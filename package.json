@@ -1,0 +1,26 @@
+{
+  "name": "learning-german",
+  "version": "1.0.0",
+  "description": "Deutsch lernen Portal mit Fortschrittstracking",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oliverlaudan-ops/learning-german.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oliverlaudan-ops/learning-german/issues"
+  },
+  "homepage": "https://github.com/oliverlaudan-ops/learning-german#readme",
+  "devDependencies": {
+    "typescript": "^6.0.2",
+    "vite": "^8.0.8"
+  }
+}
