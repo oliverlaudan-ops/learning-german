@@ -72,13 +72,13 @@ function generateQuiz(_lessonId?: string, count: number = 10): QuizQuestion[] {
   return shuffled.map(word => {
     const isMultipleChoice = Math.random() > 0.5
     const others = vocabulary.filter(w => w.id !== word.id)
-    const wrong = others.sort(() => Math.random() - 0.5).slice(0, 3).map(w => w.translation)
+    const wrong = others.sort(() => Math.random() - 0.5).slice(0, 3).map(w => w.german)
     
     return {
       word,
       type: isMultipleChoice ? 'multiple-choice' : 'write',
-      options: isMultipleChoice ? [...wrong, word.translation].sort(() => Math.random() - 0.5) : undefined,
-      correctAnswer: word.translation,
+      options: isMultipleChoice ? [...wrong, word.german].sort(() => Math.random() - 0.5) : undefined,
+      correctAnswer: word.german,
     }
   })
 }
@@ -109,7 +109,7 @@ function showQuestion() {
   if (question.type === 'multiple-choice' && question.options) {
     content.innerHTML = `
       <div class="question">
-        <p class="question-word">${question.word.german}</p>
+        <p class="question-word">${question.word.translation}</p>
         ${question.word.article ? `<p class="question-article">${question.word.article}</p>` : ''}
         <div class="options">
           ${question.options.map(opt => `<button class="option-btn" data-answer="${opt}">${opt}</button>`).join('')}
@@ -125,7 +125,7 @@ function showQuestion() {
   } else {
     content.innerHTML = `
       <div class="question">
-        <p class="question-word">${question.word.german}</p>
+        <p class="question-word">${question.word.translation}</p>
         ${question.word.article ? `<p class="question-article">${question.word.article}</p>` : ''}
         <input type="text" class="write-answer" placeholder="Your answer..." />
         <button class="btn primary submit-answer">Check Answer</button>
@@ -154,7 +154,7 @@ function checkAnswer(answer: string, question: QuizQuestion) {
     <div class="feedback ${correct ? 'correct' : 'incorrect'}">
       <p class="feedback-icon">${correct ? '✅' : '❌'}</p>
       <p class="feedback-text">${correct ? 'Correct!' : `Wrong! The correct answer was: ${question.correctAnswer}`}</p>
-      <p class="feedback-word">${question.word.german} = ${question.correctAnswer}</p>
+      <p class="feedback-word">${question.word.translation} = ${question.correctAnswer}</p>
       <button class="btn primary next-question">Next</button>
     </div>
   `
