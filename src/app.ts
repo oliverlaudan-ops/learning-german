@@ -1,4 +1,4 @@
-import type { VocabWord, Lesson, UserProgress, QuizResult } from './types'
+import type { VocabWord, UserProgress, QuizResult } from './types'
 import { vocabulary } from './data/vocabulary'
 import { lessons } from './data/lessons'
 
@@ -65,7 +65,7 @@ interface QuizQuestion {
   correctAnswer: string
 }
 
-function generateQuiz(lessonId?: string, count: number = 10): QuizQuestion[] {
+function generateQuiz(_lessonId?: string, count: number = 10): QuizQuestion[] {
   const pool = vocabulary
   const shuffled = [...pool].sort(() => Math.random() - 0.5).slice(0, count)
   
@@ -356,6 +356,13 @@ function renderDashboard() {
     })
   })
 }
+
+// @ts-ignore - called from HTML onclick
+window.startQuiz = startQuiz
+// @ts-ignore - called from HTML onclick
+window.closeQuiz = closeQuiz
+// @ts-ignore - called from HTML onclick
+window.showTab = showTab
 
 export function initApp() {
   renderDashboard()
