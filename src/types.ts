@@ -40,3 +40,28 @@ export interface UserProgress {
   dailyGoal: number
   todayLearned: number
 }
+
+export interface GrammarRule {
+  id: string
+  title: string
+  description: string
+  level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
+  category: string
+  examples: GrammarExample[]
+}
+
+export interface GrammarExample {
+  german: string
+  english: string
+  explanation?: string
+}
+
+export interface GlossaryTerm {
+  id: string
+  term: string
+  translation: string
+  explanation: string
+  examples: string[]
+  level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
+  category: string
+}

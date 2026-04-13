@@ -1,6 +1,8 @@
 import type { VocabWord, UserProgress, QuizResult } from './types'
 import { vocabulary } from './data/vocabulary'
 import { lessons } from './data/lessons'
+import { glossaryTerms } from './data/glossary'
+import { grammarRules } from './data/grammar'
 
 const STORAGE_KEY = 'learning-german-state'
 
@@ -65,9 +67,14 @@ interface QuizQuestion {
   correctAnswer: string
 }
 
-function generateQuiz(_lessonId?: string, count: number = 10): QuizQuestion[] {
-  const pool = vocabulary
-  const shuffled = [...pool].sort(() => Math.random() - 0.5).slice(0, count)
+function generateQuiz(lessonId?: string, count: number = 10): QuizQuestion[] {
+  const pool = lessonId 
+    ? vocabulary.filter(w => {
+        const lesson = lessons.find(l => l.id === lessonId)
+        return lesson?.wordIds.includes(w.id)
+      })
+    : vocabulary
+  const shuffled = [...pool].sort(() => Math.random() - 0.5).slice(0, Math.min(count, pool.length))
   
   return shuffled.map(word => {
     const isMultipleChoice = Math.random() > 0.5
@@ -239,6 +246,8 @@ function renderDashboard() {
         <button class="tab" data-tab="lessons">Lessons</button>
         <button class="tab" data-tab="practice">Practice</button>
         <button class="tab" data-tab="stats">Stats</button>
+      <button class="tab" data-tab="grammar">Grammar</button>
+      <button class="tab" data-tab="glossary">Glossary</button>
       </nav>
       
       <main class="tab-content" id="dashboard-tab">
@@ -337,6 +346,60 @@ function renderDashboard() {
         </div>
       </main>
       
+      <main class="tab-content hidden" id="grammar-tab">
+        <h2>Grammar Rules</h2>
+        <div class="grammar-list">
+          ${grammarRules.map(rule => `
+            <div class="grammar-card">
+              <h3>${rule.title}</h3>
+              <div class="grammar-meta">
+                <span class="level">${rule.level}</span>
+                <span class="category">${rule.category}</span>
+              </div>
+              <p class="grammar-desc">${rule.description}</p>
+              <div class="grammar-examples">
+                <h4>Examples:</h4>
+                <ul>
+                  ${rule.examples.map(ex => `
+                    <li>
+                      <span class="german">${ex.german}</span>
+                      <span class="english">${ex.english}</span>
+                      ${ex.explanation ? `<span class="explanation">${ex.explanation}</span>` : ''}
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </main>
+      
+      <main class="tab-content hidden" id="glossary-tab">
+        <h2>Glossary</h2>
+        <div class="glossary-search">
+          <input type="text" id="glossary-search-input" placeholder="Search terms..." onkeyup="filterGlossary()" />
+        </div>
+        <div class="glossary-list" id="glossary-list">
+          ${glossaryTerms.map(term => `
+            <div class="glossary-card" data-term="${term.term.toLowerCase()}">
+              <h3>${term.term}</h3>
+              <div class="glossary-meta">
+                <span class="translation">${term.translation}</span>
+                <span class="level">${term.level}</span>
+                <span class="category">${term.category}</span>
+              </div>
+              <p class="glossary-explanation">${term.explanation}</p>
+              <div class="glossary-examples">
+                <h4>Examples:</h4>
+                <ul>
+                  ${term.examples.map(ex => `<li>${ex}</li>`).join('')}
+                </ul>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </main>
+      
       <div class="quiz-overlay hidden" id="quiz-overlay">
         <div class="quiz-container">
           <div class="quiz-header">
@@ -363,6 +426,19 @@ window.startQuiz = startQuiz
 window.closeQuiz = closeQuiz
 // @ts-ignore - called from HTML onclick
 window.showTab = showTab
+
+// @ts-ignore - called from HTML onclick
+window.filterGlossary = filterGlossary
+
+function filterGlossary() {
+  const input = document.getElementById('glossary-search-input') as HTMLInputElement
+  const filter = input.value.toLowerCase()
+  const cards = document.querySelectorAll('.glossary-card')
+  cards.forEach(card => {
+    const term = card.getAttribute('data-term') || ''
+    card.classList.toggle('hidden', !term.includes(filter))
+  })
+}
 
 export function initApp() {
   renderDashboard()
