@@ -104,7 +104,7 @@ function showQuestion() {
   const progress = document.querySelector('.quiz-progress')
   
   if (!content || !question) return
-  if (progress) progress.textContent = `Frage ${currentQuestionIndex + 1}/${currentQuiz.length}`
+  if (progress) progress.textContent = `Question ${currentQuestionIndex + 1}/${currentQuiz.length}`
   
   if (question.type === 'multiple-choice' && question.options) {
     content.innerHTML = `
@@ -127,8 +127,8 @@ function showQuestion() {
       <div class="question">
         <p class="question-word">${question.word.german}</p>
         ${question.word.article ? `<p class="question-article">${question.word.article}</p>` : ''}
-        <input type="text" class="write-answer" placeholder="Deine Antwort..." />
-        <button class="btn primary submit-answer">Überprüfen</button>
+        <input type="text" class="write-answer" placeholder="Your answer..." />
+        <button class="btn primary submit-answer">Check Answer</button>
       </div>
     `
     const input = content.querySelector('.write-answer') as HTMLInputElement
@@ -153,9 +153,9 @@ function checkAnswer(answer: string, question: QuizQuestion) {
   content.innerHTML = `
     <div class="feedback ${correct ? 'correct' : 'incorrect'}">
       <p class="feedback-icon">${correct ? '✅' : '❌'}</p>
-      <p class="feedback-text">${correct ? 'Richtig!' : `Falsch! Die richtige Antwort war: ${question.correctAnswer}`}</p>
+      <p class="feedback-text">${correct ? 'Correct!' : `Wrong! The correct answer was: ${question.correctAnswer}`}</p>
       <p class="feedback-word">${question.word.german} = ${question.correctAnswer}</p>
-      <button class="btn primary next-question">Weiter</button>
+      <button class="btn primary next-question">Next</button>
     </div>
   `
   
@@ -185,18 +185,18 @@ function finishQuiz() {
   
   content.innerHTML = `
     <div class="quiz-results">
-      <h2>Quiz abgeschlossen! 🎉</h2>
+      <h2>Quiz Complete! 🎉</h2>
       <div class="results-summary">
         <div class="result-item">
           <span class="result-value">${quizCorrect}/${currentQuiz.length}</span>
-          <span class="result-label">Richtige Antworten</span>
+          <span class="result-label">Correct Answers</span>
         </div>
         <div class="result-item">
           <span class="result-value">${Math.round(accuracy)}%</span>
-          <span class="result-label">Genauigkeit</span>
+          <span class="result-label">Accuracy</span>
         </div>
       </div>
-      <button class="btn primary" onclick="closeQuiz()">Zurück zum Dashboard</button>
+      <button class="btn primary" onclick="closeQuiz()">Back to Dashboard</button>
     </div>
   `
 }
@@ -231,52 +231,52 @@ function renderDashboard() {
     <div class="dashboard">
       <header>
         <h1>🇩🇪 Learning German</h1>
-        <p class="subtitle">Dein Portal zum Deutschlernen</p>
+        <p class="subtitle">Your German Learning Portal</p>
       </header>
       
       <nav class="tabs">
         <button class="tab active" data-tab="dashboard">Dashboard</button>
-        <button class="tab" data-tab="lessons">Lektionen</button>
-        <button class="tab" data-tab="practice">Üben</button>
-        <button class="tab" data-tab="stats">Statistiken</button>
+        <button class="tab" data-tab="lessons">Lessons</button>
+        <button class="tab" data-tab="practice">Practice</button>
+        <button class="tab" data-tab="stats">Stats</button>
       </nav>
       
       <main class="tab-content" id="dashboard-tab">
         <section class="stats-grid">
           <div class="stat-card">
             <div class="stat-value">${appState.progress.totalWordsLearned}</div>
-            <div class="stat-label">Gelernte Wörter</div>
+            <div class="stat-label">Words Learned</div>
           </div>
           <div class="stat-card">
             <div class="stat-value">🔥 ${appState.streak}</div>
-            <div class="stat-label">Tage Streak</div>
+            <div class="stat-label">Day Streak</div>
           </div>
           <div class="stat-card">
             <div class="stat-value">${appState.progress.totalQuizCount}</div>
-            <div class="stat-label">Quizze absolviert</div>
+            <div class="stat-label">Quizzes Completed</div>
           </div>
           <div class="stat-card">
             <div class="stat-value">${Math.round(appState.progress.averageAccuracy)}%</div>
-            <div class="stat-label">Ø Genauigkeit</div>
+            <div class="stat-label">Ø Accuracy</div>
           </div>
         </section>
         
         <section class="daily-goal">
-          <h2>Tägliches Ziel</h2>
+          <h2>Daily Goal</h2>
           <div class="progress-bar">
             <div class="progress-fill" style="width: ${progressPercent}%"></div>
           </div>
-          <p>${appState.progress.todayLearned} / ${appState.progress.dailyGoal} Wörter heute</p>
+          <p>${appState.progress.todayLearned} / ${appState.progress.dailyGoal} words today</p>
         </section>
         
         <section class="quick-actions">
-          <button class="btn primary" onclick="showTab('practice')">Jetzt üben</button>
-          <button class="btn secondary" onclick="showTab('lessons')">Lektionen ansehen</button>
+          <button class="btn primary" onclick="showTab('practice')">Practice Now</button>
+          <button class="btn secondary" onclick="showTab('lessons')">View Lessons</button>
         </section>
       </main>
       
       <main class="tab-content hidden" id="lessons-tab">
-        <h2>Lektionen</h2>
+        <h2>Lessons</h2>
         <div class="lessons-list">
           ${lessons.map(lesson => `
             <div class="lesson-card">
@@ -286,53 +286,53 @@ function renderDashboard() {
                 <span class="level">${lesson.level}</span>
                 <span class="category">${lesson.category}</span>
               </div>
-              <button class="btn start-lesson" onclick="startQuiz()">Starten</button>
+              <button class="btn start-lesson" onclick="startQuiz()">Start</button>
             </div>
           `).join('')}
         </div>
       </main>
       
       <main class="tab-content hidden" id="practice-tab">
-        <h2>Quiz-Modus</h2>
+        <h2>Quiz Mode</h2>
         <div class="quiz-setup">
           <label>
-            <span>Lektion wählen:</span>
+            <span>Select Lesson:</span>
             <select id="quiz-lesson">
-              <option value="">Alle Lektionen</option>
+              <option value="">All Lessons</option>
               ${lessons.map(l => `<option value="${l.id}">${l.title}</option>`).join('')}
             </select>
           </label>
           <label>
-            <span>Anzahl Fragen:</span>
+            <span>Number of Questions:</span>
             <select id="quiz-count">
               <option value="5">5</option>
               <option value="10" selected>10</option>
               <option value="20">20</option>
             </select>
           </label>
-          <button class="btn primary" onclick="startQuiz()">Quiz starten</button>
+          <button class="btn primary" onclick="startQuiz()">Start Quiz</button>
         </div>
       </main>
       
       <main class="tab-content hidden" id="stats-tab">
-        <h2>Deine Statistiken</h2>
+        <h2>Your Statistics</h2>
         <div class="stats-detail">
-          <h3>Wörter nach Level</h3>
+          <h3>Words by Level</h3>
           <ul class="level-breakdown">
             ${Object.entries(appState.progress.wordsByLevel).map(([level, count]) => `
-              <li><span class="level-badge">${level}</span> ${count} Wörter</li>
+              <li><span class="level-badge">${level}</span> ${count} words</li>
             `).join('')}
           </ul>
-          <h3>Letzte Quizze</h3>
+          <h3>Recent Quizzes</h3>
           <div class="quiz-history">
             ${appState.quizHistory.slice(-5).reverse().map(q => `
               <div class="quiz-result">
                 <span>${new Date(q.completedAt).toLocaleDateString()}</span>
-                <span>${q.correct}/${q.total} richtig</span>
+                <span>${q.correct}/${q.total} correct</span>
                 <span>${Math.round(q.accuracy)}%</span>
               </div>
             `).join('')}
-            ${appState.quizHistory.length === 0 ? '<p>Noch keine Quizze absolviert.</p>' : ''}
+            ${appState.quizHistory.length === 0 ? '<p>No quizzes completed yet.</p>' : ''}
           </div>
         </div>
       </main>
@@ -340,7 +340,7 @@ function renderDashboard() {
       <div class="quiz-overlay hidden" id="quiz-overlay">
         <div class="quiz-container">
           <div class="quiz-header">
-            <span class="quiz-progress">Frage 1/10</span>
+            <span class="quiz-progress">Question 1/10</span>
             <button class="close-quiz" onclick="closeQuiz()">✕</button>
           </div>
           <div class="quiz-content" id="quiz-content"></div>
