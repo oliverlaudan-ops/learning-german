@@ -65,3 +65,14 @@ export interface GlossaryTerm {
   level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
   category: string
 }
+
+export interface Achievement {
+  id: string
+  title: string
+  description: string
+  icon: string
+  condition: (progress: UserProgress & { quizHistory: QuizResult[] }) => boolean
+  unlocked: boolean
+  unlockedAt?: number
+  category: 'streak' | 'learning' | 'quiz' | 'accuracy' | 'special'
+}

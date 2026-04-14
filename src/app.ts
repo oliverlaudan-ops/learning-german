@@ -3,6 +3,7 @@ import { vocabulary } from './data/vocabulary'
 import { lessons } from './data/lessons'
 import { glossaryTerms } from './data/glossary'
 import { grammarRules } from './data/grammar'
+import { achievements as achievementList } from './data/achievements'
 
 const STORAGE_KEY = 'learning-german-state'
 
@@ -12,6 +13,7 @@ interface AppState {
   learnedWordIds: string[]
   lastActive: number
   streak: number
+  achievements: typeof achievementList
 }
 
 const defaultProgress: UserProgress = {
@@ -29,7 +31,15 @@ const defaultProgress: UserProgress = {
 function loadState(): AppState {
   const saved = localStorage.getItem(STORAGE_KEY)
   if (saved) {
-    return JSON.parse(saved)
+    const parsed = JSON.parse(saved)
+    return {
+      ...parsed,
+      achievements: achievementList.map(a => ({
+        ...a,
+        unlocked: parsed.achievements?.find((ach: any) => ach.id === a.id)?.unlocked || false,
+        unlockedAt: parsed.achievements?.find((ach: any) => ach.id === a.id)?.unlockedAt,
+      })),
+    }
   }
   return {
     progress: defaultProgress,
@@ -37,11 +47,73 @@ function loadState(): AppState {
     learnedWordIds: [],
     lastActive: Date.now(),
     streak: 0,
+    achievements: achievementList.map(a => ({ ...a, unlocked: false })),
   }
 }
 
 function saveState(state: AppState) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+  updateAchievementDisplay()
+}
+
+function checkAchievements(state: AppState) {
+  let changed = false
+  const checkData = { ...state.progress, quizHistory: state.quizHistory }
+  state.achievements.forEach(ach => {
+    if (!ach.unlocked && ach.condition(checkData)) {
+      ach.unlocked = true
+      ach.unlockedAt = Date.now()
+      showAchievementNotification(ach)
+      changed = true
+    }
+  })
+  if (changed) saveState(state)
+}
+
+function showAchievementNotification(ach: typeof achievementList[0]) {
+  const notification = document.createElement('div')
+  notification.className = 'achievement-notification'
+  notification.innerHTML = `
+    <div class="achievement-content">
+      <span class="achievement-icon">${ach.icon}</span>
+      <div class="achievement-text">
+        <strong>Achievement Unlocked!</strong>
+        <p>${ach.title}</p>
+      </div>
+    </div>
+  `
+  document.body.appendChild(notification)
+  setTimeout(() => notification.classList.add('show'), 100)
+  setTimeout(() => {
+    notification.classList.remove('show')
+    setTimeout(() => notification.remove(), 300)
+  }, 3000)
+}
+
+function updateAchievementDisplay() {
+  const container = document.getElementById('achievements-list')
+  if (!container) return
+  const state = appState
+  const unlocked = state.achievements.filter(a => a.unlocked)
+  const locked = state.achievements.filter(a => !a.unlocked)
+  
+  container.innerHTML = `
+    ${unlocked.length === 0 ? '<p class="no-achievements">No achievements yet. Keep learning!</p>' : ''}
+    <div class="achievements-grid">
+      ${unlocked.map(ach => `
+        <div class="achievement-card unlocked" title="${ach.description}\nUnlocked: ${ach.unlockedAt ? new Date(ach.unlockedAt).toLocaleDateString() : ''}">
+          <span class="achievement-icon">${ach.icon}</span>
+          <span class="achievement-title">${ach.title}</span>
+        </div>
+      `).join('')}
+      ${locked.map(ach => `
+        <div class="achievement-card locked" title="${ach.description}">
+          <span class="achievement-icon">🔒</span>
+          <span class="achievement-title">${ach.title}</span>
+        </div>
+      `).join('')}
+    </div>
+  `
 }
 
 let appState = loadState()
@@ -154,6 +226,7 @@ function checkAnswer(answer: string, question: QuizQuestion) {
   if (correct) {
     quizCorrect++
     markWordLearned(question.word.id, true)
+    checkAchievements(appState)
   }
   
   const content = document.getElementById('quiz-content')
@@ -188,6 +261,7 @@ function finishQuiz() {
   appState.progress.totalQuizCount++
   appState.progress.averageAccuracy = appState.quizHistory.reduce((sum, q) => sum + q.accuracy, 0) / appState.quizHistory.length
   saveState(appState)
+  checkAchievements(appState)
   
   const content = document.getElementById('quiz-content')
   if (!content) return
@@ -250,6 +324,7 @@ function renderDashboard() {
         <button class="tab" data-tab="stats">Stats</button>
       <button class="tab" data-tab="grammar">Grammar</button>
       <button class="tab" data-tab="glossary">Glossary</button>
+      <button class="tab" data-tab="achievements">Achievements</button>
       </nav>
       
       <main class="tab-content" id="dashboard-tab">
@@ -402,6 +477,21 @@ function renderDashboard() {
         </div>
       </main>
       
+      <main class="tab-content hidden" id="achievements-tab">
+        <h2>Achievements</h2>
+        <div class="achievements-summary">
+          <div class="achievement-stat">
+            <span class="stat-number">${appState.achievements.filter(a => a.unlocked).length}</span>
+            <span class="stat-label">Unlocked</span>
+          </div>
+          <div class="achievement-stat">
+            <span class="stat-number">${appState.achievements.length}</span>
+            <span class="stat-label">Total</span>
+          </div>
+        </div>
+        <div class="achievements-list" id="achievements-list"></div>
+      </main>
+      
       <div class="quiz-overlay hidden" id="quiz-overlay">
         <div class="quiz-container">
           <div class="quiz-header">
@@ -413,6 +503,10 @@ function renderDashboard() {
       </div>
     </div>
   `
+  
+  
+  // Initialize achievements display
+  updateAchievementDisplay()
   
   document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', (e) => {
