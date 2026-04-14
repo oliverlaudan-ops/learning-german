@@ -116,6 +116,7 @@ function showQuestion() {
   if (question.type === 'multiple-choice' && question.options) {
     content.innerHTML = `
       <div class="question">
+        <button class="speak-btn" onclick="speakWord('${question.word.german.replace(/'/g, "\\'")}')" title="Listen to pronunciation">🔊</button>
         <p class="question-word">${question.word.translation}</p>
         ${question.word.article ? `<p class="question-article">${question.word.article}</p>` : ''}
         <div class="options">
@@ -132,6 +133,7 @@ function showQuestion() {
   } else {
     content.innerHTML = `
       <div class="question">
+        <button class="speak-btn" onclick="speakWord('${question.word.german.replace(/'/g, "\\'")}')" title="Listen to pronunciation">🔊</button>
         <p class="question-word">${question.word.translation}</p>
         ${question.word.article ? `<p class="question-article">${question.word.article}</p>` : ''}
         <input type="text" class="write-answer" placeholder="Your answer..." />
@@ -161,7 +163,7 @@ function checkAnswer(answer: string, question: QuizQuestion) {
     <div class="feedback ${correct ? 'correct' : 'incorrect'}">
       <p class="feedback-icon">${correct ? '✅' : '❌'}</p>
       <p class="feedback-text">${correct ? 'Correct!' : `Wrong! The correct answer was: ${question.correctAnswer}`}</p>
-      <p class="feedback-word">${question.word.translation} = ${question.correctAnswer}</p>
+      <button class="speak-btn speak-correct" onclick="speakWord('${question.correctAnswer.replace(/'/g, "\\'")}')" title="Listen to pronunciation">🔊 ${question.correctAnswer}</button>
       <button class="btn primary next-question">Next</button>
     </div>
   `
@@ -426,6 +428,21 @@ window.startQuiz = startQuiz
 window.closeQuiz = closeQuiz
 // @ts-ignore - called from HTML onclick
 window.showTab = showTab
+
+// @ts-ignore - called from HTML onclick
+window.speakWord = speakWord
+
+function speakWord(text: string) {
+  if ('speechSynthesis' in window) {
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.lang = 'de-DE'
+    utterance.rate = 0.8
+    utterance.pitch = 1
+    speechSynthesis.speak(utterance)
+  } else {
+    alert('Speech synthesis not supported in this browser.')
+  }
+}
 
 // @ts-ignore - called from HTML onclick
 window.filterGlossary = filterGlossary

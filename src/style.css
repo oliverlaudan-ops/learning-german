@@ -286,6 +286,36 @@ body {
   margin: 1rem 0;
 }
 
+.speak-btn {
+  background: #4a90d9;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.speak-btn:hover {
+  background: #3a7bc8;
+  transform: scale(1.1);
+}
+
+.speak-correct {
+  font-size: 1em;
+  width: auto;
+  height: auto;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+}
+
 .question-article {
   color: #888;
   font-style: italic;
@@ -563,16 +593,71 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  #app {
+    padding: 1rem;
+  }
+  
+  .dashboard header h1 {
+    font-size: 2em;
+  }
+  
   .tabs {
     flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  
+  .tab {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stat-value {
+    font-size: 1.8em;
   }
   
   .options {
     grid-template-columns: 1fr;
   }
   
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .question-word {
+    font-size: 1.5em;
+  }
+  
+  .lessons-list,
+  .glossary-list,
+  .grammar-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .quiz-container {
+    padding: 1rem;
+    width: 95%;
+  }
+  
+  .quick-actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard header h1 {
+    font-size: 1.6em;
+  }
+  
+  .stat-value {
+    font-size: 1.5em;
+  }
+  
+  .stat-label {
+    font-size: 0.85em;
   }
 }
