@@ -1,10 +1,11 @@
 import type { GrammarRule } from '../types'
 
 export const grammarRules: GrammarRule[] = [
+  // A1 Grammar Rules
   {
     id: 'grammar-1',
     title: 'Articles: der, die, das',
-    description: 'German has three grammatical genders: masculine (der), feminine (die), and neuter (das).',
+    description: 'German has three grammatical genders: masculine (der), feminine (die), and neuter (das). The article must be learned with each noun.',
     level: 'A1',
     category: 'Grammar Basics',
     examples: [
@@ -16,7 +17,7 @@ export const grammarRules: GrammarRule[] = [
   {
     id: 'grammar-2',
     title: 'Present Tense Conjugation',
-    description: 'Regular verbs are conjugated by removing -en and adding personal endings.',
+    description: 'Regular verbs are conjugated by removing -en and adding personal endings: -e, -st, -t, -en, -t, -en.',
     level: 'A1',
     category: 'Verbs',
     examples: [
@@ -43,7 +44,7 @@ export const grammarRules: GrammarRule[] = [
   {
     id: 'grammar-4',
     title: 'Plural Forms',
-    description: 'German nouns have different plural endings: -e, -er, -en, -s, or no change.',
+    description: 'German nouns have different plural endings: -e, -er, -en, -s, or no change. Sometimes an Umlaut is added.',
     level: 'A1',
     category: 'Nouns',
     examples: [
@@ -54,6 +55,59 @@ export const grammarRules: GrammarRule[] = [
   },
   {
     id: 'grammar-5',
+    title: 'Personal Pronouns',
+    description: 'German personal pronouns change based on person and number.',
+    level: 'A1',
+    category: 'Pronouns',
+    examples: [
+      { german: 'ich', english: 'I', explanation: '1st person singular' },
+      { german: 'du', english: 'you (informal)', explanation: '2nd person singular' },
+      { german: 'er/sie/es', english: 'he/she/it', explanation: '3rd person singular' },
+      { german: 'wir', english: 'we', explanation: '1st person plural' },
+      { german: 'ihr', english: 'you (plural)', explanation: '2nd person plural' },
+      { german: 'sie/Sie', english: 'they/you (formal)', explanation: '3rd person plural / formal' },
+    ],
+  },
+  {
+    id: 'grammar-6',
+    title: 'Negation with nicht and kein',
+    description: 'Use "nicht" to negate verbs and adjectives. Use "kein" to negate nouns with indefinite articles.',
+    level: 'A1',
+    category: 'Grammar Basics',
+    examples: [
+      { german: 'Ich lerne nicht.', english: 'I am not learning.', explanation: 'Negating a verb' },
+      { german: 'Das ist nicht gut.', english: 'That is not good.', explanation: 'Negating an adjective' },
+      { german: 'Ich habe kein Auto.', english: 'I have no car.', explanation: 'Negating a noun' },
+    ],
+  },
+  {
+    id: 'grammar-7',
+    title: 'Questions',
+    description: 'Yes/no questions invert subject and verb. W-questions start with a question word.',
+    level: 'A1',
+    category: 'Grammar Basics',
+    examples: [
+      { german: 'Lernst du Deutsch?', english: 'Are you learning German?', explanation: 'Yes/no question' },
+      { german: 'Was machst du?', english: 'What are you doing?', explanation: 'W-question (was = what)' },
+      { german: 'Wo wohnst du?', english: 'Where do you live?', explanation: 'W-question (wo = where)' },
+    ],
+  },
+  {
+    id: 'grammar-8',
+    title: 'Modal Verbs',
+    description: 'Modal verbs (können, müssen, wollen, etc.) are conjugated irregularly and used with an infinitive.',
+    level: 'A1',
+    category: 'Verbs',
+    examples: [
+      { german: 'Ich kann Deutsch sprechen.', english: 'I can speak German.', explanation: 'können (can)' },
+      { german: 'Ich muss lernen.', english: 'I must learn.', explanation: 'müssen (must)' },
+      { german: 'Ich will das Buch lesen.', english: 'I want to read the book.', explanation: 'wollen (want)' },
+    ],
+  },
+  
+  // A2 Grammar Rules
+  {
+    id: 'grammar-9',
     title: 'Cases: Nominative, Accusative, Dative',
     description: 'German has four cases. The case determines the article and adjective endings.',
     level: 'A2',
@@ -62,6 +116,90 @@ export const grammarRules: GrammarRule[] = [
       { german: 'Der Mann ist hier. (Nominative)', english: 'The man is here.', explanation: 'Subject' },
       { german: 'Ich sehe den Mann. (Accusative)', english: 'I see the man.', explanation: 'Direct object' },
       { german: 'Ich helfe dem Mann. (Dative)', english: 'I help the man.', explanation: 'Indirect object' },
+    ],
+  },
+  {
+    id: 'grammar-10',
+    title: 'Accusative Case',
+    description: 'The accusative case is used for direct objects. Only masculine articles change (der → den).',
+    level: 'A2',
+    category: 'Cases',
+    examples: [
+      { german: 'Ich kaufe den Apfel.', english: 'I buy the apple.', explanation: 'Masculine: der → den' },
+      { german: 'Ich sehe die Frau.', english: 'I see the woman.', explanation: 'Feminine: no change' },
+      { german: 'Ich lese das Buch.', english: 'I read the book.', explanation: 'Neuter: no change' },
+    ],
+  },
+  {
+    id: 'grammar-11',
+    title: 'Dative Case',
+    description: 'The dative case is used for indirect objects. Articles change: der/das → dem, die → der.',
+    level: 'A2',
+    category: 'Cases',
+    examples: [
+      { german: 'Ich helfe dem Mann.', english: 'I help the man.', explanation: 'Masculine: der → dem' },
+      { german: 'Ich helfe der Frau.', english: 'I help the woman.', explanation: 'Feminine: die → der' },
+      { german: 'Ich danke dem Kind.', english: 'I thank the child.', explanation: 'Neuter: das → dem' },
+    ],
+  },
+  {
+    id: 'grammar-12',
+    title: 'Prepositions with Accusative',
+    description: 'Some prepositions always take the accusative: durch, für, gegen, ohne, um.',
+    level: 'A2',
+    category: 'Prepositions',
+    examples: [
+      { german: 'Ich gehe durch den Park.', english: 'I walk through the park.', explanation: 'durch + accusative' },
+      { german: 'Das ist für dich.', english: 'That is for you.', explanation: 'für + accusative' },
+      { german: 'Ohne dich kann ich nicht leben.', english: 'I cannot live without you.', explanation: 'ohne + accusative' },
+    ],
+  },
+  {
+    id: 'grammar-13',
+    title: 'Prepositions with Dative',
+    description: 'Some prepositions always take the dative: aus, bei, mit, nach, seit, von, zu.',
+    level: 'A2',
+    category: 'Prepositions',
+    examples: [
+      { german: 'Ich komme aus dem Haus.', english: 'I come from the house.', explanation: 'aus + dative' },
+      { german: 'Ich gehe mit dir.', english: 'I go with you.', explanation: 'mit + dative' },
+      { german: 'Ich fahre nach Berlin.', english: 'I travel to Berlin.', explanation: 'nach + dative (cities)' },
+    ],
+  },
+  {
+    id: 'grammar-14',
+    title: 'Two-Way Prepositions',
+    description: 'Some prepositions can take accusative (motion) or dative (location): an, auf, hinter, in, neben, über, unter, vor, zwischen.',
+    level: 'A2',
+    category: 'Prepositions',
+    examples: [
+      { german: 'Ich gehe in das Haus. (motion)', english: 'I go into the house.', explanation: 'Accusative = motion' },
+      { german: 'Ich bin in dem Haus. (location)', english: 'I am in the house.', explanation: 'Dative = location' },
+      { german: 'Das Buch liegt auf dem Tisch.', english: 'The book is on the table.', explanation: 'Location = dative' },
+    ],
+  },
+  {
+    id: 'grammar-15',
+    title: 'Perfect Tense',
+    description: 'The perfect tense is formed with haben/sein + past participle. Most verbs use haben.',
+    level: 'A2',
+    category: 'Verbs',
+    examples: [
+      { german: 'Ich habe gelernt.', english: 'I have learned.', explanation: 'Regular verb with haben' },
+      { german: 'Ich bin gegangen.', english: 'I have gone.', explanation: 'Motion verb with sein' },
+      { german: 'Wir haben gegessen.', english: 'We have eaten.', explanation: 'Irregular verb with haben' },
+    ],
+  },
+  {
+    id: 'grammar-16',
+    title: 'Adjective Endings',
+    description: 'Adjectives change endings based on case, gender, and whether there is an article.',
+    level: 'A2',
+    category: 'Adjectives',
+    examples: [
+      { german: 'der gute Mann', english: 'the good man', explanation: 'Nominative masculine' },
+      { german: 'die gute Frau', english: 'the good woman', explanation: 'Nominative feminine' },
+      { german: 'das gute Kind', english: 'the good child', explanation: 'Nominative neuter' },
     ],
   },
 ]

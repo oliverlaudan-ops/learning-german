@@ -4,6 +4,7 @@ import { lessons } from './data/lessons'
 import { glossaryTerms } from './data/glossary'
 import { grammarRules } from './data/grammar'
 import { achievements as achievementList } from './data/achievements'
+import { grammarExercises } from './data/grammar-exercises'
 
 const STORAGE_KEY = 'learning-german-state'
 
@@ -166,6 +167,11 @@ let currentQuiz: QuizQuestion[] = []
 let currentQuestionIndex = 0
 let quizCorrect = 0
 
+// Grammar Quiz State
+let currentGrammarQuiz: typeof grammarExercises = []
+let grammarQuestionIndex = 0
+let grammarCorrect = 0
+
 function startQuiz(lessonId?: string) {
   const countSelect = document.getElementById('quiz-count') as HTMLSelectElement
   const count = parseInt(countSelect?.value || '10')
@@ -323,6 +329,7 @@ function renderDashboard() {
         <button class="tab" data-tab="practice">Practice</button>
         <button class="tab" data-tab="stats">Stats</button>
       <button class="tab" data-tab="grammar">Grammar</button>
+      <button class="tab" data-tab="grammar-practice">Grammar Practice</button>
       <button class="tab" data-tab="glossary">Glossary</button>
       <button class="tab" data-tab="achievements">Achievements</button>
       </nav>
@@ -451,6 +458,34 @@ function renderDashboard() {
         </div>
       </main>
       
+      <main class="tab-content hidden" id="grammar-practice-tab">
+        <h2>Grammar Practice</h2>
+        <div class="quiz-setup">
+          <label>
+            <span>Select Category:</span>
+            <select id="grammar-category">
+              <option value="">All Categories</option>
+              <option value="Articles">Articles</option>
+              <option value="Verbs">Verbs</option>
+              <option value="Nouns">Nouns</option>
+              <option value="Cases">Cases</option>
+              <option value="Prepositions">Prepositions</option>
+              <option value="Pronouns">Pronouns</option>
+              <option value="Negation">Negation</option>
+            </select>
+          </label>
+          <label>
+            <span>Number of Questions:</span>
+            <select id="grammar-count">
+              <option value="5">5</option>
+              <option value="10" selected>10</option>
+              <option value="20">20</option>
+            </select>
+          </label>
+          <button class="btn primary" onclick="startGrammarQuiz()">Start Grammar Quiz</button>
+        </div>
+      </main>
+      
       <main class="tab-content hidden" id="glossary-tab">
         <h2>Glossary</h2>
         <div class="glossary-search">
@@ -501,6 +536,16 @@ function renderDashboard() {
           <div class="quiz-content" id="quiz-content"></div>
         </div>
       </div>
+      
+      <div class="quiz-overlay hidden" id="grammar-quiz-overlay">
+        <div class="quiz-container">
+          <div class="quiz-header">
+            <span class="quiz-progress grammar-quiz-progress">Question 1/10</span>
+            <button class="close-quiz" onclick="closeGrammarQuiz()">✕</button>
+          </div>
+          <div class="quiz-content" id="grammar-quiz-content"></div>
+        </div>
+      </div>
     </div>
   `
   
@@ -522,6 +567,105 @@ window.startQuiz = startQuiz
 window.closeQuiz = closeQuiz
 // @ts-ignore - called from HTML onclick
 window.showTab = showTab
+
+// @ts-ignore - called from HTML onclick
+window.startGrammarQuiz = startGrammarQuiz
+// @ts-ignore - called from HTML onclick
+window.closeGrammarQuiz = closeGrammarQuiz
+
+function startGrammarQuiz() {
+  const categorySelect = document.getElementById('grammar-category') as HTMLSelectElement
+  const countSelect = document.getElementById('grammar-count') as HTMLSelectElement
+  const category = categorySelect?.value || ''
+  const count = parseInt(countSelect?.value || '10')
+  
+  const pool = category 
+    ? grammarExercises.filter(ex => ex.category === category)
+    : grammarExercises
+  
+  currentGrammarQuiz = [...pool].sort(() => Math.random() - 0.5).slice(0, Math.min(count, pool.length))
+  grammarQuestionIndex = 0
+  grammarCorrect = 0
+  
+  document.getElementById('grammar-quiz-overlay')?.classList.remove('hidden')
+  showGrammarQuestion()
+}
+
+function showGrammarQuestion() {
+  const exercise = currentGrammarQuiz[grammarQuestionIndex]
+  const content = document.getElementById('grammar-quiz-content')
+  const progress = document.querySelector('.grammar-quiz-progress')
+  
+  if (!content || !exercise) return
+  if (progress) progress.textContent = `Question ${grammarQuestionIndex + 1}/${currentGrammarQuiz.length}`
+  
+  content.innerHTML = `
+    <div class="question">
+      <p class="question-word">${exercise.question}</p>
+      <div class="options">
+        ${exercise.options.map(opt => `<button class="option-btn" data-answer="${opt}">${opt}</button>`).join('')}
+      </div>
+    </div>
+  `
+  
+  content.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const answer = (e.target as HTMLElement).dataset.answer
+      checkGrammarAnswer(answer || '', exercise)
+    })
+  })
+}
+
+function checkGrammarAnswer(answer: string, exercise: typeof grammarExercises[0]) {
+  const correct = answer === exercise.correctAnswer
+  if (correct) grammarCorrect++
+  
+  const content = document.getElementById('grammar-quiz-content')
+  if (!content) return
+  
+  content.innerHTML = `
+    <div class="feedback ${correct ? 'correct' : 'incorrect'}">
+      <p class="feedback-icon">${correct ? '✅' : '❌'}</p>
+      <p class="feedback-text">${correct ? 'Correct!' : `Wrong! The correct answer was: ${exercise.correctAnswer}`}</p>
+      <p class="feedback-explanation">${exercise.explanation}</p>
+      <button class="btn primary next-question">Next</button>
+    </div>
+  `
+  
+  content.querySelector('.next-question')?.addEventListener('click', () => {
+    grammarQuestionIndex++
+    if (grammarQuestionIndex >= currentGrammarQuiz.length) finishGrammarQuiz()
+    else showGrammarQuestion()
+  })
+}
+
+function finishGrammarQuiz() {
+  const accuracy = (grammarCorrect / currentGrammarQuiz.length) * 100
+  
+  const content = document.getElementById('grammar-quiz-content')
+  if (!content) return
+  
+  content.innerHTML = `
+    <div class="quiz-results">
+      <h2>Grammar Quiz Complete! 🎉</h2>
+      <div class="results-summary">
+        <div class="result-item">
+          <span class="result-value">${grammarCorrect}/${currentGrammarQuiz.length}</span>
+          <span class="result-label">Correct Answers</span>
+        </div>
+        <div class="result-item">
+          <span class="result-value">${Math.round(accuracy)}%</span>
+          <span class="result-label">Accuracy</span>
+        </div>
+      </div>
+      <button class="btn primary" onclick="closeGrammarQuiz()">Back to Grammar</button>
+    </div>
+  `
+}
+
+function closeGrammarQuiz() {
+  document.getElementById('grammar-quiz-overlay')?.classList.add('hidden')
+}
 
 // @ts-ignore - called from HTML onclick
 window.speakWord = speakWord

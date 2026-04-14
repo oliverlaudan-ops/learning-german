@@ -56,6 +56,17 @@ export interface GrammarExample {
   explanation?: string
 }
 
+export interface GrammarExercise {
+  id: string
+  type: 'article' | 'conjugation' | 'plural' | 'case' | 'preposition' | 'pronoun' | 'negation' | 'modal' | 'perfect'
+  question: string
+  options: string[]
+  correctAnswer: string
+  explanation: string
+  level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
+  category: string
+}
+
 export interface GlossaryTerm {
   id: string
   term: string
