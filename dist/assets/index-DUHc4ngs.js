@@ -61,7 +61,7 @@
       </div>
       <button class="btn primary" onclick="closeQuiz()">Back to Dashboard</button>
     </div>
-  `)}function D(){document.getElementById(`quiz-overlay`)?.classList.add(`hidden`),k()}function O(e){document.querySelectorAll(`.tab`).forEach(e=>e.classList.remove(`active`)),document.querySelectorAll(`[data-tab="${e}"]`).forEach(e=>e.classList.add(`active`)),document.querySelectorAll(`.tab-content`).forEach(e=>e.classList.add(`hidden`)),document.getElementById(`${e}-tab`)?.classList.remove(`hidden`)}function k(){let e=document.querySelector(`#app`),n=new Date().toDateString(),i=new Date(m.lastActive).toDateString();n!==i&&(m.streak=i===new Date(Date.now()-864e5).toDateString()?m.streak+1:0,m.lastActive=Date.now(),u(m));let a=Math.min(m.progress.todayLearned/m.progress.dailyGoal*100,100);e.innerHTML=`
+  `)}function D(){document.getElementById(`quiz-overlay`)?.classList.add(`hidden`),k()}function O(e){document.querySelectorAll(`.tab`).forEach(e=>e.classList.remove(`active`)),document.querySelectorAll(`[data-tab="${e}"]`).forEach(e=>e.classList.add(`active`)),document.querySelectorAll(`.tab-content`).forEach(e=>e.classList.add(`hidden`)),document.getElementById(`${e}-tab`)?.classList.remove(`hidden`)}function k(){let n=document.querySelector(`#app`),i=new Date().toDateString(),a=new Date(m.lastActive).toDateString();i!==a&&(m.streak=a===new Date(Date.now()-864e5).toDateString()?m.streak+1:0,m.lastActive=Date.now(),u(m));let s=Math.min(m.progress.todayLearned/m.progress.dailyGoal*100,100);n.innerHTML=`
     <div class="dashboard">
       <header>
         <h1>🇩🇪 Learning German</h1>
@@ -102,7 +102,7 @@
         <section class="daily-goal">
           <h2>Daily Goal</h2>
           <div class="progress-bar">
-            <div class="progress-fill" style="width: ${a}%"></div>
+            <div class="progress-fill" style="width: ${s}%"></div>
           </div>
           <p>${m.progress.todayLearned} / ${m.progress.dailyGoal} words today</p>
         </section>
@@ -116,17 +116,24 @@
       <main class="tab-content hidden" id="lessons-tab">
         <h2>Lessons</h2>
         <div class="lessons-list">
-          ${t.map(e=>`
+          ${t.map(t=>{let n=e.filter(e=>t.wordIds.includes(e.id));return`
             <div class="lesson-card">
-              <h3>${e.title}</h3>
-              <p>${e.description}</p>
+              <h3>${t.title}</h3>
+              <p>${t.description}</p>
               <div class="lesson-meta">
-                <span class="level">${e.level}</span>
-                <span class="category">${e.category}</span>
+                <span class="level">${t.level}</span>
+                <span class="category">${t.category}</span>
+                <span class="word-count">${n.length} words</span>
               </div>
-              <button class="btn start-lesson" onclick="startQuiz()">Start</button>
+              <div class="lesson-words-preview">
+                ${n.slice(0,5).map(e=>`
+                  <span class="word-chip">${e.german}</span>
+                `).join(``)}
+                ${n.length>5?`<span class="word-more">+${n.length-5} more</span>`:``}
+              </div>
+              <button class="btn start-lesson" onclick="startQuiz('${t.id}')">Start</button>
             </div>
-          `).join(``)}
+          `}).join(``)}
         </div>
       </main>
       

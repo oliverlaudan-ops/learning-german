@@ -384,17 +384,27 @@ function renderDashboard() {
       <main class="tab-content hidden" id="lessons-tab">
         <h2>Lessons</h2>
         <div class="lessons-list">
-          ${lessons.map(lesson => `
+          ${lessons.map(lesson => {
+            const lessonWords = vocabulary.filter(w => lesson.wordIds.includes(w.id))
+            return `
             <div class="lesson-card">
               <h3>${lesson.title}</h3>
               <p>${lesson.description}</p>
               <div class="lesson-meta">
                 <span class="level">${lesson.level}</span>
                 <span class="category">${lesson.category}</span>
+                <span class="word-count">${lessonWords.length} words</span>
               </div>
-              <button class="btn start-lesson" onclick="startQuiz()">Start</button>
+              <div class="lesson-words-preview">
+                ${lessonWords.slice(0, 5).map(w => `
+                  <span class="word-chip">${w.german}</span>
+                `).join('')}
+                ${lessonWords.length > 5 ? `<span class="word-more">+${lessonWords.length - 5} more</span>` : ''}
+              </div>
+              <button class="btn start-lesson" onclick="startQuiz('${lesson.id}')">Start</button>
             </div>
-          `).join('')}
+          `
+          }).join('')}
         </div>
       </main>
       

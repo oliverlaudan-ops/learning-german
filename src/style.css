@@ -807,3 +807,36 @@ body {
 #grammar-quiz-overlay {
   z-index: 1001;
 }
+
+.lesson-meta .word-count {
+  background: #4a90d9;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8em;
+  color: #fff;
+}
+
+.lesson-words-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  min-height: 2rem;
+}
+
+.word-chip {
+  background: #0a0a0a;
+  padding: 0.35rem 0.65rem;
+  border-radius: 12px;
+  font-size: 0.85em;
+  color: #ccc;
+  border: 1px solid #333;
+}
+
+.word-more {
+  background: #333;
+  padding: 0.35rem 0.65rem;
+  border-radius: 12px;
+  font-size: 0.85em;
+  color: #888;
+}
