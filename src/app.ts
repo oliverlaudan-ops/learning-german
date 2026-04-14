@@ -6,6 +6,19 @@ import { grammarRules } from './data/grammar'
 import { achievements as achievementList } from './data/achievements'
 import { grammarExercises } from './data/grammar-exercises'
 
+
+function getAllGlossaryTerms() {
+  const vocabAsGlossary = vocabulary.map(w => ({
+    id: `vocab-${w.id}`,
+    term: w.german,
+    translation: w.translation,
+    explanation: `${w.article ? w.article + ' ' : ''}${w.german} means "${w.translation}". Category: ${w.category}. Level: ${w.level}.`,
+    examples: [],
+    level: w.level as 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2',
+    category: w.category,
+  }))
+  return [...vocabAsGlossary, ...glossaryTerms]
+}
 const STORAGE_KEY = 'learning-german-state'
 
 interface AppState {
@@ -492,7 +505,7 @@ function renderDashboard() {
           <input type="text" id="glossary-search-input" placeholder="Search terms..." onkeyup="filterGlossary()" />
         </div>
         <div class="glossary-list" id="glossary-list">
-          ${glossaryTerms.map(term => `
+          ${getAllGlossaryTerms().map(term => `
             <div class="glossary-card" data-term="${term.term.toLowerCase()}">
               <h3>${term.term}</h3>
               <div class="glossary-meta">
