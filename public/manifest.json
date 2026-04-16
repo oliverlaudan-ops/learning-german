@@ -1,0 +1,18 @@
+{
+  "name": "Deutsch Lernen – Learn German",
+  "short_name": "Deutsch Lernen",
+  "description": "Learn German from A2 to B2. Interactive lessons, vocabulary, grammar, pronunciation, and everyday German.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#e8864a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
