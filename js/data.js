@@ -1,3 +1,333 @@
+const GRAMMAR_EXERCISES = [
+  // Article Exercises
+  {
+    id: 'grammar-ex-1',
+    type: 'article',
+    question: 'What is the correct article for "Mann"?',
+    options: ['der', 'die', 'das'],
+    correctAnswer: 'der',
+    explanation: '"Mann" is a masculine noun, so it takes "der".',
+    level: 'A1',
+    category: 'Articles',
+  },
+  {
+    id: 'grammar-ex-2',
+    type: 'article',
+    question: 'What is the correct article for "Frau"?',
+    options: ['der', 'die', 'das'],
+    correctAnswer: 'die',
+    explanation: '"Frau" is a feminine noun, so it takes "die".',
+    level: 'A1',
+    category: 'Articles',
+  },
+  {
+    id: 'grammar-ex-3',
+    type: 'article',
+    question: 'What is the correct article for "Kind"?',
+    options: ['der', 'die', 'das'],
+    correctAnswer: 'das',
+    explanation: '"Kind" is a neuter noun, so it takes "das".',
+    level: 'A1',
+    category: 'Articles',
+  },
+  {
+    id: 'grammar-ex-4',
+    type: 'article',
+    question: 'What is the correct article for "Apfel"?',
+    options: ['der', 'die', 'das'],
+    correctAnswer: 'der',
+    explanation: '"Apfel" is masculine, so it takes "der".',
+    level: 'A1',
+    category: 'Articles',
+  },
+  {
+    id: 'grammar-ex-5',
+    type: 'article',
+    question: 'What is the correct article for "Banane"?',
+    options: ['der', 'die', 'das'],
+    correctAnswer: 'die',
+    explanation: '"Banane" is feminine, so it takes "die".',
+    level: 'A1',
+    category: 'Articles',
+  },
+  
+  // Conjugation Exercises
+  {
+    id: 'grammar-ex-6',
+    type: 'conjugation',
+    question: 'Complete: ich lern__',
+    options: ['-e', '-st', '-t', '-en'],
+    correctAnswer: '-e',
+    explanation: '1st person singular: ich lerne',
+    level: 'A1',
+    category: 'Verbs',
+  },
+  {
+    id: 'grammar-ex-7',
+    type: 'conjugation',
+    question: 'Complete: du lern__',
+    options: ['-e', '-st', '-t', '-en'],
+    correctAnswer: '-st',
+    explanation: '2nd person singular: du lernst',
+    level: 'A1',
+    category: 'Verbs',
+  },
+  {
+    id: 'grammar-ex-8',
+    type: 'conjugation',
+    question: 'Complete: er/sie/es lern__',
+    options: ['-e', '-st', '-t', '-en'],
+    correctAnswer: '-t',
+    explanation: '3rd person singular: er/sie/es lernt',
+    level: 'A1',
+    category: 'Verbs',
+  },
+  {
+    id: 'grammar-ex-9',
+    type: 'conjugation',
+    question: 'Complete: wir lern__',
+    options: ['-e', '-st', '-t', '-en'],
+    correctAnswer: '-en',
+    explanation: '1st person plural: wir lernen',
+    level: 'A1',
+    category: 'Verbs',
+  },
+  {
+    id: 'grammar-ex-10',
+    type: 'conjugation',
+    question: 'Complete: ihr lern__',
+    options: ['-e', '-st', '-t', '-en'],
+    correctAnswer: '-t',
+    explanation: '2nd person plural: ihr lernt',
+    level: 'A1',
+    category: 'Verbs',
+  },
+  
+  // Plural Exercises
+  {
+    id: 'grammar-ex-11',
+    type: 'plural',
+    question: 'What is the plural of "der Apfel"?',
+    options: ['die Apfels', 'die Äpfel', 'die Apfeln', 'die Apfel'],
+    correctAnswer: 'die Äpfel',
+    explanation: '"Apfel" becomes "Äpfel" with Umlaut + -er.',
+    level: 'A1',
+    category: 'Nouns',
+  },
+  {
+    id: 'grammar-ex-12',
+    type: 'plural',
+    question: 'What is the plural of "die Banane"?',
+    options: ['die Bananen', 'die Banans', 'die Banane', 'die Banä'],
+    correctAnswer: 'die Bananen',
+    explanation: '"Banane" takes -n in plural.',
+    level: 'A1',
+    category: 'Nouns',
+  },
+  {
+    id: 'grammar-ex-13',
+    type: 'plural',
+    question: 'What is the plural of "das Auto"?',
+    options: ['die Auten', 'die Autos', 'die Auter', 'die Auto'],
+    correctAnswer: 'die Autos',
+    explanation: '"Auto" takes -s in plural.',
+    level: 'A1',
+    category: 'Nouns',
+  },
+  
+  // Case Exercises
+  {
+    id: 'grammar-ex-14',
+    type: 'case',
+    question: 'Ich sehe ___ Mann. (the)',
+    options: ['der', 'den', 'dem', 'des'],
+    correctAnswer: 'den',
+    explanation: 'Accusative masculine: der → den',
+    level: 'A2',
+    category: 'Cases',
+  },
+  {
+    id: 'grammar-ex-15',
+    type: 'case',
+    question: 'Ich helfe ___ Frau. (the)',
+    options: ['der', 'die', 'den', 'dem'],
+    correctAnswer: 'der',
+    explanation: 'Dative feminine: die → der',
+    level: 'A2',
+    category: 'Cases',
+  },
+  {
+    id: 'grammar-ex-16',
+    type: 'case',
+    question: 'Ich kaufe ___ Buch. (the)',
+    options: ['der', 'die', 'das', 'dem'],
+    correctAnswer: 'das',
+    explanation: 'Accusative neuter: no change (das)',
+    level: 'A2',
+    category: 'Cases',
+  },
+  {
+    id: 'grammar-ex-17',
+    type: 'case',
+    question: 'Ich danke ___ Kind. (the)',
+    options: ['der', 'die', 'das', 'dem'],
+    correctAnswer: 'dem',
+    explanation: 'Dative neuter: das → dem',
+    level: 'A2',
+    category: 'Cases',
+  },
+  
+  // Preposition Exercises
+  {
+    id: 'grammar-ex-18',
+    type: 'preposition',
+    question: 'Ich gehe ___ den Park. (through)',
+    options: ['durch', 'für', 'gegen', 'ohne'],
+    correctAnswer: 'durch',
+    explanation: '"durch" means "through" and takes accusative.',
+    level: 'A2',
+    category: 'Prepositions',
+  },
+  {
+    id: 'grammar-ex-19',
+    type: 'preposition',
+    question: 'Das Geschenk ist ___ dich. (for)',
+    options: ['durch', 'für', 'gegen', 'ohne'],
+    correctAnswer: 'für',
+    explanation: '"für" means "for" and takes accusative.',
+    level: 'A2',
+    category: 'Prepositions',
+  },
+  {
+    id: 'grammar-ex-20',
+    type: 'preposition',
+    question: 'Ich komme ___ dem Haus. (from)',
+    options: ['aus', 'bei', 'mit', 'nach'],
+    correctAnswer: 'aus',
+    explanation: '"aus" means "from/out of" and takes dative.',
+    level: 'A2',
+    category: 'Prepositions',
+  },
+  {
+    id: 'grammar-ex-21',
+    type: 'preposition',
+    question: 'Ich gehe ___ dir. (with)',
+    options: ['aus', 'bei', 'mit', 'nach'],
+    correctAnswer: 'mit',
+    explanation: '"mit" means "with" and takes dative.',
+    level: 'A2',
+    category: 'Prepositions',
+  },
+  
+  // Pronoun Exercises
+  {
+    id: 'grammar-ex-22',
+    type: 'pronoun',
+    question: '___ lerne Deutsch. (I)',
+    options: ['Ich', 'Du', 'Er', 'Wir'],
+    correctAnswer: 'Ich',
+    explanation: '"Ich" means "I" (1st person singular).',
+    level: 'A1',
+    category: 'Pronouns',
+  },
+  {
+    id: 'grammar-ex-23',
+    type: 'pronoun',
+    question: '___ wohnst du? (Where)',
+    options: ['Was', 'Wo', 'Wer', 'Wie'],
+    correctAnswer: 'Wo',
+    explanation: '"Wo" means "Where".',
+    level: 'A1',
+    category: 'Pronouns',
+  },
+  {
+    id: 'grammar-ex-24',
+    type: 'pronoun',
+    question: '___ machst du? (What)',
+    options: ['Was', 'Wo', 'Wer', 'Wie'],
+    correctAnswer: 'Was',
+    explanation: '"Was" means "What".',
+    level: 'A1',
+    category: 'Pronouns',
+  },
+  
+  // Negation Exercises
+  {
+    id: 'grammar-ex-25',
+    type: 'negation',
+    question: 'Ich habe ___ Auto. (no)',
+    options: ['nicht', 'kein', 'keine', 'keiner'],
+    correctAnswer: 'kein',
+    explanation: '"kein" negates nouns with indefinite articles.',
+    level: 'A1',
+    category: 'Negation',
+  },
+  {
+    id: 'grammar-ex-26',
+    type: 'negation',
+    question: 'Ich lerne ___. (not)',
+    options: ['nicht', 'kein', 'keine', 'keiner'],
+    correctAnswer: 'nicht',
+    explanation: '"nicht" negates verbs.',
+    level: 'A1',
+    category: 'Negation',
+  },
+  
+  // Modal Verb Exercises
+  {
+    id: 'grammar-ex-27',
+    type: 'modal',
+    question: 'Ich ___ Deutsch sprechen. (can)',
+    options: ['kann', 'muss', 'will', 'soll'],
+    correctAnswer: 'kann',
+    explanation: '"kann" is the 1st person of "können" (can).',
+    level: 'A1',
+    category: 'Verbs',
+  },
+  {
+    id: 'grammar-ex-28',
+    type: 'modal',
+    question: 'Ich ___ lernen. (must)',
+    options: ['kann', 'muss', 'will', 'soll'],
+    correctAnswer: 'muss',
+    explanation: '"muss" is the 1st person of "müssen" (must).',
+    level: 'A1',
+    category: 'Verbs',
+  },
+  {
+    id: 'grammar-ex-29',
+    type: 'modal',
+    question: 'Ich ___ das Buch lesen. (want)',
+    options: ['kann', 'muss', 'will', 'soll'],
+    correctAnswer: 'will',
+    explanation: '"will" is the 1st person of "wollen" (want).',
+    level: 'A1',
+    category: 'Verbs',
+  },
+  
+  // Perfect Tense Exercises
+  {
+    id: 'grammar-ex-30',
+    type: 'perfect',
+    question: 'Ich ___ gelernt. (have)',
+    options: ['habe', 'bin', 'hat', 'ist'],
+    correctAnswer: 'habe',
+    explanation: 'Most verbs use "haben" for perfect tense.',
+    level: 'A2',
+    category: 'Verbs',
+  },
+  {
+    id: 'grammar-ex-31',
+    type: 'perfect',
+    question: 'Ich ___ gegangen. (have)',
+    options: ['habe', 'bin', 'hat', 'ist'],
+    correctAnswer: 'bin',
+    explanation: 'Motion verbs use "sein" for perfect tense.',
+    level: 'A2',
+    category: 'Verbs',
+  },
+];
+
 const LESSON_DATA = {
   grammar: {
     A2: [
@@ -496,472 +826,149 @@ The whole phrase is declined as one unit.`,
       }
     ]
   },
-  vocabulary: {
-    A2: [
-      {
-        id: 'a2-v1', title: 'Family & Relationships',
-        words: [
-          { german: 'die Familie', english: 'family' },
-          { german: 'die Eltern', english: 'parents' },
-          { german: 'der Vater', english: 'father' },
-          { german: 'die Mutter', english: 'mother' },
-          { german: 'der Bruder', english: 'brother' },
-          { german: 'die Schwester', english: 'sister' },
-          { german: 'die Großeltern', english: 'grandparents' },
-          { german: 'der Onkel', english: 'uncle' },
-          { german: 'die Tante', english: 'aunt' },
-          { german: 'der Cousin', english: 'cousin (male)' },
-          { german: 'die Cousine', english: 'cousin (female)' },
-          { german: 'die Kinder', english: 'children' },
-          { german: 'der Sohn', english: 'son' },
-          { german: 'die Tochter', english: 'daughter' }
-        ]
-      },
-      {
-        id: 'a2-v2', title: 'Food & Drinks',
-        words: [
-          { german: 'das Essen', english: 'food' },
-          { german: 'das Frühstück', english: 'breakfast' },
-          { german: 'das Mittagessen', english: 'lunch' },
-          { german: 'das Abendessen', english: 'dinner' },
-          { german: 'das Brot', english: 'bread' },
-          { german: 'der Käse', english: 'cheese' },
-          { german: 'die Milch', english: 'milk' },
-          { german: 'das Wasser', english: 'water' },
-          { german: 'der Kaffee', english: 'coffee' },
-          { german: 'der Tee', english: 'tea' },
-          { german: 'das Fleisch', english: 'meat' },
-          { german: 'der Fisch', english: 'fish' },
-          { german: 'das Gemüse', english: 'vegetables' },
-          { german: 'das Obst', english: 'fruit' },
-          { german: 'der Apfel', english: 'apple' }
-        ]
-      },
-      {
-        id: 'a2-v3', title: 'Daily Routine',
-        words: [
-          { german: 'aufstehen', english: 'to get up' },
-          { german: 'sich waschen', english: 'to wash oneself' },
-          { german: 'frühstücken', english: 'to have breakfast' },
-          { german: 'arbeiten', english: 'to work' },
-          { german: 'lernen', english: 'to study' },
-          { german: 'essen', english: 'to eat' },
-          { german: 'schlafen', english: 'to sleep' },
-          { german: 'einkaufen', english: 'to shop' },
-          { german: 'kochen', english: 'to cook' },
-          { german: 'fernsehen', english: 'to watch TV' },
-          { german: 'lesen', english: 'to read' },
-          { german: 'musizieren', english: 'to make music' },
-          { german: 'spazieren gehen', english: 'to go for a walk' },
-          { german: 'sich ausruhen', english: 'to rest' }
-        ]
-      },
-      {
-        id: 'a2-v4', title: 'City & Places',
-        words: [
-          { german: 'die Stadt', english: 'city' },
-          { german: 'das Dorf', english: 'village' },
-          { german: 'die Straße', english: 'street' },
-          { german: 'der Platz', english: 'square' },
-          { german: 'die Schule', english: 'school' },
-          { german: 'die Universität', english: 'university' },
-          { german: 'das Krankenhaus', english: 'hospital' },
-          { german: 'die Apotheke', english: 'pharmacy' },
-          { german: 'der Supermarkt', english: 'supermarket' },
-          { german: 'die Bank', english: 'bank' },
-          { german: 'die Post', english: 'post office' },
-          { german: 'das Restaurant', english: 'restaurant' },
-          { german: 'das Café', english: 'café' },
-          { german: 'der Bahnhof', english: 'train station' },
-          { german: 'die Haltestelle', english: 'bus stop' }
-        ]
-      },
-      {
-        id: 'a2-v5', title: 'Weather & Seasons',
-        words: [
-          { german: 'das Wetter', english: 'weather' },
-          { german: 'die Sonne', english: 'sun' },
-          { german: 'der Regen', english: 'rain' },
-          { german: 'der Schnee', english: 'snow' },
-          { german: 'der Wind', english: 'wind' },
-          { german: 'die Wolke', english: 'cloud' },
-          { german: 'warm', english: 'warm' },
-          { german: 'kalt', english: 'cold' },
-          { german: 'heiß', english: 'hot' },
-          { german: 'der Frühling', english: 'spring' },
-          { german: 'der Sommer', english: 'summer' },
-          { german: 'der Herbst', english: 'autumn' },
-          { german: 'der Winter', english: 'winter' },
-          { german: 'es regnet', english: 'it is raining' },
-          { german: 'es schneit', english: 'it is snowing' }
-        ]
-      },
-      {
-        id: 'a2-v6', title: 'Clothing',
-        words: [
-          { german: 'die Kleidung', english: 'clothing' },
-          { german: 'das Hemd', english: 'shirt' },
-          { german: 'die Hose', english: 'pants' },
-          { german: 'das Kleid', english: 'dress' },
-          { german: 'der Rock', english: 'skirt' },
-          { german: 'die Jacke', english: 'jacket' },
-          { german: 'der Mantel', english: 'coat' },
-          { german: 'die Schuhe', english: 'shoes' },
-          { german: 'die Socken', english: 'socks' },
-          { german: 'die Mütze', english: 'cap' },
-          { german: 'der Hut', english: 'hat' },
-          { german: 'die Handschuhe', english: 'gloves' },
-          { german: 'der Schal', english: 'scarf' },
-          { german: 'anhaben', english: 'to wear' },
-          { german: 'ausziehen', english: 'to take off' }
-        ]
-      },
-      {
-        id: 'a2-v7', title: 'Numbers & Time',
-        words: [
-          { german: 'eins, zwei, drei', english: 'one, two, three' },
-          { german: 'vier, fünf, sechs', english: 'four, five, six' },
-          { german: 'sieben, acht, neun', english: 'seven, eight, nine' },
-          { german: 'zehn, elf, zwölf', english: 'ten, eleven, twelve' },
-          { german: 'zwanzig', english: 'twenty' },
-          { german: 'dreißig', english: 'thirty' },
-          { german: 'fünfzig', english: 'fifty' },
-          { german: 'hundert', english: 'hundred' },
-          { german: 'die Uhr', english: 'clock/watch' },
-          { german: 'die Stunde', english: 'hour' },
-          { german: 'die Minute', english: 'minute' },
-          { german: 'der Tag', english: 'day' },
-          { german: 'die Woche', english: 'week' },
-          { german: 'der Monat', english: 'month' },
-          { german: 'das Jahr', english: 'year' }
-        ]
-      }
-    ],
-    B1: [
-      {
-        id: 'b1-v1', title: 'Work & Professions',
-        words: [
-          { german: 'der Beruf', english: 'profession' },
-          { german: 'die Arbeit', english: 'work' },
-          { german: 'der Arbeitsplatz', english: 'workplace' },
-          { german: 'der Kollege', english: 'colleague' },
-          { german: 'der Chef', english: 'boss' },
-          { german: 'die Bewerbung', english: 'application' },
-          { german: 'das Gehalt', english: 'salary' },
-          { german: 'der Urlaub', english: 'vacation' },
-          { german: 'die Pause', english: 'break' },
-          { german: 'der Ingenieur', english: 'engineer' },
-          { german: 'die Lehrerin', english: 'teacher (f)' },
-          { german: 'der Arzt', english: 'doctor' },
-          { german: 'die Krankenschwester', english: 'nurse' },
-          { german: 'der Verkäufer', english: 'salesperson' },
-          { german: 'die Bürokauffrau', english: 'office clerk (f)' }
-        ]
-      },
-      {
-        id: 'b1-v2', title: 'Health & Body',
-        words: [
-          { german: 'die Gesundheit', english: 'health' },
-          { german: 'der Körper', english: 'body' },
-          { german: 'der Kopf', english: 'head' },
-          { german: 'der Arm', english: 'arm' },
-          { german: 'das Bein', english: 'leg' },
-          { german: 'die Hand', english: 'hand' },
-          { german: 'der Fuß', english: 'foot' },
-          { german: 'das Auge', english: 'eye' },
-          { german: 'das Ohr', english: 'ear' },
-          { german: 'die Krankheit', english: 'illness' },
-          { german: 'die Schmerzen', english: 'pain' },
-          { german: 'das Fieber', english: 'fever' },
-          { german: 'die Medizin', english: 'medicine' },
-          { german: 'die Tablette', english: 'pill' },
-          { german: 'gesund', english: 'healthy' }
-        ]
-      },
-      {
-        id: 'b1-v3', title: 'Travel & Transport',
-        words: [
-          { german: 'die Reise', english: 'trip/journey' },
-          { german: 'das Flugzeug', english: 'airplane' },
-          { german: 'der Zug', english: 'train' },
-          { german: 'der Bus', english: 'bus' },
-          { german: 'das Auto', english: 'car' },
-          { german: 'das Fahrrad', english: 'bicycle' },
-          { german: 'das Ticket', english: 'ticket' },
-          { german: 'der Flughafen', english: 'airport' },
-          { german: 'der Bahnhof', english: 'train station' },
-          { german: 'das Hotel', english: 'hotel' },
-          { german: 'die Buchung', english: 'booking' },
-          { german: 'der Koffer', english: 'suitcase' },
-          { german: 'der Pass', english: 'passport' },
-          { german: 'das Gepäck', english: 'luggage' },
-          { german: 'reisen', english: 'to travel' }
-        ]
-      },
-      {
-        id: 'b1-v4', title: 'Media & Technology',
-        words: [
-          { german: 'die Medien', english: 'media' },
-          { german: 'das Internet', english: 'internet' },
-          { german: 'der Computer', english: 'computer' },
-          { german: 'das Smartphone', english: 'smartphone' },
-          { german: 'die App', english: 'app' },
-          { german: 'die Website', english: 'website' },
-          { german: 'die E-Mail', english: 'email' },
-          { german: 'die Nachricht', english: 'message/news' },
-          { german: 'das soziale Netzwerk', english: 'social network' },
-          { german: 'online', english: 'online' },
-          { german: 'herunterladen', english: 'to download' },
-          { german: 'hochladen', english: 'to upload' },
-          { german: 'die Datei', english: 'file' },
-          { german: 'der Bildschirm', english: 'screen' },
-          { german: 'die Tastatur', english: 'keyboard' }
-        ]
-      },
-      {
-        id: 'b1-v5', title: 'Environment & Nature',
-        words: [
-          { german: 'die Umwelt', english: 'environment' },
-          { german: 'die Natur', english: 'nature' },
-          { german: 'der Wald', english: 'forest' },
-          { german: 'der Baum', english: 'tree' },
-          { german: 'die Blume', english: 'flower' },
-          { german: 'das Tier', english: 'animal' },
-          { german: 'der Vogel', english: 'bird' },
-          { german: 'der Fluss', english: 'river' },
-          { german: 'der See', english: 'lake' },
-          { german: 'das Meer', english: 'sea' },
-          { german: 'der Berg', english: 'mountain' },
-          { german: 'die Luft', english: 'air' },
-          { german: 'der Müll', english: 'trash' },
-          { german: 'recyceln', english: 'to recycle' },
-          { german: 'umweltfreundlich', english: 'eco-friendly' }
-        ]
-      },
-      {
-        id: 'b1-v6', title: 'Feelings & Emotions',
-        words: [
-          { german: 'das Gefühl', english: 'feeling' },
-          { german: 'die Freude', english: 'joy' },
-          { german: 'die Trauer', english: 'sadness' },
-          { german: 'die Angst', english: 'fear' },
-          { german: 'der Ärger', english: 'anger' },
-          { german: 'die Überraschung', english: 'surprise' },
-          { german: 'glücklich', english: 'happy' },
-          { german: 'traurig', english: 'sad' },
-          { german: 'wütend', english: 'angry' },
-          { german: 'nervös', english: 'nervous' },
-          { german: 'aufgeregt', english: 'excited' },
-          { german: 'enttäuscht', english: 'disappointed' },
-          { german: 'stolz', english: 'proud' },
-          { german: 'müde', english: 'tired' },
-          { german: 'gelangweilt', english: 'bored' }
-        ]
-      },
-      {
-        id: 'b1-v7', title: 'Education & Learning',
-        words: [
-          { german: 'die Bildung', english: 'education' },
-          { german: 'das Studium', english: 'university studies' },
-          { german: 'die Ausbildung', english: 'training/apprenticeship' },
-          { german: 'die Prüfung', english: 'exam' },
-          { german: 'die Note', english: 'grade' },
-          { german: 'das Zeugnis', english: 'certificate/report card' },
-          { german: 'der Kurs', english: 'course' },
-          { german: 'die Vorlesung', english: 'lecture' },
-          { german: 'das Seminar', english: 'seminar' },
-          { german: 'die Hausaufgabe', english: 'homework' },
-          { german: 'lernen', english: 'to study/learn' },
-          { german: 'üben', english: 'to practice' },
-          { german: 'bestehen', english: 'to pass' },
-          { german: 'durchfallen', english: 'to fail' },
-          { german: 'die Sprache', english: 'language' }
-        ]
-      },
-      {
-        id: 'b1-v8', title: 'Shopping & Money',
-        words: [
-          { german: 'das Geld', english: 'money' },
-          { german: 'der Euro', english: 'euro' },
-          { german: 'der Preis', english: 'price' },
-          { german: 'die Rechnung', english: 'bill/invoice' },
-          { german: 'die Quittung', english: 'receipt' },
-          { german: 'der Rabatt', english: 'discount' },
-          { german: 'der Sale', english: 'sale' },
-          { german: 'teuer', english: 'expensive' },
-          { german: 'billig', english: 'cheap' },
-          { german: 'kostenlos', english: 'free' },
-          { german: 'bezahlen', english: 'to pay' },
-          { german: 'die Kreditkarte', english: 'credit card' },
-          { german: 'das Bargeld', english: 'cash' },
-          { german: 'die Bank', english: 'bank' },
-          { german: 'das Konto', english: 'account' }
-        ]
-      }
-    ],
-    B2: [
-      {
-        id: 'b2-v1', title: 'Politics & Society',
-        words: [
-          { german: 'die Politik', english: 'politics' },
-          { german: 'die Regierung', english: 'government' },
-          { german: 'das Parlament', english: 'parliament' },
-          { german: 'die Wahl', english: 'election' },
-          { german: 'die Partei', english: 'party' },
-          { german: 'der Bürger', english: 'citizen' },
-          { german: 'die Gesellschaft', english: 'society' },
-          { german: 'die Demokratie', english: 'democracy' },
-          { german: 'das Gesetz', english: 'law' },
-          { german: 'die Freiheit', english: 'freedom' },
-          { german: 'die Gerechtigkeit', english: 'justice' },
-          { german: 'die Gleichheit', english: 'equality' },
-          { german: 'die Menschenrechte', english: 'human rights' },
-          { german: 'die Verantwortung', english: 'responsibility' },
-          { german: 'wählen', english: 'to vote' }
-        ]
-      },
-      {
-        id: 'b2-v2', title: 'Economy & Business',
-        words: [
-          { german: 'die Wirtschaft', english: 'economy' },
-          { german: 'das Unternehmen', english: 'company' },
-          { german: 'die Firma', english: 'firm' },
-          { german: 'der Markt', english: 'market' },
-          { german: 'der Handel', english: 'trade' },
-          { german: 'die Investition', english: 'investment' },
-          { german: 'der Gewinn', english: 'profit' },
-          { german: 'der Verlust', english: 'loss' },
-          { german: 'die Steuer', english: 'tax' },
-          { german: 'die Versicherung', english: 'insurance' },
-          { german: 'der Vertrag', english: 'contract' },
-          { german: 'die Konkurrenz', english: 'competition' },
-          { german: 'die Nachfrage', english: 'demand' },
-          { german: 'das Angebot', english: 'supply/offer' },
-          { german: 'wirtschaftlich', english: 'economic' }
-        ]
-      },
-      {
-        id: 'b2-v3', title: 'Science & Research',
-        words: [
-          { german: 'die Wissenschaft', english: 'science' },
-          { german: 'die Forschung', english: 'research' },
-          { german: 'das Experiment', english: 'experiment' },
-          { german: 'die Theorie', english: 'theory' },
-          { german: 'die Hypothese', english: 'hypothesis' },
-          { german: 'das Ergebnis', english: 'result' },
-          { german: 'die Entdeckung', english: 'discovery' },
-          { german: 'die Entwicklung', english: 'development' },
-          { german: 'die Technologie', english: 'technology' },
-          { german: 'die Innovation', english: 'innovation' },
-          { german: 'der Forscher', english: 'researcher' },
-          { german: 'das Labor', english: 'laboratory' },
-          { german: 'studieren', english: 'to study/research' },
-          { german: 'experimentieren', english: 'to experiment' },
-          { german: 'wissenschaftlich', english: 'scientific' }
-        ]
-      },
-      {
-        id: 'b2-v4', title: 'Culture & Arts',
-        words: [
-          { german: 'die Kultur', english: 'culture' },
-          { german: 'die Kunst', english: 'art' },
-          { german: 'das Museum', english: 'museum' },
-          { german: 'die Galerie', english: 'gallery' },
-          { german: 'die Ausstellung', english: 'exhibition' },
-          { german: 'das Theater', english: 'theater' },
-          { german: 'die Oper', english: 'opera' },
-          { german: 'das Konzert', english: 'concert' },
-          { german: 'die Musik', english: 'music' },
-          { german: 'die Literatur', english: 'literature' },
-          { german: 'der Roman', english: 'novel' },
-          { german: 'die Dichtung', english: 'poetry' },
-          { german: 'der Künstler', english: 'artist' },
-          { german: 'das Werk', english: 'work (of art)' },
-          { german: 'kreativ', english: 'creative' }
-        ]
-      },
-      {
-        id: 'b2-v5', title: 'Abstract Concepts',
-        words: [
-          { german: 'die Möglichkeit', english: 'possibility' },
-          { german: 'die Wahrscheinlichkeit', english: 'probability' },
-          { german: 'die Gelegenheit', english: 'opportunity' },
-          { german: 'die Erfahrung', english: 'experience' },
-          { german: 'die Kenntnis', english: 'knowledge' },
-          { german: 'die Fähigkeit', english: 'ability' },
-          { german: 'die Meinung', english: 'opinion' },
-          { german: 'die Entscheidung', english: 'decision' },
-          { german: 'die Lösung', english: 'solution' },
-          { german: 'das Problem', english: 'problem' },
-          { german: 'die Herausforderung', english: 'challenge' },
-          { german: 'der Vorteil', english: 'advantage' },
-          { german: 'der Nachteil', english: 'disadvantage' },
-          { german: 'der Unterschied', english: 'difference' },
-          { german: 'die Ähnlichkeit', english: 'similarity' }
-        ]
-      },
-      {
-        id: 'b2-v6', title: 'Communication & Discussion',
-        words: [
-          { german: 'die Kommunikation', english: 'communication' },
-          { german: 'die Diskussion', english: 'discussion' },
-          { german: 'die Debatte', english: 'debate' },
-          { german: 'die Argumentation', english: 'argumentation' },
-          { german: 'das Argument', english: 'argument' },
-          { german: 'die Begründung', english: 'reasoning' },
-          { german: 'die Zustimmung', english: 'agreement' },
-          { german: 'die Ablehnung', english: 'rejection' },
-          { german: 'der Kompromiss', english: 'compromise' },
-          { german: 'die Kritik', english: 'criticism' },
-          { german: 'das Lob', english: 'praise' },
-          { german: 'der Vorschlag', english: 'suggestion' },
-          { german: 'diskutieren', english: 'to discuss' },
-          { german: 'überzeugen', english: 'to convince' },
-          { german: 'zustimmen', english: 'to agree' }
-        ]
-      },
-      {
-        id: 'b2-v7', title: 'Global Issues',
-        words: [
-          { german: 'die Globalisierung', english: 'globalization' },
-          { german: 'der Klimawandel', english: 'climate change' },
-          { german: 'die Umweltverschmutzung', english: 'pollution' },
-          { german: 'die Armut', english: 'poverty' },
-          { german: 'die Ungleichheit', english: 'inequality' },
-          { german: 'die Migration', english: 'migration' },
-          { german: 'der Flüchtling', english: 'refugee' },
-          { german: 'die Integration', english: 'integration' },
-          { german: 'die Nachhaltigkeit', english: 'sustainability' },
-          { german: 'die Ressource', english: 'resource' },
-          { german: 'die Energie', english: 'energy' },
-          { german: 'die Krise', english: 'crisis' },
-          { german: 'die Pandemie', english: 'pandemic' },
-          { german: 'die Solidarität', english: 'solidarity' },
-          { german: 'global', english: 'global' }
-        ]
-      },
-      {
-        id: 'b2-v8', title: 'Idioms & Expressions',
-        words: [
-          { german: 'Das ist mir Wurst.', english: 'It\'s all the same to me.' },
-          { german: 'Ich verstehe nur Bahnhof.', english: 'I don\'t understand anything.' },
-          { german: 'Das ist nicht mein Bier.', english: 'That\'s not my business.' },
-          { german: 'Hals und Beinbruch!', english: 'Good luck! (Break a leg!)' },
-          { german: 'Da steppt der Bär.', english: 'That\'s where the action is.' },
-          { german: 'jemandem auf den Wecker gehen', english: 'to get on someone\'s nerves' },
-          { german: 'die Nase voll haben', english: 'to be fed up' },
-          { german: 'ins Schwarze treffen', english: 'to hit the bullseye' },
-          { german: 'Tomaten auf den Augen haben', english: 'to not see what\'s obvious' },
-          { german: 'einen Korb bekommen', english: 'to be rejected' },
-          { german: 'unter vier Augen', english: 'in private' },
-          { german: 'auf Wolke sieben sein', english: 'to be on cloud nine' },
-          { german: 'den Nagel auf den Kopf treffen', english: 'to hit the nail on the head' },
-          { german: 'Schwein haben', english: 'to have luck' },
-          { german: 'um den heißen Brei reden', english: 'to beat around the bush' }
-        ]
-      }
-    ]
-  },
+  // 123 Core Vocabulary Words - Comprehensive German Learning Set
+  vocabulary: [
+    // Lesson 1: Greetings (8 words)
+    { id: 'w1', german: 'Hallo', translation: 'Hello', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w2', german: 'Guten Morgen', translation: 'Good morning', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w3', german: 'Guten Tag', translation: 'Good day', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w4', german: 'Guten Abend', translation: 'Good evening', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w5', german: 'Auf Wiedersehen', translation: 'Goodbye', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w6', german: 'Tschüss', translation: 'Bye', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w7', german: 'Danke', translation: 'Thank you', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w8', german: 'Bitte', translation: 'Please / You\'re welcome', article: '', level: 'A1', category: 'Basics' },
+    
+    // Lesson 2: Numbers (10 words)
+    { id: 'w9', german: 'eins', translation: 'one', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w10', german: 'zwei', translation: 'two', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w11', german: 'drei', translation: 'three', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w12', german: 'vier', translation: 'four', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w13', german: 'fünf', translation: 'five', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w14', german: 'sechs', translation: 'six', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w15', german: 'sieben', translation: 'seven', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w16', german: 'acht', translation: 'eight', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w17', german: 'neun', translation: 'nine', article: '', level: 'A1', category: 'Basics' },
+    { id: 'w18', german: 'zehn', translation: 'ten', article: '', level: 'A1', category: 'Basics' },
+    
+    // Lesson 3: Family (10 words)
+    { id: 'w19', german: 'die Familie', translation: 'family', article: 'die', level: 'A1', category: 'Personal' },
+    { id: 'w20', german: 'die Mutter', translation: 'mother', article: 'die', level: 'A1', category: 'Personal' },
+    { id: 'w21', german: 'der Vater', translation: 'father', article: 'der', level: 'A1', category: 'Personal' },
+    { id: 'w22', german: 'die Schwester', translation: 'sister', article: 'die', level: 'A1', category: 'Personal' },
+    { id: 'w23', german: 'der Bruder', translation: 'brother', article: 'der', level: 'A1', category: 'Personal' },
+    { id: 'w24', german: 'die Tochter', translation: 'daughter', article: 'die', level: 'A1', category: 'Personal' },
+    { id: 'w25', german: 'der Sohn', translation: 'son', article: 'der', level: 'A1', category: 'Personal' },
+    { id: 'w26', german: 'die Eltern', translation: 'parents', article: 'die', level: 'A1', category: 'Personal' },
+    { id: 'w27', german: 'die Großmutter', translation: 'grandmother', article: 'die', level: 'A1', category: 'Personal' },
+    { id: 'w28', german: 'der Großvater', translation: 'grandfather', article: 'der', level: 'A1', category: 'Personal' },
+    
+    // Lesson 4: Food and Drink (15 words)
+    { id: 'w29', german: 'das Essen', translation: 'food', article: 'das', level: 'A1', category: 'Food' },
+    { id: 'w30', german: 'das Brot', translation: 'bread', article: 'das', level: 'A1', category: 'Food' },
+    { id: 'w31', german: 'das Wasser', translation: 'water', article: 'das', level: 'A1', category: 'Food' },
+    { id: 'w32', german: 'der Kaffee', translation: 'coffee', article: 'der', level: 'A1', category: 'Food' },
+    { id: 'w33', german: 'der Tee', translation: 'tea', article: 'der', level: 'A1', category: 'Food' },
+    { id: 'w34', german: 'der Apfel', translation: 'apple', article: 'der', level: 'A1', category: 'Food' },
+    { id: 'w35', german: 'die Banane', translation: 'banana', article: 'die', level: 'A1', category: 'Food' },
+    { id: 'w36', german: 'die Milch', translation: 'milk', article: 'die', level: 'A1', category: 'Food' },
+    { id: 'w37', german: 'der Käse', translation: 'cheese', article: 'der', level: 'A1', category: 'Food' },
+    { id: 'w38', german: 'das Fleisch', translation: 'meat', article: 'das', level: 'A1', category: 'Food' },
+    { id: 'w39', german: 'der Fisch', translation: 'fish', article: 'der', level: 'A1', category: 'Food' },
+    { id: 'w40', german: 'die Kartoffel', translation: 'potato', article: 'die', level: 'A1', category: 'Food' },
+    { id: 'w41', german: 'das Frühstück', translation: 'breakfast', article: 'das', level: 'A1', category: 'Food' },
+    { id: 'w42', german: 'das Mittagessen', translation: 'lunch', article: 'das', level: 'A1', category: 'Food' },
+    { id: 'w43', german: 'das Abendessen', translation: 'dinner', article: 'das', level: 'A1', category: 'Food' },
+    
+    // Lesson 5: Shopping (15 words)
+    { id: 'w44', german: 'der Supermarkt', translation: 'supermarket', article: 'der', level: 'A1', category: 'Shopping' },
+    { id: 'w45', german: 'der Markt', translation: 'market', article: 'der', level: 'A1', category: 'Shopping' },
+    { id: 'w46', german: 'das Geschäft', translation: 'shop', article: 'das', level: 'A1', category: 'Shopping' },
+    { id: 'w47', german: 'die Bäckerei', translation: 'bakery', article: 'die', level: 'A1', category: 'Shopping' },
+    { id: 'w48', german: 'kaufen', translation: 'to buy', article: '', level: 'A1', category: 'Shopping' },
+    { id: 'w49', german: 'bezahlen', translation: 'to pay', article: '', level: 'A1', category: 'Shopping' },
+    { id: 'w50', german: 'das Geld', translation: 'money', article: 'das', level: 'A1', category: 'Shopping' },
+    { id: 'w51', german: 'die Karte', translation: 'card', article: 'die', level: 'A1', category: 'Shopping' },
+    { id: 'w52', german: 'bar', translation: 'in cash', article: '', level: 'A1', category: 'Shopping' },
+    { id: 'w53', german: 'teuer', translation: 'expensive', article: '', level: 'A1', category: 'Shopping' },
+    { id: 'w54', german: 'billig', translation: 'cheap', article: '', level: 'A1', category: 'Shopping' },
+    { id: 'w55', german: 'die Tasche', translation: 'bag', article: 'die', level: 'A1', category: 'Shopping' },
+    { id: 'w56', german: 'der Einkaufswagen', translation: 'shopping cart', article: 'der', level: 'A1', category: 'Shopping' },
+    { id: 'w57', german: 'die Kasse', translation: 'cash register', article: 'die', level: 'A1', category: 'Shopping' },
+    { id: 'w58', german: 'der Preis', translation: 'price', article: 'der', level: 'A1', category: 'Shopping' },
+    
+    // Lesson 6: Travel and Transport (15 words)
+    { id: 'w59', german: 'der Zug', translation: 'train', article: 'der', level: 'A2', category: 'Travel' },
+    { id: 'w60', german: 'die Bahn', translation: 'railway', article: 'die', level: 'A2', category: 'Travel' },
+    { id: 'w61', german: 'der Bahnhof', translation: 'train station', article: 'der', level: 'A2', category: 'Travel' },
+    { id: 'w62', german: 'das Flugzeug', translation: 'airplane', article: 'das', level: 'A2', category: 'Travel' },
+    { id: 'w63', german: 'der Flughafen', translation: 'airport', article: 'der', level: 'A2', category: 'Travel' },
+    { id: 'w64', german: 'der Bus', translation: 'bus', article: 'der', level: 'A2', category: 'Travel' },
+    { id: 'w65', german: 'die U-Bahn', translation: 'subway', article: 'die', level: 'A2', category: 'Travel' },
+    { id: 'w66', german: 'das Taxi', translation: 'taxi', article: 'das', level: 'A2', category: 'Travel' },
+    { id: 'w67', german: 'das Auto', translation: 'car', article: 'das', level: 'A2', category: 'Travel' },
+    { id: 'w68', german: 'das Fahrrad', translation: 'bicycle', article: 'das', level: 'A2', category: 'Travel' },
+    { id: 'w69', german: 'die Fahrkarte', translation: 'ticket', article: 'die', level: 'A2', category: 'Travel' },
+    { id: 'w70', german: 'reisen', translation: 'to travel', article: '', level: 'A2', category: 'Travel' },
+    { id: 'w71', german: 'das Hotel', translation: 'hotel', article: 'das', level: 'A2', category: 'Travel' },
+    { id: 'w72', german: 'die Straße', translation: 'street', article: 'die', level: 'A2', category: 'Travel' },
+    { id: 'w73', german: 'die Karte', translation: 'map', article: 'die', level: 'A2', category: 'Travel' },
+    
+    // Lesson 7: Work and Profession (15 words)
+    { id: 'w74', german: 'die Arbeit', translation: 'work', article: 'die', level: 'A2', category: 'Work' },
+    { id: 'w75', german: 'der Beruf', translation: 'profession', article: 'der', level: 'A2', category: 'Work' },
+    { id: 'w76', german: 'der Lehrer', translation: 'teacher (m)', article: 'der', level: 'A2', category: 'Work' },
+    { id: 'w77', german: 'die Lehrerin', translation: 'teacher (f)', article: 'die', level: 'A2', category: 'Work' },
+    { id: 'w78', german: 'der Arzt', translation: 'doctor (m)', article: 'der', level: 'A2', category: 'Work' },
+    { id: 'w79', german: 'die Ärztin', translation: 'doctor (f)', article: 'die', level: 'A2', category: 'Work' },
+    { id: 'w80', german: 'der Ingenieur', translation: 'engineer', article: 'der', level: 'A2', category: 'Work' },
+    { id: 'w81', german: 'die Bürokauffrau', translation: 'office clerk', article: 'die', level: 'A2', category: 'Work' },
+    { id: 'w82', german: 'das Büro', translation: 'office', article: 'das', level: 'A2', category: 'Work' },
+    { id: 'w83', german: 'der Chef', translation: 'boss', article: 'der', level: 'A2', category: 'Work' },
+    { id: 'w84', german: 'der Kollege', translation: 'colleague', article: 'der', level: 'A2', category: 'Work' },
+    { id: 'w85', german: 'arbeiten', translation: 'to work', article: '', level: 'A2', category: 'Work' },
+    { id: 'w86', german: 'das Gehalt', translation: 'salary', article: 'das', level: 'A2', category: 'Work' },
+    { id: 'w87', german: 'der Urlaub', translation: 'vacation', article: 'der', level: 'A2', category: 'Work' },
+    { id: 'w88', german: 'die Pause', translation: 'break', article: 'die', level: 'A2', category: 'Work' },
+    
+    // Lesson 8: Health (15 words)
+    { id: 'w89', german: 'die Gesundheit', translation: 'health', article: 'die', level: 'A2', category: 'Health' },
+    { id: 'w90', german: 'der Körper', translation: 'body', article: 'der', level: 'A2', category: 'Health' },
+    { id: 'w91', german: 'der Kopf', translation: 'head', article: 'der', level: 'A2', category: 'Health' },
+    { id: 'w92', german: 'die Hand', translation: 'hand', article: 'die', level: 'A2', category: 'Health' },
+    { id: 'w93', german: 'der Fuß', translation: 'foot', article: 'der', level: 'A2', category: 'Health' },
+    { id: 'w94', german: 'das Auge', translation: 'eye', article: 'das', level: 'A2', category: 'Health' },
+    { id: 'w95', german: 'das Ohr', translation: 'ear', article: 'das', level: 'A2', category: 'Health' },
+    { id: 'w96', german: 'die Krankheit', translation: 'illness', article: 'die', level: 'A2', category: 'Health' },
+    { id: 'w97', german: 'der Schmerz', translation: 'pain', article: 'der', level: 'A2', category: 'Health' },
+    { id: 'w98', german: 'das Fieber', translation: 'fever', article: 'das', level: 'A2', category: 'Health' },
+    { id: 'w99', german: 'das Medikament', translation: 'medication', article: 'das', level: 'A2', category: 'Health' },
+    { id: 'w100', german: 'die Apotheke', translation: 'pharmacy', article: 'die', level: 'A2', category: 'Health' },
+    { id: 'w101', german: 'das Krankenhaus', translation: 'hospital', article: 'das', level: 'A2', category: 'Health' },
+    { id: 'w102', german: 'der Patient', translation: 'patient', article: 'der', level: 'A2', category: 'Health' },
+    { id: 'w103', german: 'gesund', translation: 'healthy', article: '', level: 'A2', category: 'Health' },
+    
+    // Additional Common Words (20 words)
+    { id: 'w104', german: 'ja', translation: 'yes', article: '', level: 'A1', category: 'Common' },
+    { id: 'w105', german: 'nein', translation: 'no', article: '', level: 'A1', category: 'Common' },
+    { id: 'w106', german: 'vielleicht', translation: 'maybe', article: '', level: 'A1', category: 'Common' },
+    { id: 'w107', german: 'und', translation: 'and', article: '', level: 'A1', category: 'Common' },
+    { id: 'w108', german: 'oder', translation: 'or', article: '', level: 'A1', category: 'Common' },
+    { id: 'w109', german: 'aber', translation: 'but', article: '', level: 'A1', category: 'Common' },
+    { id: 'w110', german: 'ich', translation: 'I', article: '', level: 'A1', category: 'Common' },
+    { id: 'w111', german: 'du', translation: 'you (informal)', article: '', level: 'A1', category: 'Common' },
+    { id: 'w112', german: 'er', translation: 'he', article: '', level: 'A1', category: 'Common' },
+    { id: 'w113', german: 'sie', translation: 'she', article: '', level: 'A1', category: 'Common' },
+    { id: 'w114', german: 'es', translation: 'it', article: '', level: 'A1', category: 'Common' },
+    { id: 'w115', german: 'wir', translation: 'we', article: '', level: 'A1', category: 'Common' },
+    { id: 'w116', german: 'ihr', translation: 'you (plural)', article: '', level: 'A1', category: 'Common' },
+    { id: 'w117', german: 'heute', translation: 'today', article: '', level: 'A1', category: 'Common' },
+    { id: 'w118', german: 'morgen', translation: 'tomorrow', article: '', level: 'A1', category: 'Common' },
+    { id: 'w119', german: 'gestern', translation: 'yesterday', article: '', level: 'A1', category: 'Common' },
+    { id: 'w120', german: 'jetzt', translation: 'now', article: '', level: 'A1', category: 'Common' },
+    { id: 'w121', german: 'hier', translation: 'here', article: '', level: 'A1', category: 'Common' },
+    { id: 'w122', german: 'dort', translation: 'there', article: '', level: 'A1', category: 'Common' },
+    { id: 'w123', german: 'gut', translation: 'good', article: '', level: 'A1', category: 'Common' }
+  ],
   pronunciation: {
     A2: [
       {
@@ -1773,6 +1780,9 @@ This is automatic in German speech!`,
   }
 };
 
+// Export grammar exercises for use in grammatik.html
+window.grammarExercises = GRAMMAR_EXERCISES;
+
 const LEVELS = ['A2', 'B1', 'B2'];
 const SECTIONS = [
   { id: 'grammar', name: 'Grammar', icon: '📚' },
@@ -1780,3 +1790,25 @@ const SECTIONS = [
   { id: 'pronunciation', name: 'Pronunciation', icon: '🗣️' },
   { id: 'everyday', name: 'Everyday German', icon: '🌍' }
 ];
+
+// Flatten vocabulary for quiz and glossary use
+const vocabulary = LESSON_DATA.vocabulary.flatMap((level, levelIdx) => {
+  const levelName = ['A2', 'B1', 'B2'][levelIdx];
+  return level.flatMap(category => 
+    category.words.map(word => ({
+      id: word.german.toLowerCase().replace(/\s+/g, '-'),
+      german: word.german,
+      translation: word.english,
+      article: word.german.match(/^(der|die|das)/i)?.[1] || '',
+      level: levelName,
+      category: category.title.split(' ')[0] // First word of category title
+    }))
+  );
+});
+
+// Glossary terms - using the 123 core vocabulary words
+const glossaryTerms = vocabulary.slice(0, 123);
+
+// Export for use in other files
+window.vocabulary = vocabulary;
+window.glossaryTerms = glossaryTerms;

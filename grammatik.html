@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Master German grammar with interactive lessons and exercises from A2 to B2 level.">
+  <title>Grammatik | Learn German</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Grammar-specific styles */
+    .grammar-practice-section {
+      background: var(--color-bg-alt);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-md);
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .grammar-quiz-setup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .grammar-quiz-setup label {
+      display: block;
+      font-weight: var(--font-weight-semibold);
+    }
+    
+    .grammar-quiz-setup select {
+      width: 100%;
+      padding: var(--spacing-sm);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-top: var(--spacing-xs);
+    }
+    
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .lesson-card {
+      background: var(--color-white);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+      border-left: 4px solid var(--color-primary);
+    }
+    
+    .lesson-card:hover {
+      transform: translateY(-2px);
+    }
+    
+    .lesson-card.a2 { border-left-color: #4CAF50; }
+    .lesson-card.b1 { border-left-color: #2196F3; }
+    .lesson-card.b2 { border-left-color: #9C27B0; }
+    
+    .lesson-card-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary-dark);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .lesson-card-meta {
+      display: flex;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .level-badge {
+      display: inline-block;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-white);
+    }
+    
+    .level-badge.a2 { background: #4CAF50; }
+    .level-badge.b1 { background: #2196F3; }
+    .level-badge.b2 { background: #9C27B0; }
+    
+    .lesson-card-desc {
+      font-size: var(--font-size-sm);
+      color: var(--color-text);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .grammar-exercise-item {
+      background: var(--color-white);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-md);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    .exercise-question {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-primary-dark);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .exercise-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .exercise-option {
+      padding: var(--spacing-sm) var(--spacing-md);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-white);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .exercise-option:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+    }
+    
+    .exercise-option.selected {
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+      color: var(--color-white);
+    }
+    
+    .exercise-option.correct {
+      border-color: #4CAF50;
+      background: #4CAF50;
+      color: var(--color-white);
+    }
+    
+    .exercise-option.incorrect {
+      border-color: #f44336;
+      background: #f44336;
+      color: var(--color-white);
+    }
+    
+    .exercise-feedback {
+      padding: var(--spacing-md);
+      border-radius: var(--radius-sm);
+      margin-top: var(--spacing-md);
+    }
+    
+    .exercise-feedback.correct {
+      background: #e8f5e9;
+      border: 2px solid #4CAF50;
+    }
+    
+    .exercise-feedback.incorrect {
+      background: #ffebee;
+      border: 2px solid #f44336;
+    }
+    
+    /* Quiz overlay (shared with vokabeln.html) */
+    .quiz-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    .quiz-overlay.hidden {
+      display: none;
+    }
+    
+    .quiz-container {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 2px solid var(--color-border);
+    }
+    
+    .quiz-progress {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-primary);
+    }
+    
+    .close-quiz {
+      background: none;
+      border: none;
+      font-size: var(--font-size-2xl);
+      cursor: pointer;
+      color: var(--color-text-light);
+    }
+    
+    .question-word {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary-dark);
+      margin: var(--spacing-md) 0;
+      text-align: center;
+    }
+    
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .option-btn {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-white);
+      cursor: pointer;
+      font-size: var(--font-size-base);
+      transition: all 0.2s;
+    }
+    
+    .option-btn:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+    }
+    
+    .feedback {
+      text-align: center;
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .feedback.correct {
+      background: #e8f5e9;
+      border: 2px solid #4CAF50;
+    }
+    
+    .feedback.incorrect {
+      background: #ffebee;
+      border: 2px solid #f44336;
+    }
+    
+    .feedback-icon {
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .feedback-text {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .feedback-explanation {
+      color: var(--color-text-light);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .speak-btn {
+      background: var(--color-primary-light);
+      border: none;
+      border-radius: var(--radius-full);
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: var(--font-size-base);
+      transition: all 0.2s;
+      margin-left: var(--spacing-xs);
+      vertical-align: middle;
+    }
+    
+    .speak-btn:hover {
+      background: var(--color-primary);
+      color: var(--color-white);
+      transform: scale(1.1);
+    }
+    
+    .exercise-question {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
+    
+    .quiz-results {
+      text-align: center;
+    }
+    
+    .results-summary {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .result-item {
+      padding: var(--spacing-md);
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-md);
+    }
+    
+    .result-value {
+      display: block;
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary);
+    }
+    
+    .result-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <span class="logo-emoji">🇩🇪</span>
+        <span>Learn German</span>
+      </a>
+      
+      <nav class="nav" id="mainNav">
+        <a href="grammatik.html" class="nav-link active">Grammatik</a>
+        <a href="vokabeln.html" class="nav-link">Vokabeln</a>
+        <a href="aussprache.html" class="nav-link">Aussprache</a>
+        <a href="alltag.html" class="nav-link">Alltag</a>
+        <a href="stats.html" class="nav-link">Stats</a>
+      </nav>
+      
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <span class="theme-toggle-icon">🌙</span>
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <span class="menu-toggle-icon">☰</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="container">
+    <nav class="breadcrumb" id="breadcrumb">
+      <!-- Generated by app.js -->
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container main-content">
+    <h1 class="page-title">📖 Grammatik</h1>
+    <p class="page-subtitle">Master German grammar with clear explanations and interactive exercises</p>
+
+    <!-- Grammar Practice Section -->
+    <section class="grammar-practice-section">
+      <h2 style="margin-bottom: var(--spacing-md);">🎯 Grammar Practice</h2>
+      <p style="margin-bottom: var(--spacing-lg);">Test your knowledge with interactive grammar exercises</p>
+      
+      <div class="grammar-quiz-setup">
+        <div>
+          <label>Category:</label>
+          <select id="grammar-category">
+            <option value="">All Categories</option>
+            <option value="Articles">Articles</option>
+            <option value="Verbs">Verbs</option>
+            <option value="Nouns">Nouns</option>
+            <option value="Cases">Cases</option>
+            <option value="Prepositions">Prepositions</option>
+            <option value="Pronouns">Pronouns</option>
+            <option value="Negation">Negation</option>
+          </select>
+        </div>
+        <div>
+          <label>Questions:</label>
+          <select id="grammar-count">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="startGrammarQuizFromSetup()">Start Grammar Quiz</button>
+    </section>
+
+    <!-- Lessons by Level -->
+    <section>
+      <h2 style="margin-bottom: var(--spacing-lg);">Grammar Topics</h2>
+      
+      <div class="lesson-grid">
+        <!-- A2 Lessons -->
+        <div class="lesson-card a2">
+          <div class="lesson-card-meta">
+            <span class="level-badge a2">A2</span>
+            <span class="level-badge" style="background: var(--color-bg-alt); color: var(--color-text);">Articles</span>
+          </div>
+          <h3 class="lesson-card-title">Articles: der, die, das</h3>
+          <p class="lesson-card-desc">Learn the three grammatical genders and when to use each article.</p>
+          <details style="margin-top: var(--spacing-md);">
+            <summary style="cursor: pointer; color: var(--color-primary); font-weight: var(--font-weight-semibold);">Quick Reference</summary>
+            <div style="margin-top: var(--spacing-sm); font-size: var(--font-size-sm);">
+              <p><strong>der</strong> - masculine <button class="speak-btn" onclick="speakWord('der Mann')" title="Listen">🔊</button> (der Mann, der Tisch)</p>
+              <p><strong>die</strong> - feminine <button class="speak-btn" onclick="speakWord('die Frau')" title="Listen">🔊</button> (die Frau, die Lampe)</p>
+              <p><strong>das</strong> - neuter <button class="speak-btn" onclick="speakWord('das Kind')" title="Listen">🔊</button> (das Kind, das Buch)</p>
+            </div>
+          </details>
+          <button class="btn btn-primary" style="margin-top: var(--spacing-md); width: 100%;" onclick="startGrammarQuiz('Articles', 10)">🎯 Practice</button>
+        </div>
+
+        <div class="lesson-card a2">
+          <div class="lesson-card-meta">
+            <span class="level-badge a2">A2</span>
+            <span class="level-badge" style="background: var(--color-bg-alt); color: var(--color-text);">Cases</span>
+          </div>
+          <h3 class="lesson-card-title">Nominativ & Akkusativ</h3>
+          <p class="lesson-card-desc">Master the subject and direct object cases. Only masculine changes!</p>
+          <details style="margin-top: var(--spacing-md);">
+            <summary style="cursor: pointer; color: var(--color-primary); font-weight: var(--font-weight-semibold);">Quick Reference</summary>
+            <div style="margin-top: var(--spacing-sm); font-size: var(--font-size-sm);">
+              <p><strong>Nominativ:</strong> <button class="speak-btn" onclick="speakWord('der Mann')" title="Listen">🔊</button> der Mann (subject)</p>
+              <p><strong>Akkusativ:</strong> <button class="speak-btn" onclick="speakWord('den Mann')" title="Listen">🔊</button> den Mann (direct object)</p>
+              <p>Feminine, neuter, and plural don't change.</p>
+            </div>
+          </details>
+          <button class="btn btn-primary" style="margin-top: var(--spacing-md); width: 100%;" onclick="startGrammarQuiz('Cases', 10)">🎯 Practice</button>
+        </div>
+
+        <div class="lesson-card a2">
+          <div class="lesson-card-meta">
+            <span class="level-badge a2">A2</span>
+            <span class="level-badge" style="background: var(--color-bg-alt); color: var(--color-text);">Verbs</span>
+          </div>
+          <h3 class="lesson-card-title">Modal Verbs</h3>
+          <p class="lesson-card-desc">können, müssen, dürfen, wollen, sollen, möchten - express ability and obligation.</p>
+          <button class="btn btn-primary" style="margin-top: var(--spacing-md); width: 100%;" onclick="startGrammarQuiz('Verbs', 10)">🎯 Practice</button>
+        </div>
+
+        <div class="lesson-card a2">
+          <div class="lesson-card-meta">
+            <span class="level-badge a2">A2</span>
+            <span class="level-badge" style="background: var(--color-bg-alt); color: var(--color-text);">Verbs</span>
+          </div>
+          <h3 class="lesson-card-title">Perfekt Tense</h3>
+          <p class="lesson-card-desc">The most common past tense in spoken German. haben/sein + Partizip II.</p>
+          <button class="btn btn-primary" style="margin-top: var(--spacing-md); width: 100%;" onclick="startGrammarQuiz('Verbs', 10)">🎯 Practice</button>
+        </div>
+
+        <!-- B1 Lessons -->
+        <div class="lesson-card b1">
+          <div class="lesson-card-meta">
+            <span class="level-badge b1">B1</span>
+            <span class="level-badge" style="background: var(--color-bg-alt); color: var(--color-text);">Cases</span>
+          </div>
+          <h3 class="lesson-card-title">Dativ Case</h3>
+          <p class="lesson-card-desc">The indirect object case. dem, der, dem, den - for whom?</p>
+          <button class="btn btn-primary" style="margin-top: var(--spacing-md); width: 100%;" onclick="startGrammarQuiz('Cases', 10)">🎯 Practice</button>
+        </div>
+
+        <div class="lesson-card b1">
+          <div class="lesson-card-meta">
+            <span class="level-badge b1">B1</span>
+            <span class="level-badge" style="background: var(--color-bg-alt); color: var(--color-text);">Clauses</span>
+          </div>
+          <h3 class="lesson-card-title">Relative Clauses</h3>
+          <p class="lesson-card-desc">Add information about nouns using der, die, das, den, dem...</p>
+          <button class="btn btn-primary" style="margin-top: var(--spacing-md); width: 100%;" onclick="startGrammarQuiz('Pronouns', 10)">🎯 Practice</button>
+        </div>
+
+        <div class="lesson-card b1">
+          <div class="lesson-card-meta">
+            <span class="level-badge b1">B1</span>
+            <span class="level-badge" style="background: var(--color-bg-alt); color: var(--color-text);">Mood</span>
+          </div>
+          <h3 class="lesson-card-title">Konjunktiv II</h3>
+          <p class="lesson-card-desc">Express hypothetical situations: würde, wäre, hätte, könnte...</p>
+          <button class="btn btn-primary" style="margin-top: var(--spacing-md); width: 100%;" onclick="startGrammarQuiz('Verbs', 10)">🎯 Practice</button>
+        </div>
+
+        <div class="lesson-card b1">
+          <div class="lesson-card-meta">
+            <span class="level-badge b1">B1</span>
+            <span class="level-badge" style="background: var(--color-bg-alt); color: var(--color-text);">Voice</span>
+          </div>
+          <h3 class="lesson-card-title">Passive Voice</h3>
+          <p class="lesson-card-desc">Focus on the action: werden + Partizip II</p>
+          <button class="btn btn-primary" style="margin-top: var(--spacing-md); width: 100%;" onclick="startGrammarQuiz('Verbs', 10)">🎯 Practice</button>
+        </div>
+
+        <!-- B2 Lessons -->
+        <div class="lesson-card b2">
+          <div class="lesson-card-meta">
+            <span class="level-badge b2">B2</span>
+            <span class="level-badge" style="background: var(--color-bg-alt); color: var(--color-text);">Style</span>
+          </div>
+          <h3 class="lesson-card-title">Nominalstil vs Verbalstil</h3>
+          <p class="lesson-card-desc">Formal noun-based vs. casual verb-based German.</p>
+          <button class="btn btn-primary" style="margin-top: var(--spacing-md); width: 100%;" onclick="startGrammarQuiz(null, 10)">🎯 Practice All</button>
+        </div>
+
+        <div class="lesson-card b2">
+          <div class="lesson-card-meta">
+            <span class="level-badge b2">B2</span>
+            <span class="level-badge" style="background: var(--color-bg-alt); color: var(--color-text);">Infinitives</span>
+          </div>
+          <h3 class="lesson-card-title">Infinitive with zu</h3>
+          <p class="lesson-card-desc">um...zu, ohne...zu, statt...zu constructions.</p>
+          <button class="btn btn-primary" style="margin-top: var(--spacing-md); width: 100%;" onclick="startGrammarQuiz('Verbs', 10)">🎯 Practice</button>
+        </div>
+
+        <div class="lesson-card b2">
+          <div class="lesson-card-meta">
+            <span class="level-badge b2">B2</span>
+            <span class="level-badge" style="background: var(--color-bg-alt); color: var(--color-text);">Speech</span>
+          </div>
+          <h3 class="lesson-card-title">Konjunktiv I</h3>
+          <p class="lesson-card-desc">Reported speech: er sei, er habe, er werde...</p>
+          <button class="btn btn-primary" style="margin-top: var(--spacing-md); width: 100%;" onclick="startGrammarQuiz('Verbs', 10)">🎯 Practice</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grammar Exercises Preview -->
+    <section style="margin-top: var(--spacing-xl);">
+      <h2 style="margin-bottom: var(--spacing-lg);">📝 Sample Exercises</h2>
+      <div id="exercise-preview">
+        <!-- Populated by JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Grammar Quiz Overlay -->
+  <div class="quiz-overlay hidden" id="grammar-quiz-overlay">
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <span class="quiz-progress grammar-quiz-progress">Question 1/10</span>
+        <button class="close-quiz" onclick="closeGrammarQuiz()">✕</button>
+      </div>
+      <div class="quiz-content" id="grammar-quiz-content"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-text">© 2026 Learn German. Made with ❤️ for language learners.</p>
+      <nav class="footer-links">
+        <a href="#" class="footer-link">About</a>
+        <a href="#" class="footer-link">Contact</a>
+        <a href="#" class="footer-link">Privacy</a>
+      </nav>
+    </footer>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Start grammar quiz from setup
+    function startGrammarQuizFromSetup() {
+      const category = document.getElementById('grammar-category').value;
+      const count = parseInt(document.getElementById('grammar-count').value);
+      startGrammarQuiz(category, count);
+    }
+
+    // Populate exercise preview
+    function populateExercisePreview() {
+      const container = document.getElementById('exercise-preview');
+      if (!container) return;
+      
+      // Show first 3 exercises as preview
+      const preview = grammarExercises.slice(0, 3);
+      container.innerHTML = preview.map((ex, idx) => `
+        <div class="grammar-exercise-item">
+          <div class="exercise-question">
+            <span>${idx + 1}. ${ex.question}</span>
+            <button class="speak-btn" onclick="speakWord('${ex.question.replace(/'/g, "\\'")}')" title="Listen to pronunciation">🔊</button>
+          </div>
+          <div class="exercise-options">
+            ${ex.options.map(opt => `<div class="exercise-option">${opt}</div>`).join('')}
+          </div>
+          <p style="font-size: var(--font-size-sm); color: var(--color-text-light);">
+            <strong>Answer:</strong> ${ex.correctAnswer} <button class="speak-btn" onclick="speakWord('${ex.correctAnswer.replace(/'/g, "\\'")}')" title="Listen">🔊</button> &nbsp;|&nbsp; 
+            <strong>Explanation:</strong> ${ex.explanation}
+          </p>
+        </div>
+      `).join('');
+    }
+
+    // Initialize
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', populateExercisePreview);
+    } else {
+      populateExercisePreview();
+    }
+  </script>
+</body>
+</html>

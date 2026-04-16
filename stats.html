@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Track your German learning progress with detailed statistics and insights.">
+  <title>Statistics | Learn German</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Stats-specific styles */
+    .stats-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .stat-card {
+      background: var(--color-white);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .stat-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .stat-value {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .stat-label {
+      color: var(--color-text-light);
+      font-size: var(--font-size-sm);
+    }
+
+    .stats-section {
+      background: var(--color-white);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .stats-section-title {
+      font-size: var(--font-size-xl);
+      color: var(--color-primary-dark);
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    .progress-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--spacing-sm);
+      height: 200px;
+      padding: var(--spacing-md);
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-sm);
+      margin: var(--spacing-lg) 0;
+    }
+
+    .chart-bar {
+      flex: 1;
+      background: var(--color-primary);
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      transition: height 0.3s;
+      position: relative;
+      min-width: 30px;
+    }
+
+    .chart-bar:hover {
+      background: var(--color-primary-dark);
+    }
+
+    .chart-bar-label {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-light);
+      white-space: nowrap;
+    }
+
+    .chart-bar-value {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-primary);
+    }
+
+    .level-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: var(--spacing-md);
+    }
+
+    .level-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm);
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-sm);
+    }
+
+    .level-badge {
+      display: inline-block;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-white);
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .level-badge.a1 { background: #4CAF50; }
+    .level-badge.a2 { background: #2196F3; }
+    .level-badge.b1 { background: #9C27B0; }
+    .level-badge.b2 { background: #FF9800; }
+
+    .level-count {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text);
+    }
+
+    .quiz-history {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .quiz-result-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm);
+      border-bottom: 1px solid var(--color-border);
+      font-size: var(--font-size-sm);
+    }
+
+    .quiz-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .quiz-result-item .accuracy {
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .quiz-result-item .accuracy.high { color: #4CAF50; }
+    .quiz-result-item .accuracy.medium { color: #FF9800; }
+    .quiz-result-item .accuracy.low { color: #f44336; }
+
+    .streak-calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--spacing-xs);
+      margin-top: var(--spacing-md);
+    }
+
+    .streak-day {
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .streak-day.active {
+      background: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    .streak-day.inactive {
+      background: var(--color-bg-alt);
+      color: var(--color-text-light);
+    }
+
+    .no-data {
+      text-align: center;
+      padding: var(--spacing-xl);
+      color: var(--color-text-light);
+    }
+
+    .refresh-btn {
+      margin-top: var(--spacing-md);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <span class="logo-emoji">🇩🇪</span>
+        <span>Learn German</span>
+      </a>
+      
+      <nav class="nav" id="mainNav">
+        <a href="grammatik.html" class="nav-link">Grammatik</a>
+        <a href="vokabeln.html" class="nav-link">Vokabeln</a>
+        <a href="aussprache.html" class="nav-link">Aussprache</a>
+        <a href="alltag.html" class="nav-link">Alltag</a>
+        <a href="stats.html" class="nav-link active">Stats</a>
+      </nav>
+      
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <span class="theme-toggle-icon">🌙</span>
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <span class="menu-toggle-icon">☰</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="container">
+    <nav class="breadcrumb" id="breadcrumb">
+      <!-- Generated by app.js -->
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container main-content">
+    <div class="stats-header">
+      <h1 class="page-title">📊 Your Statistics</h1>
+      <p class="page-subtitle">Track your German learning progress and achievements</p>
+    </div>
+
+    <!-- Overview Stats -->
+    <section class="stats-grid" id="overview-stats">
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-value" id="total-words">0</div>
+        <div class="stat-label">Words Learned</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-value" id="current-streak">0</div>
+        <div class="stat-label">Day Streak</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-value" id="total-quizzes">0</div>
+        <div class="stat-label">Quizzes Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-value" id="avg-accuracy">0%</div>
+        <div class="stat-label">Ø Accuracy</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-value" id="achievements-count">0</div>
+        <div class="stat-label">Achievements</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-value" id="total-time">0h</div>
+        <div class="stat-label">Total Time</div>
+      </div>
+    </section>
+
+    <!-- Level Breakdown -->
+    <section class="stats-section">
+      <h2 class="stats-section-title">Words by Level</h2>
+      <div class="level-breakdown" id="level-breakdown">
+        <div class="level-item">
+          <span class="level-badge a1">A1</span>
+          <span class="level-count" id="level-a1">0 words</span>
+        </div>
+        <div class="level-item">
+          <span class="level-badge a2">A2</span>
+          <span class="level-count" id="level-a2">0 words</span>
+        </div>
+        <div class="level-item">
+          <span class="level-badge b1">B1</span>
+          <span class="level-count" id="level-b1">0 words</span>
+        </div>
+        <div class="level-item">
+          <span class="level-badge b2">B2</span>
+          <span class="level-count" id="level-b2">0 words</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz History -->
+    <section class="stats-section">
+      <h2 class="stats-section-title">Recent Quiz Results</h2>
+      <div class="quiz-history" id="quiz-history">
+        <div class="no-data">No quizzes completed yet. Start practicing to see your results!</div>
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section class="stats-section">
+      <h2 class="stats-section-title">Achievements</h2>
+      <div id="achievements-list">
+        <div class="no-data">No achievements unlocked yet. Keep learning!</div>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <div style="text-align: center; margin-top: var(--spacing-xl);">
+      <a href="vokabeln.html" class="btn btn-primary">Practice Vocabulary</a>
+      <a href="grammatik.html" class="btn btn-secondary">Practice Grammar</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-text">© 2026 Learn German. Made with ❤️ for language learners.</p>
+      <nav class="footer-links">
+        <a href="#" class="footer-link">About</a>
+        <a href="#" class="footer-link">Contact</a>
+        <a href="#" class="footer-link">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Stats page initialization
+    function loadStats() {
+      // Load progress from localStorage
+      const progress = JSON.parse(localStorage.getItem('german-portal-progress') || '{}');
+      const quizHistory = JSON.parse(localStorage.getItem('german-portal-quiz-history') || '[]');
+      const achievements = JSON.parse(localStorage.getItem('german-portal-achievements') || '[]');
+      
+      // Overview stats
+      document.getElementById('total-words').textContent = progress.totalWordsLearned || 0;
+      document.getElementById('current-streak').textContent = progress.currentStreak || 0;
+      document.getElementById('total-quizzes').textContent = progress.totalQuizCount || 0;
+      document.getElementById('avg-accuracy').textContent = Math.round(progress.averageAccuracy || 0) + '%';
+      document.getElementById('achievements-count').textContent = achievements.length;
+      
+      // Calculate total time (estimated from quiz history)
+      const totalTimeSeconds = quizHistory.reduce((sum, q) => sum + (q.timeSpent || 0), 0);
+      const totalHours = (totalTimeSeconds / 3600).toFixed(1);
+      document.getElementById('total-time').textContent = totalHours + 'h';
+      
+      // Level breakdown
+      const wordsByLevel = progress.wordsByLevel || { A1: 0, A2: 0, B1: 0, B2: 0 };
+      document.getElementById('level-a1').textContent = (wordsByLevel.A1 || 0) + ' words';
+      document.getElementById('level-a2').textContent = (wordsByLevel.A2 || 0) + ' words';
+      document.getElementById('level-b1').textContent = (wordsByLevel.B1 || 0) + ' words';
+      document.getElementById('level-b2').textContent = (wordsByLevel.B2 || 0) + ' words';
+      
+      // Quiz history
+      const quizHistoryEl = document.getElementById('quiz-history');
+      if (quizHistory.length > 0) {
+        const recentQuizzes = quizHistory.slice(-10).reverse();
+        quizHistoryEl.innerHTML = `
+          <div class="quiz-result-item" style="font-weight: bold;">
+            <span>Date</span>
+            <span>Score</span>
+            <span>Accuracy</span>
+          </div>
+          ${recentQuizzes.map(q => {
+            const date = new Date(q.completedAt).toLocaleDateString();
+            const accuracyClass = q.accuracy >= 80 ? 'high' : q.accuracy >= 50 ? 'medium' : 'low';
+            return `
+              <div class="quiz-result-item">
+                <span>${date}</span>
+                <span>${q.correct}/${q.total}</span>
+                <span class="accuracy ${accuracyClass}">${Math.round(q.accuracy)}%</span>
+              </div>
+            `;
+          }).join('')}
+        `;
+      }
+      
+      // Achievements
+      const achievementsListEl = document.getElementById('achievements-list');
+      if (achievements.length > 0) {
+        const allAchievements = achievements || [];
+        achievementsListEl.innerHTML = `
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--spacing-md);">
+            ${allAchievements.map(ach => `
+              <div class="stat-card" style="padding: var(--spacing-md);">
+                <div class="stat-icon">${ach.icon || '🏆'}</div>
+                <div style="font-weight: var(--font-weight-semibold); font-size: var(--font-size-sm);">${ach.title || 'Achievement'}</div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-light);">${ach.description || ''}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+    }
+
+    // Load stats when page is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadStats);
+    } else {
+      loadStats();
+    }
+  </script>
+</body>
+</html>
