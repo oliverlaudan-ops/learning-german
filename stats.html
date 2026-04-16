@@ -66,50 +66,6 @@
       border-bottom: 2px solid var(--color-border);
     }
 
-    .progress-chart {
-      display: flex;
-      align-items: flex-end;
-      gap: var(--spacing-sm);
-      height: 200px;
-      padding: var(--spacing-md);
-      background: var(--color-bg-alt);
-      border-radius: var(--radius-sm);
-      margin: var(--spacing-lg) 0;
-    }
-
-    .chart-bar {
-      flex: 1;
-      background: var(--color-primary);
-      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-      transition: height 0.3s;
-      position: relative;
-      min-width: 30px;
-    }
-
-    .chart-bar:hover {
-      background: var(--color-primary-dark);
-    }
-
-    .chart-bar-label {
-      position: absolute;
-      bottom: -25px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: var(--font-size-xs);
-      color: var(--color-text-light);
-      white-space: nowrap;
-    }
-
-    .chart-bar-value {
-      position: absolute;
-      top: -25px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-primary);
-    }
-
     .level-breakdown {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -172,37 +128,226 @@
     .quiz-result-item .accuracy.medium { color: #FF9800; }
     .quiz-result-item .accuracy.low { color: #f44336; }
 
-    .streak-calendar {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: var(--spacing-xs);
-      margin-top: var(--spacing-md);
-    }
-
-    .streak-day {
-      aspect-ratio: 1;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
-    }
-
-    .streak-day.active {
-      background: var(--color-primary);
-      color: var(--color-white);
-    }
-
-    .streak-day.inactive {
-      background: var(--color-bg-alt);
-      color: var(--color-text-light);
-    }
-
     .no-data {
       text-align: center;
       padding: var(--spacing-xl);
       color: var(--color-text-light);
+    }
+
+    /* Achievements Grid */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--spacing-md);
+    }
+
+    .achievement-card {
+      background: var(--color-bg-alt);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      text-align: center;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .achievement-card.unlocked {
+      background: var(--color-white);
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+    }
+
+    .achievement-card.locked {
+      opacity: 0.5;
+      filter: grayscale(0.8);
+    }
+
+    .achievement-card .achievement-icon {
+      font-size: 2rem;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .achievement-card .achievement-title {
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--spacing-xs);
+      color: var(--color-text);
+    }
+
+    .achievement-card .achievement-description {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-light);
+    }
+
+    .achievement-card .achievement-category {
+      display: inline-block;
+      margin-top: var(--spacing-xs);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-size: 0.65rem;
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+    }
+
+    .achievement-card .achievement-category.streak { background: #FF9800; color: white; }
+    .achievement-card .achievement-category.learning { background: #4CAF50; color: white; }
+    .achievement-card .achievement-category.quiz { background: #2196F3; color: white; }
+    .achievement-card .achievement-category.accuracy { background: #9C27B0; color: white; }
+    .achievement-card .achievement-category.special { background: #E91E63; color: white; }
+
+    /* Daily Goal Progress */
+    .daily-goal-section {
+      background: var(--color-white);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .daily-goal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .daily-goal-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text);
+    }
+
+    .daily-goal-count {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-light);
+    }
+
+    .progress-bar-container {
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-full);
+      height: 12px;
+      overflow: hidden;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+      border-radius: var(--radius-full);
+      transition: width 0.5s ease;
+    }
+
+    .daily-goal-complete {
+      text-align: center;
+      padding: var(--spacing-md);
+      background: linear-gradient(135deg, #4CAF50, #8BC34A);
+      color: white;
+      border-radius: var(--radius-md);
+      font-weight: var(--font-weight-semibold);
+      margin-top: var(--spacing-md);
+    }
+
+    /* Streak Display */
+    .streak-display {
+      text-align: center;
+      padding: var(--spacing-lg);
+      background: linear-gradient(135deg, #FF9800, #FF5722);
+      color: white;
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .streak-display .streak-emoji {
+      font-size: 3rem;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .streak-display .streak-count {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-bold);
+    }
+
+    .streak-display .streak-label {
+      font-size: var(--font-size-lg);
+      opacity: 0.9;
+    }
+
+    /* Achievement Notification */
+    .achievement-notification {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #4F46E5, #7C3AED);
+      color: white;
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-md);
+      box-shadow: 0 8px 32px rgba(79, 70, 229, 0.3);
+      z-index: 1000;
+      transform: translateX(400px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      max-width: 350px;
+    }
+
+    .achievement-notification.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .achievement-notification .achievement-content {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .achievement-notification .achievement-icon {
+      font-size: 2.5rem;
+    }
+
+    .achievement-notification .achievement-text strong {
+      display: block;
+      font-size: var(--font-size-base);
+      margin-bottom: 4px;
+    }
+
+    .achievement-notification .achievement-text p {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      margin: 0;
+    }
+
+    .achievement-notification .achievement-text small {
+      font-size: var(--font-size-xs);
+      opacity: 0.9;
+    }
+
+    /* Category Tabs */
+    .achievement-tabs {
+      display: flex;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-lg);
+      flex-wrap: wrap;
+    }
+
+    .achievement-tab {
+      padding: var(--spacing-sm) var(--spacing-md);
+      border: none;
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text);
+      transition: all 0.2s;
+    }
+
+    .achievement-tab:hover {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .achievement-tab.active {
+      background: var(--color-primary);
+      color: white;
     }
 
     .refresh-btn {
@@ -252,17 +397,33 @@
       <p class="page-subtitle">Track your German learning progress and achievements</p>
     </div>
 
+    <!-- Streak Display -->
+    <section class="streak-display">
+      <div class="streak-emoji">🔥</div>
+      <div class="streak-count" id="streak-count">0</div>
+      <div class="streak-label">Day Streak</div>
+    </section>
+
+    <!-- Daily Goal Progress -->
+    <section class="daily-goal-section">
+      <div class="daily-goal-header">
+        <span class="daily-goal-title">📅 Daily Goal</span>
+        <span class="daily-goal-count" id="daily-goal-count">0 / 10 words</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="daily-goal-progress" style="width: 0%"></div>
+      </div>
+      <div id="daily-goal-message" style="text-align: center; color: var(--color-text-light); font-size: var(--font-size-sm);">
+        Keep learning to reach your daily goal!
+      </div>
+    </section>
+
     <!-- Overview Stats -->
     <section class="stats-grid" id="overview-stats">
       <div class="stat-card">
         <div class="stat-icon">📚</div>
         <div class="stat-value" id="total-words">0</div>
         <div class="stat-label">Words Learned</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon">🔥</div>
-        <div class="stat-value" id="current-streak">0</div>
-        <div class="stat-label">Day Streak</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">🏆</div>
@@ -276,13 +437,18 @@
       </div>
       <div class="stat-card">
         <div class="stat-icon">⭐</div>
-        <div class="stat-value" id="achievements-count">0</div>
+        <div class="stat-value" id="achievements-count">0/16</div>
         <div class="stat-label">Achievements</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">⏱️</div>
         <div class="stat-value" id="total-time">0h</div>
         <div class="stat-label">Total Time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💪</div>
+        <div class="stat-value" id="longest-streak">0</div>
+        <div class="stat-label">Best Streak</div>
       </div>
     </section>
 
@@ -319,9 +485,20 @@
 
     <!-- Achievements -->
     <section class="stats-section">
-      <h2 class="stats-section-title">Achievements</h2>
-      <div id="achievements-list">
-        <div class="no-data">No achievements unlocked yet. Keep learning!</div>
+      <h2 class="stats-section-title">🏆 Achievements</h2>
+      
+      <!-- Category Filter Tabs -->
+      <div class="achievement-tabs">
+        <button class="achievement-tab active" data-category="all">All</button>
+        <button class="achievement-tab" data-category="streak">Streak</button>
+        <button class="achievement-tab" data-category="learning">Learning</button>
+        <button class="achievement-tab" data-category="quiz">Quiz</button>
+        <button class="achievement-tab" data-category="accuracy">Accuracy</button>
+        <button class="achievement-tab" data-category="special">Special</button>
+      </div>
+      
+      <div class="achievements-grid" id="achievements-grid">
+        <!-- Achievements will be rendered here -->
       </div>
     </section>
 
@@ -351,18 +528,42 @@
   <script src="app.js"></script>
   <script>
     // Stats page initialization
+    let currentFilter = 'all';
+
     function loadStats() {
+      // Initialize achievements module
+      const achievements = AchievementsModule.init();
+      
       // Load progress from localStorage
       const progress = JSON.parse(localStorage.getItem('german-portal-progress') || '{}');
       const quizHistory = JSON.parse(localStorage.getItem('german-portal-quiz-history') || '[]');
-      const achievements = JSON.parse(localStorage.getItem('german-portal-achievements') || '[]');
+      
+      // Streak display
+      const currentStreak = progress.currentStreak || 0;
+      document.getElementById('streak-count').textContent = currentStreak;
+      
+      // Daily goal progress
+      const dailyGoal = progress.dailyGoal || 10;
+      const todayLearned = progress.todayLearned || 0;
+      const dailyPercentage = Math.min(100, (todayLearned / dailyGoal) * 100);
+      
+      document.getElementById('daily-goal-count').textContent = `${todayLearned} / ${dailyGoal} words`;
+      document.getElementById('daily-goal-progress').style.width = dailyPercentage + '%';
+      
+      const goalMessage = document.getElementById('daily-goal-message');
+      if (todayLearned >= dailyGoal) {
+        goalMessage.innerHTML = '<div class="daily-goal-complete">✅ Daily goal completed! Great job!</div>';
+      } else {
+        const remaining = dailyGoal - todayLearned;
+        goalMessage.textContent = `${remaining} more word${remaining !== 1 ? 's' : ''} to reach your daily goal!`;
+      }
       
       // Overview stats
       document.getElementById('total-words').textContent = progress.totalWordsLearned || 0;
-      document.getElementById('current-streak').textContent = progress.currentStreak || 0;
       document.getElementById('total-quizzes').textContent = progress.totalQuizCount || 0;
       document.getElementById('avg-accuracy').textContent = Math.round(progress.averageAccuracy || 0) + '%';
-      document.getElementById('achievements-count').textContent = achievements.length;
+      document.getElementById('longest-streak').textContent = progress.longestStreak || 0;
+      document.getElementById('achievements-count').textContent = `${AchievementsModule.getUnlockedCount()}/16`;
       
       // Calculate total time (estimated from quiz history)
       const totalTimeSeconds = quizHistory.reduce((sum, q) => sum + (q.timeSpent || 0), 0);
@@ -400,21 +601,43 @@
         `;
       }
       
-      // Achievements
-      const achievementsListEl = document.getElementById('achievements-list');
-      if (achievements.length > 0) {
-        const allAchievements = achievements || [];
-        achievementsListEl.innerHTML = `
-          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--spacing-md);">
-            ${allAchievements.map(ach => `
-              <div class="stat-card" style="padding: var(--spacing-md);">
-                <div class="stat-icon">${ach.icon || '🏆'}</div>
-                <div style="font-weight: var(--font-weight-semibold); font-size: var(--font-size-sm);">${ach.title || 'Achievement'}</div>
-                <div style="font-size: var(--font-size-xs); color: var(--color-text-light);">${ach.description || ''}</div>
-              </div>
-            `).join('')}
+      // Render achievements
+      renderAchievements(achievements);
+      
+      // Setup achievement tab filtering
+      document.querySelectorAll('.achievement-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.achievement-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentFilter = tab.dataset.category;
+          renderAchievements(achievements);
+        });
+      });
+    }
+
+    function renderAchievements(achievements) {
+      const grid = document.getElementById('achievements-grid');
+      const unlockedIds = AchievementsModule.getUnlockedIds();
+      
+      let filtered = achievements;
+      if (currentFilter !== 'all') {
+        filtered = achievements.filter(a => a.category === currentFilter);
+      }
+      
+      grid.innerHTML = filtered.map(ach => {
+        const isUnlocked = unlockedIds.includes(ach.id);
+        return `
+          <div class="achievement-card ${isUnlocked ? 'unlocked' : 'locked'}">
+            <div class="achievement-icon">${isUnlocked ? ach.icon : '🔒'}</div>
+            <div class="achievement-title">${ach.title}</div>
+            <div class="achievement-description">${ach.description}</div>
+            <span class="achievement-category ${ach.category}">${ach.category}</span>
           </div>
         `;
+      }).join('');
+      
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="no-data">No achievements in this category.</div>';
       }
     }
 

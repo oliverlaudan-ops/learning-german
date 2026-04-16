@@ -681,3 +681,52 @@ ul, ol {
 .pulse {
   animation: pulse 2s ease-in-out infinite;
 }
+
+/* ===== Achievement Notification ===== */
+.achievement-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #4F46E5, #7C3AED);
+  color: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 32px rgba(79, 70, 229, 0.3);
+  z-index: 1000;
+  transform: translateX(400px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  max-width: 350px;
+}
+
+.achievement-notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.achievement-notification .achievement-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.achievement-notification .achievement-icon {
+  font-size: 2.5rem;
+}
+
+.achievement-notification .achievement-text strong {
+  display: block;
+  font-size: var(--font-size-base);
+  margin-bottom: 4px;
+}
+
+.achievement-notification .achievement-text p {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+}
+
+.achievement-notification .achievement-text small {
+  font-size: var(--font-size-xs);
+  opacity: 0.9;
+}
