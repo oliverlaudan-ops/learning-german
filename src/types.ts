@@ -58,7 +58,7 @@ export interface GrammarExample {
 
 export interface GrammarExercise {
   id: string
-  type: 'article' | 'conjugation' | 'plural' | 'case' | 'preposition' | 'pronoun' | 'negation' | 'modal' | 'perfect'
+  type: 'article' | 'conjugation' | 'plural' | 'case' | 'preposition' | 'pronoun' | 'negation' | 'modal' | 'perfect' | 'prefix'
   question: string
   options: string[]
   correctAnswer: string

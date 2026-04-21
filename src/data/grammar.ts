@@ -202,4 +202,25 @@ export const grammarRules: GrammarRule[] = [
       { german: 'das gute Kind', english: 'the good child', explanation: 'Nominative neuter' },
     ],
   },
+  
+  // Vor vs Ver Prefix Rule
+  {
+    id: 'grammar-17',
+    title: 'Vor vs Ver Prefixes',
+    description: 'German prefixes "vor-" and "ver-" change verb meanings. "Vor-" often relates to position (in front), time (before), or presenting something. "Ver-" often indicates completion, transformation, mistake, or something going wrong. Many "vor-" verbs are separable (trennbar), while most "ver-" verbs are inseparable (untrennbar).',
+    level: 'A2',
+    category: 'Vor-Ver Prefixes',
+    examples: [
+      { german: 'vorstellen (sich)', english: 'to imagine / to introduce', explanation: 'Vor- = before/present; separable: "ich stelle vor"' },
+      { german: 'verstehen', english: 'to understand', explanation: 'Ver- = completion; inseparable: "ich verstehe"' },
+      { german: 'vorbereiten', english: 'to prepare', explanation: 'Vor- = beforehand; separable: "ich bereite vor"' },
+      { german: 'vergessen', english: 'to forget', explanation: 'Ver- = gone/wrong; inseparable: "ich vergesse"' },
+      { german: 'vorlesen', english: 'to read aloud', explanation: 'Vor- = forth/present; separable: "ich lese vor"' },
+      { german: 'verkaufen', english: 'to sell', explanation: 'Ver- = transaction; inseparable: "ich verkaufe"' },
+      { german: 'vorne', english: 'in front', explanation: 'Position word with vor-' },
+      { german: 'verloren', english: 'lost', explanation: 'Ver- = gone; past participle of verlieren' },
+      { german: 'vorher', english: 'before/previously', explanation: 'Time reference with vor-' },
+      { german: 'versuchen', english: 'to try', explanation: 'Ver- = attempt; inseparable: "ich versuche"' },
+    ],
+  },
 ]
