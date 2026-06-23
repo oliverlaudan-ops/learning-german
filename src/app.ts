@@ -2,34 +2,30 @@ import type {
   CEFRLevel,
   VocabWord,
   UserProgress,
-  QuizResult,
-  Chapter,
   Level,
   LevelProgress,
-  ChapterProgress,
+  AppState,
+  ProfileState,
+  QuizMode,
 } from './types'
 import { vocabulary } from './data/vocabulary'
 import { lessons, getLevels } from './data/lessons'
-// import { glossaryTerms } from './data/glossary'
-// Grammar rules are not currently rendered in this minimal dashboard view.
-import { achievements as achievementList } from './data/achievements'
 import { grammarExercises } from './data/grammar-exercises'
 
+// --- Constants ---
+const STORAGE_KEY = 'learning-german-v3-state'
+const LEGACY_STORAGE_KEY = 'learning-german-v2-state'
+const SRS_INTERVALS = [
+  0, // Box 0 (unused)
+  24 * 60 * 60 * 1000, // Box 1: 1 day
+  3 * 24 * 60 * 60 * 1000, // Box 2: 3 days
+  7 * 24 * 60 * 60 * 1000, // Box 3: 7 days
+  14 * 24 * 60 * 60 * 1000, // Box 4: 14 days
+  30 * 24 * 60 * 60 * 1000, // Box 5: 30 days
+]
+
+// --- Initialization ---
 const levels: Level[] = getLevels()
-
-// Glossary render helpers kept for future use but unused in the current tabs.
-
-const STORAGE_KEY = 'learning-german-v2-state'
-
-interface AppState {
-  progress: UserProgress
-  quizHistory: QuizResult[]
-  learnedWordIds: string[]
-  lastActive: number
-  streak: number
-  achievements: typeof achievementList
-  levels: Record<CEFRLevel, LevelProgress>
-}
 
 const defaultProgress: UserProgress = {
   totalWordsLearned: 0,
@@ -43,341 +39,147 @@ const defaultProgress: UserProgress = {
   todayLearned: 0,
 }
 
-function emptyChapterProgress(ch: Chapter): ChapterProgress {
+function createEmptyProfile(id: string, name: string): ProfileState {
   return {
-    chapterId: ch.id,
-    levelId: ch.level,
-    wordsLearned: 0,
+    id,
+    displayName: name,
+    createdAt: Date.now(),
+    l1: 'en',
+    progress: { ...defaultProgress },
+    levels: initialLevels(),
+    quizHistory: [],
     learnedWordIds: [],
-    percent: 0,
-  }
-}
-
-function emptyLevelProgress(level: Level): LevelProgress {
-  const chapters: Record<string, ChapterProgress> = {}
-  for (const ch of level.chapters) {
-    chapters[ch.id] = emptyChapterProgress(ch)
-  }
-  return {
-    levelId: level.id,
-    chapters,
-    completedChapters: [],
-    totalWordsLearned: 0,
-    percent: 0,
-    started: false,
+    srsState: {},
+    categoryStats: {},
   }
 }
 
 function initialLevels(): Record<CEFRLevel, LevelProgress> {
   const out: Partial<Record<CEFRLevel, LevelProgress>> = {}
   for (const level of levels) {
-    out[level.id] = emptyLevelProgress(level)
+    out[level.id] = {
+      levelId: level.id,
+      chapters: Object.fromEntries(
+        level.chapters.map((ch) => [
+          ch.id,
+          {
+            chapterId: ch.id,
+            levelId: ch.level,
+            wordsLearned: 0,
+            learnedWordIds: [],
+            percent: 0,
+          },
+        ]),
+      ),
+      completedChapters: [],
+      totalWordsLearned: 0,
+      percent: 0,
+      started: false,
+    }
   }
   return out as Record<CEFRLevel, LevelProgress>
 }
 
-function migrateLegacyState(parsed: any): Partial<AppState> {
-  const legacy: Partial<AppState> = {}
-  if (parsed?.progress) {
-    legacy.progress = {
-      ...defaultProgress,
-      ...parsed.progress,
-      wordsByLevel: {
-        A1: 0,
-        A2: 0,
-        B1: 0,
-        B2: 0,
-        ...parsed.progress.wordsByLevel,
-      },
-    }
-  }
-  if (Array.isArray(parsed?.quizHistory)) {
-    legacy.quizHistory = parsed.quizHistory
-      .filter((q: any) => q != null)
-      .map((q: any) => ({
-        chapterId: q.lessonId || q.chapterId || 'unknown',
-        levelId: q.levelId || 'A1',
-        correct: q.correct || 0,
-        total: q.total || 0,
-        accuracy: q.accuracy || 0,
-        completedAt: q.completedAt || Date.now(),
-        timeSpent: q.timeSpent || 0,
-      }))
-  }
-  if (Array.isArray(parsed?.learnedWordIds)) {
-    legacy.learnedWordIds = parsed.learnedWordIds
-  }
-  if (typeof parsed?.lastActive === 'number') legacy.lastActive = parsed.lastActive
-  if (typeof parsed?.streak === 'number') legacy.streak = parsed.streak
-  return legacy
-}
+// --- Persistence & Migration ---
 
 function loadState(): AppState {
   const saved = localStorage.getItem(STORAGE_KEY)
-  const fresh: AppState = {
-    progress: defaultProgress,
-    quizHistory: [],
-    learnedWordIds: [],
-    lastActive: Date.now(),
-    streak: 0,
-    achievements: achievementList.map((a) => ({ ...a, unlocked: false })),
-    levels: initialLevels(),
-  }
-
-  if (!saved) return fresh
-
-  try {
-    const parsed = JSON.parse(saved)
-    const migrated = migrateLegacyState(parsed)
-
-    const mergedProgress = { ...defaultProgress, ...migrated.progress }
-    const mergedLevels = initialLevels()
-
-    // Rebuild chapter progress from saved level/chapter data if present.
-    if (parsed.levels) {
-      for (const level of levels) {
-        const savedLevel = parsed.levels[level.id]
-        const levelProgress = mergedLevels[level.id]
-        if (savedLevel?.started) levelProgress.started = true
-        if (savedLevel?.completedChapters) {
-          levelProgress.completedChapters = savedLevel.completedChapters
-        }
-        for (const ch of level.chapters) {
-          const savedChapter = savedLevel?.chapters?.[ch.id]
-          if (savedChapter) {
-            levelProgress.chapters[ch.id] = {
-              chapterId: ch.id,
-              levelId: ch.level,
-              wordsLearned: savedChapter.wordsLearned || 0,
-              learnedWordIds: savedChapter.learnedWordIds || [],
-              percent: savedChapter.percent || 0,
-              lastActive: savedChapter.lastActive,
-            }
-          }
-        }
-        recalcLevelProgress(levelProgress, level)
-      }
-    }
-
-    // Re-calc totals from learned word ids when migrating from old storage.
-    if (!parsed.levels && Array.isArray(migrated.learnedWordIds)) {
-      for (const wordId of migrated.learnedWordIds) {
-        const word = vocabulary.find((w) => w.id === wordId)
-        if (!word || !isCEFRLevel(word.level)) continue
-        const level = levels.find((l) => l.id === word.level)
-        const chapter = level?.chapters.find((c) => c.wordIds.includes(wordId))
-        if (!chapter) continue
-        const lp = mergedLevels[word.level]
-        const cp = lp.chapters[chapter.id]
-        if (!cp.learnedWordIds.includes(wordId)) {
-          cp.learnedWordIds.push(wordId)
-          cp.wordsLearned++
-        }
-      }
-      for (const level of levels) {
-        recalcLevelProgress(mergedLevels[level.id], level)
-      }
-    }
-
-    return {
-      progress: {
-        ...mergedProgress,
-        totalWordsLearned: mergedProgress.totalWordsLearned,
-      },
-      quizHistory: migrated.quizHistory || [],
-      learnedWordIds: migrated.learnedWordIds || [],
-      lastActive: migrated.lastActive || Date.now(),
-      streak: migrated.streak || 0,
-      achievements: achievementList.map((a) => ({
-        ...a,
-        unlocked: parsed.achievements?.find((ach: any) => ach.id === a.id)?.unlocked || false,
-        unlockedAt: parsed.achievements?.find((ach: any) => ach.id === a.id)?.unlockedAt,
-      })),
-      levels: mergedLevels,
-    }
-  } catch {
-    return fresh
-  }
-}
-
-function isCEFRLevel(level: string): level is CEFRLevel {
-  return ['A1', 'A2', 'B1', 'B2'].includes(level)
-}
-
-function recalcLevelProgress(lp: LevelProgress, level: Level) {
-  let totalWords = 0
-  let learned = 0
-  lp.completedChapters = []
-  for (const ch of level.chapters) {
-    const cp = lp.chapters[ch.id]
-    cp.wordsLearned = cp.learnedWordIds.length
-    cp.percent = Math.round((cp.learnedWordIds.length / ch.wordIds.length) * 100)
-    totalWords += ch.wordIds.length
-    learned += cp.learnedWordIds.length
-    if (cp.percent >= 100) {
-      lp.completedChapters.push(ch.id)
+  if (saved) {
+    try {
+      return JSON.parse(saved)
+    } catch {
+      /* ignore and fall back */
     }
   }
-  lp.totalWordsLearned = learned
-  lp.percent = totalWords === 0 ? 0 : Math.round((learned / totalWords) * 100)
+
+  // Try migrate from v2
+  const legacySaved = localStorage.getItem(LEGACY_STORAGE_KEY)
+  if (legacySaved) {
+    try {
+      const parsed = JSON.parse(legacySaved)
+      const defaultProfile = createEmptyProfile('oliver', 'Oliver')
+      defaultProfile.progress = parsed.progress || defaultProfile.progress
+      defaultProfile.levels = parsed.levels || defaultProfile.levels
+      defaultProfile.quizHistory = parsed.quizHistory || defaultProfile.quizHistory
+      defaultProfile.learnedWordIds = parsed.learnedWordIds || defaultProfile.learnedWordIds
+      defaultProfile.srsState = parsed.srsState || defaultProfile.srsState
+      defaultProfile.categoryStats = parsed.categoryStats || defaultProfile.categoryStats
+
+      const state: AppState = {
+        profiles: { oliver: defaultProfile },
+        currentProfileId: 'oliver',
+      }
+      saveState(state)
+      return state
+    } catch {
+      /* ignore and fall back */
+    }
+  }
+
+  // Fresh start
+  const firstProfile = createEmptyProfile('oliver', 'Oliver')
+  return {
+    profiles: { oliver: firstProfile },
+    currentProfileId: 'oliver',
+  }
 }
 
 function saveState(state: AppState) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-  updateAchievementDisplay()
-}
-
-function checkAchievements(state: AppState) {
-  let changed = false
-  const checkData = { ...state.progress, quizHistory: state.quizHistory }
-  state.achievements.forEach((ach) => {
-    if (!ach.unlocked && ach.condition(checkData)) {
-      ach.unlocked = true
-      ach.unlockedAt = Date.now()
-      showAchievementNotification(ach)
-      changed = true
-    }
-  })
-  if (changed) saveState(state)
-}
-
-function showAchievementNotification(ach: (typeof achievementList)[0]) {
-  const notification = document.createElement('div')
-  notification.className = 'achievement-notification'
-  notification.innerHTML = `
-    <div class="achievement-content">
-      <span class="achievement-icon">${ach.icon}</span>
-      <div class="achievement-text">
-        <strong>Achievement Unlocked!</strong>
-        <p>${ach.title}</p>
-      </div>
-    </div>
-  `
-  document.body.appendChild(notification)
-  setTimeout(() => notification.classList.add('show'), 100)
-  setTimeout(() => {
-    notification.classList.remove('show')
-    setTimeout(() => notification.remove(), 300)
-  }, 3000)
-}
-
-function updateAchievementDisplay() {
-  const container = document.getElementById('achievements-list')
-  if (!container) return
-  const state = appState
-  const unlocked = state.achievements.filter((a) => a.unlocked)
-  const locked = state.achievements.filter((a) => !a.unlocked)
-
-  container.innerHTML = `
-    ${unlocked.length === 0 ? '<p class="no-achievements">No achievements yet. Keep learning!</p>' : ''}
-    <div class="achievements-grid">
-      ${unlocked
-        .map(
-          (ach) => `
-        <div class="achievement-card unlocked" title="${ach.description}\nUnlocked: ${ach.unlockedAt ? new Date(ach.unlockedAt).toLocaleDateString() : ''}">
-          <span class="achievement-icon">${ach.icon}</span>
-          <span class="achievement-title">${ach.title}</span>
-        </div>
-      `,
-        )
-        .join('')}
-      ${locked
-        .map(
-          (ach) => `
-        <div class="achievement-card locked" title="${ach.description}">
-          <span class="achievement-icon">🔒</span>
-          <span class="achievement-title">${ach.title}</span>
-        </div>
-      `,
-        )
-        .join('')}
-    </div>
-  `
 }
 
 let appState = loadState()
-
-function markWordLearned(wordId: string, correct: boolean, chapterId?: string, levelId?: CEFRLevel) {
-  if (!correct) return
-  if (appState.learnedWordIds.includes(wordId)) {
-    // Still update level/chapter progress if missing.
-    ensureChapterProgress(wordId)
-    return
-  }
-
-  const word = vocabulary.find((w) => w.id === wordId)
-  if (!word) return
-
-  appState.learnedWordIds.push(wordId)
-  appState.progress.totalWordsLearned = appState.learnedWordIds.length
-
-  const targetLevelId = levelId && isCEFRLevel(levelId) ? levelId : isCEFRLevel(word.level) ? word.level : undefined
-  if (!targetLevelId) return
-
-  appState.progress.wordsByLevel[targetLevelId] = (appState.progress.wordsByLevel[targetLevelId] || 0) + 1
-  appState.progress.todayLearned++
-
-  const level = levels.find((l) => l.id === targetLevelId)
-  if (!level) return
-
-  const targetChapterId = chapterId || level.chapters.find((c) => c.wordIds.includes(wordId))?.id
-  if (!targetChapterId) return
-
-  const lp = appState.levels[targetLevelId]
-  if (!lp) return
-  lp.started = true
-
-  const cp = lp.chapters[targetChapterId]
-  if (cp && !cp.learnedWordIds.includes(wordId)) {
-    cp.learnedWordIds.push(wordId)
-  }
-
-  recalcLevelProgress(lp, level)
-  saveState(appState)
+function getProfile() {
+  return appState.profiles[appState.currentProfileId]
 }
 
-function ensureChapterProgress(wordId: string) {
-  const word = vocabulary.find((w) => w.id === wordId)
-  if (!word || !isCEFRLevel(word.level)) return
-  const level = levels.find((l) => l.id === word.level)
-  if (!level) return
-  const chapter = level.chapters.find((c) => c.wordIds.includes(wordId))
-  if (!chapter) return
-  const lp = appState.levels[word.level]
-  if (!lp.chapters[chapter.id].learnedWordIds.includes(wordId)) {
-    lp.chapters[chapter.id].learnedWordIds.push(wordId)
-    recalcLevelProgress(lp, level)
+// --- SRS Logic ---
+
+function updateSrs(wordId: string, correct: boolean) {
+  const profile = getProfile()
+  if (!profile.srsState[wordId]) {
+    profile.srsState[wordId] = {
+      box: 1,
+      nextReviewAt: 0,
+      lastReviewedAt: 0,
+      correctCount: 0,
+      wrongCount: 0,
+    }
+  }
+
+  const entry = profile.srsState[wordId]
+  entry.lastReviewedAt = Date.now()
+
+  if (correct) {
+    entry.correctCount++
+    if (entry.box < 5) entry.box++
+    entry.nextReviewAt = Date.now() + SRS_INTERVALS[entry.box]
+  } else {
+    entry.wrongCount++
+    entry.box = 1
+    entry.nextReviewAt = Date.now() + SRS_INTERVALS[1] // Review tomorrow
   }
 }
+
+function getDueSrsWords(): VocabWord[] {
+  const profile = getProfile()
+  const now = Date.now()
+  return vocabulary.filter((w) => {
+    const srs = profile.srsState[w.id]
+    return srs && srs.nextReviewAt <= now
+  })
+}
+
+// --- Quiz Engine ---
 
 interface QuizQuestion {
   word: VocabWord
   type: 'multiple-choice' | 'write'
+  mode: QuizMode
   options?: string[]
   correctAnswer: string
-}
-
-function generateQuiz(chapterId?: string, count: number = 10): QuizQuestion[] {
-  const pool = chapterId
-    ? vocabulary.filter((w) => {
-        const chapter = lessons.find((l) => l.id === chapterId)
-        return chapter?.wordIds.includes(w.id)
-      })
-    : vocabulary
-  const shuffled = [...pool].sort(() => Math.random() - 0.5).slice(0, Math.min(count, pool.length))
-
-  return shuffled.map((word) => {
-    const isMultipleChoice = Math.random() > 0.5
-    const others = vocabulary.filter((w) => w.id !== word.id)
-    const wrong = others.sort(() => Math.random() - 0.5).slice(0, 3).map((w) => w.german)
-
-    return {
-      word,
-      type: isMultipleChoice ? 'multiple-choice' : 'write',
-      options: isMultipleChoice ? [...wrong, word.german].sort(() => Math.random() - 0.5) : undefined,
-      correctAnswer: word.german,
-    }
-  })
+  prompt: string
+  contextSentence?: string
 }
 
 let currentQuiz: QuizQuestion[] = []
@@ -385,21 +187,108 @@ let currentQuestionIndex = 0
 let quizCorrect = 0
 let currentQuizChapterId: string | undefined
 let currentQuizLevelId: CEFRLevel | undefined
+let currentQuizMode: QuizMode = 'de-en'
+let isReviewMode = false
 
 // Grammar Quiz State
 let currentGrammarQuiz: typeof grammarExercises = []
 let grammarQuestionIndex = 0
 let grammarCorrect = 0
 
-function startQuiz(chapterId?: string) {
-  const chapter = chapterId ? lessons.find((l) => l.id === chapterId) : undefined
+function generateQuiz(options: {
+  chapterId?: string
+  levelId?: CEFRLevel
+  count: number
+  mode: QuizMode
+  isReview?: boolean
+}): QuizQuestion[] {
+  let pool = vocabulary
+  if (options.isReview) {
+    pool = getDueSrsWords()
+  } else if (options.chapterId) {
+    pool = vocabulary.filter((w) => {
+      const ch = lessons.find((l) => l.id === options.chapterId)
+      return ch?.wordIds.includes(w.id)
+    })
+  } else if (options.levelId) {
+    pool = vocabulary.filter((w) => w.level === options.levelId)
+  }
+
+  const shuffled = [...pool].sort(() => Math.random() - 0.5).slice(0, options.count)
+
+  return shuffled.map((word) => {
+    const isMultipleChoice = options.mode === 'de-en' || options.mode === 'en-de' || options.mode === 'sentence-completion'
+
+    let prompt = ''
+    let correctAnswer = ''
+    let contextSentence = ''
+
+    switch (options.mode) {
+      case 'de-en':
+        prompt = word.translation
+        correctAnswer = word.german
+        break
+      case 'en-de':
+        prompt = word.german
+        correctAnswer = word.translation
+        break
+      case 'audio-dictation':
+        prompt = 'Listen and type'
+        correctAnswer = word.german
+        break
+      case 'sentence-completion':
+        if (word.example) {
+          contextSentence = word.example.replace(new RegExp(word.german, 'gi'), '___')
+          prompt = 'Complete the sentence'
+        } else {
+          prompt = word.translation
+        }
+        correctAnswer = word.german
+        break
+      case 'type-sentence':
+        if (word.example) {
+          contextSentence = word.example.replace(new RegExp(word.german, 'gi'), '___')
+          prompt = 'Type the missing word'
+        } else {
+          prompt = word.translation
+        }
+        correctAnswer = word.german
+        break
+    }
+
+    const others = vocabulary.filter((w) => w.id !== word.id)
+    const wrong = others
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3)
+      .map((w) => (options.mode === 'en-de' ? w.translation : w.german))
+
+    return {
+      word,
+      type: isMultipleChoice ? 'multiple-choice' : 'write',
+      mode: options.mode,
+      options: isMultipleChoice ? [...wrong, correctAnswer].sort(() => Math.random() - 0.5) : undefined,
+      correctAnswer,
+      prompt,
+      contextSentence,
+    }
+  })
+}
+
+function startQuiz(chapterId?: string, mode: QuizMode = 'de-en', isReview = false) {
   const countSelect = document.getElementById('quiz-count') as HTMLSelectElement
-  const count = parseInt(countSelect?.value || '10')
-  currentQuiz = generateQuiz(chapterId, count)
+  const count = isReview ? 100 : parseInt(countSelect?.value || '10')
+
+  currentQuiz = generateQuiz({ chapterId, count, mode, isReview })
+  if (currentQuiz.length === 0) {
+    if (isReview) alert('No words due for review right now! Great job.')
+    return
+  }
+
   currentQuestionIndex = 0
   quizCorrect = 0
   currentQuizChapterId = chapterId
-  currentQuizLevelId = chapter?.level
+  currentQuizMode = mode
+  isReviewMode = isReview
 
   document.getElementById('quiz-overlay')?.classList.remove('hidden')
   showQuestion()
@@ -413,17 +302,32 @@ function showQuestion() {
   if (!content || !question) return
   if (progress) progress.textContent = `Question ${currentQuestionIndex + 1}/${currentQuiz.length}`
 
-  if (question.type === 'multiple-choice' && question.options) {
-    content.innerHTML = `
-      <div class="question">
-        <button class="speak-btn" onclick="speakWord('${question.word.german.replace(/'/g, "\\'")}')" title="Listen to pronunciation">🔊</button>
-        <p class="question-word">${question.word.translation}</p>
-        ${question.word.article ? `<p class="question-article">${question.word.article}</p>` : ''}
+  const isAudioMode = question.mode === 'audio-dictation'
+  if (isAudioMode) speakWord(question.word.german)
+
+  content.innerHTML = `
+    <div class="question">
+      <button class="speak-btn" onclick="window.speakWord('${question.word.german.replace(/'/g, "\\'")}')" title="Listen">🔊</button>
+      <p class="subtitle">${question.prompt}</p>
+      <p class="question-word">${question.mode === 'audio-dictation' ? '???' : question.mode === 'en-de' ? question.word.translation : question.word.german}</p>
+      ${question.contextSentence ? `<p class="example-sentence">"${question.contextSentence}"</p>` : ''}
+      
+      ${
+        question.type === 'multiple-choice'
+          ? `
         <div class="options">
-          ${question.options.map((opt) => `<button class="option-btn" data-answer="${opt}">${opt}</button>`).join('')}
+          ${question.options?.map((opt) => `<button class="option-btn" data-answer="${opt}">${opt}</button>`).join('')}
         </div>
-      </div>
-    `
+      `
+          : `
+        <input type="text" class="write-answer" placeholder="Your answer..." autocomplete="off" />
+        <button class="btn primary submit-answer">Check Answer</button>
+      `
+      }
+    </div>
+  `
+
+  if (question.type === 'multiple-choice') {
     content.querySelectorAll('.option-btn').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         const answer = (e.target as HTMLElement).dataset.answer
@@ -431,17 +335,9 @@ function showQuestion() {
       })
     })
   } else {
-    content.innerHTML = `
-      <div class="question">
-        <button class="speak-btn" onclick="speakWord('${question.word.german.replace(/'/g, "\\'")}')" title="Listen to pronunciation">🔊</button>
-        <p class="question-word">${question.word.translation}</p>
-        ${question.word.article ? `<p class="question-article">${question.word.article}</p>` : ''}
-        <input type="text" class="write-answer" placeholder="Your answer..." />
-        <button class="btn primary submit-answer">Check Answer</button>
-      </div>
-    `
     const input = content.querySelector('.write-answer') as HTMLInputElement
     const submit = content.querySelector('.submit-answer')
+    input.focus()
     submit?.addEventListener('click', () => checkAnswer(input.value.trim(), question))
     input?.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') checkAnswer(input.value.trim(), question)
@@ -453,9 +349,21 @@ function checkAnswer(answer: string, question: QuizQuestion) {
   const correct = answer.toLowerCase() === question.correctAnswer.toLowerCase()
   if (correct) {
     quizCorrect++
-    markWordLearned(question.word.id, true, currentQuizChapterId, currentQuizLevelId)
-    checkAchievements(appState)
+    if (isReviewMode) {
+      updateSrs(question.word.id, true)
+    } else {
+      markWordLearned(question.word.id, true, currentQuizChapterId)
+    }
+  } else if (isReviewMode) {
+    updateSrs(question.word.id, false)
   }
+
+  // Update Category Stats
+  const profile = getProfile()
+  const cat = question.word.category
+  if (!profile.categoryStats[cat]) profile.categoryStats[cat] = { correct: 0, total: 0 }
+  profile.categoryStats[cat].total++
+  if (correct) profile.categoryStats[cat].correct++
 
   const content = document.getElementById('quiz-content')
   if (!content) return
@@ -464,7 +372,10 @@ function checkAnswer(answer: string, question: QuizQuestion) {
     <div class="feedback ${correct ? 'correct' : 'incorrect'}">
       <p class="feedback-icon">${correct ? '✅' : '❌'}</p>
       <p class="feedback-text">${correct ? 'Correct!' : `Wrong! The correct answer was: ${question.correctAnswer}`}</p>
-      <button class="speak-btn speak-correct" onclick="speakWord('${question.correctAnswer.replace(/'/g, "\\'")}')" title="Listen to pronunciation">🔊 ${question.correctAnswer}</button>
+      <div class="word-details">
+        <p><strong>${question.word.german}</strong> = ${question.word.translation}</p>
+        ${question.word.example ? `<p class="example-sentence">${question.word.example}<span class="example-translation">${question.word.exampleTranslation || ''}</span></p>` : ''}
+      </div>
       <button class="btn primary next-question">Next</button>
     </div>
   `
@@ -478,7 +389,9 @@ function checkAnswer(answer: string, question: QuizQuestion) {
 
 function finishQuiz() {
   const accuracy = (quizCorrect / currentQuiz.length) * 100
-  appState.quizHistory.push({
+  const profile = getProfile()
+
+  profile.quizHistory.push({
     chapterId: currentQuizChapterId || 'general',
     levelId: currentQuizLevelId || 'A1',
     correct: quizCorrect,
@@ -486,22 +399,49 @@ function finishQuiz() {
     accuracy,
     completedAt: Date.now(),
     timeSpent: 0,
+    mode: currentQuizMode,
   })
-  appState.progress.totalQuizCount++
-  appState.progress.averageAccuracy =
-    appState.quizHistory.reduce((sum, q) => sum + q.accuracy, 0) / appState.quizHistory.length
+
+  profile.progress.totalQuizCount++
+  profile.progress.averageAccuracy =
+    profile.quizHistory.reduce((sum, q) => sum + q.accuracy, 0) / profile.quizHistory.length
+
   saveState(appState)
-  checkAchievements(appState)
+  checkAchievements()
 
   const content = document.getElementById('quiz-content')
   if (!content) return
 
   content.innerHTML = `
     <div class="quiz-results">
-      <h2>Quiz Complete! 🎉</h2>
+      <h2>${isReviewMode ? 'Review Finished!' : 'Quiz Complete!'} 🎉</h2>
       <div class="results-summary">
         <div class="result-item">
           <span class="result-value">${quizCorrect}/${currentQuiz.length}</span>
+          <span class="result-label">Correct</span>
+        </div>
+        <div class="result-item">
+          <span class="result-value">${Math.round(accuracy)}%</span>
+          <span class="result-label">Accuracy</span>
+        </div>
+      </div>
+      <button class="btn primary" onclick="closeQuiz()">Done</button>
+    </div>
+  `
+}
+
+function finishGrammarQuiz() {
+  const accuracy = (grammarCorrect / currentGrammarQuiz.length) * 100
+
+  const content = document.getElementById('grammar-quiz-content')
+  if (!content) return
+
+  content.innerHTML = `
+    <div class="quiz-results">
+      <h2>Grammar Quiz Complete! 🎉</h2>
+      <div class="results-summary">
+        <div class="result-item">
+          <span class="result-value">${grammarCorrect}/${currentGrammarQuiz.length}</span>
           <span class="result-label">Correct Answers</span>
         </div>
         <div class="result-item">
@@ -509,7 +449,7 @@ function finishQuiz() {
           <span class="result-label">Accuracy</span>
         </div>
       </div>
-      <button class="btn primary" onclick="closeQuiz()">Back to Dashboard</button>
+      <button class="btn primary" onclick="window.closeGrammarQuiz()">Back to Practice</button>
     </div>
   `
 }
@@ -519,376 +459,7 @@ function closeQuiz() {
   renderDashboard()
 }
 
-function showTab(tabName: string) {
-  document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'))
-  document.querySelectorAll(`[data-tab="${tabName}"]`).forEach((t) => t.classList.add('active'))
-  document.querySelectorAll('.tab-content').forEach((c) => c.classList.add('hidden'))
-  const tab = document.getElementById(`${tabName}-tab`)
-  tab?.classList.remove('hidden')
-  if (tabName === 'achievements') updateAchievementDisplay()
-  if (tabName === 'learn') renderLearn()
-  if (tabName === 'practice') renderPractice()
-}
-
-function getRecommendedLevel(): Level {
-  for (const level of levels) {
-    const lp = appState.levels[level.id]
-    if (!lp.started || lp.percent < 100) return level
-  }
-  return levels[levels.length - 1]
-}
-
-function getRecommendedChapter(level: Level): Chapter | undefined {
-  const lp = appState.levels[level.id]
-  return level.chapters.find((ch) => {
-    const cp = lp.chapters[ch.id]
-    return cp.percent < 100
-  })
-}
-
-function renderDashboard() {
-  const app = document.querySelector<HTMLDivElement>('#app')!
-  const today = new Date().toDateString()
-  const lastActive = new Date(appState.lastActive).toDateString()
-
-  if (today !== lastActive) {
-    const yesterday = new Date(Date.now() - 86400000).toDateString()
-    appState.streak = lastActive === yesterday ? appState.streak + 1 : 0
-    appState.lastActive = Date.now()
-    saveState(appState)
-  }
-
-  const progressPercent = Math.min((appState.progress.todayLearned / appState.progress.dailyGoal) * 100, 100)
-  const recommendedLevel = getRecommendedLevel()
-  const recommendedChapter = getRecommendedChapter(recommendedLevel)
-
-  app.innerHTML = `
-    <div class="dashboard">
-      <header>
-        <h1>🇩🇪 Learning German</h1>
-        <p class="subtitle">Your German Learning Path</p>
-      </header>
-
-      <nav class="tabs">
-        <button class="tab active" data-tab="dashboard">Dashboard</button>
-        <button class="tab" data-tab="learn">Learn</button>
-        <button class="tab" data-tab="practice">Practice</button>
-        <button class="tab" data-tab="stats">Stats</button>
-        <button class="tab" data-tab="achievements">Achievements</button>
-      </nav>
-
-      <main class="tab-content" id="dashboard-tab">
-        <section class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-value">${appState.progress.totalWordsLearned}</div>
-            <div class="stat-label">Words Learned</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">🔥 ${appState.streak}</div>
-            <div class="stat-label">Day Streak</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">${appState.progress.totalQuizCount}</div>
-            <div class="stat-label">Quizzes Completed</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">${Math.round(appState.progress.averageAccuracy)}%</div>
-            <div class="stat-label">Ø Accuracy</div>
-          </div>
-        </section>
-
-        <section class="daily-goal">
-          <h2>Daily Goal</h2>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: ${progressPercent}%"></div>
-          </div>
-          <p>${appState.progress.todayLearned} / ${appState.progress.dailyGoal} words today</p>
-        </section>
-
-        <section class="recommended-action">
-          <h2>Continue Learning</h2>
-          <div class="recommended-card">
-            <div class="recommended-info">
-              <span class="level-badge">${recommendedLevel.id}</span>
-              <h3>${recommendedChapter ? recommendedChapter.title : recommendedLevel.title}</h3>
-              <p>${recommendedChapter ? recommendedChapter.description : recommendedLevel.description}</p>
-            </div>
-            <button class="btn primary" onclick="startQuiz('${recommendedChapter?.id || ''}')">
-              ${recommendedChapter && appState.levels[recommendedLevel.id].chapters[recommendedChapter.id].percent > 0 ? 'Continue' : 'Start'}
-            </button>
-          </div>
-        </section>
-
-        <section class="level-overview">
-          <h2>Your Levels</h2>
-          <div class="level-cards">
-            ${levels
-              .map((level) => {
-                const lp = appState.levels[level.id]
-                return `
-              <div class="level-card">
-                <div class="level-card-header">
-                  <h3>${level.id}</h3>
-                  <span class="level-status">${lp.percent === 100 ? '✅' : lp.started ? '📝' : '🔒'}</span>
-                </div>
-                <p class="level-description">${level.description}</p>
-                <div class="level-progress">
-                  <div class="progress-bar">
-                    <div class="progress-fill" style="width: ${lp.percent}%"></div>
-                  </div>
-                  <span class="progress-text">${lp.percent}% • ${lp.completedChapters.length}/${level.chapters.length} chapters</span>
-                </div>
-                <button class="btn secondary" onclick="showTab('learn')">View</button>
-              </div>
-            `
-              })
-              .join('')}
-          </div>
-        </section>
-      </main>
-
-      <main class="tab-content hidden" id="learn-tab"></main>
-
-      <main class="tab-content hidden" id="practice-tab"></main>
-
-      <main class="tab-content hidden" id="stats-tab">
-        <h2>Your Statistics</h2>
-        <div class="stats-detail">
-          <h3>Words by Level</h3>
-          <ul class="level-breakdown">
-            ${Object.entries(appState.progress.wordsByLevel)
-              .map(([level, count]) => `
-              <li><span class="level-badge">${level}</span> ${count} words</li>
-            `)
-              .join('')}
-          </ul>
-          <h3>Recent Quizzes</h3>
-          <div class="quiz-history">
-            ${appState.quizHistory
-              .slice(-5)
-              .reverse()
-              .map((q) => `
-              <div class="quiz-result">
-                <span>${new Date(q.completedAt).toLocaleDateString()}</span>
-                <span class="level-badge">${q.levelId}</span>
-                <span>${q.correct}/${q.total} correct</span>
-                <span>${Math.round(q.accuracy)}%</span>
-              </div>
-            `)
-              .join('')}
-            ${appState.quizHistory.length === 0 ? '<p>No quizzes completed yet.</p>' : ''}
-          </div>
-        </div>
-      </main>
-
-      <main class="tab-content hidden" id="achievements-tab">
-        <h2>Achievements</h2>
-        <div class="achievements-summary">
-          <div class="achievement-stat">
-            <span class="stat-number">${appState.achievements.filter((a) => a.unlocked).length}</span>
-            <span class="stat-label">Unlocked</span>
-          </div>
-          <div class="achievement-stat">
-            <span class="stat-number">${appState.achievements.length}</span>
-            <span class="stat-label">Total</span>
-          </div>
-        </div>
-        <div class="achievements-list" id="achievements-list"></div>
-      </main>
-
-      <div class="quiz-overlay hidden" id="quiz-overlay">
-        <div class="quiz-container">
-          <div class="quiz-header">
-            <span class="quiz-progress">Question 1/10</span>
-            <button class="close-quiz" onclick="closeQuiz()">✕</button>
-          </div>
-          <div class="quiz-content" id="quiz-content"></div>
-        </div>
-      </div>
-
-      <div class="quiz-overlay hidden" id="grammar-quiz-overlay">
-        <div class="quiz-container">
-          <div class="quiz-header">
-            <span class="quiz-progress grammar-quiz-progress">Question 1/10</span>
-            <button class="close-quiz" onclick="closeGrammarQuiz()">✕</button>
-          </div>
-          <div class="quiz-content" id="grammar-quiz-content"></div>
-        </div>
-      </div>
-    </div>
-  `
-
-  updateAchievementDisplay()
-  renderLearn()
-  renderPractice()
-
-  document.querySelectorAll('.tab').forEach((tab) => {
-    tab.addEventListener('click', (e) => {
-      const target = (e.target as HTMLElement).dataset.tab
-      if (target) showTab(target)
-    })
-  })
-}
-
-function renderLearn() {
-  const tab = document.getElementById('learn-tab')
-  if (!tab) return
-
-  tab.innerHTML = `
-    <h2>Learn by Level</h2>
-    <p class="section-intro">Choose a level and pick the chapter you want to study. Higher levels are recommended once you finish the current level, but you can explore them freely.</p>
-    <div class="levels-list">
-      ${levels
-        .map((level) => {
-          const lp = appState.levels[level.id]
-          return `
-        <section class="level-section">
-          <div class="level-section-header">
-            <div>
-              <h3>${level.id} – ${level.title.replace(level.id + ' – ', '')}</h3>
-              <p>${level.description}</p>
-            </div>
-            <div class="level-section-progress">
-              <span>${lp.percent}%</span>
-              <div class="progress-bar slim">
-                <div class="progress-fill" style="width: ${lp.percent}%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="chapters-list">
-            ${level.chapters
-              .map((ch) => {
-                const cp = lp.chapters[ch.id]
-                const chapterWords = vocabulary.filter((w) => ch.wordIds.includes(w.id))
-                return `
-              <div class="chapter-card">
-                <div class="chapter-main">
-                  <div class="chapter-number">${ch.order}</div>
-                  <div class="chapter-info">
-                    <h4>${ch.title}</h4>
-                    <p>${ch.description}</p>
-                    <div class="chapter-meta">
-                      <span class="category">${ch.category}</span>
-                      <span class="word-count">${chapterWords.length} words</span>
-                    </div>
-                    <div class="chapter-progress">
-                      <div class="progress-bar slim">
-                        <div class="progress-fill" style="width: ${cp.percent}%"></div>
-                      </div>
-                      <span>${cp.percent}%</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="chapter-words-preview">
-                  ${chapterWords
-                    .slice(0, 5)
-                    .map((w) => `<span class="word-chip">${w.german}</span>`)
-                    .join('')}
-                  ${chapterWords.length > 5 ? `<span class="word-more">+${chapterWords.length - 5} more</span>` : ''}
-                </div>
-                <button class="btn ${cp.percent > 0 ? 'secondary' : 'primary'}" onclick="startQuiz('${ch.id}')">
-                  ${cp.percent > 0 ? (cp.percent >= 100 ? 'Review' : 'Continue') : 'Start'}
-                </button>
-              </div>
-            `
-              })
-              .join('')}
-            ${level.chapters.length === 0 ? '<p class="empty-chapters">No chapters available yet. Content coming soon!</p>' : ''}
-          </div>
-        </section>
-      `
-        })
-        .join('')}
-    </div>
-  `
-}
-
-function renderPractice() {
-  const tab = document.getElementById('practice-tab')
-  if (!tab) return
-
-  tab.innerHTML = `
-    <h2>Practice</h2>
-
-    <section class="practice-section">
-      <h3>Vocabulary Quiz</h3>
-      <div class="quiz-setup">
-        <label>
-          <span>Select Chapter:</span>
-          <select id="quiz-lesson">
-            <option value="">All Words</option>
-            ${levels
-              .map((level) => {
-                const opts = level.chapters
-                  .map((l) => `<option value="${l.id}">[${level.id}] ${l.title}</option>`)
-                  .join('')
-                return `<optgroup label="${level.id}">${opts}</optgroup>`
-              })
-              .join('')}
-          </select>
-        </label>
-        <label>
-          <span>Number of Questions:</span>
-          <select id="quiz-count">
-            <option value="5">5</option>
-            <option value="10" selected>10</option>
-            <option value="20">20</option>
-          </select>
-        </label>
-        <button class="btn primary" onclick="startQuiz(getSelectedChapter())">Start Quiz</button>
-      </div>
-    </section>
-
-    <section class="practice-section">
-      <h3>Grammar Practice</h3>
-      <div class="quiz-setup">
-        <label>
-          <span>Select Category:</span>
-          <select id="grammar-category">
-            <option value="">All Categories</option>
-            <option value="Articles">Articles</option>
-            <option value="Verbs">Verbs</option>
-            <option value="Nouns">Nouns</option>
-            <option value="Cases">Cases</option>
-            <option value="Prepositions">Prepositions</option>
-            <option value="Pronouns">Pronouns</option>
-            <option value="Negation">Negation</option>
-            <option value="Vor-Ver Prefixes">⭐ Vor vs Ver</option>
-          </select>
-        </label>
-        <label>
-          <span>Number of Questions:</span>
-          <select id="grammar-count">
-            <option value="5">5</option>
-            <option value="10" selected>10</option>
-            <option value="20">20</option>
-          </select>
-        </label>
-        <button class="btn primary" onclick="startGrammarQuiz()">Start Grammar Quiz</button>
-      </div>
-    </section>
-  `
-}
-
-// @ts-ignore - called from HTML onclick
-window.getSelectedChapter = getSelectedChapter
-
-function getSelectedChapter(): string | undefined {
-  const select = document.getElementById('quiz-lesson') as HTMLSelectElement
-  return select?.value || undefined
-}
-
-// @ts-ignore - called from HTML onclick
-window.startQuiz = startQuiz
-// @ts-ignore - called from HTML onclick
-window.closeQuiz = closeQuiz
-// @ts-ignore - called from HTML onclick
-window.showTab = showTab
-
-// @ts-ignore - called from HTML onclick
-window.startGrammarQuiz = startGrammarQuiz
-// @ts-ignore - called from HTML onclick
-window.closeGrammarQuiz = closeGrammarQuiz
+// --- Grammar Quiz logic ---
 
 function startGrammarQuiz() {
   const categorySelect = document.getElementById('grammar-category') as HTMLSelectElement
@@ -954,61 +525,484 @@ function checkGrammarAnswer(answer: string, exercise: (typeof grammarExercises)[
   })
 }
 
-function finishGrammarQuiz() {
-  const accuracy = (grammarCorrect / currentGrammarQuiz.length) * 100
-
-  const content = document.getElementById('grammar-quiz-content')
-  if (!content) return
-
-  content.innerHTML = `
-    <div class="quiz-results">
-      <h2>Grammar Quiz Complete! 🎉</h2>
-      <div class="results-summary">
-        <div class="result-item">
-          <span class="result-value">${grammarCorrect}/${currentGrammarQuiz.length}</span>
-          <span class="result-label">Correct Answers</span>
-        </div>
-        <div class="result-item">
-          <span class="result-value">${Math.round(accuracy)}%</span>
-          <span class="result-label">Accuracy</span>
-        </div>
-      </div>
-      <button class="btn primary" onclick="closeGrammarQuiz()">Back to Practice</button>
-    </div>
-  `
-}
-
 function closeGrammarQuiz() {
   document.getElementById('grammar-quiz-overlay')?.classList.add('hidden')
 }
 
-// @ts-ignore - called from HTML onclick
-window.speakWord = speakWord
+// --- Profile & Progress Management ---
+
+function switchProfile(id: string) {
+  if (id === 'new') {
+    const name = prompt('Enter name for the new profile:')
+    if (!name) return
+    const newId = name.toLowerCase().replace(/\s+/g, '-') + '-' + Date.now()
+    appState.profiles[newId] = createEmptyProfile(newId, name)
+    appState.currentProfileId = newId
+  } else if (appState.profiles[id]) {
+    appState.currentProfileId = id
+  }
+  saveState(appState)
+  renderDashboard()
+}
+
+function markWordLearned(wordId: string, correct: boolean, chapterId?: string) {
+  if (!correct) return
+  const profile = getProfile()
+  if (profile.learnedWordIds.includes(wordId)) return
+
+  const word = vocabulary.find((w) => w.id === wordId)
+  if (!word) return
+
+  profile.learnedWordIds.push(wordId)
+  profile.progress.totalWordsLearned = profile.learnedWordIds.length
+
+  const levelId = (word.level as CEFRLevel) || 'A1'
+  profile.progress.wordsByLevel[levelId] = (profile.progress.wordsByLevel[levelId] || 0) + 1
+  profile.progress.todayLearned++
+
+  const lp = profile.levels[levelId]
+  if (lp) {
+    lp.started = true
+    const chId = chapterId || lessons.find((l) => l.wordIds.includes(wordId))?.id
+    if (chId && lp.chapters[chId]) {
+      const cp = lp.chapters[chId]
+      if (!cp.learnedWordIds.includes(wordId)) cp.learnedWordIds.push(wordId)
+    }
+    recalcLevelProgress(lp)
+  }
+
+  // Also initialize SRS for this word
+  if (!profile.srsState[wordId]) {
+    profile.srsState[wordId] = {
+      box: 1,
+      nextReviewAt: Date.now() + SRS_INTERVALS[1],
+      lastReviewedAt: 0,
+      correctCount: 1,
+      wrongCount: 0,
+    }
+  }
+
+  saveState(appState)
+}
+
+function recalcLevelProgress(lp: LevelProgress) {
+  const levelData = levels.find((l) => l.id === lp.levelId)
+  if (!levelData) return
+
+  let totalWords = 0
+  let learned = 0
+  lp.completedChapters = []
+
+  for (const ch of levelData.chapters) {
+    const cp = lp.chapters[ch.id]
+    cp.wordsLearned = cp.learnedWordIds.length
+    cp.percent = Math.round((cp.learnedWordIds.length / ch.wordIds.length) * 100)
+    totalWords += ch.wordIds.length
+    learned += cp.learnedWordIds.length
+    if (cp.percent >= 100) lp.completedChapters.push(ch.id)
+  }
+
+  lp.totalWordsLearned = learned
+  lp.percent = totalWords === 0 ? 0 : Math.round((learned / totalWords) * 100)
+}
+
+function checkAchievements() {
+  saveState(appState)
+}
+
+// --- Rendering ---
+
+function renderHeader() {
+  return `
+    <header>
+      <div class="header-top">
+        <div class="profile-selector">
+          <select class="profile-select" onchange="window.switchProfile(this.value)">
+            ${Object.values(appState.profiles)
+              .map((p) => `<option value="${p.id}" ${p.id === appState.currentProfileId ? 'selected' : ''}>👤 ${p.displayName}</option>`)
+              .join('')}
+            <option value="new">+ New Profile</option>
+          </select>
+        </div>
+        <div class="streak-badge">🔥 ${getProfile().progress.currentStreak}</div>
+      </div>
+      <h1>🇩🇪 Deutsch Lernen</h1>
+      <p class="subtitle">Platform for Oliver & Friend</p>
+    </header>
+  `
+}
+
+function renderDashboard() {
+  const app = document.querySelector<HTMLDivElement>('#app')!
+  const profile = getProfile()
+  const today = new Date().toDateString()
+  const lastActive = new Date(profile.progress.lastActive).toDateString()
+
+  if (today !== lastActive) {
+    const yesterday = new Date(Date.now() - 86400000).toDateString()
+    profile.progress.currentStreak = lastActive === yesterday ? profile.progress.currentStreak + 1 : 0
+    profile.progress.lastActive = Date.now()
+    profile.progress.todayLearned = 0
+    saveState(appState)
+  }
+
+  const dueCount = getDueSrsWords().length
+  const progressPercent = Math.min((profile.progress.todayLearned / profile.progress.dailyGoal) * 100, 100)
+
+  app.innerHTML = `
+    <div class="dashboard">
+      ${renderHeader()}
+
+      <nav class="tabs">
+        <button class="tab active" data-tab="dashboard">Dashboard</button>
+        <button class="tab" data-tab="review">Review ${dueCount > 0 ? `<span class="tab-badge">${dueCount}</span>` : ''}</button>
+        <button class="tab" data-tab="learn">Learn</button>
+        <button class="tab" data-tab="practice">Practice</button>
+        <button class="tab" data-tab="stats">Stats</button>
+      </nav>
+
+      <main class="tab-content" id="dashboard-tab">
+        <section class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">${profile.progress.totalWordsLearned}</div>
+            <div class="stat-label">Words Learned</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">${dueCount}</div>
+            <div class="stat-label">Due for Review</div>
+          </div>
+        </section>
+
+        <section class="daily-goal">
+          <h2>Daily Goal</h2>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${progressPercent}%"></div>
+          </div>
+          <p>${profile.progress.todayLearned} / ${profile.progress.dailyGoal} words today</p>
+        </section>
+
+        <section class="recommended-action">
+          <div class="recommended-card" onclick="window.showTab('review')">
+            <div class="recommended-info">
+              <h3>Next Step</h3>
+              <p>${dueCount > 0 ? `Review ${dueCount} words now` : 'Start a new lesson'}</p>
+            </div>
+            <button class="btn secondary">Go</button>
+          </div>
+        </section>
+
+        <section class="level-overview">
+          <h2>Levels</h2>
+          <div class="level-cards">
+            ${levels
+              .map((level) => {
+                const lp = profile.levels[level.id]
+                return `
+              <div class="level-card">
+                <div class="level-card-header">
+                  <h3>${level.id} – ${level.title}</h3>
+                  <span class="level-status">${lp.percent === 100 ? '✅' : lp.started ? '📝' : '🔒'}</span>
+                </div>
+                <div class="level-progress">
+                  <div class="progress-bar slim">
+                    <div class="progress-fill" style="width: ${lp.percent}%"></div>
+                  </div>
+                  <span class="progress-text">${lp.percent}%</span>
+                </div>
+              </div>
+            `
+              })
+              .join('')}
+          </div>
+        </section>
+      </main>
+
+      <main class="tab-content hidden" id="review-tab"></main>
+      <main class="tab-content hidden" id="learn-tab"></main>
+      <main class="tab-content hidden" id="practice-tab"></main>
+      <main class="tab-content hidden" id="stats-tab"></main>
+
+      <div class="quiz-overlay hidden" id="quiz-overlay">
+        <div class="quiz-container">
+          <div class="quiz-header">
+            <span class="quiz-progress">Question 1/10</span>
+            <button class="close-quiz" onclick="window.closeQuiz()">✕</button>
+          </div>
+          <div class="quiz-content" id="quiz-content"></div>
+        </div>
+      </div>
+
+      <div class="quiz-overlay hidden" id="grammar-quiz-overlay">
+        <div class="quiz-container">
+          <div class="quiz-header">
+            <span class="quiz-progress grammar-quiz-progress">Question 1/10</span>
+            <button class="close-quiz" onclick="window.closeGrammarQuiz()">✕</button>
+          </div>
+          <div class="quiz-content" id="grammar-quiz-content"></div>
+        </div>
+      </div>
+    </div>
+  `
+
+  renderReview()
+  renderLearn()
+  renderPractice()
+  renderStats()
+
+  document.querySelectorAll('.tab').forEach((tab) => {
+    tab.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).dataset.tab
+      if (target) showTab(target)
+    })
+  })
+}
+
+function renderReview() {
+  const tab = document.getElementById('review-tab')
+  if (!tab) return
+  const dueCount = getDueSrsWords().length
+  const profile = getProfile()
+  const boxCounts = [0, 0, 0, 0, 0, 0]
+  Object.values(profile.srsState).forEach((s) => boxCounts[s.box]++)
+
+  tab.innerHTML = `
+    <div class="review-due ${dueCount === 0 ? 'hidden' : ''}">
+      <h2>Review Time!</h2>
+      <p>You have <strong>${dueCount}</strong> words ready for review.</p>
+      <button class="btn primary" onclick="window.startQuiz(undefined, 'de-en', true)">Start Review Session</button>
+    </div>
+    
+    <div class="srs-info">
+      <h3>Memory Progress (SRS)</h3>
+      <p class="subtitle" style="margin-bottom: 1.5rem">Words move to higher boxes as you remember them correctly.</p>
+      <div class="srs-boxes">
+        ${[1, 2, 3, 4, 5]
+          .map(
+            (b) => `
+          <div class="srs-box">
+            <span class="box-number">Box ${b}</span>
+            <span class="box-count">${boxCounts[b]}</span>
+          </div>
+        `,
+          )
+          .join('')}
+      </div>
+    </div>
+    
+    ${dueCount === 0 ? '<p style="text-align: center; margin-top: 2rem">Zero words due. Take a break or learn something new! ☕</p>' : ''}
+  `
+}
+
+function renderLearn() {
+  const tab = document.getElementById('learn-tab')
+  if (!tab) return
+  const profile = getProfile()
+
+  tab.innerHTML = `
+    <h2>Learn by Level</h2>
+    <div class="levels-list">
+      ${levels
+        .map((level) => {
+          const lp = profile.levels[level.id]
+          return `
+        <section class="level-section">
+          <h3>${level.id} – ${level.title}</h3>
+          <div class="chapters-list">
+            ${level.chapters
+              .map((ch) => {
+                const cp = lp.chapters[ch.id]
+                return `
+              <div class="chapter-card">
+                <div class="chapter-info">
+                  <h4>${ch.title}</h4>
+                  <p>${ch.description}</p>
+                  <div class="chapter-progress">
+                    <div class="progress-bar slim">
+                      <div class="progress-fill" style="width: ${cp.percent}%"></div>
+                    </div>
+                    <span>${cp.percent}%</span>
+                  </div>
+                </div>
+                <button class="btn secondary" onclick="window.startQuiz('${ch.id}', 'de-en')">Learn</button>
+              </div>
+            `
+              })
+              .join('')}
+          </div>
+        </section>
+      `
+        })
+        .join('')}
+    </div>
+  `
+}
+
+function renderPractice() {
+  const tab = document.getElementById('practice-tab')
+  if (!tab) return
+
+  tab.innerHTML = `
+    <h2>Practice</h2>
+    
+    <div class="practice-section">
+      <h3>Vocabulary Quiz</h3>
+      <div class="quiz-setup">
+        <label>
+          <span>Mode:</span>
+          <select id="quiz-mode">
+            <option value="de-en">German → English</option>
+            <option value="en-de">English → German</option>
+            <option value="audio-dictation">Audio Dictation (Diktat)</option>
+            <option value="sentence-completion">Sentence Completion</option>
+            <option value="type-sentence">Sentence Typing (B1+)</option>
+          </select>
+        </label>
+        <label>
+          <span>Chapter:</span>
+          <select id="quiz-lesson">
+            <option value="">All Words</option>
+            ${levels
+              .map(
+                (lvl) => `
+              <optgroup label="${lvl.id}">
+                ${lvl.chapters.map((ch) => `<option value="${ch.id}">${ch.title}</option>`).join('')}
+              </optgroup>
+            `,
+              )
+              .join('')}
+          </select>
+        </label>
+        <label>
+          <span>Questions:</span>
+          <select id="quiz-count">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+          </select>
+        </label>
+        <button class="btn primary" onclick="window.startQuiz(window.getSelectedChapter(), window.getSelectedMode())">Start Practice</button>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <h3>Grammar Challenge</h3>
+      <div class="quiz-setup">
+        <label>
+          <span>Category:</span>
+          <select id="grammar-category">
+            <option value="">All Categories</option>
+            ${Array.from(new Set(grammarExercises.map(e => e.category))).map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+          </select>
+        </label>
+        <label>
+          <span>Questions:</span>
+          <select id="grammar-count">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+          </select>
+        </label>
+        <button class="btn primary" onclick="window.startGrammarQuiz()">Start Grammar Quiz</button>
+      </div>
+    </div>
+  `
+}
+
+function renderStats() {
+  const tab = document.getElementById('stats-tab')
+  if (!tab) return
+  const profile = getProfile()
+  
+  // Find top 3 weaknesses
+  const weaknesses = Object.entries(profile.categoryStats)
+    .map(([name, stat]) => ({ name, accuracy: (stat.correct / stat.total) * 100 }))
+    .sort((a, b) => a.accuracy - b.accuracy)
+    .slice(0, 3)
+
+  tab.innerHTML = `
+    <h2>Your Stats</h2>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">${profile.quizHistory.length}</div>
+        <div class="stat-label">Total Quizzes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">${Math.round(profile.progress.averageAccuracy)}%</div>
+        <div class="stat-label">Average Accuracy</div>
+      </div>
+    </div>
+
+    ${weaknesses.length > 0 ? `
+      <div class="practice-section weakness-card">
+        <h3>Weak Spots 🎯</h3>
+        <p class="subtitle">Categories you should practice more:</p>
+        <div class="weakness-list" style="margin-top: 1rem">
+          ${weaknesses.map(w => `
+            <div class="category-stat">
+              <span>${w.name}</span>
+              <span style="color: ${w.accuracy < 50 ? 'var(--danger)' : 'var(--accent)'}">${Math.round(w.accuracy)}%</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    ` : ''}
+
+    <h3>Recent Activity</h3>
+    <div class="quiz-history">
+      ${profile.quizHistory.slice(-10).reverse().map(q => `
+        <div class="quiz-result" style="display: flex; justify-content: space-between; padding: 0.5rem; border-bottom: 1px solid var(--border)">
+          <span style="font-size: 0.8rem">${new Date(q.completedAt).toLocaleDateString()}</span>
+          <strong>${q.mode || 'de-en'}</strong>
+          <span>${Math.round(q.accuracy)}%</span>
+        </div>
+      `).join('')}
+    </div>
+  `
+}
+
+function showTab(tabName: string) {
+  document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'))
+  document.querySelectorAll(`[data-tab="${tabName}"]`).forEach((t) => t.classList.add('active'))
+  document.querySelectorAll('.tab-content').forEach((c) => c.classList.add('hidden'))
+  const tab = document.getElementById(`${tabName}-tab`)
+  tab?.classList.remove('hidden')
+  
+  if (tabName === 'dashboard') renderDashboard()
+  if (tabName === 'review') renderReview()
+  if (tabName === 'learn') renderLearn()
+  if (tabName === 'practice') renderPractice()
+  if (tabName === 'stats') renderStats()
+}
 
 function speakWord(text: string) {
   if ('speechSynthesis' in window) {
     const utterance = new SpeechSynthesisUtterance(text)
     utterance.lang = 'de-DE'
     utterance.rate = 0.8
-    utterance.pitch = 1
     speechSynthesis.speak(utterance)
-  } else {
-    alert('Speech synthesis not supported in this browser.')
   }
 }
 
-// @ts-ignore - called from HTML onclick
-window.filterGlossary = filterGlossary
-
-function filterGlossary() {
-  const input = document.getElementById('glossary-search-input') as HTMLInputElement
-  const filter = input.value.toLowerCase()
-  const cards = document.querySelectorAll('.glossary-card')
-  cards.forEach((card) => {
-    const term = card.getAttribute('data-term') || ''
-    card.classList.toggle('hidden', !term.includes(filter))
-  })
-}
+// --- Window Helpers ---
+// @ts-ignore
+window.startQuiz = startQuiz
+// @ts-ignore
+window.closeQuiz = closeQuiz
+// @ts-ignore
+window.showTab = showTab
+// @ts-ignore
+window.switchProfile = switchProfile
+// @ts-ignore
+window.startGrammarQuiz = startGrammarQuiz
+// @ts-ignore
+window.closeGrammarQuiz = closeGrammarQuiz
+// @ts-ignore
+window.getSelectedChapter = () => (document.getElementById('quiz-lesson') as HTMLSelectElement)?.value
+// @ts-ignore
+window.getSelectedMode = () => (document.getElementById('quiz-mode') as HTMLSelectElement)?.value
+// @ts-ignore
+window.speakWord = speakWord
 
 export function initApp() {
   renderDashboard()

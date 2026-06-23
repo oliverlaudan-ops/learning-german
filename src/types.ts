@@ -1,5 +1,9 @@
 export type CEFRLevel = 'A1' | 'A2' | 'B1' | 'B2'
 
+export type L1Language = 'en'
+
+export type QuizMode = 'de-en' | 'en-de' | 'audio-dictation' | 'sentence-completion' | 'type-sentence'
+
 export interface VocabWord {
   id: string
   german: string
@@ -7,6 +11,8 @@ export interface VocabWord {
   article?: string
   plural?: string
   example?: string
+  /** English translation of the example sentence. */
+  exampleTranslation?: string
   level: CEFRLevel | 'C1' | 'C2'
   category: string
   createdAt: number
@@ -41,6 +47,10 @@ export interface QuizResult {
   accuracy: number
   completedAt: number
   timeSpent: number
+  /** Mode of the quiz that produced this result. */
+  mode?: QuizMode
+  /** Optional category filter used (e.g. weakness tracker drilling). */
+  categoryFilter?: string
 }
 
 export interface ChapterProgress {
@@ -93,9 +103,25 @@ export interface GrammarExample {
   explanation?: string
 }
 
+export type GrammarExerciseType =
+  | 'article'
+  | 'conjugation'
+  | 'plural'
+  | 'case'
+  | 'preposition'
+  | 'pronoun'
+  | 'negation'
+  | 'modal'
+  | 'perfect'
+  | 'prefix'
+  | 'nebensatz'
+  | 'präteritum'
+  | 'konjunktiv2'
+  | 'relativsatz'
+
 export interface GrammarExercise {
   id: string
-  type: 'article' | 'conjugation' | 'plural' | 'case' | 'preposition' | 'pronoun' | 'negation' | 'modal' | 'perfect' | 'prefix'
+  type: GrammarExerciseType
   question: string
   options: string[]
   correctAnswer: string
@@ -123,6 +149,58 @@ export interface Achievement {
   unlocked: boolean
   unlockedAt?: number
   category: 'streak' | 'learning' | 'quiz' | 'accuracy' | 'special'
+}
+
+/** Spaced-repetition (Leitner-Box) state for a single word. */
+export interface SrsEntry {
+  /** Box number 1..5. Higher = more confident. */
+  box: number
+  /** Next review timestamp (ms). */
+  nextReviewAt: number
+  /** Last review timestamp (ms). 0 if never reviewed. */
+  lastReviewedAt: number
+  /** Number of times the user has been correct in reviews. */
+  correctCount: number
+  /** Number of times the user has been wrong in reviews. */
+  wrongCount: number
+}
+
+/** Per-category aggregate stats for the weakness tracker. */
+export interface CategoryStat {
+  correct: number
+  total: number
+}
+
+/** A complete learner profile. All per-user data lives here. */
+export interface ProfileState {
+  id: string
+  displayName: string
+  createdAt: number
+  l1: L1Language
+  /** Legacy fields (kept for migration of single-profile state). */
+  progress: UserProgress
+  levels: Record<CEFRLevel, LevelProgress>
+  quizHistory: QuizResult[]
+  learnedWordIds: string[]
+  srsState: Record<string, SrsEntry>
+  categoryStats: Record<string, CategoryStat>
+}
+
+/** Root persisted shape: a dict of profiles + the active profile id. */
+export interface AppState {
+  profiles: Record<string, ProfileState>
+  currentProfileId: string
+}
+
+/** Backward-compat shape: original flat structure. */
+export interface LegacyState {
+  progress?: UserProgress
+  levels?: Record<CEFRLevel, LevelProgress>
+  quizHistory?: QuizResult[]
+  learnedWordIds?: string[]
+  srsState?: Record<string, SrsEntry>
+  categoryStats?: Record<string, CategoryStat>
+  [k: string]: unknown
 }
 
 /** Legacy Lesson type kept for migration paths. A Chapter is the new concept. */
