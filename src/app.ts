@@ -219,38 +219,34 @@ function generateQuiz(options: {
   return shuffled.map((word) => {
     const isMultipleChoice = options.mode === 'de-en' || options.mode === 'en-de' || options.mode === 'sentence-completion'
 
-    let prompt = ''
     let correctAnswer = ''
     let contextSentence = ''
 
     switch (options.mode) {
       case 'de-en':
-        prompt = word.translation
         correctAnswer = word.german
         break
       case 'en-de':
-        prompt = word.german
         correctAnswer = word.translation
         break
       case 'audio-dictation':
-        prompt = 'Listen and type'
         correctAnswer = word.german
         break
       case 'sentence-completion':
         if (word.example) {
-          contextSentence = word.example.replace(new RegExp(word.german, 'gi'), '___')
-          prompt = 'Complete the sentence'
-        } else {
-          prompt = word.translation
+          // Use word boundaries so we don't accidentally replace parts of compound words
+          // (e.g. 'Wohnung' in 'Wohnungen'). Also handle leading article if present.
+          const escapedGerman = word.german.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+          const re = new RegExp(`\\b${escapedGerman}\\b`, 'gi')
+          contextSentence = word.example.replace(re, '___')
         }
         correctAnswer = word.german
         break
       case 'type-sentence':
         if (word.example) {
-          contextSentence = word.example.replace(new RegExp(word.german, 'gi'), '___')
-          prompt = 'Type the missing word'
-        } else {
-          prompt = word.translation
+          const escapedGerman = word.german.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+          const re = new RegExp(`\\b${escapedGerman}\\b`, 'gi')
+          contextSentence = word.example.replace(re, '___')
         }
         correctAnswer = word.german
         break
@@ -268,7 +264,7 @@ function generateQuiz(options: {
       mode: options.mode,
       options: isMultipleChoice ? [...wrong, correctAnswer].sort(() => Math.random() - 0.5) : undefined,
       correctAnswer,
-      prompt,
+      prompt: '',
       contextSentence,
     }
   })
@@ -305,12 +301,38 @@ function showQuestion() {
   const isAudioMode = question.mode === 'audio-dictation'
   if (isAudioMode) speakWord(question.word.german)
 
+  // Determine what to show as the main question (what the user must answer).
+  // The main text must NEVER be the correct answer — that would be cheating.
+  let mainText = ''
+  let subtitle = ''
+  switch (question.mode) {
+    case 'de-en':
+      subtitle = 'What is the German word?'
+      mainText = question.word.translation
+      break
+    case 'en-de':
+      subtitle = 'What does it mean in English?'
+      mainText = question.word.german
+      break
+    case 'audio-dictation':
+      subtitle = 'Listen and type the German word'
+      mainText = '🎧 ???'
+      break
+    case 'sentence-completion':
+      subtitle = 'Complete the sentence'
+      mainText = question.contextSentence || question.word.translation
+      break
+    case 'type-sentence':
+      subtitle = 'Type the missing word'
+      mainText = question.contextSentence || question.word.translation
+      break
+  }
+
   content.innerHTML = `
     <div class="question">
       <button class="speak-btn" onclick="window.speakWord('${question.word.german.replace(/'/g, "\\'")}')" title="Listen">🔊</button>
-      <p class="subtitle">${question.prompt}</p>
-      <p class="question-word">${question.mode === 'audio-dictation' ? '???' : question.mode === 'en-de' ? question.word.translation : question.word.german}</p>
-      ${question.contextSentence ? `<p class="example-sentence">"${question.contextSentence}"</p>` : ''}
+      <p class="subtitle">${subtitle}</p>
+      <p class="question-word">${mainText}</p>
       
       ${
         question.type === 'multiple-choice'
