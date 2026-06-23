@@ -17,10 +17,10 @@ A free, offline-capable German learning portal for English speakers.
 
 ## Tech Stack
 
-- Plain HTML/CSS/JavaScript (no build step required)
-- Service Worker for offline capability
+- [Vite](https://vitejs.dev/) + TypeScript
 - LocalStorage for progress persistence
-- Single-page app with hash routing
+- GitHub Pages deployment (CNAME configured)
+- Mobile-first CSS
 
 ## Usage
 
@@ -31,17 +31,26 @@ A free, offline-capable German learning portal for English speakers.
 ## Structure
 
 ```
-deutsch-lernen/
-├── index.html          # Main entry point
-├── manifest.json       # PWA manifest
-├── sw.js               # Service worker for offline support
-├── css/
-│   └── style.css       # All styles
-└── js/
-    ├── data.js         # Lesson content (grammar, vocab, etc.)
-    ├── router.js       # Hash-based routing
-    ├── components.js   # UI component functions
-    └── app.js          # Main application logic
+learning-german/
+├── index.html              # Main entry point
+├── src/
+│   ├── main.ts             # Vite app bootstrap
+│   ├── app.ts              # Main application logic and UI rendering
+│   ├── style.css           # All styles
+│   ├── types.ts            # Shared TypeScript interfaces
+│   └── data/               # Static learning content
+│       ├── lessons.ts      # Chapters grouped into CEFR levels
+│       ├── vocabulary.ts   # German–English word list
+│       ├── grammar.ts      # Grammar rule explanations
+│       ├── grammar-exercises.ts
+│       ├── glossary.ts
+│       └── achievements.ts
+├── public/                 # Static assets (manifest, etc.)
+├── dist/                   # Vite production build output
+├── package.json            # Vite + TypeScript dependencies
+├── tsconfig.json
+├── vite.config.ts
+└── CNAME                   # GitHub Pages custom domain
 ```
 
 ## License

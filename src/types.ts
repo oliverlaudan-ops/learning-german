@@ -1,3 +1,5 @@
+export type CEFRLevel = 'A1' | 'A2' | 'B1' | 'B2'
+
 export interface VocabWord {
   id: string
   german: string
@@ -5,23 +7,35 @@ export interface VocabWord {
   article?: string
   plural?: string
   example?: string
-  level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
+  level: CEFRLevel | 'C1' | 'C2'
   category: string
   createdAt: number
 }
 
-export interface Lesson {
+/** A chapter is a learnable unit inside a CEFR level. Maps 1:1 to the legacy Lesson. */
+export interface Chapter {
   id: string
   title: string
   description: string
   category: string
-  level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
+  level: CEFRLevel
   wordIds: string[]
+  /** Sequence position inside the level (1-based). */
   order: number
 }
 
+/** A level groups chapters in CEFR order. */
+export interface Level {
+  id: CEFRLevel
+  title: string
+  description: string
+  order: number
+  chapters: Chapter[]
+}
+
 export interface QuizResult {
-  lessonId: string
+  chapterId: string
+  levelId: CEFRLevel
   correct: number
   total: number
   accuracy: number
@@ -29,9 +43,32 @@ export interface QuizResult {
   timeSpent: number
 }
 
+export interface ChapterProgress {
+  chapterId: string
+  levelId: CEFRLevel
+  /** Number of words in this chapter that the user has learned. */
+  wordsLearned: number
+  /** Word ids completed in this chapter. */
+  learnedWordIds: string[]
+  /** Percentage completion (0-100). */
+  percent: number
+  /** Timestamp of last quiz start for this chapter. */
+  lastActive?: number
+}
+
+export interface LevelProgress {
+  levelId: CEFRLevel
+  chapters: Record<string, ChapterProgress>
+  completedChapters: string[]
+  totalWordsLearned: number
+  percent: number
+  /** Soft unlock: a level is considered started once the user enters it. */
+  started: boolean
+}
+
 export interface UserProgress {
   totalWordsLearned: number
-  wordsByLevel: Record<string, number>
+  wordsByLevel: Record<CEFRLevel, number>
   currentStreak: number
   longestStreak: number
   totalQuizCount: number
@@ -87,3 +124,6 @@ export interface Achievement {
   unlockedAt?: number
   category: 'streak' | 'learning' | 'quiz' | 'accuracy' | 'special'
 }
+
+/** Legacy Lesson type kept for migration paths. A Chapter is the new concept. */
+export interface Lesson extends Chapter {}
