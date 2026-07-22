@@ -861,3 +861,152 @@ section h2 {
   opacity: 0.7;
   margin-top: 0.4rem;
 }
+
+/* -------------------------------------------------------------------------
+   Sentence-construction tiles
+   ------------------------------------------------------------------------- */
+.tile-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  min-height: 100px;
+}
+
+.tile-built {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-height: 48px;
+  padding: 0.6rem;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  align-content: flex-start;
+}
+
+.tile-built-item {
+  display: inline-block;
+  padding: 0.45rem 0.75rem;
+  background: var(--primary);
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s, background 0.15s;
+}
+.tile-built-item:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.tile-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.6rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-height: 56px;
+  align-content: flex-start;
+}
+
+.tile {
+  display: inline-block;
+  padding: 0.45rem 0.75rem;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s, background 0.15s, border-color 0.15s;
+}
+.tile:hover {
+  background: var(--bg);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+.tile:active {
+  transform: translateY(0);
+}
+
+.tile-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* -------------------------------------------------------------------------
+   Achievement toast
+   ------------------------------------------------------------------------- */
+.achievement-toast-host {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.achievement-toast {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 280px;
+  max-width: 360px;
+  padding: 0.85rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--accent);
+  border-left-width: 4px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.achievement-toast-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.achievement-toast-out {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.achievement-toast-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.achievement-toast-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+.achievement-toast-body strong {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+.achievement-toast-title {
+  font-weight: 600;
+  color: var(--text);
+}
+.achievement-toast-desc {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
