@@ -21,13 +21,13 @@ function levelProgress(profile: ProfileState, levelId: CEFRLevel): number {
   return Math.max(0, Math.min(100, profile.levels[levelId]?.percent ?? 0))
 }
 
-function findNextChapter(data: DashboardData): { level: Level; chapterId: string; title: string } | undefined {
+function findNextChapter(data: DashboardData): { level: Level; chapter: Level['chapters'][number] } | undefined {
   for (const level of data.levels) {
     const progress = data.profile.levels[level.id]
     for (const chapter of level.chapters) {
       const chapterProgress = progress?.chapters[chapter.id]
       if ((chapterProgress?.percent ?? 0) < 100) {
-        return { level, chapterId: chapter.id, title: chapter.title }
+        return { level, chapter }
       }
     }
   }
