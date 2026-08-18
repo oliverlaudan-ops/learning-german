@@ -1,11 +1,14 @@
 import './dashboard.css'
+import './lesson.css'
 import { vocabulary } from '../data/vocabulary'
 import { getLevels } from '../data/lessons'
 import { getDueSrsWords } from '../srs/srs'
 import { renderDashboard } from './dashboard'
+import { renderLearnExperience } from './lesson-ui'
 import { __appState, __getProfile } from './ui'
 
 const levels = getLevels()
+const a1Chapters = levels.find((level) => level.id === 'A1')?.chapters ?? []
 
 type AppWindow = Window & {
   showTab: (tabName: string) => void
@@ -25,8 +28,14 @@ function refreshDashboard(): void {
   target.querySelectorAll<HTMLElement>('[data-dashboard-action="continue"]').forEach((button) => {
     button.addEventListener('click', () => {
       const chapterId = button.dataset.chapterId
-      if (chapterId) (window as AppWindow).startQuiz(chapterId, 'de-en')
-      else (window as AppWindow).showTab('review')
+      if (chapterId) {
+        // The learner now starts with the guided lesson rather than being
+        // dropped directly into a quiz.
+        refreshLearn(chapterId)
+        ;(window as AppWindow).showTab('learn')
+      } else {
+        ;(window as AppWindow).showTab('review')
+      }
     })
   })
   target.querySelectorAll<HTMLElement>('[data-dashboard-level]').forEach((button) => {
@@ -34,10 +43,17 @@ function refreshDashboard(): void {
   })
 }
 
+function refreshLearn(chapterId?: string): void {
+  const target = document.getElementById('learn-tab')
+  if (!target) return
+  if (chapterId) target.dataset.lessonId = chapterId
+  else if (!target.dataset.lessonId) delete target.dataset.lessonId
+  renderLearnExperience(target, a1Chapters)
+}
+
 export function enhanceDashboard(): void {
-  // ui.ts owns the existing application shell. This adapter upgrades only the
-  // dashboard surface, keeping the existing learning/review/practice flows intact.
   refreshDashboard()
+  refreshLearn()
 
   const appWindow = window as AppWindow
   const originalShowTab = appWindow.showTab
@@ -46,13 +62,16 @@ export function enhanceDashboard(): void {
   const wrapped = (tabName: string): void => {
     originalShowTab(tabName)
     if (tabName === 'dashboard') refreshDashboard()
+    if (tabName === 'learn') refreshLearn()
   }
   ;(wrapped as unknown as { __dashboardWrapped?: boolean }).__dashboardWrapped = true
   appWindow.showTab = wrapped
 
-  // Keep the active profile's dashboard fresh after profile switching.
   document.querySelector('.profile-select')?.addEventListener('change', () => {
-    window.setTimeout(refreshDashboard, 0)
+    window.setTimeout(() => {
+      refreshDashboard()
+      refreshLearn()
+    }, 0)
   })
 
   void __appState
