@@ -3,7 +3,7 @@ import type { Chapter, VocabWord } from '../types'
 import { vocabulary } from '../data/vocabulary'
 import { getLessonContent } from '../data/lesson-content'
 
-interface AppWindow extends Window {
+type AppWindow = {
   startQuiz?: (chapterId?: string, mode?: 'de-en' | 'en-de' | 'audio-dictation' | 'sentence-completion' | 'type-sentence', isReview?: boolean) => void
   showTab?: (tabName: string) => void
   speakWord?: (text: string) => void
@@ -152,19 +152,19 @@ function wireLesson(target: HTMLElement, chapterId: string): void {
   target.querySelectorAll<HTMLElement>('[data-speak]').forEach((button) => {
     button.addEventListener('click', () => {
       const text = button.dataset.speak
-      if (text) (window as AppWindow).speakWord?.(text)
+      if (text) (window as unknown as AppWindow).speakWord?.(text)
     })
   })
 
   target.querySelectorAll<HTMLElement>('[data-action="back"]').forEach((button) => {
     button.addEventListener('click', () => {
       delete target.dataset.lessonId
-      ;(window as AppWindow).showTab?.('learn')
+      ;(window as unknown as AppWindow).showTab?.('learn')
     })
   })
 
   target.querySelectorAll<HTMLElement>('[data-action="practice"]').forEach((button) => {
-    button.addEventListener('click', () => (window as AppWindow).startQuiz?.(chapterId, 'de-en'))
+    button.addEventListener('click', () => (window as unknown as AppWindow).startQuiz?.(chapterId, 'de-en'))
   })
 }
 
