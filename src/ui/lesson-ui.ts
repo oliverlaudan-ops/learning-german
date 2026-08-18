@@ -2,9 +2,9 @@ import './lesson.css'
 import type { Chapter, VocabWord } from '../types'
 import { vocabulary } from '../data/vocabulary'
 import { getLessonContent } from '../data/lesson-content'
+import { renderGuidedSession } from './lesson-session'
 
 type AppWindow = {
-  startQuiz?: (chapterId?: string, mode?: 'de-en' | 'en-de' | 'audio-dictation' | 'sentence-completion' | 'type-sentence', isReview?: boolean) => void
   showTab?: (tabName: string) => void
   speakWord?: (text: string) => void
 }
@@ -14,7 +14,7 @@ function escapeHtml(value: string): string {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
+    .replace(/\"/g, '&quot;')
     .replace(/'/g, '&#039;')
 }
 
@@ -81,11 +81,11 @@ function renderLesson(chapter: Chapter): string {
 
       <section class="lesson-card lesson-start">
         <div>
-          <span class="lesson-kicker">LEARN FIRST</span>
-          <h2>Understand it before you practise it.</h2>
-          <p>Read the English explanation, look at the German examples, and say the phrases aloud. Then test yourself.</p>
+          <span class="lesson-kicker">GUIDED LESSON</span>
+          <h2>Learn it, understand it, use it.</h2>
+          <p>This lesson is now a short guided session: learn, listen, understand, build, speak, use real German, then review.</p>
         </div>
-        <button class="btn primary" type="button" data-action="practice">Practice this lesson →</button>
+        <button class="btn primary" type="button" data-action="guided">Start guided lesson →</button>
       </section>
 
       <section class="lesson-section">
@@ -140,15 +140,15 @@ function renderLesson(chapter: Chapter): string {
         <div>
           <span class="lesson-kicker">READY?</span>
           <h2>Now use what you learned.</h2>
-          <p>Start with a short quiz. Your correct answers become part of your learning progress and SRS review.</p>
+          <p>Start the guided session. The final step sends you into the existing quiz and SRS system.</p>
         </div>
-        <button class="btn primary" type="button" data-action="practice">Start ${words.length} word practice</button>
+        <button class="btn primary" type="button" data-action="guided">Start guided lesson →</button>
       </section>
     </section>
   `
 }
 
-function wireLesson(target: HTMLElement, chapterId: string): void {
+function wireLesson(target: HTMLElement, chapter: Chapter): void {
   target.querySelectorAll<HTMLElement>('[data-speak]').forEach((button) => {
     button.addEventListener('click', () => {
       const text = button.dataset.speak
@@ -159,12 +159,16 @@ function wireLesson(target: HTMLElement, chapterId: string): void {
   target.querySelectorAll<HTMLElement>('[data-action="back"]').forEach((button) => {
     button.addEventListener('click', () => {
       delete target.dataset.lessonId
+      delete target.dataset.session
       ;(window as unknown as AppWindow).showTab?.('learn')
     })
   })
 
-  target.querySelectorAll<HTMLElement>('[data-action="practice"]').forEach((button) => {
-    button.addEventListener('click', () => (window as unknown as AppWindow).startQuiz?.(chapterId, 'de-en'))
+  target.querySelectorAll<HTMLElement>('[data-action="guided"]').forEach((button) => {
+    button.addEventListener('click', () => {
+      target.dataset.session = 'guided'
+      renderGuidedSession(target, chapter)
+    })
   })
 }
 
@@ -176,7 +180,7 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
         <div class="lesson-index-hero">
           <span class="lesson-kicker">YOUR COURSE</span>
           <h2>Learn German step by step</h2>
-          <p>Each lesson now combines vocabulary, simple English explanations, grammar, useful phrases and practice.</p>
+          <p>Each lesson now combines vocabulary, simple English explanations, grammar, useful phrases and a guided learning session.</p>
         </div>
         <div class="lesson-index-list">
           ${chapters.map((chapter) => `
@@ -204,6 +208,12 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
     renderLearnExperience(target, chapters)
     return
   }
+
+  if (target.dataset.session === 'guided') {
+    renderGuidedSession(target, chapter)
+    return
+  }
+
   target.innerHTML = renderLesson(chapter)
-  wireLesson(target, chapter.id)
+  wireLesson(target, chapter)
 }
