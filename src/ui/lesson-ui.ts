@@ -157,7 +157,10 @@ function wireLesson(target: HTMLElement, chapterId: string): void {
   })
 
   target.querySelectorAll<HTMLElement>('[data-action="back"]').forEach((button) => {
-    button.addEventListener('click', () => (window as AppWindow).showTab?.('learn'))
+    button.addEventListener('click', () => {
+      delete target.dataset.lessonId
+      ;(window as AppWindow).showTab?.('learn')
+    })
   })
 
   target.querySelectorAll<HTMLElement>('[data-action="practice"]').forEach((button) => {
