@@ -1,3 +1,4 @@
+import './dashboard.css'
 import { vocabulary } from '../data/vocabulary'
 import { getLevels } from '../data/lessons'
 import { getDueSrsWords } from '../srs/srs'
