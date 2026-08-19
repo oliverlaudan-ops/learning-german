@@ -1,0 +1,25 @@
+.placement-shell { max-width: 850px; margin: 0 auto; padding: 8px 0 48px; }
+.placement-hero { padding: 26px; border-radius: 22px; background: linear-gradient(135deg,#eef5ff,#fff); border: 1px solid var(--border); margin-bottom: 18px; }
+.placement-kicker { display:block; font-size:.72rem; font-weight:800; letter-spacing:.09em; color:var(--primary); margin-bottom:5px; }
+.placement-hero h1 { margin:4px 0 8px; }
+.placement-hero p { color:var(--text-light); max-width:700px; }
+.placement-progress { height:8px; background:var(--border); border-radius:99px; overflow:hidden; }
+.placement-progress span { display:block; height:100%; background:var(--primary); transition:width .2s ease; }
+.placement-count { color:var(--text-light); font-size:.9rem; }
+.placement-card { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:24px; box-shadow:var(--shadow); }
+.placement-skill { text-transform:capitalize; font-size:.75rem; font-weight:800; color:var(--primary); letter-spacing:.06em; }
+.placement-card h2 { margin:7px 0 20px; }
+.placement-options { display:grid; gap:10px; }
+.placement-option { display:flex; align-items:center; gap:12px; text-align:left; width:100%; padding:14px; border:1px solid var(--border); border-radius:13px; background:var(--bg); color:inherit; font:inherit; cursor:pointer; }
+.placement-option:hover,.placement-option.selected { border-color:var(--primary); background:#eef5ff; }
+.placement-option span { width:30px; height:30px; display:grid; place-items:center; border-radius:9px; background:var(--card); font-weight:800; }
+.placement-actions { display:flex; justify-content:space-between; gap:10px; margin-top:22px; }
+.placement-actions button:disabled { opacity:.45; cursor:not-allowed; }
+.placement-level-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:18px 0; }
+.placement-level-card { padding:16px; background:var(--card); border:1px solid var(--border); border-radius:15px; }
+.placement-level-card strong,.placement-level-card span { display:block; }
+.placement-level-card span { font-size:1.4rem; font-weight:800; margin-top:4px; }
+.placement-mini-bar { height:6px; background:var(--border); border-radius:99px; overflow:hidden; margin-top:9px; }
+.placement-mini-bar i { display:block; height:100%; background:var(--primary); }
+.placement-note { color:var(--text-light); font-size:.9rem; }
+@media (max-width:650px) { .placement-level-grid { grid-template-columns:1fr; } .placement-shell { padding:4px 0 32px; } .placement-card,.placement-hero { padding:18px; } }
