@@ -22,4 +22,9 @@
 .placement-mini-bar { height:6px; background:var(--border); border-radius:99px; overflow:hidden; margin-top:9px; }
 .placement-mini-bar i { display:block; height:100%; background:var(--primary); }
 .placement-note { color:var(--text-light); font-size:.9rem; }
+.placement-refreshers { margin-top:18px; padding-top:18px; border-top:1px dashed var(--border); }
+.placement-refreshers-title { font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--primary); font-size:.75rem; margin:0 0 8px; }
+.placement-refreshers ul { list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; gap:8px; }
+.placement-refresher { background:var(--bg); border:1px solid var(--border); border-radius:99px; padding:8px 14px; cursor:pointer; font:inherit; color:inherit; }
+.placement-refresher:hover { border-color:var(--primary); background:#eef5ff; }
 @media (max-width:650px) { .placement-level-grid { grid-template-columns:1fr; } .placement-shell { padding:4px 0 32px; } .placement-card,.placement-hero { padding:18px; } }
