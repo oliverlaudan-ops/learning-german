@@ -26,9 +26,7 @@ function findNextChapter(data: DashboardData): { level: Level; chapter: Level['c
     const progress = data.profile.levels[level.id]
     for (const chapter of level.chapters) {
       const chapterProgress = progress?.chapters[chapter.id]
-      if ((chapterProgress?.percent ?? 0) < 100) {
-        return { level, chapter }
-      }
+      if ((chapterProgress?.percent ?? 0) < 100) return { level, chapter }
     }
   }
   return undefined
@@ -87,6 +85,15 @@ export function renderDashboard(data: DashboardData): string {
           <p class="muted">${goalPercent >= 100 ? 'Goal complete! 🎉' : `${goal - profile.progress.todayLearned} more to reach today's goal.`}</p>
         </article>
       </div>
+
+      <section class="dashboard-card placement-callout" aria-labelledby="placement-title">
+        <div>
+          <p class="card-kicker">NEW · PLACEMENT CHECK</p>
+          <h2 id="placement-title">Not sure where to start?</h2>
+          <p class="muted">Take a short check across vocabulary, grammar, articles, sentence structure and reading. We will recommend a starting level.</p>
+        </div>
+        <button class="primary-button" type="button" data-dashboard-action="placement">Find my level →</button>
+      </section>
 
       <div class="dashboard-stats" aria-label="Learning statistics">
         <div class="stat-card"><span>📚</span><strong>${profile.progress.totalWordsLearned}</strong><small>words learned</small></div>
