@@ -10,12 +10,15 @@ export type PlacementSkill =
   | 'cases'
   | 'modal-verbs'
   | 'connectors'
+  | 'listening'
 
 export type PlacementQuestion = {
   id: string
   level: PlacementLevel
   skill: PlacementSkill
   prompt: string
+  /** German sentence spoken via speechSynthesis for listening questions. */
+  audio?: string
   options: string[]
   answer: number
   explanation: string
@@ -35,6 +38,8 @@ export const placementQuestions: readonly PlacementQuestion[] = [
    options: ['bin … gegangen', 'habe … gegangen', 'bin … gefahren', 'habe … gefahren'], answer: 0, explanation: 'Gehen uses sein in the perfect tense: Ich bin gegangen. Fahren would also take sein, but the sentence specifies Kino (going on foot / by transport — gehen fits the walk-to-cinema idea).' },
   { id: 'a2-cases-1', level: 'A2', skill: 'cases', prompt: 'Ich helfe ___ Frau mit dem Koffer.', options: ['die', 'der', 'den', 'dem'], answer: 1, explanation: 'Helfen takes the dative. Feminine die becomes der in the dative: Ich helfe der Frau.' },
   { id: 'a2-modal-1', level: 'A2', skill: 'modal-verbs', prompt: 'Ich ___ heute Abend nicht ausgehen.', options: ['möchte', 'kann', 'darf', 'muss'], answer: 1, explanation: 'Kann (can / am able to) fits the negative statement about not going out. Möchte / darf / muss would each change the meaning.' },
+  { id: 'a2-listening-1', level: 'A2', skill: 'listening', prompt: 'Press play. What is the speaker saying?', audio: 'Ich gehe heute ins Kino.', options: ['I am going to the cinema today.', 'I am coming home from the cinema.', 'I want to go to the cinema tomorrow.', 'I have been at the cinema.'], answer: 0, explanation: '“Ich gehe heute ins Kino” — I go / I am going to the cinema today.' },
+  { id: 'a2-listening-2', level: 'A2', skill: 'listening', prompt: 'Press play. What time does the speaker mention?', audio: 'Der Zug fährt um acht Uhr dreißig.', options: ['Half past seven.', 'Half past eight.', 'Quarter to nine.', 'A quarter past eight.'], answer: 1, explanation: '“um acht Uhr dreißig” is half past eight.' },
 
   { id: 'b1-vocab-1', level: 'B1', skill: 'vocabulary', prompt: 'What does “obwohl” introduce?', options: ['a reason', 'a contrast', 'a condition', 'a time expression'], answer: 1, explanation: 'Obwohl introduces a contrast: although/even though.' },
   { id: 'b1-grammar-1', level: 'B1', skill: 'grammar', prompt: 'Wenn ich mehr Zeit ___, würde ich öfter Deutsch lernen.', options: ['habe', 'hätte', 'hatte', 'haben'], answer: 1, explanation: 'The Konjunktiv II hätte expresses a hypothetical situation: Wenn ich mehr Zeit hätte ...' },
@@ -44,6 +49,7 @@ export const placementQuestions: readonly PlacementQuestion[] = [
   { id: 'b1-perfect-1', level: 'B1', skill: 'perfect-tense', prompt: 'Er ___ sich schon immer für Musik ___.',
    options: ['hat … interessiert', 'ist … interessiert', 'hat … interessieren', 'ist … interessieren'], answer: 0, explanation: 'Sich interessieren forms the perfect with haben + partizip II: Er hat sich interessiert.' },
   { id: 'b1-connectors-1', level: 'B1', skill: 'connectors', prompt: 'Ich bleibe zu Hause, ___ es regnet.', options: ['weil', 'denn', 'wenn', 'damit'], answer: 0, explanation: 'Weil pushes the verb to the end of the subordinate clause — natural after the comma. Denn would also introduce a reason but keeps normal word order (no comma).' },
+  { id: 'b1-listening-1', level: 'B1', skill: 'listening', prompt: 'Press play. When did the speaker read the book?', audio: 'Nachdem ich gegessen hatte, habe ich noch ein Buch gelesen.', options: ['Before eating.', 'While eating.', 'After eating.', 'Instead of eating.'], answer: 2, explanation: '“Nachdem” is a temporal connector that pushes the verb to the end — the perfect tense there (“gegessen hatte”) marks the earlier action. The reading happened after the meal.' },
 ]
 
 export type PlacementResult = {
@@ -83,6 +89,7 @@ const SKILL_REFRESHER: Partial<Record<PlacementSkill, string>> = {
   'perfect-tense': 'a2-ch1',
   'modal-verbs': 'a1-ch5',
   'connectors': 'a2-ch1',
+  'listening': 'a2-ch1',
 }
 
 export function evaluatePlacement(answers: Record<string, number>): PlacementResult {

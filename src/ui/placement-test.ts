@@ -13,6 +13,38 @@ function chapterTitle(id: string): string {
   return chapterById.get(id)?.title ?? id
 }
 
+/**
+ * Cross-browser speech synthesis trigger. Returns a small handle that the
+ * caller can use to test whether the browser actually exposed a speak path
+ * (e.g. for tests, or to fall back to a visible transcript).
+ *
+ * Kept as a named export so tests can stub it via dependency injection or by
+ * mocking `window.speechSynthesis` on the happy-dom environment.
+ */
+export interface SpeakHandle {
+  ok: boolean
+  reason?: 'unsupported' | 'empty'
+}
+
+export function speakGerman(text: string): SpeakHandle {
+  const trimmed = text.trim()
+  if (!trimmed) return { ok: false, reason: 'empty' }
+  const synth = typeof window !== 'undefined' ? window.speechSynthesis : undefined
+  if (!synth || typeof synth.speak !== 'function') {
+    return { ok: false, reason: 'unsupported' }
+  }
+  try {
+    synth.cancel()
+    const utter = new SpeechSynthesisUtterance(trimmed)
+    utter.lang = 'de-DE'
+    utter.rate = 0.9
+    synth.speak(utter)
+    return { ok: true }
+  } catch {
+    return { ok: false, reason: 'unsupported' }
+  }
+}
+
 export function renderPlacementTest(target: HTMLElement): void {
   let index = 0
   const answers: Record<string, number> = {}
@@ -25,6 +57,13 @@ export function renderPlacementTest(target: HTMLElement): void {
     }
 
     const selected = answers[question.id]
+    const audioBlock = question.audio
+      ? `<button class="placement-audio" type="button" data-action="play-audio" aria-label="Play German audio">
+          <span aria-hidden="true">🔊</span> Play German
+        </button>
+        <p class="placement-audio-note" data-audio-status>Tap to hear the sentence, then choose the meaning.</p>`
+      : ''
+
     target.innerHTML = `
       <section class="placement-shell">
         <div class="placement-hero">
@@ -37,6 +76,7 @@ export function renderPlacementTest(target: HTMLElement): void {
         <article class="placement-card">
           <span class="placement-skill">${question.skill.replace('-', ' ')}</span>
           <h2>${question.prompt}</h2>
+          ${audioBlock}
           <div class="placement-options">
             ${question.options.map((option, optionIndex) => `
               <button class="placement-option${selected === optionIndex ? ' selected' : ''}" type="button" data-answer="${optionIndex}">
@@ -66,6 +106,18 @@ export function renderPlacementTest(target: HTMLElement): void {
       if (answers[question.id] === undefined) return
       index += 1
       render()
+    })
+    target.querySelector<HTMLElement>('[data-action="play-audio"]')?.addEventListener('click', () => {
+      if (!question.audio) return
+      const status = target.querySelector<HTMLElement>('[data-audio-status]')
+      const handle = speakGerman(question.audio)
+      if (!handle.ok) {
+        if (status) {
+          status.textContent = handle.reason === 'unsupported'
+            ? `Audio is not available in this browser. The sentence was: “${question.audio}”`
+            : 'No audio available for this question.'
+        }
+      }
     })
   }
 
