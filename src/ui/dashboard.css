@@ -35,4 +35,8 @@
 .level-progress-copy small { color:var(--muted,#687386); }
 .mini-progress { grid-column:1 / -1; height:7px; }
 .dashboard-review { display:flex; justify-content:space-between; gap:20px; align-items:center; }
+.dashboard-continue--from-placement { border-color:var(--accent,#315efb); background:linear-gradient(135deg,#f0f5ff, var(--card-bg,#fff)); }
+.placement-callout--done { background:var(--surface,#f4f7fb); }
+.dashboard-refresher-list { list-style:none; padding:0; margin:12px 0 0; display:flex; flex-wrap:wrap; gap:8px; }
+.placement-review-hint { color:var(--muted,#687386); font-size:.92rem; margin:8px 0 0; }
 @media (max-width: 760px) { .dashboard { padding:16px 12px 36px; } .dashboard-hero,.dashboard-review { flex-direction:column; align-items:flex-start; } .dashboard-grid,.level-progress-grid { grid-template-columns:1fr; } .dashboard-stats { grid-template-columns:repeat(2,1fr); } .dashboard-streak { align-self:stretch; justify-content:center; } }

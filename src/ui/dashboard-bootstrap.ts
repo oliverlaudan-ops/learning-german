@@ -33,6 +33,20 @@ function refreshDashboard(): void {
       ;(window as AppWindow).showTab('learn')
     })
   })
+  target.querySelectorAll<HTMLElement>('[data-dashboard-action="retake-placement"]').forEach((button) => {
+    button.addEventListener('click', () => {
+      refreshPlacement()
+      ;(window as AppWindow).showTab('learn')
+    })
+  })
+  target.querySelectorAll<HTMLElement>('[data-dashboard-action="refresher"]').forEach((button) => {
+    const chapterId = button.dataset.chapterId
+    if (!chapterId) return
+    button.addEventListener('click', () => {
+      refreshLearn(chapterId)
+      ;(window as AppWindow).showTab('learn')
+    })
+  })
   target.querySelectorAll<HTMLElement>('[data-dashboard-action="continue"]').forEach((button) => {
     button.addEventListener('click', () => {
       const chapterId = button.dataset.chapterId

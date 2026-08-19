@@ -2,7 +2,7 @@
  * AppState types, persistence, and migrations.
  *
  * State shape lives in `types.ts`. This module owns the storage key, the
- * load/save pair, and v2→v3 and v3→v4 migration paths.
+ * load/save pair, and v2→v3, v3→v4 and v4→v5 migration paths.
  */
 
 import type {
@@ -11,15 +11,18 @@ import type {
   LegacyState,
   Level,
   LevelProgress,
+  PlacementSnapshot,
   ProfileState,
   UserProgress,
 } from '../types'
 
 /** Current storage key. Bump suffix when changing the on-disk shape. */
-export const STORAGE_KEY = 'learning-german-v4-state'
+export const STORAGE_KEY = 'learning-german-v5-state'
 /** Previous shape — kept for one-shot migration on first load. */
+export const LEGACY_V4_KEY = 'learning-german-v4-state'
+/** Older shape (single AppState, no profiles). */
 export const LEGACY_V3_KEY = 'learning-german-v3-state'
-/** Oldest shape (flat state, no profiles) — also migrated on first load. */
+/** Oldest shape (flat state, no profiles). */
 export const LEGACY_V2_KEY = 'learning-german-v2-state'
 
 // ---------------------------------------------------------------------------
@@ -86,6 +89,18 @@ export function createEmptyProfile(id: string, name: string, levels: Level[]): P
 // ---------------------------------------------------------------------------
 
 /**
+ * v4 already uses the { profiles, currentProfileId } shape. v5 only adds an
+ * optional `placement` field per profile, so v4 data migrates by simply
+ * re-writing under the new key — the field is omitted until the learner
+ * completes a placement check.
+ */
+function migrateV4ToV5(raw: LegacyState): AppState | null {
+  if (!raw || typeof raw !== 'object') return null
+  if (!('profiles' in raw) || !('currentProfileId' in raw)) return null
+  return raw as unknown as AppState
+}
+
+/**
  * v3 stored a single `AppState` (profiles + currentProfileId).
  * The shape is identical to v4; we just re-write the key.
  */
@@ -111,6 +126,32 @@ function migrateV2ToV4(raw: LegacyState, levels: Level[]): AppState | null {
 }
 
 // ---------------------------------------------------------------------------
+// Placement write-back
+// ---------------------------------------------------------------------------
+
+/**
+ * Persist a placement snapshot on the current profile. The caller (the
+ * placement UI) supplies the full snapshot so this module stays free of
+ * evaluation logic.
+ */
+export function savePlacementSnapshot(state: AppState, snapshot: PlacementSnapshot): AppState {
+  const profile = state.profiles[state.currentProfileId]
+  if (!profile) return state
+  const next: AppState = {
+    ...state,
+    profiles: {
+      ...state.profiles,
+      [profile.id]: {
+        ...profile,
+        placement: snapshot,
+      },
+    },
+  }
+  saveState(next)
+  return next
+}
+
+// ---------------------------------------------------------------------------
 // Load / save
 // ---------------------------------------------------------------------------
 
@@ -119,25 +160,35 @@ export interface LoadOptions {
 }
 
 export function loadState(opts: LoadOptions): AppState {
-  // 1) Try current key
+  // 1) Try current key (v5)
   const current = readKey<LegacyState>(STORAGE_KEY)
   if (current && typeof current === 'object' && 'profiles' in current && 'currentProfileId' in current) {
     return current as unknown as AppState
   }
 
-  // 2) Try v3
+  // 2) Try v4
+  const v4 = readKey<LegacyState>(LEGACY_V4_KEY)
+  if (v4) {
+    const migrated = migrateV4ToV5(v4)
+    if (migrated) {
+      saveState(migrated)
+      try { localStorage.removeItem(LEGACY_V4_KEY) } catch { /* ignore */ }
+      return migrated
+    }
+  }
+
+  // 3) Try v3
   const v3 = readKey<LegacyState>(LEGACY_V3_KEY)
   if (v3) {
     const migrated = migrateV3ToV4(v3)
     if (migrated) {
       saveState(migrated)
-      // Best-effort cleanup of the old key — failure is non-fatal.
       try { localStorage.removeItem(LEGACY_V3_KEY) } catch { /* ignore */ }
       return migrated
     }
   }
 
-  // 3) Try v2
+  // 4) Try v2
   const v2 = readKey<LegacyState>(LEGACY_V2_KEY)
   if (v2) {
     const migrated = migrateV2ToV4(v2, opts.levels)
@@ -148,7 +199,7 @@ export function loadState(opts: LoadOptions): AppState {
     }
   }
 
-  // 4) Fresh start
+  // 5) Fresh start
   const firstProfile = createEmptyProfile('oliver', 'Oliver', opts.levels)
   const fresh: AppState = { profiles: { oliver: firstProfile }, currentProfileId: 'oliver' }
   saveState(fresh)

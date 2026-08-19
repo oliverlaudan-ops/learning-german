@@ -1,6 +1,9 @@
 import './placement-test.css'
 import { lessons } from '../data/lessons'
 import { evaluatePlacement, placementQuestions, type PlacementLevel } from '../data/placement-test'
+import type { PlacementSnapshot } from '../types'
+import { savePlacementSnapshot } from '../state/state'
+import { __appState } from './ui'
 
 type PlacementWindow = Window & {
   showTab?: (tabName: string) => void
@@ -175,13 +178,30 @@ function renderResult(target: HTMLElement, answers: Record<string, number>): voi
   `
 
   target.querySelector('[data-action="continue"]')?.addEventListener('click', () => {
+    persistPlacement(result)
     openChapter(result.recommendedChapterId)
   })
   target.querySelectorAll<HTMLElement>('[data-refresher]').forEach((button) => {
     const chapterId = button.dataset.refresher
     if (!chapterId) return
-    button.addEventListener('click', () => openChapter(chapterId))
+    button.addEventListener('click', () => {
+      persistPlacement(result)
+      openChapter(chapterId)
+    })
   })
+}
+
+function persistPlacement(result: ReturnType<typeof evaluatePlacement>): void {
+  const snapshot: PlacementSnapshot = {
+    recommendedLevel: result.recommendedLevel,
+    recommendedLevelIsApproximate: result.recommendedLevelIsApproximate,
+    recommendedChapterId: result.recommendedChapterId,
+    refresherIds: result.refresherIds,
+    focusAreas: result.focusAreas,
+    percentages: result.percentages,
+    completedAt: Date.now(),
+  }
+  savePlacementSnapshot(__appState, snapshot)
 }
 
 function openChapter(chapterId: string): void {
