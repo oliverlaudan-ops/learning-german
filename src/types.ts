@@ -184,6 +184,23 @@ export interface ProfileState {
   learnedWordIds: string[]
   srsState: Record<string, SrsEntry>
   categoryStats: Record<string, CategoryStat>
+  /** Snapshot of the last placement check, used to personalize the path. */
+  placement?: PlacementSnapshot
+}
+
+/**
+ * Persisted result of a placement check. Drives the dashboard's Continue
+ * Learning override and the Quick Refresher pills.
+ */
+export interface PlacementSnapshot {
+  recommendedLevel: 'A1' | 'A2' | 'B1'
+  recommendedLevelIsApproximate: boolean
+  recommendedChapterId: string
+  refresherIds: string[]
+  focusAreas: string[]
+  percentages: { A1: number; A2: number; B1: number }
+  /** Timestamp of when the learner finished the placement check. */
+  completedAt: number
 }
 
 /** Root persisted shape: a dict of profiles + the active profile id. */
