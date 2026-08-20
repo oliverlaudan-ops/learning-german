@@ -135,6 +135,43 @@ export const lessonContent: readonly LessonContent[] = [
     ],
     tips: ['These words should become automatic, not just recognisable.', 'Use the phrases when speaking with a German speaker.', 'If you do not understand, ask for repetition instead of switching immediately to English.'],
   },
+  {
+    chapterId: 'a2-ch1',
+    goal: 'Find your way through German train stations, airports and public transport, and ask for or understand basic travel information.',
+    whyItMatters: 'Almost every long-distance trip in Germany starts with a Fahrkarte and ends with a platform number. These phrases are the difference between making your connection and missing it.',
+    grammar: [
+      {
+        title: 'Two-way prepositions: an, in, mit, nach, zu',
+        explanation: 'These prepositions take the accusative when you describe movement towards a place (Wohin?) and the dative when you describe a location (Wo?). Most travel phrases use both directions of the same preposition, so the article is what changes, not the preposition itself.',
+        examples: [
+          { german: 'Ich fahre zum Bahnhof.', english: 'I am travelling to the train station.' },
+          { german: 'Ich warte am Bahnhof auf Anna.', english: 'I am waiting for Anna at the train station.' },
+          { german: 'Wie komme ich zum Flughafen?', english: 'How do I get to the airport?' },
+        ],
+      },
+      {
+        title: 'Transport by mit + dative',
+        explanation: 'Mit (by, with) is followed by the dative. With vehicles, the article shifts: das Auto becomes mit dem Auto, die Bahn becomes mit der Bahn. This is the cleanest way to say how you travelled.',
+        examples: [
+          { german: 'Ich fahre mit der Bahn.', english: 'I travel by train.' },
+          { german: 'Wir fahren mit dem Bus in die Stadt.', english: 'We take the bus into town.' },
+          { german: 'Fährst du mit dem Fahrrad zur Arbeit?', english: 'Do you cycle to work?' },
+        ],
+      },
+    ],
+    communication: [
+      { german: 'Eine Fahrkarte nach Berlin, bitte.', english: 'One ticket to Berlin, please.' },
+      { german: 'Von welchem Gleis fährt der Zug?', english: 'From which platform does the train leave?' },
+      { german: 'Wie komme ich zum Flughafen?', english: 'How do I get to the airport?' },
+      { german: 'Der Zug hat zehn Minuten Verspätung.', english: 'The train is ten minutes late.' },
+      { german: 'Ich möchte ein Hotel in der Stadtmitte.', english: 'I would like a hotel in the city centre.' },
+    ],
+    tips: [
+      'Memorise the pair am Bahnhof / zum Bahnhof as a single unit — the meaning flips but the preposition stays.',
+      'When you hear a platform number, it is almost always Gleis followed by the number: Gleis 7.',
+      'Carry your Fahrkarte visibly between platforms — ticket checks on trains are normal, not a sign that something is wrong.',
+    ],
+  },
 ]
 
 export function getLessonContent(chapterId: string): LessonContent | undefined {
