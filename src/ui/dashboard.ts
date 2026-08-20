@@ -40,7 +40,23 @@ function findChapterById(data: DashboardData, chapterId: string): { level: Level
   return undefined
 }
 
-const REVIEW_HINT_SKILLS = new Set(['articles', 'cases', 'sentence-order'])
+/**
+ * Skills that justify an inline Smart Review hint on the dashboard.
+ * Articles, cases and sentence order are the three skills the placement
+ * UI cannot itself teach, so we surface them explicitly when the learner
+ * still wobbles on them. All other PlacementSkills are either taught in
+ * chapters or already covered elsewhere in the UI.
+ */
+export const REVIEW_HINT_SKILLS = new Set(['articles', 'cases', 'sentence-order'])
+export const NON_HINT_SKILLS: readonly string[] = [
+  'vocabulary',
+  'grammar',
+  'reading',
+  'perfect-tense',
+  'modal-verbs',
+  'connectors',
+  'listening',
+]
 
 function reviewHintSkills(placement: PlacementSnapshot): string[] {
   return placement.focusAreas.filter((skill) => REVIEW_HINT_SKILLS.has(skill))

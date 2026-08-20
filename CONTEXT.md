@@ -158,8 +158,8 @@ An interactive in-app test is implemented and opens from the dashboard in the Le
 
 Current verified implementation:
 
-- 13 questions across A1, A2, and B1;
-- skills: vocabulary, grammar, articles, sentence order, and reading;
+- 21 questions across A1, A2, and B1 (4 A1 + 9 A2 + 8 B1);
+- skills: vocabulary, grammar, articles, sentence order, reading, perfect-tense, cases, modal-verbs, connectors, and listening;
 - per-level percentages, total score, strengths, focus areas, and a starting-level recommendation;
 - a clear disclaimer: it is a starting recommendation, not a formal CEFR assessment;
 - placement evaluation tests covering a strong B1 result, secure A1 with uncertain A2 resulting in A2, and an A1 recommendation when foundations are not secure.
@@ -183,7 +183,7 @@ The test workflow runs on pull requests to `main`, pushes to `main`, and manual 
 
 This context was written after checking PR #4, its changed-file list, and the branch versions of `package.json`, `ARCHITECTURE.md`, the workflow files, `src/main.ts`, state, dashboard wiring, and placement-test files.
 
-- PR #4 is a **draft**, targets `main`, and has head branch `agent/dashboard-learning-flow`.
+- PR #4 is **open** (`state: OPEN`, `mergeable: MERGEABLE`, awaiting review), targets `main`, and has head branch `agent/dashboard-learning-flow`.
 - The branch contains the dashboard, lesson, placement, and workflow changes described above.
 - Previous project work reported successful test/build runs after the Node 24 workflow update.
 - The workflow definitions are verified in the repository; however, the authoring environment for this file did not have authenticated GitHub CLI access to retrieve live PR check results. Treat the current check conclusion as **workflow configuration verified; live check status should be confirmed in GitHub before merging**.
@@ -194,7 +194,7 @@ This context was written after checking PR #4, its changed-file list, and the br
 Prioritize in this order unless a new user request changes it:
 
 1. **Strengthen the Placement Test**
-   - Expand beyond 13 questions and distinguish A2, A2+, and B1 more reliably.
+   - Expand beyond 21 questions and distinguish A2, A2+, and B1 more reliably.
    - Add targeted diagnostics for perfect tense, subordinate clauses, connectors, modal verbs, Konjunktiv II, prepositions/cases, and vocabulary by real-life domain.
    - Add more substantial A2/B1 reading and, later, listening.
    - Convert results into chapter-level recommendations and optional A1 refreshers.

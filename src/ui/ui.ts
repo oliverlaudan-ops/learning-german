@@ -913,6 +913,33 @@ function showTab(tabName: string): void {
   else if (tabName === 'learn') renderLearn()
   else if (tabName === 'practice') renderPractice()
   else if (tabName === 'stats') renderStats()
+
+  for (const hook of showTabHooks) hook(tabName)
+}
+
+/**
+ * Hooks invoked after `showTab` has finished its standard tab-switch work.
+ * Modules (e.g. the learner-dashboard bootstrap) use this to re-render their
+ * own pieces of the UI when the user navigates to their tab.
+ */
+const showTabHooks = new Set<(tabName: string) => void>()
+
+export function registerShowTabHook(hook: (tabName: string) => void): () => void {
+  showTabHooks.add(hook)
+  return () => showTabHooks.delete(hook)
+}
+
+export function __resetShowTabHooks(): void {
+  showTabHooks.clear()
+}
+
+/**
+ * Test seam: fire all registered hooks for a given tab name without going
+ * through `window.showTab`. Lets unit tests verify that a module correctly
+ * registered its hook without spinning up the full tab-rendering machinery.
+ */
+export function __triggerShowTabHooks(tabName: string): void {
+  for (const hook of showTabHooks) hook(tabName)
 }
 
 function speakWord(text: string): void {

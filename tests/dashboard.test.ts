@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import { renderDashboard } from '../src/ui/dashboard'
+import { renderDashboard, NON_HINT_SKILLS } from '../src/ui/dashboard'
 import type { DashboardData } from '../src/ui/dashboard'
 import { lessons, getLevels } from '../src/data/lessons'
 import type { Level, PlacementSnapshot, ProfileState } from '../src/types'
@@ -162,9 +162,9 @@ describe('renderDashboard', () => {
     expect(html).toContain('Smart Review will surface these first')
   })
 
-  it('does not show a Smart Review hint for non-fundamental focus areas', () => {
+  it.each(NON_HINT_SKILLS)('does not show a Smart Review hint for non-fundamental focus area "%s"', (skill) => {
     const html = renderDashboard(data(buildProfile({
-      placement: snapshot({ focusAreas: ['listening', 'perfect-tense'] }),
+      placement: snapshot({ focusAreas: [skill] }),
     })))
     expect(html).not.toContain('placement-review-hint')
   })

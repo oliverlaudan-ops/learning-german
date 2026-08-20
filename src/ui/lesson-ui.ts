@@ -3,6 +3,7 @@ import type { Chapter, VocabWord } from '../types'
 import { vocabulary } from '../data/vocabulary'
 import { getLessonContent } from '../data/lesson-content'
 import { renderGuidedSession } from './lesson-session'
+import { __getProfile } from './ui'
 
 type AppWindow = {
   showTab?: (tabName: string) => void
@@ -148,7 +149,7 @@ function renderLesson(chapter: Chapter): string {
   `
 }
 
-function wireLesson(target: HTMLElement, chapter: Chapter): void {
+function wireLesson(target: HTMLElement, chapter: Chapter, learnerName: string): void {
   target.querySelectorAll<HTMLElement>('[data-speak]').forEach((button) => {
     button.addEventListener('click', () => {
       const text = button.dataset.speak
@@ -167,12 +168,28 @@ function wireLesson(target: HTMLElement, chapter: Chapter): void {
   target.querySelectorAll<HTMLElement>('[data-action="guided"]').forEach((button) => {
     button.addEventListener('click', () => {
       target.dataset.session = 'guided'
-      renderGuidedSession(target, chapter)
+      renderGuidedSession(target, chapter, 'Learn', learnerName)
     })
   })
 }
 
+/**
+ * Pull the learner's display name from the active profile so the Build and
+ * Real German steps personalise the answer. Falls back to "Anna" when no
+ * profile name is set so the lesson still has a coherent greeting.
+ */
+function currentLearnerName(): string {
+  try {
+    const name = __getProfile().displayName
+    if (typeof name === 'string' && name.trim()) return name.trim()
+  } catch {
+    // no profile yet — fall through
+  }
+  return 'Anna'
+}
+
 export function renderLearnExperience(target: HTMLElement, chapters: readonly Chapter[]): void {
+  const learnerName = currentLearnerName()
   const current = target.dataset.lessonId
   if (!current) {
     target.innerHTML = `
@@ -210,10 +227,10 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
   }
 
   if (target.dataset.session === 'guided') {
-    renderGuidedSession(target, chapter)
+    renderGuidedSession(target, chapter, 'Learn', learnerName)
     return
   }
 
   target.innerHTML = renderLesson(chapter)
-  wireLesson(target, chapter)
+  wireLesson(target, chapter, learnerName)
 }
