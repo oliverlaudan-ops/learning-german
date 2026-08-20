@@ -1,11 +1,11 @@
 # learning-german — Project Context
 
-> **Purpose:** This file is the working context for future contributors and Codex sessions. Read it before changing the learning experience. It captures agreed product direction, the current architecture, work already present on the development branch, and the next priorities.
+> **Purpose:** This file is the working context for future contributors and Codex sessions. Read it before changing the learning experience. It captures agreed product direction, the current architecture, work already shipped on `main`, and the next priorities.
 >
 > **Repository:** `oliverlaudan-ops/learning-german`  
-> **Working branch:** `agent/dashboard-learning-flow`  
-> **Pull request:** [#4 — Introduce learner-focused dashboard](https://github.com/oliverlaudan-ops/learning-german/pull/4) (draft, targeting `main`)  
-> **Branch rule:** Work on the branch above. **Do not change, merge into, or deploy from `main` unless explicitly requested.**
+> **Working branch:** `main`  
+> **Last shipped:** [#4 — Introduce learner-focused dashboard](https://github.com/oliverlaudan-ops/learning-german/pull/4) (squashed and merged 2026-08-20; feature branch `agent/dashboard-learning-flow` deleted).  
+> **Branch rule:** Branch off `main` for any new feature. Keep changes scoped; **do not deploy from `main` directly** — the Pages workflow handles that on merge.
 
 ## 1. Product mission
 
@@ -118,9 +118,9 @@ src/
 - Continue supporting mobile layouts and offline use.
 - Do not present the placement check as an official CEFR assessment.
 
-## 4. Work already implemented on `agent/dashboard-learning-flow`
+## 4. Work already shipped on `main`
 
-The branch is represented by draft PR #4 and currently contains the following feature work in addition to the base application.
+PR #4 was squashed and merged into `main` on 2026-08-20. The merged feature work now lives on `main` and includes the items below.
 
 ### Learner dashboard
 
@@ -181,13 +181,12 @@ The test workflow runs on pull requests to `main`, pushes to `main`, and manual 
 
 ## 5. Verification and CI status
 
-This context was written after checking PR #4, its changed-file list, and the branch versions of `package.json`, `ARCHITECTURE.md`, the workflow files, `src/main.ts`, state, dashboard wiring, and placement-test files.
+This context was last verified against `main` after the squash-merge of PR #4 (`2305804 Introduce learner-focused dashboard (#4)`).
 
-- PR #4 is **open** (`state: OPEN`, `mergeable: MERGEABLE`, awaiting review), targets `main`, and has head branch `agent/dashboard-learning-flow`.
-- The branch contains the dashboard, lesson, placement, and workflow changes described above.
-- Previous project work reported successful test/build runs after the Node 24 workflow update.
-- The workflow definitions are verified in the repository; however, the authoring environment for this file did not have authenticated GitHub CLI access to retrieve live PR check results. Treat the current check conclusion as **workflow configuration verified; live check status should be confirmed in GitHub before merging**.
-- `main` has not been changed by this documentation work.
+- The dashboard, lesson, placement, and workflow changes described above are now part of `main`.
+- `npm test` runs **105 tests across 8 files** on a happy-dom environment; the GitHub Actions `test` workflow passes on every push to `main` and on every pull request targeting `main`.
+- The Pages deployment workflow runs from `main` only: `npm ci && npm run build && upload-pages-artifact && deploy-pages`. It deploys the bundled `dist/` to GitHub Pages automatically when a PR is merged.
+- This documentation commit did not change any application code.
 
 ## 6. Recommended next steps
 
@@ -226,12 +225,11 @@ Prioritize in this order unless a new user request changes it:
 Before implementing anything:
 
 1. Read this file and `ARCHITECTURE.md`.
-2. Confirm the current branch is `agent/dashboard-learning-flow`.
-3. Inspect [PR #4](https://github.com/oliverlaudan-ops/learning-german/pull/4) and its live checks.
-4. Keep changes scoped; do not alter `main`.
-5. Run `npm test` and `npm run build` where a runtime is available.
-6. Evaluate each change against the core question: does it make the learner's next German-learning step clearer, more practical, or more effective?
+2. Confirm you are on `main` (or branch off `main` for the new feature). Fetch with `git fetch origin --prune` so deleted remote branches do not show up as still tracked.
+3. Run `npm test` and `npm run build` to confirm the local environment matches the green CI baseline before you start changing things.
+4. Open a feature branch, keep changes scoped, and open a PR back into `main` when ready.
+5. Evaluate each change against the core question: does it make the learner's next German-learning step clearer, more practical, or more effective?
 
 ## 8. Short prompt for future Codex sessions
 
-> Read `CONTEXT.md` and `ARCHITECTURE.md` first. Work only on `agent/dashboard-learning-flow` / PR #4, not `main`. We are building a personal, English-guided, mobile/offline-friendly German-learning companion for an A2→B1 learner in Uganda. Preserve the existing quiz/SRS/state architecture; continue toward personalized placement, A2/B1 learning paths, contextual lessons, and smart review.
+> Read `CONTEXT.md` and `ARCHITECTURE.md` first. Branch off `main` for any new work; do not push directly to `main`. We are building a personal, English-guided, mobile/offline-friendly German-learning companion for an A2→B1 learner in Uganda. Preserve the existing quiz/SRS/state architecture; continue toward personalized placement, A2/B1 learning paths, contextual lessons, and smart review.
