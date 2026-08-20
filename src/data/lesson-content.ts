@@ -172,6 +172,43 @@ export const lessonContent: readonly LessonContent[] = [
       'Carry your Fahrkarte visibly between platforms — ticket checks on trains are normal, not a sign that something is wrong.',
     ],
   },
+  {
+    chapterId: 'a2-ch2',
+    goal: 'Say what you do for work, describe a typical working day, and ask polite questions about jobs, hours and time off.',
+    whyItMatters: 'Most adult introductions in German end with "Und was machst du beruflich?" The phrases in this chapter let you answer that question and hold a real conversation about work — the topic Germans ask about most when they first meet you.',
+    grammar: [
+      {
+        title: 'Ich arbeite als + Beruf',
+        explanation: 'When you describe your profession, German uses "als" (as) followed by the bare job noun. The verb is "arbeiten". The preposition stays the same whether you talk about today or in general.',
+        examples: [
+          { german: 'Ich arbeite als Ingenieur.', english: 'I work as an engineer.' },
+          { german: 'Er arbeitet als Lehrer an einer Grundschule.', english: 'He works as a teacher at an elementary school.' },
+          { german: 'Was bist du von Beruf?', english: 'What is your profession?' },
+        ],
+      },
+      {
+        title: 'Modal verbs at work: müssen, dürfen, können, möchten',
+        explanation: 'The work day runs on modal verbs: what you must do, what you are allowed to do, what you can do, and what you would like to do. They conjugate like other verbs but the second idea (the infinitive) goes at the very end of the sentence.',
+        examples: [
+          { german: 'Ich muss um acht Uhr im Büro sein.', english: 'I have to be in the office at eight.' },
+          { german: 'Darf ich heute früher gehen?', english: 'May I leave earlier today?' },
+          { german: 'Ich kann das morgen erledigen.', english: 'I can take care of that tomorrow.' },
+        ],
+      },
+    ],
+    communication: [
+      { german: 'Ich bin von Beruf Ingenieurin.', english: 'I am an engineer by profession.' },
+      { german: 'Ich arbeite heute im Home-Office.', english: 'I am working from home today.' },
+      { german: 'Haben Sie einen Moment Zeit für mich?', english: 'Do you have a moment for me?' },
+      { german: 'Ich habe nächste Woche Urlaub.', english: 'I am on vacation next week.' },
+      { german: 'Wann wird das Gehalt bezahlt?', english: 'When is the salary paid?' },
+    ],
+    tips: [
+      'Many job titles have a feminine form. Use "Lehrerin / Ärztin / Ingenieurin" if you are a woman — the masculine form is for men only.',
+      'In most workplaces people use "du" with colleagues and "Sie" with the boss until the boss explicitly invites you to use "du". Watch and listen before you decide.',
+      'Modal verbs are the key to polite requests: "Darf ich ..." is softer than "Ich will ..." even when both are grammatically correct.',
+    ],
+  },
 ]
 
 export function getLessonContent(chapterId: string): LessonContent | undefined {

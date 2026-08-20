@@ -20,6 +20,7 @@ const SHIPPED_CHAPTERS = [
   'a1-ch5',
   'a1-ch6',
   'a2-ch1',
+  'a2-ch2',
 ] as const
 
 describe('lesson-content catalogue', () => {
@@ -87,6 +88,52 @@ describe('a2-ch1 (Travel and Transport) — reference content', () => {
     const coreVocab = ['Zug', 'Bahn', 'Bahnhof', 'Flughafen', 'Bus', 'Fahrrad', 'Fahrkarte', 'Hotel']
     for(const word of coreVocab) {
       expect(text, `a2-ch1 lesson never mentions core vocabulary "${word}"`).toContain(word)
+    }
+  })
+})
+
+describe('a2-ch2 (Work and Profession) — reference content', () => {
+  const content = getLessonContent('a2-ch2')
+
+  it('exists and frames work as the practical outcome', () => {
+    expect(content).toBeDefined()
+    expect(content!.goal.toLowerCase()).toContain('work')
+    expect(content!.whyItMatters.toLowerCase()).toContain('beruf')
+  })
+
+  it('teaches the "ich arbeite als + Beruf" pattern', () => {
+    const alsRule = content!.grammar.find((r) => /als\s*\+\s*Beruf/i.test(r.title) || /arbeite als/.test(r.title))
+    expect(alsRule, 'no "als + Beruf" rule found').toBeDefined()
+    const allExamples = alsRule!.examples.map((e) => e.german).join(' ')
+    expect(allExamples).toMatch(/arbeitet als \w+/)
+    expect(allExamples).toMatch(/was bist du von Beruf/i)
+  })
+
+  it('teaches the modal-verbs-at-work pattern', () => {
+    const modal = content!.grammar.find((r) => /modal/i.test(r.title))
+    expect(modal, 'no modal-verb rule found').toBeDefined()
+    const allExamples = modal!.examples.map((e) => e.german).join(' ')
+    // Case-insensitive match so the test does not break when the example
+    // happens to start a sentence with a capitalised modal verb.
+    const lower = allExamples.toLowerCase()
+    expect(lower).toMatch(/\bmuss\b/)
+    expect(lower).toMatch(/\bdarf\b/)
+    expect(lower).toMatch(/\bkann\b/)
+  })
+
+  it('uses the core chapter vocabulary the lesson actually teaches', () => {
+    const text = content!.grammar.flatMap((r) => r.examples.map((e) => e.german)).join(' ')
+      + ' ' + content!.communication.map((p) => p.german).join(' ')
+    // Core: the chapter's most teachable professions + work concepts that
+    // anchor the patterns. Peripheral vocabulary (Lehrer, Lehrerin, Arzt,
+    // Ärztin, Bürokauffrau, Büro, Chef, Kollege, Pause) is fine to teach
+    // in a future lesson chapter.
+    // The vocab check is case-insensitive and accepts any conjugation:
+    // "arbeiten" can appear as "Ich arbeite" / "Er arbeitet".
+    const lower = text.toLowerCase()
+    const coreVocab = ['ingenieur', 'arbeit', 'beruf', 'büro', 'urlaub', 'gehalt']
+    for(const word of coreVocab) {
+      expect(lower, `a2-ch2 lesson never mentions core vocabulary "${word}"`).toMatch(new RegExp(`\\b${word}`, 'i'))
     }
   })
 })
