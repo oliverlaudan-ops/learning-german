@@ -283,6 +283,43 @@ export const lessonContent: readonly LessonContent[] = [
       'Watch out for the false friend "verstellen" (to adjust or block) versus "vorstellen" (to introduce). They share no meaning at all even though they share most of their letters.',
     ],
   },
+  {
+    chapterId: 'a2-ch5',
+    goal: 'Talk about how you spend your free time, suggest activities, and ask or answer the most common small-talk weather question.',
+    whyItMatters: 'Freizeit is the first topic Germans bring up after work. The phrases in this chapter turn a flat "Ich habe nichts gemacht" into a real answer, and let you accept or politely decline a weekend plan.',
+    grammar: [
+      {
+        title: 'spazieren gehen / wandern gehen (infinitive without "zu")',
+        explanation: 'German pairs movement verbs ("gehen") with another infinitive to describe the *kind* of movement: spazieren gehen (to go for a walk), wandern gehen (to go hiking). The second infinitive drops to the end of the sentence and never takes "zu".',
+        examples: [
+          { german: 'Wir gehen im Park spazieren.', english: 'We are going for a walk in the park.' },
+          { german: 'Im Urlaub gehen wir oft wandern.', english: 'We often go hiking on vacation.' },
+          { german: 'Gehen wir am Sonntag spazieren?', english: 'Shall we go for a walk on Sunday?' },
+        ],
+      },
+      {
+        title: 'Im + Jahreszeit + Verb',
+        explanation: 'Seasons take the dative after "in": im Frühling, im Sommer, im Herbst, im Winter. They work as a one-word adverbial meaning "in spring/summer/autumn/winter" and slot into the same sentence slot as "heute" or "morgen".',
+        examples: [
+          { german: 'Im Frühling blühen die Blumen.', english: 'In spring the flowers bloom.' },
+          { german: 'Im Sommer ist es meistens heiß.', english: 'In summer it is usually hot.' },
+          { german: 'Im Winter liegt oft Schnee.', english: 'In winter there is often snow.' },
+        ],
+      },
+    ],
+    communication: [
+      { german: 'Was machst du in deiner Freizeit?', english: 'What do you do in your free time?' },
+      { german: 'Am Sonntag machen wir einen Ausflug.', english: 'On Sunday we are going on a trip.' },
+      { german: 'Wir gehen im Park spazieren.', english: 'We are going for a walk in the park.' },
+      { german: 'Im Urlaub gehen wir oft wandern.', english: 'We often go hiking on vacation.' },
+      { german: 'Wie ist das Wetter heute?', english: 'How is the weather today?' },
+    ],
+    tips: [
+      'spazieren gehen is for a short, casual walk (an hour or two). wandern gehen is for a whole-day hike with a backpack and boots. Pick the one that matches the plan.',
+      'Seasons are gendered: der Frühling, der Sommer, der Herbst, der Winter. Always with the article, even in plain prose.',
+      'Wetter-Smalltalk is a real social skill. "Schön heute, oder?" after a sunny morning buys you the first minute of almost any conversation.',
+    ],
+  },
 ]
 
 export function getLessonContent(chapterId: string): LessonContent | undefined {

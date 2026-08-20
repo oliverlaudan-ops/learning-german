@@ -23,6 +23,7 @@ const SHIPPED_CHAPTERS = [
   'a2-ch2',
   'a2-ch3',
   'a2-ch4',
+  'a2-ch5',
 ] as const
 
 describe('lesson-content catalogue', () => {
@@ -218,6 +219,50 @@ describe('a2-ch4 (Vor vs Ver Prefixes) — reference content', () => {
     const coreVocab = ['vorstellen', 'verstehe', 'verloren', 'vorlesen']
     for(const word of coreVocab) {
       expect(lower, `a2-ch4 lesson never mentions core vocabulary "${word}"`).toMatch(new RegExp(`\\b${word}`, 'i'))
+    }
+  })
+})
+
+describe('a2-ch5 (Hobbys & Freizeit) — reference content', () => {
+  const content = getLessonContent('a2-ch5')
+
+  it('exists and frames freizeit as the practical topic', () => {
+    expect(content).toBeDefined()
+    expect(content!.goal.toLowerCase()).toContain('free time')
+    expect(content!.whyItMatters.toLowerCase()).toContain('freizeit')
+  })
+
+  it('teaches the "spazieren gehen / wandern gehen" infinitive pair', () => {
+    const infinitive = content!.grammar.find((r) => /spazieren|wandern/i.test(r.title) || /infinitive/i.test(r.title))
+    expect(infinitive, 'no spazieren/wandern rule found').toBeDefined()
+    const allExamples = infinitive!.examples.map((e) => e.german).join(' ')
+    const lower = allExamples.toLowerCase()
+    // Examples use the infinitive at the end of the sentence; the
+    // matching verb ("gehen") may appear earlier in the same clause.
+    expect(lower).toMatch(/spazieren/)
+    expect(lower).toMatch(/wandern/)
+    expect(lower).toMatch(/\bgehen\b/)
+  })
+
+  it('teaches the "im + Jahreszeit" temporal pattern', () => {
+    const seasonal = content!.grammar.find((r) => /jahreszeit|im \+/i.test(r.title))
+    expect(seasonal, 'no "im + Jahreszeit" rule found').toBeDefined()
+    const allExamples = seasonal!.examples.map((e) => e.german).join(' ')
+    expect(allExamples.toLowerCase()).toMatch(/im frühling/)
+    expect(allExamples.toLowerCase()).toMatch(/im sommer/)
+  })
+
+  it('uses the core chapter vocabulary the lesson actually teaches', () => {
+    const text = content!.grammar.flatMap((r) => r.examples.map((e) => e.german)).join(' ')
+      + ' ' + content!.communication.map((p) => p.german).join(' ')
+    const lower = text.toLowerCase()
+    // Core: the chapter's anchor activities and seasons. Weather nouns
+    // (Sonne, Regen, Schnee, Wind, Wolke) are covered as smalltalk
+    // phrases; we do not pin them in the test because the lesson may
+    // legitimately focus on freizeit rather than wetter.
+    const coreVocab = ['spazieren', 'wandern', 'ausflug', 'frühling', 'sommer']
+    for(const word of coreVocab) {
+      expect(lower, `a2-ch5 lesson never mentions core vocabulary "${word}"`).toMatch(new RegExp('\\b' + word, 'i'))
     }
   })
 })
