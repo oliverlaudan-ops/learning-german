@@ -21,6 +21,7 @@ const SHIPPED_CHAPTERS = [
   'a1-ch6',
   'a2-ch1',
   'a2-ch2',
+  'a2-ch3',
 ] as const
 
 describe('lesson-content catalogue', () => {
@@ -134,6 +135,48 @@ describe('a2-ch2 (Work and Profession) — reference content', () => {
     const coreVocab = ['ingenieur', 'arbeit', 'beruf', 'büro', 'urlaub', 'gehalt']
     for(const word of coreVocab) {
       expect(lower, `a2-ch2 lesson never mentions core vocabulary "${word}"`).toMatch(new RegExp(`\\b${word}`, 'i'))
+    }
+  })
+})
+
+describe('a2-ch3 (Health) — reference content', () => {
+  const content = getLessonContent('a2-ch3')
+
+  it('exists and frames health as a real-life scenario', () => {
+    expect(content).toBeDefined()
+    expect(content!.goal.toLowerCase()).toContain('symptom')
+    expect(content!.whyItMatters.toLowerCase()).toMatch(/hurts|pharmacy|doctor/)
+  })
+
+  it('teaches the "ich habe + Symptom" pattern with haben', () => {
+    // The rule title uses the first-person finite form ("habe") because it
+    // is the form learners will actually say. Match either.
+    const haben = content!.grammar.find((r) => /habe|haben/i.test(r.title))
+    expect(haben, 'no "habe/haben + Symptom" rule found').toBeDefined()
+    const allExamples = haben!.examples.map((e) => e.german).join(' ')
+    expect(allExamples.toLowerCase()).toMatch(/ich habe\s+\w+/)
+    expect(allExamples.toLowerCase()).toMatch(/kopfschmerzen/)
+    expect(allExamples.toLowerCase()).toMatch(/fieber/)
+  })
+
+  it('teaches the "mir tut X weh" dative construction', () => {
+    const weh = content!.grammar.find((r) => /weh|dative/i.test(r.title) || /body parts/i.test(r.title))
+    expect(weh, 'no dative / "weh" rule found').toBeDefined()
+    const allExamples = weh!.examples.map((e) => e.german).join(' ')
+    const lower = allExamples.toLowerCase()
+    expect(lower).toMatch(/mir tut/)
+    expect(lower).toMatch(/weh/)
+  })
+
+  it('uses the core chapter vocabulary the lesson actually teaches', () => {
+    const text = content!.grammar.flatMap((r) => r.examples.map((e) => e.german)).join(' ')
+      + ' ' + content!.communication.map((p) => p.german).join(' ')
+    const lower = text.toLowerCase()
+    // Core: the chapter's anchor symptoms and care locations. Peripheral
+    // body parts (Hand, Fuß, Auge) are fine to teach in a follow-up.
+    const coreVocab = ['kopf', 'ohr', 'fieber', 'kopfschmerzen', 'arzt', 'apotheke', 'krankenwagen']
+    for(const word of coreVocab) {
+      expect(lower, `a2-ch3 lesson never mentions core vocabulary "${word}"`).toMatch(new RegExp(`\\b${word}`, 'i'))
     }
   })
 })

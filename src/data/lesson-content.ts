@@ -209,6 +209,43 @@ export const lessonContent: readonly LessonContent[] = [
       'Modal verbs are the key to polite requests: "Darf ich ..." is softer than "Ich will ..." even when both are grammatically correct.',
     ],
   },
+  {
+    chapterId: 'a2-ch3',
+    goal: 'Describe common symptoms, ask for help at a pharmacy or doctor, and handle a real medical situation from "I do not feel well" to "I have an appointment".',
+    whyItMatters: 'When you live abroad, a flu at the wrong moment turns into a small crisis if you cannot explain what hurts, where to go, or how urgently you need help. These phrases turn a panic moment into a short, clear conversation.',
+    grammar: [
+      {
+        title: 'Ich habe + Schmerz / Schmerzen',
+        explanation: 'German describes most symptoms with "haben" plus the symptom noun. Some symptoms are fixed compounds ("Kopfschmerzen", plural only) and some take the plural ("Schmerzen") when the pain is general. The word order stays the same as English: "Ich habe Kopfschmerzen."',
+        examples: [
+          { german: 'Ich habe Kopfschmerzen.', english: 'I have a headache.' },
+          { german: 'Ich habe hohes Fieber.', english: 'I have a high fever.' },
+          { german: 'Haben Sie Schmerzen?', english: 'Are you in pain?' },
+        ],
+      },
+      {
+        title: 'Mir tut X weh (dative of body parts)',
+        explanation: 'When something hurts *in* a body part, German uses "tun ... weh" with the body part as the subject and the person as the dative object: "Mir tut der Kopf weh." Use the possessive ("mein") if you want to be specific about *which* one.',
+        examples: [
+          { german: 'Mir tut der Kopf weh.', english: 'My head hurts.' },
+          { german: 'Mein rechtes Ohr tut weh.', english: 'My right ear hurts.' },
+          { german: 'Wo tut es Ihnen weh?', english: 'Where does it hurt (formal)?' },
+        ],
+      },
+    ],
+    communication: [
+      { german: 'Ich fühle mich nicht gut.', english: 'I do not feel well.' },
+      { german: 'Ich habe seit gestern Fieber.', english: 'I have had a fever since yesterday.' },
+      { german: 'Ich brauche einen Termin beim Arzt.', english: 'I need an appointment with the doctor.' },
+      { german: 'Wo ist die nächste Apotheke?', english: 'Where is the nearest pharmacy?' },
+      { german: 'Rufen Sie bitte einen Krankenwagen!', english: 'Please call an ambulance.' },
+    ],
+    tips: [
+      'Pharmacies rotate an emergency "Notdienst" outside business hours. Any pharmacy door will display the address of the nearest one on duty.',
+      'For a real emergency, "Rufen Sie einen Krankenwagen" or the European emergency number 112 works in every EU country. You do not need perfect German to be understood.',
+      'If you only remember one symptom phrase, remember "Ich habe Kopfschmerzen" — it covers the most common minor ailment and gets you a pharmacy recommendation fast.',
+    ],
+  },
 ]
 
 export function getLessonContent(chapterId: string): LessonContent | undefined {
