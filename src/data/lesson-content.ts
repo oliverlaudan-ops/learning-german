@@ -246,6 +246,43 @@ export const lessonContent: readonly LessonContent[] = [
       'If you only remember one symptom phrase, remember "Ich habe Kopfschmerzen" — it covers the most common minor ailment and gets you a pharmacy recommendation fast.',
     ],
   },
+  {
+    chapterId: 'a2-ch4',
+    goal: 'Tell apart the inseparable-looking pair "vor-" and "ver-" so you can recognise and use the twenty most common verbs that start with them.',
+    whyItMatters: 'These two prefixes are spelled almost the same but mean different things: "vor-" is about what comes before, in front, or earlier; "ver-" is about going wrong, finishing, or moving things together. Mixing them up makes "I introduce myself" sound like "I lock myself up".',
+    grammar: [
+      {
+        title: 'vor-verbs: what comes before, in front, or earlier',
+        explanation: 'The prefix "vor-" means *before* in time (vorher, vorbereiten, vorlesen), *in front* in space (vorne, vorschlagen = throw forward), or *to introduce* (sich vorstellen = put yourself in front of someone). "vor-" is the stressed syllable when the verb is spoken.',
+        examples: [
+          { german: 'Darf ich mich vorstellen?', english: 'May I introduce myself?' },
+          { german: 'Ich muss das Abendessen vorbereiten.', english: 'I have to prepare dinner.' },
+          { german: 'Kannst du mir eine Geschichte vorlesen?', english: 'Can you read me a story?' },
+        ],
+      },
+      {
+        title: 'ver-verbs: going wrong, finishing, or bringing together',
+        explanation: 'The prefix "ver-" often signals something that goes away (vergessen = slip out of memory), gets finished (verkaufen = sell off), changes (sich verändern), or joins together (verbinden). "ver-" is also the stressed syllable.',
+        examples: [
+          { german: 'Ich verstehe dich nicht.', english: 'I do not understand you.' },
+          { german: 'Ich habe meinen Schlüssel verloren.', english: 'I have lost my key.' },
+          { german: 'Kannst du mich mit der Zentrale verbinden?', english: 'Can you connect me with the switchboard?' },
+        ],
+      },
+    ],
+    communication: [
+      { german: 'Darf ich mich vorstellen?', english: 'May I introduce myself?' },
+      { german: 'Ich verstehe dich nicht.', english: 'I do not understand you.' },
+      { german: 'Ich habe meinen Schlüssel verloren.', english: 'I have lost my key.' },
+      { german: 'Kannst du mir eine Geschichte vorlesen?', english: 'Can you read me a story?' },
+      { german: 'Ich versuche, mein Bestes zu geben.', english: 'I am trying to do my best.' },
+    ],
+    tips: [
+      'Both "vor-" and "ver-" are *separable* prefixes in the present tense. In a normal sentence the prefix drops to the end: "Ich stelle mich vor." In a yes/no question or "du"-imperative the prefix leads: "Stellst du dich vor?"',
+      'Stress is your friend: the prefix is always the stressed syllable ("vorSTELLen", "verSTEhen", "verGESsen"). If you cannot hear the stress, you probably misidentified the prefix.',
+      'Watch out for the false friend "verstellen" (to adjust or block) versus "vorstellen" (to introduce). They share no meaning at all even though they share most of their letters.',
+    ],
+  },
 ]
 
 export function getLessonContent(chapterId: string): LessonContent | undefined {

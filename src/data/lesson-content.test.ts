@@ -22,6 +22,7 @@ const SHIPPED_CHAPTERS = [
   'a2-ch1',
   'a2-ch2',
   'a2-ch3',
+  'a2-ch4',
 ] as const
 
 describe('lesson-content catalogue', () => {
@@ -177,6 +178,46 @@ describe('a2-ch3 (Health) — reference content', () => {
     const coreVocab = ['kopf', 'ohr', 'fieber', 'kopfschmerzen', 'arzt', 'apotheke', 'krankenwagen']
     for(const word of coreVocab) {
       expect(lower, `a2-ch3 lesson never mentions core vocabulary "${word}"`).toMatch(new RegExp(`\\b${word}`, 'i'))
+    }
+  })
+})
+
+describe('a2-ch4 (Vor vs Ver Prefixes) — reference content', () => {
+  const content = getLessonContent('a2-ch4')
+
+  it('exists and frames vor/ver as a real-life confusion', () => {
+    expect(content).toBeDefined()
+    expect(content!.goal.toLowerCase()).toContain('vor-')
+    expect(content!.whyItMatters.toLowerCase()).toContain('"vor-"')
+  })
+
+  it('teaches the vor-verbs pattern with stress and meaning', () => {
+    const vor = content!.grammar.find((r) => /vor-verbs|vor-/i.test(r.title))
+    expect(vor, 'no vor-verbs rule found').toBeDefined()
+    const allExamples = vor!.examples.map((e) => e.german).join(' ')
+    expect(allExamples.toLowerCase()).toMatch(/vorstellen/)
+    expect(allExamples.toLowerCase()).toMatch(/vorbereiten/)
+  })
+
+  it('teaches the ver-verbs pattern with stress and meaning', () => {
+    const ver = content!.grammar.find((r) => /ver-verbs|ver-/i.test(r.title))
+    expect(ver, 'no ver-verbs rule found').toBeDefined()
+    const allExamples = ver!.examples.map((e) => e.german).join(' ')
+    expect(allExamples.toLowerCase()).toMatch(/verstehe/)
+    expect(allExamples.toLowerCase()).toMatch(/verloren/)
+  })
+
+  it('uses the core chapter vocabulary the lesson actually teaches', () => {
+    const text = content!.grammar.flatMap((r) => r.examples.map((e) => e.german)).join(' ')
+      + ' ' + content!.communication.map((p) => p.german).join(' ')
+    const lower = text.toLowerCase()
+    // Core: the chapter's anchor verbs across both prefixes. Peripheral
+    // verbs (vorbereiten, verkaufen, vergessen, vorschlagen, verbinden)
+    // are still worth mentioning but the lesson must show at least these
+    // four front-of-mind verbs that anchor the prefix distinction.
+    const coreVocab = ['vorstellen', 'verstehe', 'verloren', 'vorlesen']
+    for(const word of coreVocab) {
+      expect(lower, `a2-ch4 lesson never mentions core vocabulary "${word}"`).toMatch(new RegExp(`\\b${word}`, 'i'))
     }
   })
 })
