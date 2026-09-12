@@ -190,6 +190,38 @@ This context was last verified against `main` after the squash-merge of PR #4 (`
 
 ## 6. Recommended next steps
 
+### Current development: hearing and pronunciation (September 2026)
+
+The learner uses Chrome on an older Samsung Android phone. The user's new
+priority is listening comprehension and pronunciation, ahead of placement-test
+expansion. The `codex/weekend-listening-pronunciation` branch adds an A2 unit,
+**Making weekend plans**, linked from Learn and the A2 hobbies chapter:
+
+- Listen without a visible transcript, answer four comprehension questions,
+  replay six turns with optional German/English text, and practise three sentences
+  in six short chunks with English sound and stress guidance.
+- Thirteen fixed MP3 files (~318 KB total), generated locally with Piper and
+  the Thorsten German voice; normal/slower playback, no microphone or runtime
+  speech service needed. Both dialogue roles use the same synthetic voice.
+- Audio loads on demand and stops on exercise/tab/profile navigation. No new
+  progress storage or score is added; completion is practice, not pronunciation
+  assessment. Answer choices survive step navigation within the exercise.
+- The Learn index now includes all chapters with guided content (A1 and the
+  five existing A2 chapters), fixing the previous A1-only index.
+- Persistent offline audio downloads and reopening the portal offline remain
+  future work. This unit does not add a service worker. Recording and automatic
+  speech assessment are also not part of this first unit.
+- `src/data/weekend-listening.json` owns the content; `src/ui/listening-lesson.ts`
+  and its CSS own the UI. `scripts/generate-weekend-audio.py` reproduces the
+  audio; attribution is in `public/audio/weekend-v1/README.md`.
+
+Baseline was 137 tests; this change adds eight tests (145 total). Browser
+verification uses a small viewport, not a physical Android device. Review the
+synthetic voice with the learner before expanding to more listening units.
+
+The priorities below record the earlier roadmap; hearing/pronunciation now
+take precedence according to the user's request.
+
 Prioritize in this order unless a new user request changes it:
 
 1. **Strengthen the Placement Test**

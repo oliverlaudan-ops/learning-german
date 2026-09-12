@@ -8,9 +8,11 @@ import { renderDashboard } from './dashboard'
 import { renderLearnExperience } from './lesson-ui'
 import { renderPlacementTest } from './placement-test'
 import { __getProfile, registerShowTabHook } from './ui'
+import { disposeListeningLesson } from './listening-lesson'
+import { getLessonContent } from '../data/lesson-content'
 
 const levels = getLevels()
-const a1Chapters = levels.find((level) => level.id === 'A1')?.chapters ?? []
+const guidedChapters = levels.flatMap(level => level.chapters).filter(chapter => getLessonContent(chapter.id))
 
 function showTab(tabName: string): void {
   (window as unknown as { showTab: (tabName: string) => void }).showTab(tabName)
@@ -68,7 +70,7 @@ function refreshLearn(chapterId?: string): void {
   delete target.dataset.placement
   if (chapterId) target.dataset.lessonId = chapterId
   else if (!target.dataset.lessonId) delete target.dataset.lessonId
-  renderLearnExperience(target, a1Chapters)
+  renderLearnExperience(target, guidedChapters)
 }
 
 function refreshPlacement(): void {
@@ -87,6 +89,7 @@ export function enhanceDashboard(): void {
   // future refactor, double-invoked main entry) does not stack listeners.
   if (unregisterShowTabHook) unregisterShowTabHook()
   unregisterShowTabHook = registerShowTabHook((tabName) => {
+    disposeListeningLesson()
     if (tabName === 'dashboard') refreshDashboard()
     else if (tabName === 'learn') {
       const learnTarget = document.getElementById('learn-tab')
