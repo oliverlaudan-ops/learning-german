@@ -1,0 +1,25 @@
+{
+  "id": "weekend-v1",
+  "chapterId": "a2-ch5",
+  "title": "Making weekend plans",
+  "scenario": "Two friends are making plans for the weekend. Listen for the day, the final time and the meeting place.",
+  "lines": [
+    { "id": "line-1", "speaker": "Alex", "german": "Hast du am Sonntag Zeit?", "english": "Are you free on Sunday?" },
+    { "id": "line-2", "speaker": "Sam", "german": "Ja, am Nachmittag. Wollen wir im Park spazieren gehen?", "english": "Yes, in the afternoon. Shall we go for a walk in the park?" },
+    { "id": "line-3", "speaker": "Alex", "german": "Gern. Treffen wir uns um halb drei?", "english": "Gladly. Shall we meet at half past two?" },
+    { "id": "line-4", "speaker": "Sam", "german": "Lieber um drei. Ich esse vorher noch zu Mittag.", "english": "I'd prefer three. I'm having lunch before that." },
+    { "id": "line-5", "speaker": "Alex", "german": "Gut, dann um drei am Eingang zum Park.", "english": "Good, then at three at the entrance to the park." },
+    { "id": "line-6", "speaker": "Sam", "german": "Abgemacht! Bis Sonntag.", "english": "It's a plan! See you on Sunday." }
+  ],
+  "questions": [
+    { "prompt": "Which day will they meet?", "options": ["Saturday", "Sunday", "Monday"], "answer": 1, "explanation": "They say ‘am Sonntag’ — on Sunday — and confirm it with ‘Bis Sonntag’." },
+    { "prompt": "What time do they finally agree on?", "options": ["2:30 pm", "12:00 noon", "3:00 pm"], "answer": 2, "explanation": "‘Halb drei’ means 2:30, but Sam suggests ‘lieber um drei’. Alex agrees: ‘dann um drei’ — so the final time is 3:00 pm." },
+    { "prompt": "Where exactly will they meet?", "options": ["At the park entrance", "Inside a café", "At the station"], "answer": 0, "explanation": "‘Am Eingang zum Park’ means at the entrance to the park." },
+    { "prompt": "What are they planning to do?", "options": ["Have lunch together", "Go for a walk", "Go on a hike"], "answer": 1, "explanation": "‘Im Park spazieren gehen’ means to go for a walk in the park. Sam will eat lunch beforehand." }
+  ],
+  "practice": [
+    { "lineId": "line-1", "focus": "A clear question", "tip": "In ‘Zeit’, z starts with /ts/, like the end of English ‘cats’. Let your voice rise gently at the end of this yes/no question.", "rhythm": "Hast du am SONNtag ZEIT?", "chunks": [ { "id": "chunk-1", "german": "Hast du am Sonntag" }, { "id": "chunk-2", "german": "Zeit?" } ] },
+    { "lineId": "line-3", "focus": "Meet and make a suggestion", "tip": "German w in ‘wir’ sounds like English v. In ‘treffen’, keep the e short, as in English ‘bed’. ‘Halb drei’ means half an hour before three: 2:30.", "rhythm": "GERN. TREFFen wir uns um halb DREI?", "chunks": [ { "id": "chunk-3", "german": "Gern. Treffen wir uns" }, { "id": "chunk-4", "german": "um halb drei?" } ] },
+    { "lineId": "line-5", "focus": "Confirm the details", "tip": "In ‘Eingang’, ei sounds like English ‘eye’. The ng is one sound, as at the end of ‘sing’; do not add a separate hard g. Give the time and place a little extra emphasis.", "rhythm": "Gut, dann um DREI / am EINgang zum PARK.", "chunks": [ { "id": "chunk-5", "german": "Gut, dann um drei" }, { "id": "chunk-6", "german": "am Eingang zum Park." } ] }
+  ]
+}

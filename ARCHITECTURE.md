@@ -203,7 +203,10 @@ The renderer in `src/ui/ui.ts` builds the tile UI in
 - `tests/state.test.ts` — 7 tests: round-trip, v2/v3 migration, fresh
 - `tests/vocabulary-schema.test.ts` — 9 tests: validation, bundled JSON
 
-Total: **53 tests** in 5 files. All green via `npm test`.
+The original refactor had 53 tests in five files. Current coverage also includes
+dashboard/bootstrap, lesson content, placement, and `tests/listening-lesson.test.ts`
+(hidden transcripts, feedback/corrections, playback lifecycle/failure, navigation,
+and bundled audio completeness). Current total: **145 tests in 10 files**.
 
 Vitest is configured with `happy-dom` (lighter than jsdom) — we only
 need `localStorage` and a few browser globals for the tests, and

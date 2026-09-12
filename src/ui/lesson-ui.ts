@@ -4,6 +4,7 @@ import { vocabulary } from '../data/vocabulary'
 import { getLessonContent } from '../data/lesson-content'
 import { renderGuidedSession } from './lesson-session'
 import { __getProfile } from './ui'
+import { disposeListeningLesson, listeningEntry, renderListeningLesson } from './listening-lesson'
 
 type AppWindow = {
   showTab?: (tabName: string) => void
@@ -88,6 +89,8 @@ function renderLesson(chapter: Chapter): string {
         </div>
         <button class="btn primary" type="button" data-action="guided">Start guided lesson →</button>
       </section>
+
+      ${chapter.id === 'a2-ch5' ? listeningEntry() : ''}
 
       <section class="lesson-section">
         <div class="lesson-section-heading">
@@ -189,6 +192,7 @@ function currentLearnerName(): string {
 }
 
 export function renderLearnExperience(target: HTMLElement, chapters: readonly Chapter[]): void {
+  disposeListeningLesson()
   const learnerName = currentLearnerName()
   const current = target.dataset.lessonId
   if (!current) {
@@ -199,10 +203,11 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
           <h2>Learn German step by step</h2>
           <p>Each lesson now combines vocabulary, simple English explanations, grammar, useful phrases and a guided learning session.</p>
         </div>
+        ${listeningEntry()}
         <div class="lesson-index-list">
           ${chapters.map((chapter) => `
             <button class="lesson-index-card" type="button" data-open-lesson="${escapeHtml(chapter.id)}">
-              <span class="lesson-index-number">${chapter.order}</span>
+              <span class="lesson-index-number">${escapeHtml(chapter.level)}</span>
               <span><strong>${escapeHtml(chapter.title)}</strong><small>${escapeHtml(chapter.description)}</small></span>
               <span>→</span>
             </button>
@@ -210,6 +215,7 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
         </div>
       </section>
     `
+    wireListeningEntry(target, chapters)
     target.querySelectorAll<HTMLElement>('[data-open-lesson]').forEach((button) => {
       button.addEventListener('click', () => {
         target.dataset.lessonId = button.dataset.openLesson || ''
@@ -233,4 +239,11 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
 
   target.innerHTML = renderLesson(chapter)
   wireLesson(target, chapter, learnerName)
+  wireListeningEntry(target, chapters)
+}
+
+function wireListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): void {
+  target.querySelector('[data-listening-start]')?.addEventListener('click', () => {
+    renderListeningLesson(target, () => renderLearnExperience(target, chapters))
+  })
 }
