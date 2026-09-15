@@ -53,13 +53,15 @@ describe('doctor appointment listening lesson', () => {
   it('lets the learner reorder and verify all events', () => {
     advance(); advance(); advance()
     expect(target.querySelectorAll('.listening-sequence li')).toHaveLength(lesson.sequence.length)
-    for (let pass = 0; pass < lesson.sequence.length; pass++) {
-      for (const expected of lesson.sequence) {
-        const items = [...target.querySelectorAll<HTMLLIElement>('.listening-sequence li')]
-        const index = items.findIndex(item => item.textContent?.includes(expected.text))
-        if (index > 0) items[index].querySelector<HTMLButtonElement>('[data-move-up]')!.click()
+    lesson.sequence.forEach((expected, targetIndex) => {
+      let items = [...target.querySelectorAll<HTMLLIElement>('.listening-sequence li')]
+      let currentIndex = items.findIndex(item => item.textContent?.includes(expected.text))
+      while (currentIndex > targetIndex) {
+        items[currentIndex].querySelector<HTMLButtonElement>('[data-move-up]')!.click()
+        items = [...target.querySelectorAll<HTMLLIElement>('.listening-sequence li')]
+        currentIndex = items.findIndex(item => item.textContent?.includes(expected.text))
       }
-    }
+    })
     click('[data-check-sequence]')
     expect(target.querySelector('[data-sequence-result]')!.textContent).toContain('Correct')
   })
