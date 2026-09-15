@@ -1,0 +1,54 @@
+{
+  "id": "doctor-consultation-v1",
+  "chapterId": "a2-ch3",
+  "level": "B1",
+  "title": "At the doctor's consultation",
+  "scenario": "Judith explains several symptoms to Dr Weber. Listen for how long they have lasted, what may have caused them and exactly how she should take the medicine.",
+  "lines": [
+    { "id": "line-1", "speaker": "Doctor", "german": "Guten Morgen, Frau Nakayima. Was führt Sie zu mir?", "english": "Good morning, Ms Nakayima. What brings you here?" },
+    { "id": "line-2", "speaker": "Patient", "german": "Seit drei Tagen habe ich Halsschmerzen. Seit gestern habe ich außerdem Fieber und Kopfschmerzen.", "english": "I have had a sore throat for three days. Since yesterday I have also had a fever and a headache." },
+    { "id": "line-3", "speaker": "Doctor", "german": "Haben Sie auch Husten oder Schwierigkeiten beim Atmen?", "english": "Do you also have a cough or difficulty breathing?" },
+    { "id": "line-4", "speaker": "Patient", "german": "Ich huste nur ein wenig. Beim Atmen habe ich keine Probleme, aber ich bin sehr müde.", "english": "I only cough a little. I have no trouble breathing, but I am very tired." },
+    { "id": "line-5", "speaker": "Doctor", "german": "Ich untersuche jetzt Ihren Hals und höre Ihre Lunge ab. Bitte atmen Sie tief ein und wieder aus.", "english": "I will now examine your throat and listen to your lungs. Please breathe in deeply and out again." },
+    { "id": "line-6", "speaker": "Doctor", "german": "Ihre Lunge klingt unauffällig, aber der Hals ist stark gerötet. Wahrscheinlich handelt es sich um einen Virusinfekt.", "english": "Your lungs sound normal, but your throat is very red. It is probably a viral infection." },
+    { "id": "line-7", "speaker": "Patient", "german": "Brauche ich ein Antibiotikum?", "english": "Do I need an antibiotic?" },
+    { "id": "line-8", "speaker": "Doctor", "german": "Im Moment nicht. Antibiotika helfen nicht gegen Viren. Ich verschreibe Ihnen etwas gegen die Schmerzen und das Fieber.", "english": "Not at the moment. Antibiotics do not work against viruses. I will prescribe something for the pain and fever." },
+    { "id": "line-9", "speaker": "Patient", "german": "Wie soll ich das Medikament einnehmen?", "english": "How should I take the medicine?" },
+    { "id": "line-10", "speaker": "Doctor", "german": "Nehmen Sie höchstens dreimal täglich eine Tablette nach dem Essen. Zwischen zwei Tabletten müssen mindestens sechs Stunden liegen.", "english": "Take one tablet no more than three times a day after food. There must be at least six hours between two tablets." },
+    { "id": "line-11", "speaker": "Patient", "german": "Kann ich morgen wieder arbeiten gehen?", "english": "Can I go back to work tomorrow?" },
+    { "id": "line-12", "speaker": "Doctor", "german": "Nein, bleiben Sie bitte zwei Tage zu Hause, ruhen Sie sich aus und trinken Sie viel. Ich schreibe Sie bis einschließlich Donnerstag krank.", "english": "No, please stay home for two days, rest and drink plenty. I will give you a sick note through Thursday inclusive." },
+    { "id": "line-13", "speaker": "Doctor", "german": "Wenn das Fieber steigt oder Sie schlecht Luft bekommen, rufen Sie sofort an. Falls es bis Freitag nicht besser ist, kommen Sie bitte noch einmal.", "english": "If the fever rises or you have difficulty breathing, call immediately. If you are not better by Friday, please come back." },
+    { "id": "line-14", "speaker": "Patient", "german": "Gut, vielen Dank für die Erklärung. Auf Wiedersehen.", "english": "All right, thank you very much for the explanation. Goodbye." }
+  ],
+  "trueFalse": [
+    { "statement": "Judith has had all her symptoms for three days.", "answer": false, "explanation": "The sore throat began three days ago, but the fever and headache began yesterday." },
+    { "statement": "She has no difficulty breathing.", "answer": true, "explanation": "She says: ‘Beim Atmen habe ich keine Probleme.’" },
+    { "statement": "The doctor thinks that Judith probably has a viral infection.", "answer": true, "explanation": "The red throat and normal lungs suggest a virus infection." },
+    { "statement": "The doctor immediately prescribes an antibiotic.", "answer": false, "explanation": "She explains that antibiotics do not help against viruses." },
+    { "statement": "Judith may take one tablet three times a day at most.", "answer": true, "explanation": "The instruction is ‘höchstens dreimal täglich eine Tablette’." },
+    { "statement": "Judith should return if she is not better by Friday.", "answer": true, "explanation": "The doctor asks her to come back if the symptoms have not improved by Friday." }
+  ],
+  "gaps": [
+    { "before": "Seit drei Tagen habe ich", "answer": "Halsschmerzen", "after": ".", "options": ["Halsschmerzen", "Bauchschmerzen", "Ohrenschmerzen"] },
+    { "before": "Bitte atmen Sie tief", "answer": "ein", "after": "und wieder aus.", "options": ["ein", "auf", "mit"] },
+    { "before": "Antibiotika helfen nicht gegen", "answer": "Viren", "after": ".", "options": ["Viren", "Schmerzen", "Tabletten"] },
+    { "before": "Nehmen Sie höchstens dreimal täglich eine Tablette", "answer": "nach dem Essen", "after": ".", "options": ["nach dem Essen", "vor dem Schlafen", "auf nüchternen Magen"] },
+    { "before": "Zwischen zwei Tabletten müssen mindestens", "answer": "sechs Stunden", "after": "liegen.", "options": ["sechs Stunden", "zwei Stunden", "zwölf Stunden"] }
+  ],
+  "sequence": [
+    { "id": "symptoms", "text": "Judith explains when her different symptoms began." },
+    { "id": "questions", "text": "The doctor asks about coughing and breathing." },
+    { "id": "examination", "text": "The doctor examines Judith's throat and lungs." },
+    { "id": "assessment", "text": "The doctor explains that it is probably a viral infection." },
+    { "id": "medicine", "text": "Judith receives detailed instructions for the medicine." },
+    { "id": "sick-note", "text": "The doctor tells Judith to stay home through Thursday." },
+    { "id": "warning", "text": "The doctor explains when to call or return." }
+  ],
+  "practice": [
+    { "lineId": "line-2", "focus": "Describe different time periods", "tip": "Use ‘seit’ with the present tense. Keep the two starting points separate: three days and yesterday.", "rhythm": "Seit DREI Tagen / habe ich HALSschmerzen. / Seit GEStern / außerdem FIEber und KOPFschmerzen." },
+    { "lineId": "line-4", "focus": "Clarify what you do and do not have", "tip": "‘nur ein wenig’ reduces the first symptom; ‘keine Probleme, aber …’ contrasts it with the important problem.", "rhythm": "Ich HUste / nur ein WEnig. / Beim ATmen keine ProBLEme, / aber SEHR MÜde." },
+    { "lineId": "line-9", "focus": "Ask about medication", "tip": "‘Wie soll ich …?’ is the key question when you need precise instructions.", "rhythm": "WIE soll ich / das MedikaMENT / EINnehmen?" },
+    { "lineId": "line-10", "focus": "Understand dosage instructions", "tip": "Listen for the maximum frequency, amount, relation to food and minimum interval.", "rhythm": "HÖCHStens DREImal TÄGlich / EIne TabLETte / NACH dem Essen." },
+    { "lineId": "line-13", "focus": "Understand warning signs", "tip": "‘Wenn’ gives the immediate warning; ‘falls’ introduces the follow-up condition.", "rhythm": "WENN das FIEber STEIGT / oder Sie SCHLECHT LUFT bekommen / rufen Sie soFORT an." }
+  ]
+}
