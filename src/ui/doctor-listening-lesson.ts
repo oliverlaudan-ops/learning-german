@@ -169,7 +169,7 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
 
     target.innerHTML = `<section class="listening-lesson" aria-labelledby="doctor-listening-title">
       <button class="lesson-back" type="button" data-doctor-exit>← Back to lessons</button>
-      <header><span class="lesson-kicker">${escape(lesson.level)} · HEALTH & APPOINTMENTS</span><h1 id="doctor-listening-title">${escape(lesson.title)}</h1><p>A realistic conversation with details that matter.</p></header>
+      <header><span class="lesson-kicker">${escape(lesson.level)} · ${lesson.id === 'travel-disruption-v1' ? 'TRAVEL & DISRUPTIONS' : 'HEALTH & APPOINTMENTS'}</span><h1 id="doctor-listening-title">${escape(lesson.title)}</h1><p>A realistic conversation with details that matter.</p></header>
       <ol class="listening-progress medical-progress" aria-label="Exercise progress">${stages.map((name, index) => `<li ${index === stage ? 'aria-current="step"' : ''}>${index + 1}. ${name}</li>`).join('')}</ol>
       <section class="lesson-card"><h2 tabindex="-1" data-stage-heading>${stage + 1}. ${stages[stage]}</h2>
         <div class="listening-player"><button class="btn primary" type="button" data-play-dialogue>▶ Play full conversation</button>
@@ -225,7 +225,7 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
     target.querySelector('[data-doctor-next]')?.addEventListener('click', () => {
       if (stage < stages.length - 1) { stage++; render(true); return }
       disposeDoctorListeningLesson()
-      target.innerHTML = `<section class="listening-lesson lesson-card"><span class="lesson-kicker">PRACTICE COMPLETE</span><h1 tabindex="-1">${lesson.id === 'doctor-appointment-v1' ? "You made a doctor's appointment." : 'You understood a medical consultation.'}</h1><p>${lesson.id === 'doctor-appointment-v1' ? 'You understood symptoms, a rejected time and the final appointment details.' : 'You followed symptoms, an examination, medication instructions and warning signs.'}</p><button class="btn primary" type="button" data-doctor-done>Back to lessons</button></section>`
+      target.innerHTML = `<section class="listening-lesson lesson-card"><span class="lesson-kicker">PRACTICE COMPLETE</span><h1 tabindex="-1">${lesson.id === 'doctor-appointment-v1' ? "You made a doctor's appointment." : lesson.id === 'travel-disruption-v1' ? 'You solved a disrupted journey.' : 'You understood a medical consultation.'}</h1><p>${lesson.id === 'doctor-appointment-v1' ? 'You understood symptoms, a rejected time and the final appointment details.' : lesson.id === 'travel-disruption-v1' ? 'You tracked delays, rejected alternatives, a platform change and the final valid connection.' : 'You followed symptoms, an examination, medication instructions and warning signs.'}</p><button class="btn primary" type="button" data-doctor-done>Back to lessons</button></section>`
       target.querySelector('h1')?.focus()
       target.querySelector('[data-doctor-done]')?.addEventListener('click', onExit)
     })
