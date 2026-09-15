@@ -75,20 +75,43 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
   const stop = () => (window as AppWindow).speechSynthesis?.cancel()
   cleanup = () => { disposed = true; stop() }
 
-  function speak(text: string, status: HTMLElement): void {
-    stop()
+  const speakers = [...new Set(lesson.lines.map(line => line.speaker))]
+  const voiceForSpeaker = (speaker: string) => lesson.useTwoVoices ? Math.max(0, speakers.indexOf(speaker)) : 0
+
+  function speak(text: string, status: HTMLElement, voiceIndex = 0, onFinished?: () => void, cancelFirst = true): void {
+    if (cancelFirst) stop()
     const appWindow = window as AppWindow
     if (!appWindow.speechSynthesis || !appWindow.SpeechSynthesisUtterance) {
       status.textContent = 'Audio is not available in this browser. Continue with the transcript in the final step.'
       return
     }
     const utterance = new appWindow.SpeechSynthesisUtterance(text)
+    const voices = selectGermanVoices(appWindow.speechSynthesis.getVoices())
     utterance.lang = 'de-DE'
     utterance.rate = rate
+    if (voices.length) utterance.voice = voices[voiceIndex % voices.length]
     utterance.onstart = () => { if (!disposed) status.textContent = 'Playing German audio…' }
-    utterance.onend = () => { if (!disposed) status.textContent = 'Finished. Replay or continue when you are ready.' }
+    utterance.onend = () => {
+      if (disposed) return
+      if (onFinished) onFinished()
+      else status.textContent = 'Finished. Replay or continue when you are ready.'
+    }
     utterance.onerror = () => { if (!disposed) status.textContent = 'Audio could not play. Please try again.' }
     appWindow.speechSynthesis.speak(utterance)
+  }
+
+  function speakDialogue(status: HTMLElement): void {
+    stop()
+    let index = 0
+    const next = () => {
+      if (disposed || index >= lesson.lines.length) {
+        if (!disposed) status.textContent = 'Finished. Replay or continue when you are ready.'
+        return
+      }
+      const line = lesson.lines[index++]
+      speak(line.german, status, voiceForSpeaker(line.speaker), next, false)
+    }
+    next()
   }
 
   function trueFalseMarkup(): string {
