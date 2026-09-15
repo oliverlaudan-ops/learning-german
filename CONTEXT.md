@@ -4,7 +4,7 @@
 >
 > **Repository:** `oliverlaudan-ops/learning-german`  
 > **Working branch:** `main`  
-> **Last shipped:** [#6 — Add advanced doctor appointment listening lesson](https://github.com/oliverlaudan-ops/learning-german/pull/6) (merged 2026-09-15).  
+> **Last shipped:** [#7 — Add B1 doctor consultation listening exercise](https://github.com/oliverlaudan-ops/learning-german/pull/7) (merged 2026-09-15).  
 > **Branch rule:** Branch off `main` for any new feature. Keep changes scoped; **do not deploy from `main` directly** — the Pages workflow handles that on merge.
 
 ## 1. Product mission
@@ -236,9 +236,9 @@ PR #6 added a second, more demanding unit,
 - Seven new tests cover hidden content, all task types, completion, and entry
   points. The current branch baseline is 152 tests across 11 files.
 
-### Current feature branch: doctor consultation listening
+### Shipped: doctor consultation listening
 
-The `codex/doctor-consultation-listening` branch adds a third listening unit,
+PR #7 added a third listening unit,
 **At the doctor's consultation**, as a direct continuation of making the appointment.
 
 - Level target: B1; fourteen turns covering symptom duration, examination,
@@ -250,6 +250,22 @@ The `codex/doctor-consultation-listening` branch adds a third listening unit,
 - The medical renderer is now data-driven so both medical units share the same
   interaction and accessibility behaviour.
 - Seven new tests bring the branch baseline to 159 tests across 12 files.
+
+### Current feature branch: travel disruption listening
+
+The `codex/travel-disruption-listening` branch adds **A missed connection at
+the station**, linked from Learn and `a2-ch1` Travel and Transport.
+
+- Level target: B1; fourteen turns between a traveller and railway staff.
+- The dialogue deliberately mentions several plausible but rejected times,
+  platforms and routes before confirming the valid direct connection.
+- Normal playback is faster (1.08) while a slower learning option remains.
+- The two roles use different installed German browser voices when available;
+  one voice remains a functional fallback on devices that expose only one.
+- Six true/false statements, five gaps, eight ordered events and five speaking
+  prompts focus on delay, train restrictions, cancellation, platform changes,
+  ticket validity and seat reservations.
+- Seven new tests bring the branch baseline to 166 tests across 13 files.
 
 The priorities below record the earlier roadmap; hearing/pronunciation now
 take precedence according to the user's request.

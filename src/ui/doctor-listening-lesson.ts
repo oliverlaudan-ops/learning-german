@@ -1,5 +1,6 @@
 import appointmentLesson from '../data/doctor-appointment-listening.json'
 import consultationLesson from '../data/doctor-consultation-listening.json'
+import travelLesson from '../data/travel-disruption-listening.json'
 import './listening-lesson.css'
 
 const stages = ['Listen', 'True or false', 'Fill the gaps', 'Put in order', 'Review & speak']
@@ -13,6 +14,11 @@ type AppWindow = Window & typeof globalThis & {
 export function disposeDoctorListeningLesson(): void {
   cleanup?.()
   cleanup = undefined
+}
+
+export function selectGermanVoices(voices: readonly SpeechSynthesisVoice[]): SpeechSynthesisVoice[] {
+  const german = voices.filter(voice => voice.lang.toLowerCase().startsWith('de'))
+  return german.length ? german : [...voices]
 }
 
 function escape(value: string): string {
@@ -35,6 +41,14 @@ export function consultationListeningEntry(): string {
   </section>`
 }
 
+export function travelListeningEntry(): string {
+  return `<section class="listening-entry lesson-card">
+    <div><span class="lesson-kicker">B1 · TWO VOICES · 20–25 MIN</span>
+    <h2>${escape(travelLesson.title)}</h2><p>Track delays, cancelled trains, platform changes and the one journey that finally works.</p></div>
+    <button type="button" class="btn primary" data-travel-listening-start>Start lesson →</button>
+  </section>`
+}
+
 export function renderDoctorListeningLesson(target: HTMLElement, onExit: () => void): void {
   renderMedicalListeningLesson(target, onExit, appointmentLesson)
 }
@@ -43,10 +57,14 @@ export function renderConsultationListeningLesson(target: HTMLElement, onExit: (
   renderMedicalListeningLesson(target, onExit, consultationLesson)
 }
 
-function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, lesson: typeof appointmentLesson): void {
+export function renderTravelListeningLesson(target: HTMLElement, onExit: () => void): void {
+  renderMedicalListeningLesson(target, onExit, travelLesson)
+}
+
+function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, lesson: typeof appointmentLesson & { speechRate?: number; useTwoVoices?: boolean }): void {
   disposeDoctorListeningLesson()
   let stage = 0
-  let rate = 0.95
+  let rate = lesson.speechRate ?? 0.95
   let disposed = false
   const trueFalseAnswers: Array<boolean | undefined> = []
   const gapAnswers: Array<string | undefined> = []
@@ -57,20 +75,43 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
   const stop = () => (window as AppWindow).speechSynthesis?.cancel()
   cleanup = () => { disposed = true; stop() }
 
-  function speak(text: string, status: HTMLElement): void {
-    stop()
+  const speakers = [...new Set(lesson.lines.map(line => line.speaker))]
+  const voiceForSpeaker = (speaker: string) => lesson.useTwoVoices ? Math.max(0, speakers.indexOf(speaker)) : 0
+
+  function speak(text: string, status: HTMLElement, voiceIndex = 0, onFinished?: () => void, cancelFirst = true): void {
+    if (cancelFirst) stop()
     const appWindow = window as AppWindow
     if (!appWindow.speechSynthesis || !appWindow.SpeechSynthesisUtterance) {
       status.textContent = 'Audio is not available in this browser. Continue with the transcript in the final step.'
       return
     }
     const utterance = new appWindow.SpeechSynthesisUtterance(text)
+    const voices = selectGermanVoices(appWindow.speechSynthesis.getVoices())
     utterance.lang = 'de-DE'
     utterance.rate = rate
+    if (voices.length) utterance.voice = voices[voiceIndex % voices.length]
     utterance.onstart = () => { if (!disposed) status.textContent = 'Playing German audio…' }
-    utterance.onend = () => { if (!disposed) status.textContent = 'Finished. Replay or continue when you are ready.' }
+    utterance.onend = () => {
+      if (disposed) return
+      if (onFinished) onFinished()
+      else status.textContent = 'Finished. Replay or continue when you are ready.'
+    }
     utterance.onerror = () => { if (!disposed) status.textContent = 'Audio could not play. Please try again.' }
     appWindow.speechSynthesis.speak(utterance)
+  }
+
+  function speakDialogue(status: HTMLElement): void {
+    stop()
+    let index = 0
+    const next = () => {
+      if (disposed || index >= lesson.lines.length) {
+        if (!disposed) status.textContent = 'Finished. Replay or continue when you are ready.'
+        return
+      }
+      const line = lesson.lines[index++]
+      speak(line.german, status, voiceForSpeaker(line.speaker), next, false)
+    }
+    next()
   }
 
   function trueFalseMarkup(): string {
@@ -103,7 +144,7 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
   }
 
   function reviewMarkup(): string {
-    return `<p>Replay individual turns, then repeat the four useful sentences aloud.</p>
+    return `<p>Replay individual turns, then repeat the useful sentences aloud.</p>
       <div class="listening-turns">${lesson.lines.map((line, index) => `<article><h3>${index + 1} · ${escape(line.speaker)}</h3>
         <button class="btn secondary" type="button" data-speak-line="${index}">▶ Play turn ${index + 1}</button>
         <details><summary>Show German & translation</summary><p lang="de">${escape(line.german)}</p><p>${escape(line.english)}</p></details>
@@ -119,7 +160,7 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
   function render(focus = false): void {
     stop()
     const body = stage === 0
-      ? `<p>${escape(lesson.scenario)}</p><div class="listening-hint">The transcript is hidden. Dates and times may change during the call, so listen for the final agreement.</div>`
+      ? `<p>${escape(lesson.scenario)}</p><div class="listening-hint">The transcript is hidden. Several details sound plausible, so listen for what is finally confirmed.</div>`
       : stage === 1
         ? `<p>Decide whether each statement matches the conversation.</p><form data-true-false>${trueFalseMarkup()}<button class="btn primary" type="submit">Check answers</button><p data-tf-result role="status"></p></form>`
         : stage === 2
@@ -128,12 +169,12 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
 
     target.innerHTML = `<section class="listening-lesson" aria-labelledby="doctor-listening-title">
       <button class="lesson-back" type="button" data-doctor-exit>← Back to lessons</button>
-      <header><span class="lesson-kicker">${escape(lesson.level)} · HEALTH & APPOINTMENTS</span><h1 id="doctor-listening-title">${escape(lesson.title)}</h1><p>A realistic medical conversation with details that matter.</p></header>
+      <header><span class="lesson-kicker">${escape(lesson.level)} · ${lesson.id === 'travel-disruption-v1' ? 'TRAVEL & DISRUPTIONS' : 'HEALTH & APPOINTMENTS'}</span><h1 id="doctor-listening-title">${escape(lesson.title)}</h1><p>A realistic conversation with details that matter.</p></header>
       <ol class="listening-progress medical-progress" aria-label="Exercise progress">${stages.map((name, index) => `<li ${index === stage ? 'aria-current="step"' : ''}>${index + 1}. ${name}</li>`).join('')}</ol>
       <section class="lesson-card"><h2 tabindex="-1" data-stage-heading>${stage + 1}. ${stages[stage]}</h2>
         <div class="listening-player"><button class="btn primary" type="button" data-play-dialogue>▶ Play full conversation</button>
-          <label>Playback speed <select data-doctor-speed><option value="0.95">Normal</option><option value="0.78">Slower</option></select></label>
-          <p data-doctor-audio-status role="status">Press play when you are ready.</p><small>Computer-generated German audio. Audio is created by your device.</small></div>
+          <label>Playback speed <select data-doctor-speed><option value="${lesson.speechRate ?? 0.95}">Normal</option><option value="${Math.max(0.72, (lesson.speechRate ?? 0.95) - 0.18)}">Slower</option></select></label>
+          <p data-doctor-audio-status role="status">Press play when you are ready.</p><small>Computer-generated German audio. Audio is created by your device.${lesson.useTwoVoices ? ' Two different German voices are used when available.' : ''}</small></div>
         ${body}
         <nav class="listening-navigation" aria-label="Exercise navigation">${stage > 0 ? '<button class="btn secondary" type="button" data-doctor-previous>← Back</button>' : '<span></span>'}
           <button class="btn primary" type="button" data-doctor-next>${stage === stages.length - 1 ? 'Finish practice ✓' : `${stages[stage + 1]} →`}</button></nav>
@@ -143,7 +184,7 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
     const speed = target.querySelector<HTMLSelectElement>('[data-doctor-speed]')!
     speed.value = String(rate)
     speed.addEventListener('change', () => { rate = Number(speed.value) })
-    target.querySelector('[data-play-dialogue]')?.addEventListener('click', () => speak(lesson.lines.map(line => line.german).join('   '), status))
+    target.querySelector('[data-play-dialogue]')?.addEventListener('click', () => speakDialogue(status))
     target.querySelectorAll<HTMLInputElement>('[name^="tf-"]').forEach(input => input.addEventListener('change', () => {
       trueFalseAnswers[Number(input.name.slice(3))] = input.value === 'true'; trueFalseChecked = false
     }))
@@ -171,19 +212,20 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
     }))
     target.querySelector('[data-check-sequence]')?.addEventListener('click', () => {
       const correct = sequence.every((item, index) => item.id === lesson.sequence[index].id)
-      target.querySelector<HTMLElement>('[data-sequence-result]')!.textContent = correct ? '✓ Correct. That is the order of the call.' : 'Not quite. Listen again and check where the appointment changes.'
+      target.querySelector<HTMLElement>('[data-sequence-result]')!.textContent = correct ? '✓ Correct. That is the order of the call.' : 'Not quite. Listen again and check where the important details change.'
     })
-    target.querySelectorAll<HTMLButtonElement>('[data-speak-line]').forEach(button => button.addEventListener('click', () => speak(lesson.lines[Number(button.dataset.speakLine)].german, status)))
+    target.querySelectorAll<HTMLButtonElement>('[data-speak-line]').forEach(button => button.addEventListener('click', () => { const line = lesson.lines[Number(button.dataset.speakLine)]; speak(line.german, status, voiceForSpeaker(line.speaker)) }))
     target.querySelectorAll<HTMLButtonElement>('[data-speak-practice]').forEach(button => button.addEventListener('click', () => {
       const item = lesson.practice[Number(button.dataset.speakPractice)]
-      speak(lesson.lines.find(line => line.id === item.lineId)!.german, status)
+      const line = lesson.lines.find(line => line.id === item.lineId)!
+      speak(line.german, status, voiceForSpeaker(line.speaker))
     }))
     target.querySelector('[data-doctor-exit]')?.addEventListener('click', () => { disposeDoctorListeningLesson(); onExit() })
     target.querySelector('[data-doctor-previous]')?.addEventListener('click', () => { stage--; render(true) })
     target.querySelector('[data-doctor-next]')?.addEventListener('click', () => {
       if (stage < stages.length - 1) { stage++; render(true); return }
       disposeDoctorListeningLesson()
-      target.innerHTML = `<section class="listening-lesson lesson-card"><span class="lesson-kicker">PRACTICE COMPLETE</span><h1 tabindex="-1">${lesson.id === 'doctor-appointment-v1' ? "You made a doctor's appointment." : 'You understood a medical consultation.'}</h1><p>${lesson.id === 'doctor-appointment-v1' ? 'You understood symptoms, a rejected time and the final appointment details.' : 'You followed symptoms, an examination, medication instructions and warning signs.'}</p><button class="btn primary" type="button" data-doctor-done>Back to lessons</button></section>`
+      target.innerHTML = `<section class="listening-lesson lesson-card"><span class="lesson-kicker">PRACTICE COMPLETE</span><h1 tabindex="-1">${lesson.id === 'doctor-appointment-v1' ? "You made a doctor's appointment." : lesson.id === 'travel-disruption-v1' ? 'You solved a disrupted journey.' : 'You understood a medical consultation.'}</h1><p>${lesson.id === 'doctor-appointment-v1' ? 'You understood symptoms, a rejected time and the final appointment details.' : lesson.id === 'travel-disruption-v1' ? 'You tracked delays, rejected alternatives, a platform change and the final valid connection.' : 'You followed symptoms, an examination, medication instructions and warning signs.'}</p><button class="btn primary" type="button" data-doctor-done>Back to lessons</button></section>`
       target.querySelector('h1')?.focus()
       target.querySelector('[data-doctor-done]')?.addEventListener('click', onExit)
     })
