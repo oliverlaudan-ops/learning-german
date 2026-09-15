@@ -219,6 +219,23 @@ Baseline was 137 tests; this change adds eight tests (145 total). Browser
 verification uses a small viewport, not a physical Android device. Review the
 synthetic voice with the learner before expanding to more listening units.
 
+
+### Current feature branch: doctor appointment listening
+
+The `codex/medical-listening` branch adds a second, more demanding unit,
+**Making a doctor's appointment**, linked from Learn and `a2-ch3` Health.
+
+- Level target: A2+/early B1; twelve turns in a realistic phone call.
+- The learner must track symptoms, a rejected Tuesday appointment, the final
+  Wednesday 10:15 appointment, a date of birth, and an insurance-card reminder.
+- Five stages: hidden-transcript listening, true/false, gap fill, event ordering,
+  and transcript review with four speaking prompts.
+- Unlike the bundled Piper MP3 weekend unit, this lesson uses browser speech
+  synthesis so it can be delivered through the GitHub-only workflow. It provides
+  a visible fallback if speech synthesis is unavailable.
+- Seven new tests cover hidden content, all task types, completion, and entry
+  points. The current branch baseline is 152 tests across 11 files.
+
 The priorities below record the earlier roadmap; hearing/pronunciation now
 take precedence according to the user's request.
 

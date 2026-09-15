@@ -1,0 +1,48 @@
+{
+  "id": "doctor-appointment-v1",
+  "chapterId": "a2-ch3",
+  "level": "A2+",
+  "title": "Making a doctor's appointment",
+  "scenario": "Judith calls a medical practice because she has had a sore throat and a fever since yesterday. Listen for the symptoms, the rejected appointment and the final arrangement.",
+  "lines": [
+    { "id": "line-1", "speaker": "Receptionist", "german": "Praxis Dr. Weber, guten Morgen. Was kann ich für Sie tun?", "english": "Dr Weber's practice, good morning. What can I do for you?" },
+    { "id": "line-2", "speaker": "Patient", "german": "Guten Morgen. Mein Name ist Judith Nakayima. Ich würde gern einen Termin vereinbaren.", "english": "Good morning. My name is Judith Nakayima. I would like to make an appointment." },
+    { "id": "line-3", "speaker": "Receptionist", "german": "Ist es dringend? Welche Beschwerden haben Sie?", "english": "Is it urgent? What symptoms do you have?" },
+    { "id": "line-4", "speaker": "Patient", "german": "Ich habe seit gestern starke Halsschmerzen und etwas Fieber. Außerdem fühle ich mich sehr müde.", "english": "I have had a bad sore throat and a slight fever since yesterday. I also feel very tired." },
+    { "id": "line-5", "speaker": "Receptionist", "german": "Frau Doktor Weber könnte Sie am Dienstag um sechzehn Uhr sehen.", "english": "Dr Weber could see you on Tuesday at 4 pm." },
+    { "id": "line-6", "speaker": "Patient", "german": "Am Dienstagnachmittag muss ich arbeiten. Haben Sie vielleicht am Mittwochvormittag etwas frei?", "english": "I have to work on Tuesday afternoon. Do you perhaps have anything available on Wednesday morning?" },
+    { "id": "line-7", "speaker": "Receptionist", "german": "Einen Moment bitte. Am Mittwoch ist um zehn Uhr fünfzehn ein Termin frei.", "english": "One moment, please. On Wednesday an appointment is available at 10:15." },
+    { "id": "line-8", "speaker": "Patient", "german": "Ja, das passt gut.", "english": "Yes, that works well." },
+    { "id": "line-9", "speaker": "Receptionist", "german": "Dann brauche ich noch Ihr Geburtsdatum.", "english": "Then I still need your date of birth." },
+    { "id": "line-10", "speaker": "Patient", "german": "Der zwölfte Mai neunzehnhundertachtundneunzig.", "english": "The twelfth of May, nineteen ninety-eight." },
+    { "id": "line-11", "speaker": "Receptionist", "german": "Danke. Sie haben also am Mittwoch, dem vierzehnten September, um zehn Uhr fünfzehn einen Termin. Bitte bringen Sie Ihre Versicherungskarte mit.", "english": "Thank you. Your appointment is therefore on Wednesday, 14 September, at 10:15. Please bring your insurance card." },
+    { "id": "line-12", "speaker": "Patient", "german": "Vielen Dank. Auf Wiederhören.", "english": "Thank you very much. Goodbye." }
+  ],
+  "trueFalse": [
+    { "statement": "Judith has had symptoms since yesterday.", "answer": true, "explanation": "She says: ‘seit gestern’." },
+    { "statement": "She has a cough and a headache.", "answer": false, "explanation": "She mentions a sore throat, a slight fever and tiredness." },
+    { "statement": "The first suggested appointment is Tuesday at 4 pm.", "answer": true, "explanation": "The receptionist first offers Tuesday at 16:00." },
+    { "statement": "Judith accepts the Tuesday appointment.", "answer": false, "explanation": "She has to work and asks for Wednesday morning." },
+    { "statement": "She should bring her insurance card.", "answer": true, "explanation": "The receptionist mentions it when confirming the appointment." }
+  ],
+  "gaps": [
+    { "before": "Ich habe seit gestern starke", "answer": "Halsschmerzen", "after": "und etwas Fieber.", "options": ["Halsschmerzen", "Bauchschmerzen", "Kopfschmerzen"] },
+    { "before": "Am Dienstagnachmittag muss ich", "answer": "arbeiten", "after": ".", "options": ["arbeiten", "reisen", "schlafen"] },
+    { "before": "Am Mittwoch ist um", "answer": "zehn Uhr fünfzehn", "after": "ein Termin frei.", "options": ["zehn Uhr fünfzehn", "sechzehn Uhr", "halb zehn"] },
+    { "before": "Bitte bringen Sie Ihre", "answer": "Versicherungskarte", "after": "mit.", "options": ["Versicherungskarte", "Fahrkarte", "Einladung"] }
+  ],
+  "sequence": [
+    { "id": "symptoms", "text": "Judith describes her symptoms." },
+    { "id": "first-offer", "text": "The receptionist offers Tuesday afternoon." },
+    { "id": "conflict", "text": "Judith explains that she has to work." },
+    { "id": "new-offer", "text": "They agree on Wednesday at 10:15." },
+    { "id": "details", "text": "The receptionist asks for Judith's date of birth." },
+    { "id": "reminder", "text": "Judith is reminded to bring her insurance card." }
+  ],
+  "practice": [
+    { "lineId": "line-2", "focus": "Ask for an appointment", "tip": "Keep ‘würde gern’ together; it makes the request polite.", "rhythm": "Ich WÜRde gern / einen TerMIN verEINbaren." },
+    { "lineId": "line-4", "focus": "Describe symptoms and duration", "tip": "Use ‘seit’ with the present tense for something that started in the past and is still happening.", "rhythm": "Ich habe seit GEStern / starke HALSschmerzen / und etwas FIEber." },
+    { "lineId": "line-6", "focus": "Reject a time and suggest another", "tip": "‘Haben Sie vielleicht … etwas frei?’ is a useful polite pattern when changing an appointment.", "rhythm": "Am DIENStagnachmittag / muss ich ARbeiten. / Haben Sie vielleicht / am MITTwochvormittag etwas FREI?" },
+    { "lineId": "line-11", "focus": "Understand the final confirmation", "tip": "Listen for the final day and time after ‘Sie haben also … einen Termin’.", "rhythm": "Am MITTwoch / um ZEHN Uhr FÜNFzehn / einen TerMIN." }
+  ]
+}
