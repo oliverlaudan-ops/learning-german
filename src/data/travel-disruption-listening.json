@@ -1,0 +1,57 @@
+{
+  "id": "travel-disruption-v1",
+  "chapterId": "a2-ch1",
+  "level": "B1",
+  "title": "A missed connection at the station",
+  "scenario": "A traveller's first train is delayed, so she will miss her connection. Listen carefully: several departure times, platforms and routes are mentioned, but only one replacement journey is valid.",
+  "speechRate": 1.08,
+  "useTwoVoices": true,
+  "lines": [
+    { "id": "line-1", "speaker": "Traveller", "german": "Entschuldigung, mein Zug aus Köln hat fünfunddreißig Minuten Verspätung. Ich sollte um vierzehn Uhr zwölf nach Hamburg weiterfahren.", "english": "Excuse me, my train from Cologne is 35 minutes late. I was supposed to continue to Hamburg at 14:12." },
+    { "id": "line-2", "speaker": "Staff", "german": "Der ICE um vierzehn Uhr zwölf ist leider schon abgefahren. Haben Sie eine Zugbindung auf Ihrer Fahrkarte?", "english": "Unfortunately, the ICE at 14:12 has already departed. Is your ticket restricted to a specific train?" },
+    { "id": "line-3", "speaker": "Traveller", "german": "Ja, normalerweise schon. Der verspätete Zug und der Anschluss stehen beide auf derselben Buchung.", "english": "Yes, normally it is. The delayed train and the connection are both on the same booking." },
+    { "id": "line-4", "speaker": "Staff", "german": "Dann ist die Zugbindung aufgehoben. Sie dürfen ohne Aufpreis einen späteren Zug nach Hamburg nehmen.", "english": "Then the train restriction is lifted. You may take a later train to Hamburg at no extra cost." },
+    { "id": "line-5", "speaker": "Traveller", "german": "In der App sehe ich einen ICE um vierzehn Uhr achtundvierzig von Gleis sieben. Kann ich den nehmen?", "english": "In the app I see an ICE at 14:48 from platform 7. Can I take that one?" },
+    { "id": "line-6", "speaker": "Staff", "german": "Nein, dieser Zug fällt heute aus. Um fünfzehn Uhr zwei fährt ein Regionalexpress von Gleis neun, aber damit müssten Sie in Hannover noch einmal umsteigen.", "english": "No, that train is cancelled today. At 15:02 a regional express leaves from platform 9, but you would have to change again in Hanover." },
+    { "id": "line-7", "speaker": "Traveller", "german": "Ich habe einen großen Koffer dabei. Gibt es eine Verbindung ohne zusätzliches Umsteigen?", "english": "I have a large suitcase with me. Is there a connection without an additional change?" },
+    { "id": "line-8", "speaker": "Staff", "german": "Ja. Der nächste direkte ICE fährt planmäßig um fünfzehn Uhr zwanzig von Gleis elf. Heute wird er allerdings auf Gleis zwölf bereitgestellt.", "english": "Yes. The next direct ICE is scheduled to depart at 15:20 from platform 11. Today, however, it will depart from platform 12." },
+    { "id": "line-9", "speaker": "Traveller", "german": "Also nicht Gleis elf, sondern Gleis zwölf. Muss ich meine Fahrkarte vorher umschreiben lassen?", "english": "So not platform 11, but platform 12. Do I need to have my ticket changed first?" },
+    { "id": "line-10", "speaker": "Staff", "german": "Nein. Zeigen Sie bei der Kontrolle einfach Ihre ursprüngliche Fahrkarte. Die Verspätung ist im System gespeichert.", "english": "No. At the ticket inspection, simply show your original ticket. The delay is recorded in the system." },
+    { "id": "line-11", "speaker": "Traveller", "german": "Meine Sitzplatzreservierung war im ersten Wagen. Gilt sie auch im neuen Zug?", "english": "My seat reservation was in the first carriage. Is it also valid on the new train?" },
+    { "id": "line-12", "speaker": "Staff", "german": "Leider nicht. Die Fahrkarte gilt weiterhin, die Reservierung aber nicht. Sie können am Automaten eine neue Reservierung kaufen, wenn Sie möchten.", "english": "Unfortunately not. The ticket remains valid, but the reservation does not. You can buy a new reservation at the machine if you wish." },
+    { "id": "line-13", "speaker": "Traveller", "german": "Danke. Dann nehme ich den direkten ICE um fünfzehn Uhr zwanzig von Gleis zwölf und behalte meine ursprüngliche Fahrkarte.", "english": "Thank you. Then I will take the direct ICE at 15:20 from platform 12 and keep my original ticket." },
+    { "id": "line-14", "speaker": "Staff", "german": "Genau. Gehen Sie am besten sofort zum Gleis, denn der Weg dauert ungefähr acht Minuten.", "english": "Exactly. It is best to go to the platform immediately because the walk takes about eight minutes." }
+  ],
+  "trueFalse": [
+    { "statement": "The traveller's first train is 25 minutes late.", "answer": false, "explanation": "It is 35 minutes late." },
+    { "statement": "The missed 14:12 connection was part of the same booking.", "answer": true, "explanation": "Both trains are on the same booking, so the train restriction is lifted." },
+    { "statement": "The 14:48 ICE from platform 7 is the chosen replacement.", "answer": false, "explanation": "That train is cancelled." },
+    { "statement": "The regional train at 15:02 would require another change in Hanover.", "answer": true, "explanation": "This is possible, but inconvenient with the large suitcase." },
+    { "statement": "The direct ICE is displayed for platform 11 but actually leaves from platform 12.", "answer": true, "explanation": "The platform change is the key final detail." },
+    { "statement": "The old seat reservation automatically transfers to the new train.", "answer": false, "explanation": "The ticket remains valid, but the reservation does not." }
+  ],
+  "gaps": [
+    { "before": "Dann ist die", "answer": "Zugbindung aufgehoben", "after": ".", "options": ["Zugbindung aufgehoben", "Fahrkarte ungültig", "Reservierung bestätigt"] },
+    { "before": "Der ICE um vierzehn Uhr achtundvierzig", "answer": "fällt heute aus", "after": ".", "options": ["fällt heute aus", "wartet am Gleis", "fährt nach Köln"] },
+    { "before": "Mit dem Regionalexpress müssten Sie in Hannover noch einmal", "answer": "umsteigen", "after": ".", "options": ["umsteigen", "bezahlen", "reservieren"] },
+    { "before": "Der direkte ICE fährt um fünfzehn Uhr zwanzig von", "answer": "Gleis zwölf", "after": ".", "options": ["Gleis zwölf", "Gleis elf", "Gleis sieben"] },
+    { "before": "Bei der Kontrolle zeigen Sie Ihre", "answer": "ursprüngliche Fahrkarte", "after": ".", "options": ["ursprüngliche Fahrkarte", "neue Reservierung", "Buchungsbestätigung"] }
+  ],
+  "sequence": [
+    { "id": "delay", "text": "The traveller reports a 35-minute delay and a missed connection." },
+    { "id": "restriction", "text": "The staff member lifts the train restriction." },
+    { "id": "cancelled", "text": "The apparent 14:48 option turns out to be cancelled." },
+    { "id": "regional", "text": "A regional train with another change is suggested." },
+    { "id": "direct", "text": "A direct ICE at 15:20 is identified." },
+    { "id": "platform", "text": "The platform change from 11 to 12 is confirmed." },
+    { "id": "reservation", "text": "The traveller learns that the old seat reservation is not valid." },
+    { "id": "decision", "text": "She chooses the direct ICE and keeps her original ticket." }
+  ],
+  "practice": [
+    { "lineId": "line-1", "focus": "Explain a missed connection", "tip": "Use ‘Ich sollte … weiterfahren’ for the original plan and give the exact delay.", "rhythm": "Mein ZUG / hat FÜNFundDREIßig Minuten VerSPÄTung. / Ich sollte um VIERzehn Uhr ZWÖLF / WEIterfahren." },
+    { "lineId": "line-5", "focus": "Ask about a possible alternative", "tip": "Name the train, time and platform before asking ‘Kann ich den nehmen?’", "rhythm": "Einen ICE / um VIERzehn Uhr ACHTundVIERzig / von GLEIS SIEben. / Kann ich DEN nehmen?" },
+    { "lineId": "line-8", "focus": "Catch a platform change", "tip": "‘planmäßig’ introduces the normal information; ‘allerdings’ signals the important change.", "rhythm": "PLANmäßig / von Gleis ELF. / Heute ALLERdings / auf Gleis ZWÖLF." },
+    { "lineId": "line-9", "focus": "Confirm corrected information", "tip": "The pattern ‘nicht …, sondern …’ clearly checks that one detail has changed.", "rhythm": "Also NICHT Gleis ELF, / sondern Gleis ZWÖLF." },
+    { "lineId": "line-13", "focus": "Summarise the final decision", "tip": "Repeat the final train, time, platform and ticket decision as one confirmation.", "rhythm": "Den diREKten ICE / um FÜNFzehn Uhr ZWANzig / von Gleis ZWÖLF / und die urSPRÜNGliche Fahrkarte." }
+  ]
+}
