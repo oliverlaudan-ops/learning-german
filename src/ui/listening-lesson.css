@@ -34,3 +34,13 @@
 .listening-chunks { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0; }
 .listening-navigation { display:flex; justify-content:space-between; gap:12px; border-top:1px solid var(--border); padding-top:20px; margin-top:24px; }
 @media (max-width:600px) { .listening-entry { flex-direction:column; align-items:stretch; } .listening-lesson .lesson-card { padding:16px; } .listening-turns article { padding:14px; } .listening-progress li { font-size:.75rem; } .listening-chunks { flex-direction:column; } }
+
+.medical-progress { grid-template-columns:repeat(5,minmax(0,1fr)); }
+.listening-gap select { display:inline-block; min-width:180px; margin:6px; padding:8px; border:1px solid var(--border); border-radius:8px; background:var(--card); color:var(--text); font:inherit; }
+.listening-sequence { display:grid; gap:10px; padding:0; list-style:none; counter-reset:none; }
+.listening-sequence li { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px; border:1px solid var(--border); border-radius:10px; background:var(--card); }
+.listening-sequence li > span:last-child { display:flex; gap:6px; flex-shrink:0; }
+.listening-sequence button { width:44px; min-height:44px; border:1px solid var(--border); border-radius:8px; background:var(--bg); color:var(--text); font-size:1.1rem; cursor:pointer; }
+.listening-sequence button:disabled { opacity:.35; cursor:default; }
+.medical-practice { margin-top:28px; }
+@media (max-width:600px) { .medical-progress { grid-template-columns:1fr; } .medical-progress li { padding:6px; } .listening-gap select { display:block; width:100%; margin:8px 0; } }
