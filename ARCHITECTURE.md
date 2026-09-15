@@ -206,7 +206,7 @@ The renderer in `src/ui/ui.ts` builds the tile UI in
 The original refactor had 53 tests in five files. Current coverage also includes
 dashboard/bootstrap, lesson content, placement, and `tests/listening-lesson.test.ts`
 (hidden transcripts, feedback/corrections, playback lifecycle/failure, navigation,
-and bundled audio completeness). Current total: **145 tests in 10 files**.
+and bundled audio completeness). Current total on `codex/medical-listening`: **152 tests in 11 files**. The additional suite covers the A2+/B1 doctor-appointment lesson: hidden transcript, true/false scoring, gap filling, event ordering, speaking review, completion, and both course entry points.
 
 Vitest is configured with `happy-dom` (lighter than jsdom) — we only
 need `localStorage` and a few browser globals for the tests, and
