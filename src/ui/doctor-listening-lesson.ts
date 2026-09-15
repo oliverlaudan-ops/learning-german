@@ -144,7 +144,7 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
   }
 
   function reviewMarkup(): string {
-    return `<p>Replay individual turns, then repeat the four useful sentences aloud.</p>
+    return `<p>Replay individual turns, then repeat the useful sentences aloud.</p>
       <div class="listening-turns">${lesson.lines.map((line, index) => `<article><h3>${index + 1} · ${escape(line.speaker)}</h3>
         <button class="btn secondary" type="button" data-speak-line="${index}">▶ Play turn ${index + 1}</button>
         <details><summary>Show German & translation</summary><p lang="de">${escape(line.german)}</p><p>${escape(line.english)}</p></details>
@@ -160,7 +160,7 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
   function render(focus = false): void {
     stop()
     const body = stage === 0
-      ? `<p>${escape(lesson.scenario)}</p><div class="listening-hint">The transcript is hidden. Dates and times may change during the call, so listen for the final agreement.</div>`
+      ? `<p>${escape(lesson.scenario)}</p><div class="listening-hint">The transcript is hidden. Several details sound plausible, so listen for what is finally confirmed.</div>`
       : stage === 1
         ? `<p>Decide whether each statement matches the conversation.</p><form data-true-false>${trueFalseMarkup()}<button class="btn primary" type="submit">Check answers</button><p data-tf-result role="status"></p></form>`
         : stage === 2
@@ -169,12 +169,12 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
 
     target.innerHTML = `<section class="listening-lesson" aria-labelledby="doctor-listening-title">
       <button class="lesson-back" type="button" data-doctor-exit>← Back to lessons</button>
-      <header><span class="lesson-kicker">${escape(lesson.level)} · HEALTH & APPOINTMENTS</span><h1 id="doctor-listening-title">${escape(lesson.title)}</h1><p>A realistic medical conversation with details that matter.</p></header>
+      <header><span class="lesson-kicker">${escape(lesson.level)} · HEALTH & APPOINTMENTS</span><h1 id="doctor-listening-title">${escape(lesson.title)}</h1><p>A realistic conversation with details that matter.</p></header>
       <ol class="listening-progress medical-progress" aria-label="Exercise progress">${stages.map((name, index) => `<li ${index === stage ? 'aria-current="step"' : ''}>${index + 1}. ${name}</li>`).join('')}</ol>
       <section class="lesson-card"><h2 tabindex="-1" data-stage-heading>${stage + 1}. ${stages[stage]}</h2>
         <div class="listening-player"><button class="btn primary" type="button" data-play-dialogue>▶ Play full conversation</button>
-          <label>Playback speed <select data-doctor-speed><option value="0.95">Normal</option><option value="0.78">Slower</option></select></label>
-          <p data-doctor-audio-status role="status">Press play when you are ready.</p><small>Computer-generated German audio. Audio is created by your device.</small></div>
+          <label>Playback speed <select data-doctor-speed><option value="${lesson.speechRate ?? 0.95}">Normal</option><option value="${Math.max(0.72, (lesson.speechRate ?? 0.95) - 0.18)}">Slower</option></select></label>
+          <p data-doctor-audio-status role="status">Press play when you are ready.</p><small>Computer-generated German audio. Audio is created by your device.${lesson.useTwoVoices ? ' Two different German voices are used when available.' : ''}</small></div>
         ${body}
         <nav class="listening-navigation" aria-label="Exercise navigation">${stage > 0 ? '<button class="btn secondary" type="button" data-doctor-previous>← Back</button>' : '<span></span>'}
           <button class="btn primary" type="button" data-doctor-next>${stage === stages.length - 1 ? 'Finish practice ✓' : `${stages[stage + 1]} →`}</button></nav>
@@ -184,7 +184,7 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
     const speed = target.querySelector<HTMLSelectElement>('[data-doctor-speed]')!
     speed.value = String(rate)
     speed.addEventListener('change', () => { rate = Number(speed.value) })
-    target.querySelector('[data-play-dialogue]')?.addEventListener('click', () => speak(lesson.lines.map(line => line.german).join('   '), status))
+    target.querySelector('[data-play-dialogue]')?.addEventListener('click', () => speakDialogue(status))
     target.querySelectorAll<HTMLInputElement>('[name^="tf-"]').forEach(input => input.addEventListener('change', () => {
       trueFalseAnswers[Number(input.name.slice(3))] = input.value === 'true'; trueFalseChecked = false
     }))
@@ -212,12 +212,13 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
     }))
     target.querySelector('[data-check-sequence]')?.addEventListener('click', () => {
       const correct = sequence.every((item, index) => item.id === lesson.sequence[index].id)
-      target.querySelector<HTMLElement>('[data-sequence-result]')!.textContent = correct ? '✓ Correct. That is the order of the call.' : 'Not quite. Listen again and check where the appointment changes.'
+      target.querySelector<HTMLElement>('[data-sequence-result]')!.textContent = correct ? '✓ Correct. That is the order of the call.' : 'Not quite. Listen again and check where the important details change.'
     })
-    target.querySelectorAll<HTMLButtonElement>('[data-speak-line]').forEach(button => button.addEventListener('click', () => speak(lesson.lines[Number(button.dataset.speakLine)].german, status)))
+    target.querySelectorAll<HTMLButtonElement>('[data-speak-line]').forEach(button => button.addEventListener('click', () => { const line = lesson.lines[Number(button.dataset.speakLine)]; speak(line.german, status, voiceForSpeaker(line.speaker)) }))
     target.querySelectorAll<HTMLButtonElement>('[data-speak-practice]').forEach(button => button.addEventListener('click', () => {
       const item = lesson.practice[Number(button.dataset.speakPractice)]
-      speak(lesson.lines.find(line => line.id === item.lineId)!.german, status)
+      const line = lesson.lines.find(line => line.id === item.lineId)!
+      speak(line.german, status, voiceForSpeaker(line.speaker))
     }))
     target.querySelector('[data-doctor-exit]')?.addEventListener('click', () => { disposeDoctorListeningLesson(); onExit() })
     target.querySelector('[data-doctor-previous]')?.addEventListener('click', () => { stage--; render(true) })
