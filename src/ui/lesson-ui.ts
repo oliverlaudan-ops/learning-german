@@ -222,7 +222,6 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
     `
     wireListeningEntry(target, chapters)
     wireDoctorListeningEntry(target, chapters)
-  wireConsultationListeningEntry(target, chapters)
     wireConsultationListeningEntry(target, chapters)
     target.querySelectorAll<HTMLElement>('[data-open-lesson]').forEach((button) => {
       button.addEventListener('click', () => {
