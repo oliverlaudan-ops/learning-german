@@ -1,4 +1,5 @@
-import lesson from '../data/doctor-appointment-listening.json'
+import appointmentLesson from '../data/doctor-appointment-listening.json'
+import consultationLesson from '../data/doctor-consultation-listening.json'
 import './listening-lesson.css'
 
 const stages = ['Listen', 'True or false', 'Fill the gaps', 'Put in order', 'Review & speak']
@@ -21,12 +22,28 @@ function escape(value: string): string {
 export function doctorListeningEntry(): string {
   return `<section class="listening-entry lesson-card">
     <div><span class="lesson-kicker">A2+ · LISTEN & SPEAK · 15–20 MIN</span>
-    <h2>${escape(lesson.title)}</h2><p>Follow a realistic phone call and practise understanding changing appointment details.</p></div>
+    <h2>${escape(appointmentLesson.title)}</h2><p>Follow a realistic phone call and practise understanding changing appointment details.</p></div>
     <button type="button" class="btn primary" data-doctor-listening-start>Start lesson →</button>
   </section>`
 }
 
+export function consultationListeningEntry(): string {
+  return `<section class="listening-entry lesson-card">
+    <div><span class="lesson-kicker">B1 · LISTEN & SPEAK · 20–25 MIN</span>
+    <h2>${escape(consultationLesson.title)}</h2><p>Understand symptoms, an examination, medicine instructions and warning signs.</p></div>
+    <button type="button" class="btn primary" data-consultation-listening-start>Start lesson →</button>
+  </section>`
+}
+
 export function renderDoctorListeningLesson(target: HTMLElement, onExit: () => void): void {
+  renderMedicalListeningLesson(target, onExit, appointmentLesson)
+}
+
+export function renderConsultationListeningLesson(target: HTMLElement, onExit: () => void): void {
+  renderMedicalListeningLesson(target, onExit, consultationLesson)
+}
+
+function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, lesson: typeof appointmentLesson): void {
   disposeDoctorListeningLesson()
   let stage = 0
   let rate = 0.95
@@ -111,7 +128,7 @@ export function renderDoctorListeningLesson(target: HTMLElement, onExit: () => v
 
     target.innerHTML = `<section class="listening-lesson" aria-labelledby="doctor-listening-title">
       <button class="lesson-back" type="button" data-doctor-exit>← Back to lessons</button>
-      <header><span class="lesson-kicker">A2+ · HEALTH & APPOINTMENTS</span><h1 id="doctor-listening-title">${escape(lesson.title)}</h1><p>A realistic phone call with changing details.</p></header>
+      <header><span class="lesson-kicker">${escape(lesson.level)} · HEALTH & APPOINTMENTS</span><h1 id="doctor-listening-title">${escape(lesson.title)}</h1><p>A realistic medical conversation with details that matter.</p></header>
       <ol class="listening-progress medical-progress" aria-label="Exercise progress">${stages.map((name, index) => `<li ${index === stage ? 'aria-current="step"' : ''}>${index + 1}. ${name}</li>`).join('')}</ol>
       <section class="lesson-card"><h2 tabindex="-1" data-stage-heading>${stage + 1}. ${stages[stage]}</h2>
         <div class="listening-player"><button class="btn primary" type="button" data-play-dialogue>▶ Play full conversation</button>
@@ -166,7 +183,7 @@ export function renderDoctorListeningLesson(target: HTMLElement, onExit: () => v
     target.querySelector('[data-doctor-next]')?.addEventListener('click', () => {
       if (stage < stages.length - 1) { stage++; render(true); return }
       disposeDoctorListeningLesson()
-      target.innerHTML = `<section class="listening-lesson lesson-card"><span class="lesson-kicker">PRACTICE COMPLETE</span><h1 tabindex="-1">You made a doctor's appointment.</h1><p>You understood symptoms, a rejected time and the final appointment details.</p><button class="btn primary" type="button" data-doctor-done>Back to lessons</button></section>`
+      target.innerHTML = `<section class="listening-lesson lesson-card"><span class="lesson-kicker">PRACTICE COMPLETE</span><h1 tabindex="-1">${lesson.id === 'doctor-appointment-v1' ? "You made a doctor's appointment." : 'You understood a medical consultation.'}</h1><p>${lesson.id === 'doctor-appointment-v1' ? 'You understood symptoms, a rejected time and the final appointment details.' : 'You followed symptoms, an examination, medication instructions and warning signs.'}</p><button class="btn primary" type="button" data-doctor-done>Back to lessons</button></section>`
       target.querySelector('h1')?.focus()
       target.querySelector('[data-doctor-done]')?.addEventListener('click', onExit)
     })

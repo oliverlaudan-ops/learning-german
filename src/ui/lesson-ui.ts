@@ -5,7 +5,7 @@ import { getLessonContent } from '../data/lesson-content'
 import { renderGuidedSession } from './lesson-session'
 import { __getProfile } from './ui'
 import { disposeListeningLesson, listeningEntry, renderListeningLesson } from './listening-lesson'
-import { disposeDoctorListeningLesson, doctorListeningEntry, renderDoctorListeningLesson } from './doctor-listening-lesson'
+import { consultationListeningEntry, disposeDoctorListeningLesson, doctorListeningEntry, renderConsultationListeningLesson, renderDoctorListeningLesson } from './doctor-listening-lesson'
 
 type AppWindow = {
   showTab?: (tabName: string) => void
@@ -92,7 +92,7 @@ function renderLesson(chapter: Chapter): string {
       </section>
 
       ${chapter.id === 'a2-ch5' ? listeningEntry() : ''}
-      ${chapter.id === 'a2-ch3' ? doctorListeningEntry() : ''}
+      ${chapter.id === 'a2-ch3' ? `${doctorListeningEntry()}${consultationListeningEntry()}` : ''}
 
       <section class="lesson-section">
         <div class="lesson-section-heading">
@@ -207,6 +207,7 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
           <p>Each lesson now combines vocabulary, simple English explanations, grammar, useful phrases and a guided learning session.</p>
         </div>
         ${doctorListeningEntry()}
+        ${consultationListeningEntry()}
         ${listeningEntry()}
         <div class="lesson-index-list">
           ${chapters.map((chapter) => `
@@ -221,6 +222,7 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
     `
     wireListeningEntry(target, chapters)
     wireDoctorListeningEntry(target, chapters)
+    wireConsultationListeningEntry(target, chapters)
     target.querySelectorAll<HTMLElement>('[data-open-lesson]').forEach((button) => {
       button.addEventListener('click', () => {
         target.dataset.lessonId = button.dataset.openLesson || ''
@@ -246,6 +248,7 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
   wireLesson(target, chapter, learnerName)
   wireListeningEntry(target, chapters)
   wireDoctorListeningEntry(target, chapters)
+  wireConsultationListeningEntry(target, chapters)
 }
 
 function wireListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): void {
@@ -257,5 +260,11 @@ function wireListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): 
 function wireDoctorListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): void {
   target.querySelector('[data-doctor-listening-start]')?.addEventListener('click', () => {
     renderDoctorListeningLesson(target, () => renderLearnExperience(target, chapters))
+  })
+}
+
+function wireConsultationListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): void {
+  target.querySelector('[data-consultation-listening-start]')?.addEventListener('click', () => {
+    renderConsultationListeningLesson(target, () => renderLearnExperience(target, chapters))
   })
 }

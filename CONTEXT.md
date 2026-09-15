@@ -4,7 +4,7 @@
 >
 > **Repository:** `oliverlaudan-ops/learning-german`  
 > **Working branch:** `main`  
-> **Last shipped:** [#4 — Introduce learner-focused dashboard](https://github.com/oliverlaudan-ops/learning-german/pull/4) (squashed and merged 2026-08-20; feature branch `agent/dashboard-learning-flow` deleted).  
+> **Last shipped:** [#6 — Add advanced doctor appointment listening lesson](https://github.com/oliverlaudan-ops/learning-german/pull/6) (merged 2026-09-15).  
 > **Branch rule:** Branch off `main` for any new feature. Keep changes scoped; **do not deploy from `main` directly** — the Pages workflow handles that on merge.
 
 ## 1. Product mission
@@ -220,9 +220,9 @@ verification uses a small viewport, not a physical Android device. Review the
 synthetic voice with the learner before expanding to more listening units.
 
 
-### Current feature branch: doctor appointment listening
+### Shipped: doctor appointment listening
 
-The `codex/medical-listening` branch adds a second, more demanding unit,
+PR #6 added a second, more demanding unit,
 **Making a doctor's appointment**, linked from Learn and `a2-ch3` Health.
 
 - Level target: A2+/early B1; twelve turns in a realistic phone call.
@@ -235,6 +235,21 @@ The `codex/medical-listening` branch adds a second, more demanding unit,
   a visible fallback if speech synthesis is unavailable.
 - Seven new tests cover hidden content, all task types, completion, and entry
   points. The current branch baseline is 152 tests across 11 files.
+
+### Current feature branch: doctor consultation listening
+
+The `codex/doctor-consultation-listening` branch adds a third listening unit,
+**At the doctor's consultation**, as a direct continuation of making the appointment.
+
+- Level target: B1; fourteen turns covering symptom duration, examination,
+  likely viral infection, medication dosage, a sick note and warning signs.
+- It reuses the established five-stage medical listening flow: hidden transcript,
+  true/false, gap fill, event ordering, and transcript review/speaking.
+- Six true/false statements, five gaps, seven ordered events and five speaking
+  prompts require more precise listening than the appointment lesson.
+- The medical renderer is now data-driven so both medical units share the same
+  interaction and accessibility behaviour.
+- Seven new tests bring the branch baseline to 159 tests across 12 files.
 
 The priorities below record the earlier roadmap; hearing/pronunciation now
 take precedence according to the user's request.
