@@ -1,5 +1,6 @@
 import appointmentLesson from '../data/doctor-appointment-listening.json'
 import consultationLesson from '../data/doctor-consultation-listening.json'
+import travelLesson from '../data/travel-disruption-listening.json'
 import './listening-lesson.css'
 
 const stages = ['Listen', 'True or false', 'Fill the gaps', 'Put in order', 'Review & speak']
@@ -13,6 +14,11 @@ type AppWindow = Window & typeof globalThis & {
 export function disposeDoctorListeningLesson(): void {
   cleanup?.()
   cleanup = undefined
+}
+
+export function selectGermanVoices(voices: readonly SpeechSynthesisVoice[]): SpeechSynthesisVoice[] {
+  const german = voices.filter(voice => voice.lang.toLowerCase().startsWith('de'))
+  return german.length ? german : [...voices]
 }
 
 function escape(value: string): string {
@@ -35,6 +41,14 @@ export function consultationListeningEntry(): string {
   </section>`
 }
 
+export function travelListeningEntry(): string {
+  return `<section class="listening-entry lesson-card">
+    <div><span class="lesson-kicker">B1 · TWO VOICES · 20–25 MIN</span>
+    <h2>${escape(travelLesson.title)}</h2><p>Track delays, cancelled trains, platform changes and the one journey that finally works.</p></div>
+    <button type="button" class="btn primary" data-travel-listening-start>Start lesson →</button>
+  </section>`
+}
+
 export function renderDoctorListeningLesson(target: HTMLElement, onExit: () => void): void {
   renderMedicalListeningLesson(target, onExit, appointmentLesson)
 }
@@ -43,10 +57,14 @@ export function renderConsultationListeningLesson(target: HTMLElement, onExit: (
   renderMedicalListeningLesson(target, onExit, consultationLesson)
 }
 
-function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, lesson: typeof appointmentLesson): void {
+export function renderTravelListeningLesson(target: HTMLElement, onExit: () => void): void {
+  renderMedicalListeningLesson(target, onExit, travelLesson)
+}
+
+function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, lesson: typeof appointmentLesson & { speechRate?: number; useTwoVoices?: boolean }): void {
   disposeDoctorListeningLesson()
   let stage = 0
-  let rate = 0.95
+  let rate = lesson.speechRate ?? 0.95
   let disposed = false
   const trueFalseAnswers: Array<boolean | undefined> = []
   const gapAnswers: Array<string | undefined> = []
