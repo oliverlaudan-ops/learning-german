@@ -1,5 +1,6 @@
 import appointmentLesson from '../data/doctor-appointment-listening.json'
 import consultationLesson from '../data/doctor-consultation-listening.json'
+import housingLesson from '../data/housing-search-listening.json'
 import travelLesson from '../data/travel-disruption-listening.json'
 import './listening-lesson.css'
 
@@ -9,6 +10,15 @@ let cleanup: (() => void) | undefined
 type AppWindow = Window & typeof globalThis & {
   SpeechSynthesisUtterance?: typeof SpeechSynthesisUtterance
   speechSynthesis?: SpeechSynthesis
+}
+
+type ListeningLesson = typeof appointmentLesson & {
+  speechRate?: number
+  useTwoVoices?: boolean
+  useMultipleVoices?: boolean
+  topicLabel?: string
+  completionTitle?: string
+  completionText?: string
 }
 
 export function disposeDoctorListeningLesson(): void {
@@ -49,6 +59,14 @@ export function travelListeningEntry(): string {
   </section>`
 }
 
+export function housingListeningEntry(): string {
+  return `<section class="listening-entry lesson-card">
+    <div><span class="lesson-kicker">B1 · THREE SPEAKERS · 25–30 MIN</span>
+    <h2>${escape(housingLesson.title)}</h2><p>Compare changing rent, dates, documents and conditions across a phone call and a viewing.</p></div>
+    <button type="button" class="btn primary" data-housing-listening-start>Start lesson →</button>
+  </section>`
+}
+
 export function renderDoctorListeningLesson(target: HTMLElement, onExit: () => void): void {
   renderMedicalListeningLesson(target, onExit, appointmentLesson)
 }
@@ -61,7 +79,11 @@ export function renderTravelListeningLesson(target: HTMLElement, onExit: () => v
   renderMedicalListeningLesson(target, onExit, travelLesson)
 }
 
-function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, lesson: typeof appointmentLesson & { speechRate?: number; useTwoVoices?: boolean }): void {
+export function renderHousingListeningLesson(target: HTMLElement, onExit: () => void): void {
+  renderMedicalListeningLesson(target, onExit, housingLesson)
+}
+
+function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, lesson: ListeningLesson): void {
   disposeDoctorListeningLesson()
   let stage = 0
   let rate = lesson.speechRate ?? 0.95
@@ -76,7 +98,8 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
   cleanup = () => { disposed = true; stop() }
 
   const speakers = [...new Set(lesson.lines.map(line => line.speaker))]
-  const voiceForSpeaker = (speaker: string) => lesson.useTwoVoices ? Math.max(0, speakers.indexOf(speaker)) : 0
+  const usesMultipleVoices = Boolean(lesson.useTwoVoices || lesson.useMultipleVoices)
+  const voiceForSpeaker = (speaker: string) => usesMultipleVoices ? Math.max(0, speakers.indexOf(speaker)) : 0
 
   function speak(text: string, status: HTMLElement, voiceIndex = 0, onFinished?: () => void, cancelFirst = true): void {
     if (cancelFirst) stop()
@@ -167,14 +190,15 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
           ? `<p>Choose the words you heard. Replay the conversation whenever you need it.</p><form data-gaps>${gapsMarkup()}<button class="btn primary" type="submit">Check gaps</button><p data-gap-result role="status"></p></form>`
           : stage === 3 ? sequenceMarkup() : reviewMarkup()
 
+    const topicLabel = lesson.topicLabel ?? (lesson.id === 'travel-disruption-v1' ? 'TRAVEL & DISRUPTIONS' : 'HEALTH & APPOINTMENTS')
     target.innerHTML = `<section class="listening-lesson" aria-labelledby="doctor-listening-title">
       <button class="lesson-back" type="button" data-doctor-exit>← Back to lessons</button>
-      <header><span class="lesson-kicker">${escape(lesson.level)} · ${lesson.id === 'travel-disruption-v1' ? 'TRAVEL & DISRUPTIONS' : 'HEALTH & APPOINTMENTS'}</span><h1 id="doctor-listening-title">${escape(lesson.title)}</h1><p>A realistic conversation with details that matter.</p></header>
+      <header><span class="lesson-kicker">${escape(lesson.level)} · ${escape(topicLabel)}</span><h1 id="doctor-listening-title">${escape(lesson.title)}</h1><p>A realistic conversation with details that matter.</p></header>
       <ol class="listening-progress medical-progress" aria-label="Exercise progress">${stages.map((name, index) => `<li ${index === stage ? 'aria-current="step"' : ''}>${index + 1}. ${name}</li>`).join('')}</ol>
       <section class="lesson-card"><h2 tabindex="-1" data-stage-heading>${stage + 1}. ${stages[stage]}</h2>
         <div class="listening-player"><button class="btn primary" type="button" data-play-dialogue>▶ Play full conversation</button>
           <label>Playback speed <select data-doctor-speed><option value="${lesson.speechRate ?? 0.95}">Normal</option><option value="${Math.max(0.72, (lesson.speechRate ?? 0.95) - 0.18)}">Slower</option></select></label>
-          <p data-doctor-audio-status role="status">Press play when you are ready.</p><small>Computer-generated German audio. Audio is created by your device.${lesson.useTwoVoices ? ' Two different German voices are used when available.' : ''}</small></div>
+          <p data-doctor-audio-status role="status">Press play when you are ready.</p><small>Computer-generated German audio. Audio is created by your device.${lesson.useMultipleVoices ? ' Three different German voices are used when available.' : lesson.useTwoVoices ? ' Two different German voices are used when available.' : ''}</small></div>
         ${body}
         <nav class="listening-navigation" aria-label="Exercise navigation">${stage > 0 ? '<button class="btn secondary" type="button" data-doctor-previous>← Back</button>' : '<span></span>'}
           <button class="btn primary" type="button" data-doctor-next>${stage === stages.length - 1 ? 'Finish practice ✓' : `${stages[stage + 1]} →`}</button></nav>
@@ -225,7 +249,9 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
     target.querySelector('[data-doctor-next]')?.addEventListener('click', () => {
       if (stage < stages.length - 1) { stage++; render(true); return }
       disposeDoctorListeningLesson()
-      target.innerHTML = `<section class="listening-lesson lesson-card"><span class="lesson-kicker">PRACTICE COMPLETE</span><h1 tabindex="-1">${lesson.id === 'doctor-appointment-v1' ? "You made a doctor's appointment." : lesson.id === 'travel-disruption-v1' ? 'You solved a disrupted journey.' : 'You understood a medical consultation.'}</h1><p>${lesson.id === 'doctor-appointment-v1' ? 'You understood symptoms, a rejected time and the final appointment details.' : lesson.id === 'travel-disruption-v1' ? 'You tracked delays, rejected alternatives, a platform change and the final valid connection.' : 'You followed symptoms, an examination, medication instructions and warning signs.'}</p><button class="btn primary" type="button" data-doctor-done>Back to lessons</button></section>`
+      const completionTitle = lesson.completionTitle ?? (lesson.id === 'doctor-appointment-v1' ? "You made a doctor's appointment." : lesson.id === 'travel-disruption-v1' ? 'You solved a disrupted journey.' : 'You understood a medical consultation.')
+      const completionText = lesson.completionText ?? (lesson.id === 'doctor-appointment-v1' ? 'You understood symptoms, a rejected time and the final appointment details.' : lesson.id === 'travel-disruption-v1' ? 'You tracked delays, rejected alternatives, a platform change and the final valid connection.' : 'You followed symptoms, an examination, medication instructions and warning signs.')
+      target.innerHTML = `<section class="listening-lesson lesson-card"><span class="lesson-kicker">PRACTICE COMPLETE</span><h1 tabindex="-1">${escape(completionTitle)}</h1><p>${escape(completionText)}</p><button class="btn primary" type="button" data-doctor-done>Back to lessons</button></section>`
       target.querySelector('h1')?.focus()
       target.querySelector('[data-doctor-done]')?.addEventListener('click', onExit)
     })
