@@ -12,7 +12,8 @@ import { disposeListeningLesson } from './listening-lesson'
 import { getLessonContent } from '../data/lesson-content'
 
 const levels = getLevels()
-const guidedChapters = levels.flatMap(level => level.chapters).filter(chapter => getLessonContent(chapter.id))
+const listeningOnlyChapterIds = new Set(['b1-ch1'])
+const guidedChapters = levels.flatMap(level => level.chapters).filter(chapter => getLessonContent(chapter.id) || listeningOnlyChapterIds.has(chapter.id))
 
 function showTab(tabName: string): void {
   (window as unknown as { showTab: (tabName: string) => void }).showTab(tabName)

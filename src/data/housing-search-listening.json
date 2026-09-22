@@ -1,0 +1,68 @@
+{
+  "id": "housing-search-v1",
+  "chapterId": "b1-ch1",
+  "level": "B1",
+  "title": "Finding the right flat",
+  "scenario": "Judith first phones a landlady and then speaks to the current tenant at the viewing. Three people mention similar prices, dates and documents. Some details from the advert have changed, and several conditions apply only in certain situations.",
+  "speechRate": 1.16,
+  "useMultipleVoices": true,
+  "topicLabel": "HOUSING & RENTING",
+  "completionTitle": "You evaluated a rental offer.",
+  "completionText": "You followed two connected conversations, separated old information from final arrangements and understood costs, documents and conditions.",
+  "lines": [
+    { "id": "line-1", "speaker": "Judith", "german": "Guten Tag, hier spricht Judith Nakayima. Ich rufe wegen der Zwei-Zimmer-Wohnung in der Lindenstraße an. In der Anzeige stand, dass sie ab dem ersten Dezember frei ist.", "english": "Good afternoon, this is Judith Nakayima. I am calling about the two-room flat in Lindenstraße. The advert said it was available from 1 December." },
+    { "id": "line-2", "speaker": "Landlady", "german": "Guten Tag. Grundsätzlich ja, aber nach dem Auszug wird noch gestrichen. Deshalb können Sie frühestens am fünfzehnten Dezember einziehen.", "english": "Good afternoon. In principle yes, but it will still be painted after the tenant moves out. Therefore you can move in on 15 December at the earliest." },
+    { "id": "line-3", "speaker": "Judith", "german": "Das wäre für mich noch möglich. Beträgt die Warmmiete achthundertvierzig Euro? Ich möchte meine monatlichen Kosten genau planen.", "english": "That would still be possible for me. Is the warm rent 840 euros? I want to plan my monthly costs exactly." },
+    { "id": "line-4", "speaker": "Landlady", "german": "Nein, achthundertvierzig Euro war die alte Miete. Die Kaltmiete beträgt jetzt siebenhundertsechzig Euro, dazu kommen hundertachtzig Euro Nebenkosten einschließlich Heizung. Strom zahlen Sie selbst.", "english": "No, 840 euros was the old rent. The cold rent is now 760 euros, plus 180 euros in service charges including heating. You pay electricity yourself." },
+    { "id": "line-5", "speaker": "Judith", "german": "Verstehe. Dann sind es neunhundertvierzig Euro ohne Strom. Und die Kaution beträgt drei Kaltmieten, also zweitausendzweihundertachtzig Euro, richtig?", "english": "I understand. Then it is 940 euros without electricity. And the deposit is three cold rents, so 2,280 euros, correct?" },
+    { "id": "line-6", "speaker": "Landlady", "german": "Genau. Die Kaution können Sie auf Wunsch in drei monatlichen Raten zahlen.", "english": "Exactly. If you wish, you can pay the deposit in three monthly instalments." },
+    { "id": "line-7", "speaker": "Landlady", "german": "Ich hatte Ihnen Mittwoch um halb sechs angeboten. Wegen eines Handwerkertermins muss die Besichtigung aber auf Donnerstag um Viertel nach sechs verschoben werden.", "english": "I had offered you Wednesday at 5:30. Because of an appointment with a tradesperson, the viewing must be moved to Thursday at 6:15." },
+    { "id": "line-8", "speaker": "Judith", "german": "Donnerstag um achtzehn Uhr fünfzehn passt. Soll ich schon Unterlagen mitbringen?", "english": "Thursday at 18:15 works. Should I bring documents already?" },
+    { "id": "line-9", "speaker": "Landlady", "german": "Zur Besichtigung reicht Ihr Ausweis. Wenn Sie sich bewerben möchten, brauche ich danach die Selbstauskunft, eine Schufa-Auskunft und die letzten drei Gehaltsabrechnungen. Einen Arbeitsvertrag nur, falls Sie noch keine drei Abrechnungen haben.", "english": "For the viewing, your ID is enough. If you want to apply, I will then need the self-disclosure form, a credit report and the last three payslips. An employment contract only if you do not yet have three payslips." },
+    { "id": "line-10", "speaker": "Tenant", "german": "Hallo, ich bin Jonas, der jetzige Mieter. Frau Keller verspätet sich um ein paar Minuten, aber ich kann Ihnen die Wohnung schon zeigen.", "english": "Hello, I am Jonas, the current tenant. Ms Keller is a few minutes late, but I can already show you the flat." },
+    { "id": "line-11", "speaker": "Judith", "german": "Danke. Bleibt die Einbauküche in der Wohnung? Auf den Fotos waren auch eine Waschmaschine und ein großer Schrank zu sehen.", "english": "Thank you. Does the fitted kitchen remain in the flat? The photos also showed a washing machine and a large cupboard." },
+    { "id": "line-12", "speaker": "Tenant", "german": "Die Küche und der Schrank bleiben ohne Aufpreis. Die Waschmaschine gehört mir und kommt mit. Im Keller gibt es aber einen eigenen Anschluss und ein abschließbares Abteil.", "english": "The kitchen and cupboard remain at no extra charge. The washing machine belongs to me and is coming with me. In the basement, however, there is a private connection and a lockable storage unit." },
+    { "id": "line-13", "speaker": "Judith", "german": "Der Balkon ist ruhiger als erwartet. Zeigt er nicht zur Hauptstraße?", "english": "The balcony is quieter than expected. Does it not face the main road?" },
+    { "id": "line-14", "speaker": "Tenant", "german": "Nein, er geht zum Innenhof. Morgens hört man manchmal die Lieferwagen vom Supermarkt, abends ist es meistens ruhig.", "english": "No, it faces the courtyard. In the morning you sometimes hear the supermarket delivery vans; in the evening it is usually quiet." },
+    { "id": "line-15", "speaker": "Landlady", "german": "Entschuldigen Sie die Verspätung. Haben Sie noch Fragen, Frau Nakayima?", "english": "Please excuse the delay. Do you have any further questions, Ms Nakayima?" },
+    { "id": "line-16", "speaker": "Judith", "german": "Ja, ich habe eine Katze. In der Anzeige stand nur, Haustiere seien nach Absprache erlaubt.", "english": "Yes, I have a cat. The advert only said that pets were allowed by arrangement." },
+    { "id": "line-17", "speaker": "Landlady", "german": "Eine Katze ist nach einer schriftlichen Mitteilung in Ordnung. Für einen Hund bräuchten Sie vorher meine ausdrückliche Erlaubnis.", "english": "A cat is fine after written notification. For a dog, you would need my express permission beforehand." },
+    { "id": "line-18", "speaker": "Judith", "german": "Dann schicke ich Ihnen die vollständigen Unterlagen bis Freitagmittag per E-Mail.", "english": "Then I will email you the complete documents by Friday noon." },
+    { "id": "line-19", "speaker": "Landlady", "german": "Gut. Sie erhalten spätestens am Montag Bescheid. Falls Sie die Wohnung bekommen, ist die Schlüsselübergabe am dreizehnten Dezember, der Mietvertrag beginnt trotzdem erst am fünfzehnten.", "english": "Good. You will receive a decision by Monday at the latest. If you get the flat, the keys will be handed over on 13 December, but the tenancy still starts on the 15th." }
+  ],
+  "trueFalse": [
+    { "statement": "The flat can still be occupied from 1 December as advertised.", "answer": false, "explanation": "Painting delays the earliest move-in date until 15 December." },
+    { "statement": "The monthly total is €940 before electricity.", "answer": true, "explanation": "€760 cold rent plus €180 service charges equals €940; electricity is separate." },
+    { "statement": "The deposit is calculated from three warm rents.", "answer": false, "explanation": "It is three cold rents: €2,280 in total." },
+    { "statement": "The viewing remains on Wednesday at 17:30.", "answer": false, "explanation": "It is moved to Thursday at 18:15." },
+    { "statement": "Every applicant must provide an employment contract as well as three payslips.", "answer": false, "explanation": "The employment contract is needed only if three payslips are not yet available." },
+    { "statement": "The fitted kitchen and cupboard stay, but the washing machine does not.", "answer": true, "explanation": "The washing machine belongs to the current tenant." },
+    { "statement": "Judith may keep a cat after notifying the landlady in writing.", "answer": true, "explanation": "A dog would require express permission, but a cat only requires written notification." }
+  ],
+  "gaps": [
+    { "before": "Der Einzug ist frühestens am", "answer": "fünfzehnten Dezember", "after": "möglich.", "options": ["fünfzehnten Dezember", "ersten Dezember", "dreizehnten Dezember"] },
+    { "before": "Die Nebenkosten betragen hundertachtzig Euro", "answer": "einschließlich Heizung", "after": ".", "options": ["einschließlich Heizung", "einschließlich Strom", "ohne Heizung"] },
+    { "before": "Die Besichtigung wurde auf Donnerstag um", "answer": "achtzehn Uhr fünfzehn", "after": "verschoben.", "options": ["achtzehn Uhr fünfzehn", "siebzehn Uhr dreißig", "achtzehn Uhr dreißig"] },
+    { "before": "Einen Arbeitsvertrag braucht Judith nur, falls", "answer": "drei Abrechnungen fehlen", "after": ".", "options": ["drei Abrechnungen fehlen", "sie eine Katze hat", "die Schufa-Auskunft fehlt"] },
+    { "before": "Der Balkon zeigt zum", "answer": "Innenhof", "after": ".", "options": ["Innenhof", "Supermarkt", "Hauptbahnhof"] },
+    { "before": "Die Schlüsselübergabe wäre am dreizehnten Dezember, der Mietvertrag beginnt", "answer": "zwei Tage später", "after": ".", "options": ["zwei Tage später", "am selben Tag", "am ersten Dezember"] }
+  ],
+  "sequence": [
+    { "id": "availability", "text": "Judith learns that painting delays the move-in date." },
+    { "id": "costs", "text": "The landlady separates cold rent, service charges and electricity." },
+    { "id": "viewing", "text": "The viewing is moved from Wednesday to Thursday." },
+    { "id": "documents", "text": "Required application documents and one exception are explained." },
+    { "id": "fixtures", "text": "The current tenant explains what stays in the flat." },
+    { "id": "balcony", "text": "Judith checks where the balcony faces and when noise occurs." },
+    { "id": "pet", "text": "The landlady distinguishes the rules for a cat and a dog." },
+    { "id": "deadline", "text": "Judith promises the documents and hears the decision and key dates." }
+  ],
+  "practice": [
+    { "lineId": "line-3", "focus": "Verify a price from an advert", "tip": "Use ‘Beträgt …?’ to check a figure, then explain why you need certainty.", "rhythm": "BeTRÄGT die WARMmiete / ACHThundertVIERzig Euro? / Ich möchte die KOSTen / geNAU planen." },
+    { "lineId": "line-5", "focus": "Calculate and confirm total costs", "tip": "Summarise the monthly total first; then use ‘also’ to confirm the deposit calculation.", "rhythm": "Dann sind es NEUNhundertVIERzig / OHne Strom. / Drei KALTmieten, / also ZWEItausendZWEIhundertACHTzig." },
+    { "lineId": "line-8", "focus": "Confirm a changed appointment", "tip": "Repeat the complete day and time before asking the next practical question.", "rhythm": "DONnerstag / um ACHTzehn Uhr FÜNFzehn passt. / Soll ich schon UNterlagen mitbringen?" },
+    { "lineId": "line-13", "focus": "Challenge an assumption politely", "tip": "State your observation, then use a negative question to check earlier information.", "rhythm": "Der BalKON ist RUHiger / als erWARtet. / Zeigt er NICHT / zur HAUPTstraße?" },
+    { "lineId": "line-18", "focus": "Commit to a deadline", "tip": "‘bis’ marks the latest time; ‘per E-Mail’ states how you will send the documents.", "rhythm": "Dann SCHIcke ich Ihnen / die vollSTÄNDigen Unterlagen / bis FREItagMITtag / per E-Mail." },
+    { "lineId": "line-19", "focus": "Separate two similar dates", "tip": "Listen for ‘falls’ as a condition and ‘trotzdem’ as the contrast between key handover and contract start.", "rhythm": "FALLS Sie die Wohnung bekommen: / SCHLÜSsel am DREIzehnten, / Mietvertrag TROTZdem / erst am FÜNFzehnten." }
+  ]
+}
