@@ -40,6 +40,20 @@ function findChapterById(data: DashboardData, chapterId: string): { level: Level
   return undefined
 }
 
+function startOfToday(): number {
+  const now = new Date()
+  now.setHours(0, 0, 0, 0)
+  return now.getTime()
+}
+
+function activeSessionsToday(profile: ProfileState): number {
+  const start = startOfToday()
+  const quizzes = profile.quizHistory.filter((result) => result.completedAt >= start).length
+  const listening = (profile.listeningHistory ?? []).filter((result) => result.completedAt >= start).length
+  const guided = (profile.guidedLessonHistory ?? []).filter((result) => result.completedAt >= start).length
+  return quizzes + listening + guided
+}
+
 /**
  * Skills that justify an inline Smart Review hint on the dashboard.
  * Articles, cases and sentence order are the three skills the placement
@@ -65,11 +79,6 @@ function reviewHintSkills(placement: PlacementSnapshot): string[] {
 export function renderDashboard(data: DashboardData): string {
   const { profile } = data
   const placement = profile.placement
-  // Continue Learning path:
-  // 1) explicit nextChapterId wins
-  // 2) otherwise a placement snapshot overrides the next-unfinished-chapter
-  //    heuristic with the learner-chosen starting chapter
-  // 3) otherwise fall back to the next unfinished chapter
   const explicitNext = data.nextChapterId
     ? findChapterById(data, data.nextChapterId)
     : undefined
@@ -78,9 +87,42 @@ export function renderDashboard(data: DashboardData): string {
   const fromPlacement = !explicitNext && placementNext !== undefined && placement !== undefined
 
   const goal = Math.max(1, profile.progress.dailyGoal)
-  const goalPercent = Math.min(100, Math.round((profile.progress.todayLearned / goal) * 100))
+  const sessionsToday = activeSessionsToday(profile)
+  const wordGoalPercent = Math.min(100, Math.round((profile.progress.todayLearned / goal) * 100))
+  const goalPercent = sessionsToday > 0 ? 100 : wordGoalPercent
   const average = Math.round(profile.progress.averageAccuracy || 0)
   const name = escapeHtml(profile.displayName || 'Learner')
+  const remainingWords = Math.max(0, goal - profile.progress.todayLearned)
+
+  const latestListening = profile.listeningHistory?.[profile.listeningHistory.length - 1]
+  const weakListeningChapter = latestListening && latestListening.accuracy < 70
+    ? findChapterById(data, latestListening.chapterId)
+    : undefined
+  const recommendReview = !weakListeningChapter && data.dueCount >= 5
+
+  const recommendationKicker = weakListeningChapter
+    ? 'TODAY\'S RECOMMENDATION · LISTENING FOCUS'
+    : recommendReview
+      ? 'TODAY\'S RECOMMENDATION · SMART REVIEW'
+      : fromPlacement
+        ? 'FROM YOUR PLACEMENT · TODAY\'S RECOMMENDATION'
+        : 'TODAY\'S RECOMMENDATION'
+  const recommendationTitle = weakListeningChapter
+    ? `Retry ${escapeHtml(weakListeningChapter.chapter.title)}`
+    : recommendReview
+      ? `Review ${data.dueCount} due words`
+      : next
+        ? escapeHtml(next.chapter.title)
+        : 'Keep your German fresh'
+  const recommendationText = weakListeningChapter && latestListening
+    ? `Your latest listening result was ${latestListening.accuracy}%. Revisit this chapter and try its listening exercise again.`
+    : recommendReview
+      ? 'A short review now will strengthen words just as they are becoming due.'
+      : next
+        ? `${escapeHtml(next.level.title)} · ${fromPlacement ? 'Your recommended starting point' : 'A focused next step for today'} · about 10–15 min`
+        : 'You completed every chapter. Use Smart Review to keep what you learned.'
+  const recommendationAction = recommendReview || !next && !weakListeningChapter ? 'review' : 'continue'
+  const recommendationChapterId = weakListeningChapter?.chapter.id ?? next?.chapter.id
 
   const refreshersBlock = placement && placement.refresherIds.length
     ? `<section class="dashboard-card placement-refreshers-block" aria-labelledby="placement-refreshers-title">
@@ -141,11 +183,11 @@ export function renderDashboard(data: DashboardData): string {
         <article class="dashboard-card dashboard-continue${fromPlacement ? ' dashboard-continue--from-placement' : ''}">
           <div class="card-icon">▶️</div>
           <div class="card-content">
-            <p class="card-kicker">${fromPlacement ? 'FROM YOUR PLACEMENT · CONTINUE LEARNING' : 'CONTINUE LEARNING'}</p>
-            <h2>${next ? escapeHtml(next.chapter.title) : 'You completed every chapter!'}</h2>
-            <p>${next ? `${escapeHtml(next.level.title)} · ${fromPlacement ? 'Your recommended starting point' : 'Your next step'}` : 'Review your knowledge and keep it fresh.'}</p>
-            <button class="primary-button" type="button" data-dashboard-action="continue" ${next ? `data-chapter-id="${escapeHtml(next.chapter.id)}"` : ''}>
-              ${next ? 'Continue' : 'Review now'}
+            <p class="card-kicker">${recommendationKicker}</p>
+            <h2>${recommendationTitle}</h2>
+            <p>${recommendationText}</p>
+            <button class="primary-button" type="button" data-dashboard-action="${recommendationAction}" ${recommendationAction === 'continue' && recommendationChapterId ? `data-chapter-id="${escapeHtml(recommendationChapterId)}"` : ''}>
+              ${recommendReview ? 'Review now' : weakListeningChapter ? 'Open lesson' : next ? 'Start today\'s lesson' : 'Review now'}
             </button>
           </div>
         </article>
@@ -153,15 +195,17 @@ export function renderDashboard(data: DashboardData): string {
         <article class="dashboard-card dashboard-goal">
           <div class="card-header">
             <div>
-              <p class="card-kicker">TODAY'S GOAL</p>
-              <h2>${profile.progress.todayLearned} / ${goal} words</h2>
+              <p class="card-kicker">TODAY'S LEARNING</p>
+              <h2>${profile.progress.todayLearned} words · ${sessionsToday} active session${sessionsToday === 1 ? '' : 's'}</h2>
             </div>
             <span class="dashboard-percent">${goalPercent}%</span>
           </div>
-          <div class="progress-track" role="progressbar" aria-valuenow="${goalPercent}" aria-valuemin="0" aria-valuemax="100" aria-label="Today's goal">
+          <div class="progress-track" role="progressbar" aria-valuenow="${goalPercent}" aria-valuemin="0" aria-valuemax="100" aria-label="Today's learning">
             <span style="width:${goalPercent}%"></span>
           </div>
-          <p class="muted">${goalPercent >= 100 ? 'Goal complete! 🎉' : `${goal - profile.progress.todayLearned} more to reach today's goal.`}</p>
+          <p class="muted">${sessionsToday > 0 || wordGoalPercent >= 100
+            ? 'Today counts. You completed active German practice. 🎉'
+            : `${remainingWords} more words, or complete one guided lesson, listening exercise, or quiz session.`}</p>
         </article>
       </div>
 
