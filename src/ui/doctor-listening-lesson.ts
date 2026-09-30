@@ -2,6 +2,7 @@ import appointmentLesson from '../data/doctor-appointment-listening.json'
 import consultationLesson from '../data/doctor-consultation-listening.json'
 import housingLesson from '../data/housing-search-listening.json'
 import travelLesson from '../data/travel-disruption-listening.json'
+import type { ListeningResult } from '../types'
 import './listening-lesson.css'
 
 const stages = ['Listen', 'True or false', 'Fill the gaps', 'Put in order', 'Review & speak']
@@ -20,6 +21,8 @@ type ListeningLesson = typeof appointmentLesson & {
   completionTitle?: string
   completionText?: string
 }
+
+type ListeningComplete = (result: ListeningResult) => void
 
 export function disposeDoctorListeningLesson(): void {
   cleanup?.()
@@ -67,23 +70,23 @@ export function housingListeningEntry(): string {
   </section>`
 }
 
-export function renderDoctorListeningLesson(target: HTMLElement, onExit: () => void): void {
-  renderMedicalListeningLesson(target, onExit, appointmentLesson)
+export function renderDoctorListeningLesson(target: HTMLElement, onExit: () => void, onComplete?: ListeningComplete): void {
+  renderMedicalListeningLesson(target, onExit, appointmentLesson, onComplete)
 }
 
-export function renderConsultationListeningLesson(target: HTMLElement, onExit: () => void): void {
-  renderMedicalListeningLesson(target, onExit, consultationLesson)
+export function renderConsultationListeningLesson(target: HTMLElement, onExit: () => void, onComplete?: ListeningComplete): void {
+  renderMedicalListeningLesson(target, onExit, consultationLesson, onComplete)
 }
 
-export function renderTravelListeningLesson(target: HTMLElement, onExit: () => void): void {
-  renderMedicalListeningLesson(target, onExit, travelLesson)
+export function renderTravelListeningLesson(target: HTMLElement, onExit: () => void, onComplete?: ListeningComplete): void {
+  renderMedicalListeningLesson(target, onExit, travelLesson, onComplete)
 }
 
-export function renderHousingListeningLesson(target: HTMLElement, onExit: () => void): void {
-  renderMedicalListeningLesson(target, onExit, housingLesson)
+export function renderHousingListeningLesson(target: HTMLElement, onExit: () => void, onComplete?: ListeningComplete): void {
+  renderMedicalListeningLesson(target, onExit, housingLesson, onComplete)
 }
 
-function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, lesson: ListeningLesson): void {
+function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, lesson: ListeningLesson, onComplete?: ListeningComplete): void {
   disposeDoctorListeningLesson()
   let stage = 0
   let rate = lesson.speechRate ?? 0.95
@@ -92,6 +95,8 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
   const gapAnswers: Array<string | undefined> = []
   let trueFalseChecked = false
   let gapsChecked = false
+  let sequenceChecked = false
+  let sequenceCorrect = false
   let sequence = [...lesson.sequence].reverse()
 
   const stop = () => (window as AppWindow).speechSynthesis?.cancel()
@@ -163,7 +168,7 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
       ${sequence.map((item, index) => `<li><span>${index + 1}. ${escape(item.text)}</span><span>
         <button type="button" data-move-up="${item.id}" aria-label="Move up" ${index === 0 ? 'disabled' : ''}>↑</button>
         <button type="button" data-move-down="${item.id}" aria-label="Move down" ${index === sequence.length - 1 ? 'disabled' : ''}>↓</button>
-      </span></li>`).join('')}</ol><button class="btn primary" type="button" data-check-sequence>Check order</button><p data-sequence-result role="status"></p>`
+      </span></li>`).join('')}</ol><button class="btn primary" type="button" data-check-sequence>Check order</button><p data-sequence-result role="status">${sequenceChecked ? (sequenceCorrect ? '✓ Correct. That is the order of the call.' : 'Not quite. Listen again and check where the important details change.') : ''}</p>`
   }
 
   function reviewMarkup(): string {
@@ -178,6 +183,46 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
           <p class="listening-german" lang="de">${escape(line.german)}</p><button class="btn secondary" type="button" data-speak-practice="${index}">▶ Hear the sentence</button>
           <p class="listening-hint">${escape(item.tip)}</p><p><strong>Try this rhythm:</strong> <span lang="de">${escape(item.rhythm)}</span></p></article>`
       }).join('')}</div>`
+  }
+
+  function buildResult(): ListeningResult {
+    const tf = trueFalseChecked
+      ? { correct: lesson.trueFalse.filter((item, index) => trueFalseAnswers[index] === item.answer).length, total: lesson.trueFalse.length }
+      : undefined
+    const gaps = gapsChecked
+      ? { correct: lesson.gaps.filter((gap, index) => gapAnswers[index] === gap.answer).length, total: lesson.gaps.length }
+      : undefined
+    const correct = (tf?.correct ?? 0) + (gaps?.correct ?? 0) + (sequenceChecked && sequenceCorrect ? 1 : 0)
+    const total = (tf?.total ?? 0) + (gaps?.total ?? 0) + (sequenceChecked ? 1 : 0)
+    return {
+      lessonId: lesson.id,
+      chapterId: lesson.chapterId,
+      level: lesson.level,
+      correct,
+      total,
+      accuracy: total ? Math.round((correct / total) * 100) : 0,
+      tasks: {
+        trueFalse: tf,
+        gaps,
+        sequence: sequenceChecked ? sequenceCorrect : undefined,
+      },
+      completedAt: Date.now(),
+    }
+  }
+
+  function resultMarkup(result: ListeningResult): string {
+    const task = (label: string, score?: { correct: number; total: number }) => `<li><strong>${label}:</strong> ${score ? `${score.correct}/${score.total}` : 'not checked'}</li>`
+    const sequenceLabel = result.tasks.sequence === undefined ? 'not checked' : result.tasks.sequence ? 'correct' : 'retry recommended'
+    if (!result.total) {
+      return `<div class="listening-hint"><strong>No comprehension result yet.</strong> You finished the speaking practice, but none of the scored tasks were checked. Retry the lesson and check the tasks to create a progress result.</div>`
+    }
+    const nextStep = result.accuracy >= 85
+      ? 'Strong result. Next time, try the conversation at normal speed and answer without opening the transcript.'
+      : result.accuracy >= 60
+        ? 'Good basis. Retry the task type with the most errors before moving on.'
+        : 'Repeat the conversation once at the slower speed, then retry the comprehension tasks.'
+    return `<div class="listening-hint"><span class="lesson-kicker">COMPREHENSION RESULT</span><h2>${result.correct}/${result.total} correct · ${result.accuracy}%</h2>
+      <ul>${task('True / false', result.tasks.trueFalse)}${task('Gap fill', result.tasks.gaps)}<li><strong>Event order:</strong> ${sequenceLabel}</li></ul><p><strong>Next step:</strong> ${escape(nextStep)}</p></div>`
   }
 
   function render(focus = false): void {
@@ -232,11 +277,13 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
       const from = sequence.findIndex(item => item.id === id)
       const to = button.dataset.moveUp ? from - 1 : from + 1
       ;[sequence[from], sequence[to]] = [sequence[to], sequence[from]]
+      sequenceChecked = false
       render()
     }))
     target.querySelector('[data-check-sequence]')?.addEventListener('click', () => {
-      const correct = sequence.every((item, index) => item.id === lesson.sequence[index].id)
-      target.querySelector<HTMLElement>('[data-sequence-result]')!.textContent = correct ? '✓ Correct. That is the order of the call.' : 'Not quite. Listen again and check where the important details change.'
+      sequenceCorrect = sequence.every((item, index) => item.id === lesson.sequence[index].id)
+      sequenceChecked = true
+      target.querySelector<HTMLElement>('[data-sequence-result]')!.textContent = sequenceCorrect ? '✓ Correct. That is the order of the call.' : 'Not quite. Listen again and check where the important details change.'
     })
     target.querySelectorAll<HTMLButtonElement>('[data-speak-line]').forEach(button => button.addEventListener('click', () => { const line = lesson.lines[Number(button.dataset.speakLine)]; speak(line.german, status, voiceForSpeaker(line.speaker)) }))
     target.querySelectorAll<HTMLButtonElement>('[data-speak-practice]').forEach(button => button.addEventListener('click', () => {
@@ -248,11 +295,14 @@ function renderMedicalListeningLesson(target: HTMLElement, onExit: () => void, l
     target.querySelector('[data-doctor-previous]')?.addEventListener('click', () => { stage--; render(true) })
     target.querySelector('[data-doctor-next]')?.addEventListener('click', () => {
       if (stage < stages.length - 1) { stage++; render(true); return }
+      const result = buildResult()
+      onComplete?.(result)
       disposeDoctorListeningLesson()
       const completionTitle = lesson.completionTitle ?? (lesson.id === 'doctor-appointment-v1' ? "You made a doctor's appointment." : lesson.id === 'travel-disruption-v1' ? 'You solved a disrupted journey.' : 'You understood a medical consultation.')
       const completionText = lesson.completionText ?? (lesson.id === 'doctor-appointment-v1' ? 'You understood symptoms, a rejected time and the final appointment details.' : lesson.id === 'travel-disruption-v1' ? 'You tracked delays, rejected alternatives, a platform change and the final valid connection.' : 'You followed symptoms, an examination, medication instructions and warning signs.')
-      target.innerHTML = `<section class="listening-lesson lesson-card"><span class="lesson-kicker">PRACTICE COMPLETE</span><h1 tabindex="-1">${escape(completionTitle)}</h1><p>${escape(completionText)}</p><button class="btn primary" type="button" data-doctor-done>Back to lessons</button></section>`
+      target.innerHTML = `<section class="listening-lesson lesson-card"><span class="lesson-kicker">PRACTICE COMPLETE</span><h1 tabindex="-1">${escape(completionTitle)}</h1><p>${escape(completionText)}</p>${resultMarkup(result)}<div class="listening-navigation"><button class="btn secondary" type="button" data-doctor-retry>Retry lesson</button><button class="btn primary" type="button" data-doctor-done>Back to lessons</button></div></section>`
       target.querySelector('h1')?.focus()
+      target.querySelector('[data-doctor-retry]')?.addEventListener('click', () => renderMedicalListeningLesson(target, onExit, lesson, onComplete))
       target.querySelector('[data-doctor-done]')?.addEventListener('click', onExit)
     })
     if (focus) target.querySelector<HTMLElement>('[data-stage-heading]')?.focus()

@@ -11,6 +11,7 @@ import type {
   LegacyState,
   Level,
   LevelProgress,
+  ListeningResult,
   PlacementSnapshot,
   ProfileState,
   UserProgress,
@@ -126,7 +127,7 @@ function migrateV2ToV4(raw: LegacyState, levels: Level[]): AppState | null {
 }
 
 // ---------------------------------------------------------------------------
-// Placement write-back
+// Placement / listening write-back
 // ---------------------------------------------------------------------------
 
 /**
@@ -149,6 +150,20 @@ export function savePlacementSnapshot(state: AppState, snapshot: PlacementSnapsh
   }
   saveState(next)
   return next
+}
+
+/**
+ * Record one advanced-listening result for the active profile. Listening
+ * history is optional so existing v5 profiles need no migration. Keep only
+ * the newest 50 attempts to avoid unbounded localStorage growth.
+ */
+export function recordListeningResult(state: AppState, result: ListeningResult): void {
+  const profile = state.profiles[state.currentProfileId]
+  if (!profile) return
+  const history = profile.listeningHistory ?? (profile.listeningHistory = [])
+  history.push(result)
+  if (history.length > 50) history.splice(0, history.length - 50)
+  saveState(state)
 }
 
 // ---------------------------------------------------------------------------

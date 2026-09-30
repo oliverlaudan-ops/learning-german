@@ -1,9 +1,10 @@
 import './lesson.css'
-import type { Chapter, VocabWord } from '../types'
+import type { Chapter, ListeningResult, VocabWord } from '../types'
 import { vocabulary } from '../data/vocabulary'
 import { getLessonContent } from '../data/lesson-content'
+import { recordListeningResult } from '../state/state'
 import { renderGuidedSession } from './lesson-session'
-import { __getProfile } from './ui'
+import { __appState, __getProfile } from './ui'
 import { disposeListeningLesson, listeningEntry, renderListeningLesson } from './listening-lesson'
 import { consultationListeningEntry, disposeDoctorListeningLesson, doctorListeningEntry, housingListeningEntry, renderConsultationListeningLesson, renderDoctorListeningLesson, renderHousingListeningLesson, renderTravelListeningLesson, travelListeningEntry } from './doctor-listening-lesson'
 
@@ -130,14 +131,12 @@ function renderLesson(chapter: Chapter): string {
           <h2>Useful phrases</h2>
           <p>These are phrases worth remembering as complete units.</p>
         </div>
-        <div class="lesson-phrase-list">
-          ${content.communication.map((phrase) => `
+        <div class="lesson-phrase-list">${content.communication.map((phrase) => `
             <article class="lesson-phrase">
               <div><strong>${escapeHtml(phrase.german)}</strong><button class="lesson-audio" type="button" data-speak="${escapeHtml(phrase.german)}" aria-label="Listen">🔊</button></div>
               <span>${escapeHtml(phrase.english)}</span>
             </article>
-          `).join('')}
-        </div>
+          `).join('')}</div>
       </section>
 
       <section class="lesson-card lesson-tips">
@@ -196,6 +195,21 @@ function currentLearnerName(): string {
   return 'Anna'
 }
 
+function recordAdvancedListening(result: ListeningResult): void {
+  if (!result.total) return
+  recordListeningResult(__appState, result)
+}
+
+function listeningProgressSummary(): string {
+  const history = __getProfile().listeningHistory ?? []
+  if (!history.length) {
+    return `<section class="lesson-card"><span class="lesson-kicker">LISTENING PROGRESS</span><h3>Your checked results will appear here.</h3><p>Finish one of the A2+/B1 listening exercises and check at least one comprehension task to start tracking progress.</p></section>`
+  }
+  const latest = history[history.length - 1]
+  const practisedLessons = new Set(history.map(result => result.lessonId)).size
+  return `<section class="lesson-card"><span class="lesson-kicker">LISTENING PROGRESS</span><h3>Latest checked result: ${latest.accuracy}%</h3><p>${history.length} checked session${history.length === 1 ? '' : 's'} across ${practisedLessons} advanced listening lesson${practisedLessons === 1 ? '' : 's'}. Latest: ${latest.correct}/${latest.total} correct.</p></section>`
+}
+
 export function renderLearnExperience(target: HTMLElement, chapters: readonly Chapter[]): void {
   disposeListeningLesson()
   disposeDoctorListeningLesson()
@@ -209,6 +223,7 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
           <h2>Learn German step by step</h2>
           <p>Each lesson now combines vocabulary, simple English explanations, grammar, useful phrases and a guided learning session.</p>
         </div>
+        ${listeningProgressSummary()}
         ${doctorListeningEntry()}
         ${consultationListeningEntry()}
         ${travelListeningEntry()}
@@ -268,24 +283,24 @@ function wireListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): 
 
 function wireDoctorListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): void {
   target.querySelector('[data-doctor-listening-start]')?.addEventListener('click', () => {
-    renderDoctorListeningLesson(target, () => renderLearnExperience(target, chapters))
+    renderDoctorListeningLesson(target, () => renderLearnExperience(target, chapters), recordAdvancedListening)
   })
 }
 
 function wireConsultationListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): void {
   target.querySelector('[data-consultation-listening-start]')?.addEventListener('click', () => {
-    renderConsultationListeningLesson(target, () => renderLearnExperience(target, chapters))
+    renderConsultationListeningLesson(target, () => renderLearnExperience(target, chapters), recordAdvancedListening)
   })
 }
 
 function wireTravelListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): void {
   target.querySelector('[data-travel-listening-start]')?.addEventListener('click', () => {
-    renderTravelListeningLesson(target, () => renderLearnExperience(target, chapters))
+    renderTravelListeningLesson(target, () => renderLearnExperience(target, chapters), recordAdvancedListening)
   })
 }
 
 function wireHousingListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): void {
   target.querySelector('[data-housing-listening-start]')?.addEventListener('click', () => {
-    renderHousingListeningLesson(target, () => renderLearnExperience(target, chapters))
+    renderHousingListeningLesson(target, () => renderLearnExperience(target, chapters), recordAdvancedListening)
   })
 }
