@@ -53,6 +53,27 @@ export interface QuizResult {
   categoryFilter?: string
 }
 
+export interface ListeningTaskScore {
+  correct: number
+  total: number
+}
+
+/** Result from one completed advanced listening exercise. */
+export interface ListeningResult {
+  lessonId: string
+  chapterId: string
+  level: CEFRLevel
+  correct: number
+  total: number
+  accuracy: number
+  tasks: {
+    trueFalse?: ListeningTaskScore
+    gaps?: ListeningTaskScore
+    sequence?: boolean
+  }
+  completedAt: number
+}
+
 export interface ChapterProgress {
   chapterId: string
   levelId: CEFRLevel
@@ -186,6 +207,8 @@ export interface ProfileState {
   categoryStats: Record<string, CategoryStat>
   /** Snapshot of the last placement check, used to personalize the path. */
   placement?: PlacementSnapshot
+  /** Recent advanced-listening attempts, newest last. */
+  listeningHistory?: ListeningResult[]
 }
 
 /**
