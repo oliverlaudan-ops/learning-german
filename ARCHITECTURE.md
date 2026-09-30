@@ -1,224 +1,374 @@
 # ARCHITECTURE.md
 
-This document describes the module layout of `learning-german` after the
-refactor, the rationale for each split, and the wiring changes that fixed
-the Achievement system.
+This document describes the current implementation boundaries of `learning-german`, the persistence model, and the main learner flows that future changes should preserve.
 
 ## High-level layout
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        src/main.ts                              │
-│                  (entry — calls initApp)                        │
-└──────────────────────────┬──────────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                       src/ui/ui.ts                              │
-│   DOM rendering, event listeners, window.* exports,             │
-│   quiz/grammar session orchestration                            │
-│   ┌────────────────────────────┐                                │
-│   │ src/ui/achievement-ui.ts   │  toast notifications           │
-│   └────────────────────────────┘                                │
-└──┬──────────┬──────────┬──────────┬──────────┬──────────────────┘
-   │          │          │          │          │
-   ▼          ▼          ▼          ▼          ▼
-┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────────┐
-│state │  │ srs  │  │ quiz │  │grammar│ │ data/*   │
-│      │  │      │  │      │  │       │ │(json+ts) │
-└──────┘  └──────┘  └──────┘  └──────┘  └──────────┘
+```text
+src/main.ts
+   |
+   v
+src/ui/ui.ts -----------------------------+
+   |                                      |
+   +--> dashboard / placement / lessons   |
+   +--> vocab + grammar session wiring     |
+   +--> achievements                      |
+   +--> listening renderers               |
+   |                                      |
+   +----> src/state/state.ts <-------------+
+   +----> src/srs/srs.ts
+   +----> src/quiz/quiz.ts
+   +----> src/grammar/grammar.ts
+   +----> src/data/*
 ```
 
-The UI layer owns all DOM and storage writes. Everything else is pure
-(functions over plain data) and is unit-tested in `tests/`.
+The architecture is intentionally lightweight: no UI framework, browser storage for learner state, and domain logic split away from DOM code where practical.
 
 ## Module map
 
-### `src/state/state.ts`
+### `src/main.ts`
 
-AppState types, persistence, and migrations.
-
-- `STORAGE_KEY = 'learning-german-v4-state'` (bumped from v3)
-- `LEGACY_V3_KEY`, `LEGACY_V2_KEY` — old keys migrated on first load and
-  removed
-- `loadState({ levels })` — try current → v3 → v2 → fresh
-- `saveState(state)` — single write path
-- `createEmptyProfile(id, name, levels)` — used for "new profile" and
-  the v2 migration
-
-Migrations are idempotent and preserve all user data. They never run on
-every load — only on first detection of an old key.
-
-### `src/srs/srs.ts`
-
-Leitner-box spaced-repetition logic. Pure functions, no DOM, no storage.
-
-- `SRS_INTERVALS_MS` — the canonical 5-box schedule (1d, 3d, 7d, 14d, 30d)
-- `applySrsReview(entry, correct, now?)` — mutates an entry, returns it
-- `getDueSrsWords(vocab, srsState, now?)` — list of words due for review
-- `initSrsForLearnedWord(now?)` — schedule a brand-new entry on first
-  correct quiz answer
-- `boxCounts(srsState)` — aggregation used by the Review tab
-
-### `src/quiz/quiz.ts`
-
-Vocab-quiz generators and sentence-construction helpers.
-
-- `generateQuiz(options, ctx)` — pure, returns `VocabQuizQuestion[]`
-  for all 5 modes (`de-en`, `en-de`, `audio-dictation`,
-  `sentence-completion`, `type-sentence`)
-- `tokenizeSentence(s)` — splits a sentence into word tiles, preserving
-  punctuation
-- `sentencesEqual(userTiles, correct)` — case-insensitive,
-  whitespace-tolerant, umlaut-tolerant (ASCII fallbacks `ae/oe/ue/ss`)
-
-The injected `rng?: () => number` lets tests assert deterministic
-behaviour.
-
-### `src/grammar/grammar.ts`
-
-Pure grammar quiz logic, no DOM.
-
-- `pickExercises(pool, count, rng?)` — Fisher–Yates shuffle with bounded
-  size
-- `scoreCloze(ex, answer)` — strict equality for multiple-choice
-- `scoreSentenceConstruction(ex, userTiles)` — delegates to
-  `sentencesEqual`
-- `tilesForExercise(ex)` — `tokenizeSentence(ex.correctAnswer)`
-- `createGrammarQuizState / currentExercise / isFinished` — small state
-  machine the UI layer advances after each answer
+Application bootstrap. It imports shared CSS, calls `initApp()`, and enables the learner-dashboard/lesson enhancements.
 
 ### `src/ui/ui.ts`
 
-The only module that touches the DOM. Owns:
+Legacy-compatible orchestration layer and the central owner of the app's DOM-driven quiz/practice flows.
 
-- All `render*` functions (Dashboard, Review, Learn, Practice, Stats)
-- The quiz session state machines (vocab + grammar)
-- The `window.*` exports that the inline `onclick` attributes need
-- Achievement detection + persistence side-effect (see Achievement
-  changelog below)
+It owns:
 
-`initApp()` is the public entry — `src/main.ts` just calls it.
+- main tab switching;
+- vocabulary quiz session state;
+- grammar quiz session state;
+- Review, Practice and Stats rendering;
+- profile access;
+- `window.*` compatibility exports;
+- achievement evaluation and notification wiring;
+- show-tab hooks used by modular enhancements.
+
+`__appState` and `__getProfile` are exported as integration/test seams used by newer UI modules. Avoid multiplying direct state access beyond clear integration points.
+
+### `src/ui/dashboard.ts` + `dashboard-bootstrap.ts`
+
+Learner-focused dashboard layered on top of the established app shell.
+
+Responsibilities include:
+
+- daily goal, streak, accuracy and learned-word summaries;
+- A1–B2 level progress;
+- Continue Learning;
+- placement-result awareness;
+- quick refresher links;
+- Smart Review hints;
+- safe re-rendering through `registerShowTabHook` rather than runtime-patching tab navigation.
+
+### `src/ui/lesson-ui.ts`
+
+Course/lesson routing and chapter presentation.
+
+It:
+
+- renders the Learn index;
+- opens chapter pages;
+- launches guided lesson sessions;
+- registers entry points for dedicated listening exercises;
+- displays the Listening Progress summary;
+- persists advanced listening results through `recordListeningResult`.
+
+### `src/ui/lesson-session.ts`
+
+Guided lesson experience shared by shipped A1/A2 content.
+
+The intended learning sequence is:
+
+1. Learn
+2. Listen
+3. Understand
+4. Build
+5. Speak
+6. Real German
+7. Review
+
+Keep this sequence coherent when extending guided course content rather than creating unrelated chapter-specific interaction models.
+
+### `src/ui/listening-lesson.ts`
+
+Dedicated renderer for the A2 **Making weekend plans** unit.
+
+This lesson differs from the advanced renderer because it uses bundled static MP3 assets, including chunked audio for speaking practice. It currently does not emit a persisted listening score.
+
+### `src/ui/doctor-listening-lesson.ts`
+
+Despite the historical filename, this is now the shared **advanced listening renderer** for multiple domains:
+
+- doctor's appointment;
+- doctor consultation;
+- travel disruption;
+- housing search.
+
+The renderer is data-driven and supports:
+
+- hidden transcript on first listen;
+- browser Speech Synthesis;
+- optional multiple German voices by speaker;
+- configurable speech rate;
+- true/false questions;
+- gap-fill questions;
+- event ordering;
+- replayable transcript review;
+- speaking prompts;
+- completion scoring;
+- per-task score breakdown;
+- retry and targeted next-step feedback;
+- an optional `onComplete(ListeningResult)` callback.
+
+Do not fork this renderer for every new realistic listening lesson. Add compatible content data unless the interaction genuinely requires a different learning model.
+
+### `src/ui/placement-test.ts`
+
+Interactive 21-question placement check across A1/A2/B1.
+
+It includes browser-synthesized listening items and persists a `PlacementSnapshot` only when the learner acts on the recommendation/refresher path.
+
+Placement remains advisory rather than a formal CEFR assessment.
 
 ### `src/ui/achievement-ui.ts`
 
-Vanilla-DOM toast notifications. No library, no framework.
+Vanilla-DOM achievement toast rendering. The core achievement definitions remain in `src/data/achievements.ts`.
 
-- `showAchievementToast(achievements)` queues and animates a stack of
-  toasts in the bottom-right corner. Each toast auto-dismisses after
-  4.5s and can be clicked to dismiss early. Multiple unlocks stagger by
-  200ms so they don't visually collide.
+### `src/state/state.ts`
 
-### `src/data/`
+Owns persisted application state, migration, and state write-back helpers.
 
-Data and types:
+Current keys:
 
-- `vocabulary.json` — 289 words, the source of truth
-- `vocabulary.ts` — re-export + frozen + `findVocabById` helper
-- `vocabulary-schema.ts` — hand-rolled runtime validator
-- `grammar-exercises.ts` — index that aggregates the three sources
-- `grammar-exercises-legacy.ts` — original 17 cloze exercises
-- `grammar-exercises-genitiv.ts` — 20 new genitiv exercises
-- `grammar-exercises-infinitiv.ts` — 20 new infinitiv-zu exercises
-- `lessons.ts` — chapter/level metadata
-- `achievements.ts` — achievement definitions
-- `grammar.ts` — long-form grammar reference (informational)
-- `glossary.ts` — vocabulary glossary (informational)
+```text
+learning-german-v5-state   current
+learning-german-v4-state   migration source
+learning-german-v3-state   migration source
+learning-german-v2-state   migration source
+```
 
-The `grammar-exercises-genitiv.ts` and `grammar-exercises-infinitiv.ts`
-files each mix cloze multiple-choice and sentence-construction tile
-exercises. The renderer decides per-exercise based on `isTileExercise`:
+Important functions:
+
+- `loadState({ levels })`
+- `saveState(state)`
+- `createEmptyProfile(id, name, levels)`
+- `savePlacementSnapshot(state, snapshot)`
+- `recordListeningResult(state, result)`
+
+#### Migration model
+
+- v2 was a flat/single-profile legacy shape;
+- v3/v4 used profile-aware state;
+- v5 added the optional placement snapshot;
+- advanced `listeningHistory` was later added as an **optional field within v5**, so existing valid v5 data remains compatible without another migration.
+
+Migration writes the newer state before removing the older storage key.
+
+#### Listening history
+
+`recordListeningResult` appends to the active profile's optional `listeningHistory` and retains the newest **50 attempts**.
+
+A `ListeningResult` contains:
 
 ```ts
-function isTileExercise(ex: GrammarExercise): boolean {
-  const c = ex.correctAnswer
-  if (!c.includes(' ')) return false              // single word → cloze
-  if (!/^[A-ZÄÖÜ]/.test(c)) return false          // lowercase → not a sentence
-  return ex.options.length === 2
-      && ex.options[0] === 'Build the sentence'   // marker option
+interface ListeningResult {
+  lessonId: string
+  chapterId: string
+  level: string
+  correct: number
+  total: number
+  accuracy: number
+  tasks: {
+    trueFalse?: { correct: number; total: number }
+    gaps?: { correct: number; total: number }
+    sequence?: boolean
+  }
+  completedAt: number
 }
 ```
 
-This convention keeps the `GrammarExercise` type unchanged so every
-existing call site keeps working.
+The Learn UI deliberately does not persist an advanced-listening run when `total === 0`, because finishing speaking practice without checking any comprehension tasks is not evidence of 0% comprehension.
 
-## Achievement changelog
+### `src/srs/srs.ts`
 
-The old `checkAchievements()` in `app.ts` was a one-liner that just
-called `saveState`. It never evaluated any conditions, so no achievement
-could ever unlock. The refactor wires the real detection:
+Pure five-box Leitner spaced-repetition logic.
 
-1. `checkAchievements()` in `src/ui/ui.ts` now iterates over all
-   achievement definitions, evaluates their `condition()` against the
-   live profile (`progress` + `quizHistory`), and flags newly-satisfied
-   entries by setting `unlocked = true` and `unlockedAt = Date.now()`.
-2. Unlocked entries are pushed to a local `pendingAchievements` queue.
-3. `flushAchievements()` is called at the end of `finishQuiz()` and
-   renders them as toasts via `src/ui/achievement-ui.ts`.
-4. The `saveState` side-effect on every check ensures `unlockedAt`
-   timestamps survive a page reload.
+Canonical intervals:
 
-Triggers now fire from:
-- `finishQuiz()` — after every vocabulary quiz, evaluates quiz/accuracy
-  /streak/special achievements
-- `markWordLearned()` — implicitly through `progress.totalWordsLearned`
-  being incremented, which unlocks the `learn-*` achievements on the
-  next `checkAchievements()` call
-- `renderDashboard()` — runs the day-rollover (streak increment /
-  reset) before rendering, which can unlock `streak-*` achievements
-  the first time the user comes back the next day
+- Box 1: 1 day
+- Box 2: 3 days
+- Box 3: 7 days
+- Box 4: 14 days
+- Box 5: 30 days
 
-The `achievement-ui` toast is the only visible signal of an unlock; the
-underlying state is durable.
+Key helpers include `applySrsReview`, `getDueSrsWords`, `initSrsForLearnedWord`, and `boxCounts`.
 
-## Sentence-construction mix UI
+### `src/quiz/quiz.ts`
 
-The user's chosen UI direction is **Mix**:
+Pure vocabulary and sentence helpers.
 
-- **Tile mode** (sentence-construction) for grammar sentences
-  (genitiv + infinitiv-zu tile exercises)
-- **Cloze mode** for vocabulary sentences (existing `sentence-completion`
-  and `type-sentence` modes are unchanged)
+Supported modes:
 
-The renderer in `src/ui/ui.ts` builds the tile UI in
-`renderTileQuestion(exercise)`:
+- `de-en`
+- `en-de`
+- `audio-dictation`
+- `sentence-completion`
+- `type-sentence`
 
-- The correct sentence is tokenized via `tokenizeSentence` and shuffled
-  for display in the "pool" area.
-- Each tile in the pool is a `<button>`; clicking moves it into the
-  "built" area in click-order.
-- A tile in the built area can be clicked again to send it back to the
-  pool.
-- "Undo" pops the most recently added tile back to the pool.
-- "Reset" empties the built area.
-- "Check" scores the built sequence with `scoreSentenceConstruction` →
-  `sentencesEqual` (case/whitespace/umlaut-tolerant).
+Sentence comparison is tolerant of case/whitespace and German-character ASCII fallbacks where intended by the existing implementation.
+
+### `src/grammar/grammar.ts`
+
+Pure grammar-quiz state and scoring logic. Tile-based sentence construction and cloze-style exercises share the same domain module while DOM handling stays in `src/ui/ui.ts`.
+
+### `src/data/`
+
+Learning content and metadata, including:
+
+- vocabulary and schema validation;
+- chapter/level metadata;
+- guided lesson content;
+- placement questions/scoring data;
+- grammar exercise sources;
+- achievements and glossary/reference content;
+- listening lesson JSON files.
+
+Current dedicated listening content includes:
+
+```text
+weekend-listening.json
+doctor-appointment-listening.json
+doctor-consultation-listening.json
+travel-disruption-listening.json
+housing-search-listening.json
+```
+
+## Advanced listening scoring model
+
+The advanced listening renderer only scores task types the learner explicitly checks.
+
+### True/false
+
+Once submitted, score is:
+
+```text
+number of answers matching the lesson key / number of statements
+```
+
+### Gap fill
+
+Once submitted, score is:
+
+```text
+number of selected exact answers matching the lesson key / number of gaps
+```
+
+### Event ordering
+
+Once the learner presses **Check order**, this contributes one scored item:
+
+```text
+1/1 if the full sequence is correct
+0/1 otherwise
+```
+
+If a task type is never checked, it is excluded from both numerator and denominator.
+
+This matters pedagogically: an incomplete run must not silently become a low-confidence assessment.
+
+## Audio model
+
+There are two audio approaches.
+
+### Bundled MP3
+
+The weekend lesson uses pre-generated Piper audio from `public/audio/`. This gives a consistent voice and supports replayable chunks but increases static assets and requires generated files to be maintained.
+
+### Browser Speech Synthesis
+
+Advanced lessons use the browser/device Speech Synthesis implementation:
+
+- `de-DE` language;
+- lesson-configurable playback rate;
+- multiple installed German voices used by speaker when available;
+- fallback to one voice when necessary;
+- visible text fallback when speech synthesis is unavailable.
+
+Do not assume the same voice inventory or sound quality on every device/browser.
+
+## Persistence boundaries
+
+Persist only learning evidence that has a clear product use.
+
+Currently persisted:
+
+- learned words;
+- quiz/SRS progress;
+- category stats;
+- placement result;
+- scored advanced-listening attempts.
+
+Currently **not** persisted as assessment:
+
+- repeat-after-me pronunciation;
+- whether a transcript/details element was opened;
+- raw audio playback counts;
+- unsubmitted comprehension answers.
 
 ## Testing
 
-- `tests/srs.test.ts` — 10 tests: intervals, apply, due, box counts
-- `tests/quiz.test.ts` — 13 tests: generation per mode, sentence helpers
-- `tests/grammar.test.ts` — 14 tests: tile vs cloze, scoring, state
-  machine, new exercise categories
-- `tests/state.test.ts` — 7 tests: round-trip, v2/v3 migration, fresh
-- `tests/vocabulary-schema.test.ts` — 9 tests: validation, bundled JSON
+Vitest uses `happy-dom`.
 
-The original refactor had 53 tests in five files. Current coverage also includes
-dashboard/bootstrap, lesson content, placement, and `tests/listening-lesson.test.ts`
-(hidden transcripts, feedback/corrections, playback lifecycle/failure, navigation,
-and bundled audio completeness). Current total on `codex/travel-disruption-listening`: **166 tests in 13 files**. The advanced-listening suites cover the appointment, consultation, and travel-disruption units: hidden transcripts, true/false scoring, gap filling, event ordering, speaking review, completion, course entry points, faster playback, and German voice selection. These units share the data-driven renderer in `src/ui/doctor-listening-lesson.ts`.
+Current main baseline after PR #10:
 
-Vitest is configured with `happy-dom` (lighter than jsdom) — we only
-need `localStorage` and a few browser globals for the tests, and
-happy-dom starts up in milliseconds with a much smaller install footprint.
+- **175 tests across 15 test files**;
+- CI runs `npm test` and `npm run build`;
+- PR #10 passed both before merge.
 
-## Migration safety
+Coverage includes:
 
-- `STORAGE_KEY` bumps to `learning-german-v4-state`.
-- On first load, `loadState()` tries the current key, then v3, then v2.
-  Whichever is found is migrated forward and persisted to v4, then the
-  old key is removed.
-- All migrations preserve the full shape: `progress`, `levels`,
-  `quizHistory`, `learnedWordIds`, `srsState`, `categoryStats`.
-- Migrations are non-destructive — the old keys are removed *after* the
-  new state is written.
+- state migrations and persistence;
+- SRS logic;
+- vocab quiz generation/scoring;
+- grammar scoring/state;
+- vocabulary schema;
+- dashboard and dashboard bootstrap;
+- placement evaluation/UI helpers;
+- guided lesson content;
+- weekend listening playback/navigation;
+- doctor appointment listening;
+- doctor consultation listening;
+- travel disruption listening and voice selection;
+- housing listening;
+- advanced listening result emission, persistence and skipped-task handling.
+
+## CI and deployment
+
+`.github/workflows/test.yml` uses:
+
+- `actions/checkout@v6`
+- `actions/setup-node@v7`
+- Node 24
+- `npm ci`
+- `npm test`
+- `npm run build`
+
+It runs on pull requests to `main`, pushes to `main`, and manual dispatch.
+
+The Pages workflow builds and deploys `dist/` from `main`. Feature branches should be reviewed through PRs; they should not be treated as independently deployed production versions.
+
+## Architectural invariants
+
+Future work should preserve these unless there is a strong reason to change them:
+
+1. **Learning content belongs in `src/data/`.**
+2. **Pure scoring/review logic should not depend on the DOM.**
+3. **DOM/event wiring belongs in `src/ui/`.**
+4. **Persisted state changes must be backward-safe.**
+5. **Do not replace established Learn/Practice/Review/profile flows just to add a new feature.**
+6. **Prefer the shared advanced-listening renderer over per-lesson copies.**
+7. **Skipped tasks must not be interpreted as wrong answers without explicit product intent.**
+8. **Placement is advisory, not certification.**
+9. **Speaking practice is practice, not automated pronunciation assessment.**
+10. **Mobile usability and audio fallbacks are first-class requirements.**
