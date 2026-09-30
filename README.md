@@ -1,58 +1,99 @@
 # Deutsch Lernen 🇩🇪
 
-A free, offline-capable German learning portal for English speakers.
+A personal German-learning portal for English speakers, built around practical A2→B1 learning, guided lessons, listening comprehension, spaced repetition, and locally stored progress.
 
-## Features
+## Current learning experience
 
-- **4 Learning Sections:**
-  - 📚 Grammar – Explanations with examples and exercises
-  - 🔤 Vocabulary – Themed word lists with interactive flashcards
-  - 🗣️ Pronunciation – Phonetic guides with English sound comparisons
-  - 🌍 Everyday German – Practical dialogues for real-life scenarios
+- **CEFR path:** A1 foundation/refresh, A2 core course, B1 next level, B2 advanced placeholder/content area.
+- **Guided lessons:** learn, listen, understand, build, speak, use real German, then review.
+- **Placement check:** 21-question in-app diagnostic across A1, A2, and B1 with chapter-level recommendations and optional refreshers. It is a learning recommendation, not an official CEFR exam.
+- **Vocabulary practice:** German↔English, audio dictation, sentence completion, and B1+ sentence typing.
+- **Grammar practice:** cloze and sentence-construction exercises across articles, cases, modal verbs, perfect tense, prefixes, subordinate clauses, Konjunktiv II, relative clauses, and more.
+- **Smart review:** five-box Leitner spaced repetition with local review state.
+- **Profiles and progress:** multiple learner profiles, quiz history, level/chapter progress, streaks, achievements, category statistics, and placement results are stored in the browser.
 
-- **3 Levels:** A2 → B1 → B2 progression
-- **Progress Tracking:** Your completed lessons are saved locally
-- **Offline-First:** Works without internet after first load
-- **Mobile-First Design:** Looks great on any device
+## Listening and speaking
 
-## Tech Stack
+The portal currently includes five dedicated listening experiences:
 
-- [Vite](https://vitejs.dev/) + TypeScript
-- LocalStorage for progress persistence
-- GitHub Pages deployment (CNAME configured)
-- Mobile-first CSS
+1. **Making weekend plans** — A2, bundled MP3 audio, comprehension questions and pronunciation/chunk practice.
+2. **Making a doctor's appointment** — A2+/early B1, realistic phone call with changing details.
+3. **At the doctor's consultation** — B1, symptoms, examination, medicine instructions, sick note, and warning signs.
+4. **A missed connection at the station** — B1, two-speaker travel disruption with rejected alternatives and final journey details.
+5. **Finding the right flat** — B1, three speakers, changing rent/dates/documents and conditional information.
 
-## Usage
+The four advanced A2+/B1 listening lessons share a data-driven interaction flow:
 
-1. Open `index.html` in a browser
-2. Or deploy to GitHub Pages (CNAME already configured)
-3. Start learning! 🎉
+- hidden-transcript listening;
+- true/false comprehension;
+- gap fill;
+- event ordering;
+- transcript review and speaking practice;
+- scored completion summary;
+- per-profile listening history and a Listening Progress summary in Learn.
 
-## Structure
+Skipped comprehension task types are not counted as wrong answers. Pronunciation practice is not presented as automated speech assessment.
 
+## Tech stack
+
+- Vite 8 + TypeScript 6
+- Vitest 4 with happy-dom
+- browser `localStorage` persistence
+- browser Speech Synthesis for most advanced listening lessons
+- bundled static MP3 audio for the weekend lesson
+- GitHub Actions CI and GitHub Pages deployment
+- mobile-first CSS
+
+## Development
+
+```bash
+npm ci
+npm run dev
 ```
+
+Verification:
+
+```bash
+npm test
+npm run build
+```
+
+GitHub Actions runs both commands for pull requests targeting `main` and for pushes to `main`. Pages deploys from `main` after merge.
+
+## Project structure
+
+```text
 learning-german/
-├── index.html              # Main entry point
+├── .github/workflows/       # CI + Pages deployment
+├── public/                  # static assets and bundled listening audio
+├── scripts/                 # helper scripts, including audio generation
 ├── src/
-│   ├── main.ts             # Vite app bootstrap
-│   ├── app.ts              # Main application logic and UI rendering
-│   ├── style.css           # All styles
-│   ├── types.ts            # Shared TypeScript interfaces
-│   └── data/               # Static learning content
-│       ├── lessons.ts      # Chapters grouped into CEFR levels
-│       ├── vocabulary.ts   # German–English word list
-│       ├── grammar.ts      # Grammar rule explanations
-│       ├── grammar-exercises.ts
-│       ├── glossary.ts
-│       └── achievements.ts
-├── public/                 # Static assets (manifest, etc.)
-├── dist/                   # Vite production build output
-├── package.json            # Vite + TypeScript dependencies
-├── tsconfig.json
-├── vite.config.ts
-└── CNAME                   # GitHub Pages custom domain
+│   ├── data/                # lessons, vocabulary, grammar, placement + listening content
+│   ├── grammar/             # pure grammar quiz logic
+│   ├── quiz/                # pure vocabulary/sentence quiz logic
+│   ├── srs/                 # Leitner spaced-repetition logic
+│   ├── state/               # persisted app state + migrations/write-back helpers
+│   ├── ui/                  # DOM rendering and interaction wiring
+│   ├── main.ts              # application bootstrap
+│   ├── style.css            # shared styles
+│   └── types.ts             # central TypeScript interfaces
+├── tests/                   # Vitest suites
+├── ARCHITECTURE.md          # technical architecture and invariants
+├── CONTEXT.md               # product direction, shipped work, handoff context
+├── package.json
+└── index.html
 ```
+
+## State and privacy
+
+Learner data is stored locally in the browser. The current state key is `learning-german-v5-state`; older v2/v3/v4 data is migrated forward when found. Listening history is optional within v5, so the listening-progress feature did not require another storage-version bump.
+
+## Product direction
+
+The immediate goal is not to build a generic language platform. The portal is optimized for a learner moving from A2 toward B1, with practical real-life German, increasingly demanding listening, clear next actions, and review driven by actual learning data.
+
+See `CONTEXT.md` for the current roadmap and `ARCHITECTURE.md` for implementation details.
 
 ## License
 
-MIT – See LICENSE file
+See `LICENSE` and the `license` field in `package.json` for repository licensing information.
