@@ -1,17 +1,23 @@
 # learning-german — Project Context
 
-> **Purpose:** This file is the working context for future contributors and Codex sessions. Read it before changing the learning experience. It captures agreed product direction, the current architecture, work already shipped on `main`, and the next priorities.
+> **Purpose:** Working context for future contributors and coding sessions. Read this before changing the learning experience.
 >
 > **Repository:** `oliverlaudan-ops/learning-german`  
 > **Working branch:** `main`  
-> **Last shipped:** [#7 — Add B1 doctor consultation listening exercise](https://github.com/oliverlaudan-ops/learning-german/pull/7) (merged 2026-09-15).  
-> **Branch rule:** Branch off `main` for any new feature. Keep changes scoped; **do not deploy from `main` directly** — the Pages workflow handles that on merge.
+> **Last shipped:** [#10 — Track advanced listening progress](https://github.com/oliverlaudan-ops/learning-german/pull/10), merged 2026-09-30.  
+> **Branch rule:** Branch off `main` for feature or documentation work. Keep changes scoped. GitHub Pages deploys from `main` after merge.
 
 ## 1. Product mission
 
-`learning-german` is not meant to be a generic vocabulary trainer or a collection of disconnected quizzes.
+`learning-german` is a practical, personal German-learning companion for an English-speaking learner moving from approximately **A2 toward B1**.
 
-It is being shaped into a practical, personal German-learning companion for an English-speaking learner living in Uganda. The immediate learner is approximately **A2 moving toward B1**. The portal should help her understand what to learn next, practise it in realistic context, retain it, and see meaningful progress.
+The portal should help the learner:
+
+- understand what to learn next;
+- practise useful German in realistic situations;
+- improve listening and speaking confidence;
+- retain vocabulary and grammar through review;
+- see meaningful progress without being forced through a rigid beginner course.
 
 The guiding question for every feature is:
 
@@ -19,297 +25,272 @@ The guiding question for every feature is:
 
 ### Product principles
 
-- **English is the explanation language; German is the language being learned.** Grammar explanations should be simple, natural English, supported by useful German examples.
-- **Teach language in context.** Prefer articles, plurals, example sentences, short dialogues, and communicative situations over isolated word pairs.
-- **Personalized, not linear by default.** The learner should not be forced to repeat an entire beginner course when she only needs a targeted refresh.
-- **Clear next action.** The dashboard should answer “What should I do today?” without making the learner plan the session herself.
-- **Mobile-first and offline-first.** This matters for the learner's context: the app should remain useful after an initial load without requiring constant connectivity.
-- **Motivation supports learning, not the other way around.** Goals, streaks, XP/progress, achievements, and review counts are useful only when they direct attention toward learning.
-- **Build from a good reference lesson.** A1 is the pedagogical reference implementation; later A2–B2 work should reuse and improve its lesson pattern rather than create unrelated experiences.
+- **English explains; German is practised.** Keep explanations simple and natural, with useful German examples.
+- **Teach in context.** Prefer dialogues, situations, sentence patterns, articles/plurals, and complete phrases over isolated word pairs.
+- **A2→B1 is the immediate priority.** A1 exists mainly as foundation/refresh; B2 is secondary until the current path is strong.
+- **Clear next action.** The learner should not need to plan the learning session herself.
+- **Mobile-first.** The learner primarily uses a phone, so controls, layouts, audio and feedback must remain usable on small screens.
+- **Local-first progress.** Learning data lives in browser storage and should survive upgrades through safe migrations.
+- **Motivation supports learning.** Streaks, achievements and progress indicators should direct attention toward useful practice, not become the product goal.
+- **Do not overclaim assessment.** Placement is advisory; pronunciation practice is not automatic pronunciation scoring.
 
-## 2. Agreed learning architecture
-
-This is the agreed high-level learning model:
+## 2. Learning architecture
 
 ```text
-Placement Test
+Placement Check
       |
       +--> A1 — Foundation & Refresh
       +--> A2 — Core Course
       +--> B1 — Next Level
       |
       v
-B2 — Advanced
+Smart Review / SRS
       |
       v
-Smart Review (across all levels)
+B2 — Advanced (later priority)
 ```
 
-### Placement Test
+### Placement Check
 
-The entry point is a short diagnostic, not a formal CEFR exam. It should assess vocabulary, grammar, articles/gender and cases, verb forms, sentence structure, reading, and eventually practical language situations/listening.
+The in-app placement check currently contains **21 questions across A1, A2 and B1**. It covers vocabulary, grammar, articles, sentence order, reading, perfect tense, cases, modal verbs, connectors and listening.
 
-Its result must be an explanation and recommendation—not merely a score. Example:
+It returns:
 
-> Your estimated level: A2+  
-> Your vocabulary is strong, but you should review German cases before moving toward B1.  
-> Recommended: A2 → Chapter 5  
-> Quick refresher: A1 → Cases
+- per-level percentages;
+- strengths/focus areas;
+- a recommended level;
+- a recommended chapter;
+- up to two refresher chapters;
+- an approximate flag for borderline A2/B1 cases.
 
-The current implementation is deliberately a prototype. It is helpful for a starting recommendation, but it is not yet fine-grained enough to reliably separate A2, A2+, and B1.
+It is a starting recommendation, not a formal CEFR examination.
 
 ### A1 — Foundation & Refresh
 
-A1 is **not** the default full course for the current learner. It is a targeted foundation and refresh area: articles/gender, basic word order, `sein`, `haben`, modal verbs, accusative basics, essential everyday phrases, and similar gaps.
+A1 is not the default full course for the current learner. It provides targeted refreshers for gaps such as articles, cases, word order, modal verbs, `sein`/`haben`, accusative basics and everyday phrases.
 
-A1 Chapter 1 is the main lesson-quality reference: a complete session should make the learner understand, hear, build, speak, and use language—not just answer multiple-choice questions.
+The guided lesson pattern established here is the reference pattern for later levels.
 
 ### A2 — Core Course
 
-A2 is likely the learner's primary course now. Prioritize practical communication around everyday life, work, travel, health, housing, conversations, the past, and increasingly complex sentence structures.
+A2 is the current core. Guided A2 content covers practical domains including travel, work, health, prefixes and hobbies/free time.
+
+Dedicated A2/A2+ listening extends this with realistic conversations and increasingly demanding comprehension.
 
 ### B1 — Next Level
 
-At B1 the aim shifts from “How do I say this sentence?” toward “How do I express myself naturally in German?” This level should increasingly include feedback, more natural alternatives, connectors, nuanced vocabulary, and independent communication.
+B1 shifts from producing isolated correct sentences toward understanding and expressing more natural, connected German. Current B1 listening work already introduces faster speech, changing information, multiple speakers, distractors and conditional details.
 
 ### B2 — Advanced
 
-B2 is future work: complex texts, discussion and argumentation, formal language, nuance, idiomatic expressions, and advanced grammar.
+B2 remains a later priority: longer texts, argumentation, formal language, nuance, idiomatic language and advanced grammar.
 
 ### Smart Review
 
-Smart Review runs across every level. It should eventually use existing SRS data and error/category signals to recommend what needs attention (for example, articles, accusative, sentence structure, vocabulary, or listening) rather than simply show a queue of due words.
+The portal already has Leitner SRS and category statistics. The longer-term direction is to combine SRS, quiz errors, placement focus areas and listening history into clearer review recommendations.
 
 ## 3. Current technical foundation
 
-The application is a **Vite + TypeScript** browser app with **Vitest** tests. It uses browser storage for persistent progress and is designed mobile-first/offline-first.
-
-The established module boundaries are important:
+The application is a **Vite + TypeScript browser app** with **Vitest + happy-dom** tests.
 
 ```text
 src/
-  data/      learning content, lesson metadata, vocabulary, grammar exercises
+  data/      learning content, lesson metadata, placement and listening JSON
   grammar/   pure grammar quiz logic
-  quiz/      pure vocabulary quiz and sentence-construction logic
-  srs/       Leitner-box spaced repetition logic
-  state/     AppState persistence and migrations
+  quiz/      pure vocabulary/sentence quiz logic
+  srs/       pure Leitner spaced-repetition logic
+  state/     AppState persistence, migrations and write-back helpers
   ui/        DOM rendering and interaction wiring
-  types.ts   central data types
-  main.ts    app entry point
+  types.ts   central types
+  main.ts    app bootstrap
 ```
 
-### Existing learner systems
+### Persisted learner systems
 
-- CEFR levels A1, A2, B1, and B2, with chapter and level progress.
-- Local persistent state with multiple profile support, progress, quiz history, learned word IDs, SRS state, and category statistics.
-- State migrations using `learning-german-v4-state`, with v2/v3 migration paths.
-- A five-box Leitner SRS schedule: 1, 3, 7, 14, and 30 days.
-- Quiz modes including German→English, English→German, audio dictation, sentence completion, and sentence construction.
-- Grammar exercise support for articles, conjugation, plural, cases, prepositions, pronouns, negation, modal verbs, perfect tense, prefixes, subordinate clauses, preterite, Konjunktiv II, and relative clauses.
-- Existing motivation/progress systems: daily goal, streaks, accuracy, completed quizzes, achievements, and level progress.
-- Browser speech synthesis already used for listening/pronunciation support.
+The current storage key is **`learning-german-v5-state`**.
 
-### Technical decisions to preserve
+Each profile can contain:
 
-- Keep quiz, grammar, and SRS logic DOM-independent and testable; keep DOM work in the UI layer.
-- Do not replace established Learn, Practice, Review, quiz, grammar, SRS, stats, or profile flows just to add new UI.
-- Preserve local data and migration safety whenever state shape changes.
-- Prefer small, modular UI components/styles over returning new complexity to the legacy monolithic UI.
-- Continue supporting mobile layouts and offline use.
-- Do not present the placement check as an official CEFR assessment.
+- overall and per-level progress;
+- chapter progress and learned word IDs;
+- quiz history;
+- SRS state;
+- category statistics;
+- placement snapshot;
+- optional advanced-listening history.
 
-## 4. Work already shipped on `main`
+Older v2/v3/v4 storage is migrated forward. Listening history was added as an optional v5 field, so PR #10 did not need a v6 migration.
 
-PR #4 was squashed and merged into `main` on 2026-08-20. The merged feature work now lives on `main` and includes the items below.
+### Existing practice systems
 
-### Learner dashboard
+- five-box Leitner schedule: 1, 3, 7, 14 and 30 days;
+- vocab quiz modes: German→English, English→German, audio dictation, sentence completion and B1+ sentence typing;
+- grammar categories including articles, conjugation, plural, cases, prepositions, pronouns, negation, modal verbs, perfect tense, prefixes, subordinate clauses, preterite, Konjunktiv II and relative clauses;
+- daily goal, streaks, achievements, quiz accuracy and level progress;
+- browser Speech Synthesis for pronunciation and most advanced listening lessons;
+- bundled MP3 audio for the weekend lesson.
 
-New dashboard components and styling provide:
+## 4. Guided lesson experience
 
-- a learner-focused welcome/home state;
-- daily goal, streak, words learned, quiz accuracy, due reviews, and completed quizzes;
-- A1–B2 progress displays;
-- **Continue Learning**, directing the learner to the next unfinished chapter;
-- **Smart Review**, surfacing due SRS work;
-- a visible **Placement Check** call to action;
-- responsive mobile and desktop presentation.
-
-The dashboard enhancement is added alongside the existing UI rather than replacing its established flows.
-
-### Guided lesson experience
-
-A lesson layer is present for A1 chapters, with lesson metadata/content and a guided session component.
-
-The intended session pattern is:
+Guided lessons follow this sequence:
 
 1. **Learn** — goal and useful language;
-2. **Listen** — hear a German sentence via browser speech synthesis;
-3. **Understand** — concise English grammar explanation with German examples;
-4. **Build** — construct a German sentence from word tiles with feedback;
-5. **Speak** — hear and repeat a sentence aloud;
-6. **Real German** — a short usable dialogue/situation;
-7. **Review** — continue into the existing quiz/SRS system.
+2. **Listen** — hear German;
+3. **Understand** — concise English explanation;
+4. **Build** — construct a German sentence;
+5. **Speak** — listen and repeat;
+6. **Real German** — use a practical phrase/dialogue;
+7. **Review** — continue into quiz/SRS practice.
 
-The A1 content is therefore the model for future A2–B2 lessons, not a separate disposable prototype.
+The Learn index and chapter pages coexist with existing vocabulary, grammar, practice and review flows rather than replacing them.
 
-### Placement Test
+## 5. Listening path shipped on `main`
 
-An interactive in-app test is implemented and opens from the dashboard in the Learn area.
+### #5 — Making weekend plans
 
-Current verified implementation:
+- level: A2;
+- six-turn conversation;
+- bundled Piper/Thorsten MP3 audio;
+- hidden transcript on first listen;
+- comprehension questions;
+- replayable turns;
+- chunked speaking/pronunciation guidance;
+- normal and slower playback;
+- no microphone or pronunciation score.
 
-- 21 questions across A1, A2, and B1 (4 A1 + 9 A2 + 8 B1);
-- skills: vocabulary, grammar, articles, sentence order, reading, perfect-tense, cases, modal-verbs, connectors, and listening;
-- per-level percentages, total score, strengths, focus areas, and a starting-level recommendation;
-- a clear disclaimer: it is a starting recommendation, not a formal CEFR assessment;
-- placement evaluation tests covering a strong B1 result, secure A1 with uncertain A2 resulting in A2, and an A1 recommendation when foundations are not secure.
+This unit uses a dedicated MP3 renderer and is not currently part of scored listening history.
 
-Important limitation: the current recommendation model uses a 70% threshold for A1/A2 progression and returns A1/A2/B1. It does **not** yet model A2+ or diagnose individual weak skills deeply enough for a truly personalized path.
+### #6 — Making a doctor's appointment
 
-### GitHub Actions / Node update
+- target: A2+/early B1;
+- realistic phone call with symptoms and changing appointment details;
+- true/false, gap fill, event ordering, transcript review and speaking prompts;
+- browser Speech Synthesis with fallback text.
 
-Both verified workflow files use the current CI setup:
+### #7 — At the doctor's consultation
 
-- Node.js **24**
-- `actions/checkout@v6`
-- `actions/setup-node@v7`
-- `npm ci`
-- `npm test`
-- `npm run build`
+- target: B1;
+- symptoms, examination, likely diagnosis, medication instructions, sick note and warning signs;
+- uses the shared advanced-listening renderer.
 
-The test workflow runs on pull requests to `main`, pushes to `main`, and manual dispatch. The Pages deployment workflow runs from `main` only. This preserves the rule that feature-branch work must not directly deploy or modify `main`.
+### #8 — A missed connection at the station
 
-## 5. Verification and CI status
+- target: B1;
+- two speakers when multiple installed German voices are available;
+- faster normal playback;
+- rejected times/routes/platforms and one final valid connection;
+- linked from Travel and Transport.
 
-This context was last verified against `main` after the squash-merge of PR #4 (`2305804 Introduce learner-focused dashboard (#4)`).
+### #9 — Finding the right flat
 
-- The dashboard, lesson, placement, and workflow changes described above are now part of `main`.
-- `npm test` runs **105 tests across 8 files** on a happy-dom environment; the GitHub Actions `test` workflow passes on every push to `main` and on every pull request targeting `main`.
-- The Pages deployment workflow runs from `main` only: `npm ci && npm run build && upload-pages-artifact && deploy-pages`. It deploys the bundled `dist/` to GitHub Pages automatically when a PR is merged.
-- This documentation commit did not change any application code.
+- target: B1;
+- three speakers when available;
+- phone call plus viewing;
+- changing rent, move-in dates, documents, fixtures and pet conditions;
+- deliberately includes old, corrected and conditional information;
+- linked from B1 housing.
 
-## 6. Recommended next steps
+### #10 — Listening progress
 
-### Current development: hearing and pronunciation (September 2026)
+The four advanced A2+/B1 listening lessons now produce optional scored results when comprehension tasks are actually checked.
 
-The learner uses Chrome on an older Samsung Android phone. The user's new
-priority is listening comprehension and pronunciation, ahead of placement-test
-expansion. The `codex/weekend-listening-pronunciation` branch adds an A2 unit,
-**Making weekend plans**, linked from Learn and the A2 hobbies chapter:
+A saved listening result includes:
 
-- Listen without a visible transcript, answer four comprehension questions,
-  replay six turns with optional German/English text, and practise three sentences
-  in six short chunks with English sound and stress guidance.
-- Thirteen fixed MP3 files (~318 KB total), generated locally with Piper and
-  the Thorsten German voice; normal/slower playback, no microphone or runtime
-  speech service needed. Both dialogue roles use the same synthetic voice.
-- Audio loads on demand and stops on exercise/tab/profile navigation. No new
-  progress storage or score is added; completion is practice, not pronunciation
-  assessment. Answer choices survive step navigation within the exercise.
-- The Learn index now includes all chapters with guided content (A1 and the
-  five existing A2 chapters), fixing the previous A1-only index.
-- Persistent offline audio downloads and reopening the portal offline remain
-  future work. This unit does not add a service worker. Recording and automatic
-  speech assessment are also not part of this first unit.
-- `src/data/weekend-listening.json` owns the content; `src/ui/listening-lesson.ts`
-  and its CSS own the UI. `scripts/generate-weekend-audio.py` reproduces the
-  audio; attribution is in `public/audio/weekend-v1/README.md`.
+- lesson and chapter IDs;
+- pedagogical level label such as `A2+` or `B1`;
+- correct/total/accuracy;
+- per-task scores for true/false and gap fill;
+- event-order result;
+- completion timestamp.
 
-Baseline was 137 tests; this change adds eight tests (145 total). Browser
-verification uses a small viewport, not a physical Android device. Review the
-synthetic voice with the learner before expanding to more listening units.
+Important behaviour:
 
+- skipped task types are excluded from the denominator rather than counted wrong;
+- a run with no checked comprehension tasks is not persisted as a 0% result;
+- the completion screen shows a task breakdown and next-step recommendation;
+- the learner can retry immediately;
+- Learn shows a Listening Progress summary with latest result, number of scored sessions and number of different advanced lessons practised;
+- only the newest 50 listening attempts are retained per profile.
 
-### Shipped: doctor appointment listening
+## 6. CI and deployment
 
-PR #6 added a second, more demanding unit,
-**Making a doctor's appointment**, linked from Learn and `a2-ch3` Health.
+GitHub Actions currently uses:
 
-- Level target: A2+/early B1; twelve turns in a realistic phone call.
-- The learner must track symptoms, a rejected Tuesday appointment, the final
-  Wednesday 10:15 appointment, a date of birth, and an insurance-card reminder.
-- Five stages: hidden-transcript listening, true/false, gap fill, event ordering,
-  and transcript review with four speaking prompts.
-- Unlike the bundled Piper MP3 weekend unit, this lesson uses browser speech
-  synthesis so it can be delivered through the GitHub-only workflow. It provides
-  a visible fallback if speech synthesis is unavailable.
-- Seven new tests cover hidden content, all task types, completion, and entry
-  points. The current branch baseline is 152 tests across 11 files.
+- Node.js **24**;
+- `actions/checkout@v6`;
+- `actions/setup-node@v7`;
+- `npm ci`;
+- `npm test`;
+- `npm run build`.
 
-### Shipped: doctor consultation listening
+The test workflow runs on pull requests targeting `main`, pushes to `main`, and manual dispatch.
 
-PR #7 added a third listening unit,
-**At the doctor's consultation**, as a direct continuation of making the appointment.
+GitHub Pages deploys from `main` after merge using the production `dist/` build.
 
-- Level target: B1; fourteen turns covering symptom duration, examination,
-  likely viral infection, medication dosage, a sick note and warning signs.
-- It reuses the established five-stage medical listening flow: hidden transcript,
-  true/false, gap fill, event ordering, and transcript review/speaking.
-- Six true/false statements, five gaps, seven ordered events and five speaking
-  prompts require more precise listening than the appointment lesson.
-- The medical renderer is now data-driven so both medical units share the same
-  interaction and accessibility behaviour.
-- Seven new tests bring the branch baseline to 159 tests across 12 files.
+### Current verified baseline
 
-### Current feature branch: travel disruption listening
+After PR #10:
 
-The `codex/travel-disruption-listening` branch adds **A missed connection at
-the station**, linked from Learn and `a2-ch1` Travel and Transport.
+- **175 tests across 15 test files** (172 before PR #10 + 3 new listening-progress tests);
+- production TypeScript/Vite build passes in CI;
+- PR #10 CI passed before merge.
 
-- Level target: B1; fourteen turns between a traveller and railway staff.
-- The dialogue deliberately mentions several plausible but rejected times,
-  platforms and routes before confirming the valid direct connection.
-- Normal playback is faster (1.08) while a slower learning option remains.
-- The two roles use different installed German browser voices when available;
-  one voice remains a functional fallback on devices that expose only one.
-- Six true/false statements, five gaps, eight ordered events and five speaking
-  prompts focus on delay, train restrictions, cancellation, platform changes,
-  ticket validity and seat reservations.
-- Seven new tests bring the branch baseline to 166 tests across 13 files.
+## 7. Recommended next steps
 
-The priorities below record the earlier roadmap; hearing/pronunciation now
-take precedence according to the user's request.
+Listening has enough content now that the next value should come from **better adaptation and progression**, not simply adding near-identical exercises.
 
-Prioritize in this order unless a new user request changes it:
+Prioritize roughly in this order unless a new user request changes direction:
 
-1. **Strengthen the Placement Test**
-   - Expand beyond 21 questions and distinguish A2, A2+, and B1 more reliably.
-   - Add targeted diagnostics for perfect tense, subordinate clauses, connectors, modal verbs, Konjunktiv II, prepositions/cases, and vocabulary by real-life domain.
-   - Add more substantial A2/B1 reading and, later, listening.
-   - Convert results into chapter-level recommendations and optional A1 refreshers.
+1. **Use listening history for recommendations**
+   - identify weak task types or repeated low scores;
+   - recommend a specific listening retry or related chapter;
+   - avoid turning one attempt into a permanent label.
 
-2. **Connect recommendations to a personalized path**
-   - Let placement and learning data choose the recommended A2/B1 lesson and any short A1 refreshers.
-   - Use category statistics and SRS/error history for Smart Review recommendations.
-   - Avoid routing the learner through a rigid A1→B2 sequence.
+2. **Strengthen placement and path personalization**
+   - improve separation between A2, A2+ and B1;
+   - add more diagnostic reading/listening;
+   - combine placement with actual learning and listening evidence.
 
-3. **Finish and validate the A1 reference course**
-   - Make the first lesson pedagogically strong and complete.
-   - Then apply the same session structure consistently across A1 chapters.
-   - Keep explanations simple English and examples practical, natural German.
+3. **Expand B1 guided content**
+   - housing now has an advanced listening entry but broader B1 guided lesson coverage remains limited;
+   - add natural connectors, explanation/correction and self-expression.
 
-4. **Build the A2 core course**
-   - This is the learner's most immediately valuable content area.
-   - Focus on everyday situations, work, travel, health, housing, conversation, past tense, and more complex sentence patterns.
+4. **Improve Smart Review**
+   - use SRS, category errors, placement focus areas and listening results together;
+   - surface one or two useful next actions rather than a generic queue.
 
-5. **Evolve B1 and Smart Review**
-   - Add more natural expression, correction, connectors, and self-expression.
-   - Make review increasingly individual rather than a generic due-word list.
+5. **Offline resilience**
+   - fixed MP3 assets work once cached by the browser but there is no explicit service-worker/offline-download system;
+   - consider deliberate asset caching only when it improves the learner's real usage.
 
-6. **Only then extend B2 / richer speaking-listening**
-   - Build advanced content after the personalized A2→B1 path is solid.
-   - Explore listening comprehension and optional speech/recording only when they serve the core learning flow.
+6. **Richer speaking only when useful**
+   - recording and automated speech assessment are intentionally absent;
+   - do not add them merely for novelty or imply reliable pronunciation scoring without a sound evaluation design.
 
-## 7. Handoff checklist for a new session
+## 8. Technical decisions to preserve
 
-Before implementing anything:
+- Keep quiz, grammar and SRS logic DOM-independent where possible.
+- Keep DOM interaction in `src/ui/`.
+- Preserve existing Learn, Practice, Review, profile and stats flows when adding features.
+- Protect local learner data whenever state changes.
+- Prefer optional state additions when a version bump is unnecessary and backward-compatible.
+- Keep listening content data-driven rather than copying renderers per lesson.
+- Preserve mobile usability and audio fallbacks.
+- Do not present placement as official CEFR certification.
+- Do not present repeat-after-me practice as automated pronunciation assessment.
 
-1. Read this file and `ARCHITECTURE.md`.
-2. Confirm you are on `main` (or branch off `main` for the new feature). Fetch with `git fetch origin --prune` so deleted remote branches do not show up as still tracked.
-3. Run `npm test` and `npm run build` to confirm the local environment matches the green CI baseline before you start changing things.
-4. Open a feature branch, keep changes scoped, and open a PR back into `main` when ready.
-5. Evaluate each change against the core question: does it make the learner's next German-learning step clearer, more practical, or more effective?
+## 9. Handoff checklist
 
-## 8. Short prompt for future Codex sessions
+Before implementing new work:
 
-> Read `CONTEXT.md` and `ARCHITECTURE.md` first. Branch off `main` for any new work; do not push directly to `main`. We are building a personal, English-guided, mobile/offline-friendly German-learning companion for an A2→B1 learner in Uganda. Preserve the existing quiz/SRS/state architecture; continue toward personalized placement, A2/B1 learning paths, contextual lessons, and smart review.
+1. Read `CONTEXT.md` and `ARCHITECTURE.md`.
+2. Start from current `main` and create a scoped branch.
+3. Run or rely on a green baseline for `npm test` and `npm run build` before making substantial changes.
+4. Keep learning content in `src/data/`, pure logic in its domain module, persistence in `src/state/`, and DOM wiring in `src/ui/`.
+5. Add or update tests for the behaviour being changed.
+6. Open a PR rather than committing feature work directly to `main`.
+7. Let the Pages workflow deploy only after merge.
+
+## 10. Short handoff prompt
+
+> Read `CONTEXT.md` and `ARCHITECTURE.md`, inspect current `main`, preserve existing learner data and interaction flows, choose the next feature based on actual A2→B1 learning value, implement it on a scoped branch with tests, and open a PR. Do not deploy a feature branch directly.
