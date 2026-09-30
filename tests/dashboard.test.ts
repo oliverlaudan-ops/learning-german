@@ -1,7 +1,6 @@
 /**
- * Tests for the dashboard renderer, especially how a persisted placement
- * snapshot shapes Continue Learning, the Quick Refresher list, and the
- * Smart Review hint.
+ * Tests for the dashboard renderer, especially how persisted learning data
+ * shapes the single daily recommendation and visible learning progress.
  */
 
 import { describe, expect, it } from 'vitest'
@@ -114,7 +113,7 @@ describe('renderDashboard', () => {
 
   it('uses the placement recommended chapter when no explicit nextChapterId is given', () => {
     const html = renderDashboard(data(buildProfile({ placement: snapshot({ recommendedChapterId: 'a2-ch1' }) })))
-    expect(html).toContain('FROM YOUR PLACEMENT · CONTINUE LEARNING')
+    expect(html).toContain("FROM YOUR PLACEMENT · TODAY'S RECOMMENDATION")
     expect(html).toContain('data-chapter-id="a2-ch1"')
     expect(html).toContain('Travel and Transport')
   })
@@ -124,8 +123,8 @@ describe('renderDashboard', () => {
       ...data(buildProfile({ placement: snapshot({ recommendedChapterId: 'a2-ch1' }) })),
       nextChapterId: 'a1-ch3',
     })
-    expect(html).not.toContain('FROM YOUR PLACEMENT · CONTINUE LEARNING')
-    expect(html).toContain('CONTINUE LEARNING')
+    expect(html).not.toContain("FROM YOUR PLACEMENT · TODAY'S RECOMMENDATION")
+    expect(html).toContain("TODAY'S RECOMMENDATION")
     expect(html).toContain('data-chapter-id="a1-ch3"')
     expect(html).toContain('Family and Relationships')
   })
@@ -134,8 +133,43 @@ describe('renderDashboard', () => {
     const profile = buildProfile()
     profile.levels.A1.chapters['a1-ch1']!.percent = 50
     const html = renderDashboard(data(profile))
-    expect(html).toContain('CONTINUE LEARNING')
+    expect(html).toContain("TODAY'S RECOMMENDATION")
     expect(html).toContain('data-chapter-id="a1-ch1"')
+  })
+
+  it('prioritizes a meaningful Smart Review when at least five words are due', () => {
+    const html = renderDashboard({ ...data(buildProfile()), dueCount: 7 })
+    expect(html).toContain("TODAY'S RECOMMENDATION · SMART REVIEW")
+    expect(html).toContain('Review 7 due words')
+    expect(html).toContain('data-dashboard-action="review"')
+  })
+
+  it('recommends revisiting a chapter after a weak listening result', () => {
+    const html = renderDashboard(data(buildProfile({
+      listeningHistory: [{
+        lessonId: 'travel-disruption-v1',
+        chapterId: 'a2-ch1',
+        level: 'B1',
+        correct: 4,
+        total: 10,
+        accuracy: 40,
+        tasks: {},
+        completedAt: Date.now(),
+      }],
+    })))
+    expect(html).toContain("TODAY'S RECOMMENDATION · LISTENING FOCUS")
+    expect(html).toContain('Retry Travel and Transport')
+    expect(html).toContain('latest listening result was 40%')
+  })
+
+  it('counts a guided lesson as real daily learning even when no new word was learned', () => {
+    const html = renderDashboard(data(buildProfile({
+      guidedLessonHistory: [{ chapterId: 'a2-ch1', completedAt: Date.now() }],
+    })))
+    expect(html).toContain("TODAY'S LEARNING")
+    expect(html).toContain('0 words · 1 active session')
+    expect(html).toContain('Today counts. You completed active German practice.')
+    expect(html).toContain('dashboard-percent">100%')
   })
 
   it('renders the quick refresher pills block from placement.refresherIds', () => {
@@ -189,7 +223,6 @@ describe('renderDashboard', () => {
     })))
     expect(html).toContain('Family and Relationships')
     expect(html).toContain('Travel and Transport')
-    // No raw id leakage.
     expect(html).not.toMatch(/>a1-ch3</)
   })
 
@@ -201,8 +234,6 @@ describe('renderDashboard', () => {
   })
 })
 
-// Sanity check: lessons catalogue still matches the IDs we reference in tests.
-// If this fails, the chapter ids in src/data/lessons.ts have drifted.
 describe('lessons catalogue sanity', () => {
   it('exposes the chapter ids the dashboard tests rely on', () => {
     const ids = new Set(lessons.flatMap((l) => [l.id]))
