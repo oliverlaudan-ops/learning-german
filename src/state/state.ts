@@ -8,6 +8,7 @@
 import type {
   AppState,
   CEFRLevel,
+  GuidedLessonCompletion,
   LegacyState,
   Level,
   LevelProgress,
@@ -127,7 +128,7 @@ function migrateV2ToV4(raw: LegacyState, levels: Level[]): AppState | null {
 }
 
 // ---------------------------------------------------------------------------
-// Placement / listening write-back
+// Placement / learning write-back
 // ---------------------------------------------------------------------------
 
 /**
@@ -162,6 +163,16 @@ export function recordListeningResult(state: AppState, result: ListeningResult):
   if (!profile) return
   const history = profile.listeningHistory ?? (profile.listeningHistory = [])
   history.push(result)
+  if (history.length > 50) history.splice(0, history.length - 50)
+  saveState(state)
+}
+
+/** Record a completed guided lesson without requiring a storage migration. */
+export function recordGuidedLessonCompletion(state: AppState, completion: GuidedLessonCompletion): void {
+  const profile = state.profiles[state.currentProfileId]
+  if (!profile) return
+  const history = profile.guidedLessonHistory ?? (profile.guidedLessonHistory = [])
+  history.push(completion)
   if (history.length > 50) history.splice(0, history.length - 50)
   saveState(state)
 }

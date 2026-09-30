@@ -75,6 +75,12 @@ export interface ListeningResult {
   completedAt: number
 }
 
+/** One completed guided lesson session. Optional history keeps v5 data compatible. */
+export interface GuidedLessonCompletion {
+  chapterId: string
+  completedAt: number
+}
+
 export interface ChapterProgress {
   chapterId: string
   levelId: CEFRLevel
@@ -210,6 +216,8 @@ export interface ProfileState {
   placement?: PlacementSnapshot
   /** Recent advanced-listening attempts, newest last. */
   listeningHistory?: ListeningResult[]
+  /** Recent guided-lesson completions, newest last. */
+  guidedLessonHistory?: GuidedLessonCompletion[]
 }
 
 /**

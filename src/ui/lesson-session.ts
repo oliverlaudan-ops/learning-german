@@ -11,6 +11,8 @@ const steps = ['Learn', 'Listen', 'Understand', 'Build', 'Speak', 'Real German',
 
 type Step = (typeof steps)[number]
 
+type GuidedComplete = (chapterId: string) => void
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, '&amp;')
@@ -25,32 +27,18 @@ function chapterWords(chapter: Chapter) {
   return chapter.wordIds.map((id) => byId.get(id)).filter(Boolean)
 }
 
-/**
- * Build the sentence the learner is asked to assemble in the Build step.
- *
- * The lesson content sometimes leaves the name as `...` (e.g. "Hallo! Ich
- * heiße …"). We substitute the learner's name so the Build step actually
- * personalises the answer instead of always saying "Anna".
- *
- * If the chapter's first communication phrase has no placeholder, we use it
- * verbatim. The fallback is the same greeting so the Build step is never
- * empty even for chapters without lesson content.
- */
-function buildExpectedSentence(
-  firstPhrase: { german: string } | undefined,
-  learnerName: string,
-): string {
-  if (!firstPhrase || firstPhrase.german.includes('...') || !firstPhrase.german.trim()) {
-    return `Hallo! Ich heiße ${learnerName}.`
-  }
-  return firstPhrase.german
+function personalisePhrase(text: string, learnerName: string): string {
+  return text.replace(/\.\.\.|…/g, learnerName)
 }
 
-/**
- * Shuffle a copy of the expected sentence so the tile order does not reveal
- * the answer. Deterministic only by design is *not* the goal — variability
- * keeps the exercise from feeling like a fixed memory task.
- */
+function buildExpectedSentence(
+  phrase: { german: string } | undefined,
+  learnerName: string,
+): string {
+  if (!phrase || !phrase.german.trim()) return `Hallo! Ich heiße ${learnerName}.`
+  return personalisePhrase(phrase.german, learnerName)
+}
+
 function shuffleTiles(sentence: string, seed: number): string[] {
   const tokens = sentence.split(/\s+/).filter(Boolean)
   let s = seed || Math.floor(Math.random() * 1e9)
@@ -96,11 +84,16 @@ function renderStep(step: Step, chapter: Chapter, learnerName: string): string {
   const content = getLessonContent(chapter.id)
   const words = chapterWords(chapter)
   const firstWord = words[0]
-  const firstPhrase = content?.communication[0]
 
   if (!content) {
     return `<div class="guided-card"><h2>This guided lesson is coming next.</h2><p>For now, use the vocabulary practice for this chapter.</p><button class="btn primary" type="button" data-guided-review="${escapeHtml(chapter.id)}">Start practice →</button></div>`
   }
+
+  const listenPhrase = content.communication[0]
+  const buildPhrase = content.communication[1] ?? listenPhrase
+  const speakPhrase = content.communication[2] ?? buildPhrase ?? listenPhrase
+  const listenGerman = personalisePhrase(listenPhrase?.german || firstWord?.german || 'Hallo!', learnerName)
+  const speakGerman = personalisePhrase(speakPhrase?.german || listenGerman, learnerName)
 
   switch (step) {
     case 'Learn':
@@ -124,9 +117,9 @@ function renderStep(step: Step, chapter: Chapter, learnerName: string): string {
           <h2>Hear the German before you produce it.</h2>
           <p>Listen several times, then say it yourself. The browser's speech feature is used here, so no audio download is required.</p>
           <div class="guided-listen-card">
-            <strong>${escapeHtml(firstPhrase?.german || firstWord?.german || 'Hallo!')}</strong>
-            <button class="lesson-audio guided-audio" type="button" data-guided-speak="${escapeHtml(firstPhrase?.german || firstWord?.german || 'Hallo!')}">🔊 Listen</button>
-            <span>${escapeHtml(firstPhrase?.english || firstWord?.translation || '')}</span>
+            <strong>${escapeHtml(listenGerman)}</strong>
+            <button class="lesson-audio guided-audio" type="button" data-guided-speak="${escapeHtml(listenGerman)}">🔊 Listen</button>
+            <span>${escapeHtml(listenPhrase?.english || firstWord?.translation || '')}</span>
           </div>
           <div class="guided-callout"><strong>Tip:</strong> Listen for the rhythm, not just individual sounds.</div>
           ${renderNavigation(step, chapter.id)}
@@ -152,7 +145,7 @@ function renderStep(step: Step, chapter: Chapter, learnerName: string): string {
       `
 
     case 'Build':
-      return renderBuildStep(chapter, firstPhrase, learnerName)
+      return renderBuildStep(chapter, buildPhrase, learnerName)
 
     case 'Speak':
       return `
@@ -160,15 +153,15 @@ function renderStep(step: Step, chapter: Chapter, learnerName: string): string {
           <span class="lesson-kicker">STEP 5 · SPEAK</span>
           <h2>Now say it yourself.</h2>
           <p>Look at the German sentence, listen once, then say it aloud. There is no pressure to sound perfect.</p>
-          <blockquote>${escapeHtml(firstPhrase?.german || 'Hallo! Ich heiße ...')}</blockquote>
-          <button class="btn secondary" type="button" data-guided-speak="${escapeHtml(firstPhrase?.german || 'Hallo! Ich heiße ...')}">🔊 Hear it again</button>
+          <blockquote>${escapeHtml(speakGerman)}</blockquote>
+          <button class="btn secondary" type="button" data-guided-speak="${escapeHtml(speakGerman)}">🔊 Hear it again</button>
           <div class="guided-callout"><strong>Practice:</strong> Say it three times. On the third attempt, try without looking at the English translation.</div>
           ${renderNavigation(step, chapter.id)}
         </div>
       `
 
     case 'Real German':
-      return renderRealGermanStep(chapter, firstPhrase, learnerName)
+      return renderRealGermanStep(chapter, content.communication, learnerName)
 
     case 'Review':
       return `
@@ -226,26 +219,21 @@ function wireBuilder(target: HTMLElement, expected: string[]): void {
   })
 }
 
-/**
- * Build the Build step's expected sentence and shuffled tile order. The
- * step is exported so a future unit test can verify the shuffle does not
- * silently produce an already-sorted tile list.
- */
 export function getBuilderExpected(
-  firstPhrase: { german: string } | undefined,
+  phrase: { german: string } | undefined,
   learnerName: string,
 ): { expected: string[]; tiles: string[] } {
-  const sentence = buildExpectedSentence(firstPhrase, learnerName)
+  const sentence = buildExpectedSentence(phrase, learnerName)
   const expected = sentence.split(/\s+/).filter(Boolean)
   return { expected, tiles: shuffleTiles(sentence, expected.length) }
 }
 
 function renderBuildStep(
   chapter: Chapter,
-  firstPhrase: { german: string } | undefined,
+  phrase: { german: string } | undefined,
   learnerName: string,
 ): string {
-  const { expected, tiles } = getBuilderExpected(firstPhrase, learnerName)
+  const { expected, tiles } = getBuilderExpected(phrase, learnerName)
   return `
     <div class="guided-card">
       <span class="lesson-kicker">STEP 4 · BUILD</span>
@@ -266,28 +254,40 @@ function renderBuildStep(
 
 function renderRealGermanStep(
   chapter: Chapter,
-  _firstPhrase: { german: string; english: string } | undefined,
+  phrases: readonly { german: string; english: string }[],
   learnerName: string,
 ): string {
-  const fallbackYou = `Hallo! Ich heiße ${learnerName}.`
-  const fallbackYouEnglish = `Hello! My name is ${learnerName}.`
+  const practice = phrases.slice(0, 3)
   return `
     <div class="guided-card">
       <span class="lesson-kicker">STEP 6 · REAL GERMAN</span>
-      <h2>Use German in a real situation.</h2>
-      <p>Imagine you meet someone for the first time.</p>
-      <div class="dialogue">
-        <div><span>Other person</span><strong>Hallo! Wie heißt du?</strong><small>Hello! What is your name?</small></div>
-        <div class="dialogue-you"><span>You</span><strong>${escapeHtml(fallbackYou)}</strong><small>${escapeHtml(fallbackYouEnglish)}</small></div>
-        <div><span>Other person</span><strong>Freut mich!</strong><small>Nice to meet you!</small></div>
+      <h2>Use German in ${escapeHtml(chapter.title)}.</h2>
+      <p>Read the situation in English, say the German phrase aloud from memory, then reveal the model answer.</p>
+      <div class="guided-grammar-grid">
+        ${practice.map((phrase, index) => `
+          <article class="guided-example">
+            <span>Situation ${index + 1}</span>
+            <p>${escapeHtml(phrase.english)}</p>
+            <details>
+              <summary>Show a natural German answer</summary>
+              <strong>${escapeHtml(personalisePhrase(phrase.german, learnerName))}</strong>
+            </details>
+          </article>
+        `).join('')}
       </div>
-      <div class="guided-callout"><strong>Your turn:</strong> Say the whole answer aloud.</div>
+      <div class="guided-callout"><strong>Your turn:</strong> Try each answer before opening it. This is retrieval practice, not a reading exercise.</div>
       ${renderNavigation('Real German', chapter.id)}
     </div>
   `
 }
 
-function wireSession(target: HTMLElement, chapter: Chapter, step: Step, learnerName: string): void {
+function wireSession(
+  target: HTMLElement,
+  chapter: Chapter,
+  step: Step,
+  learnerName: string,
+  onComplete?: GuidedComplete,
+): void {
   target.querySelectorAll<HTMLElement>('[data-guided-speak]').forEach((button) => {
     button.addEventListener('click', () => {
       const text = button.dataset.guidedSpeak
@@ -298,13 +298,14 @@ function wireSession(target: HTMLElement, chapter: Chapter, step: Step, learnerN
   target.querySelectorAll<HTMLButtonElement>('[data-guided-step]').forEach((button) => {
     button.addEventListener('click', () => {
       const next = button.dataset.guidedStep as Step | undefined
-      if (next) renderGuidedSession(target, chapter, next, learnerName)
+      if (next) renderGuidedSession(target, chapter, next, learnerName, onComplete)
     })
   })
 
   target.querySelectorAll<HTMLButtonElement>('[data-guided-review]').forEach((button) => {
     button.addEventListener('click', () => {
       const chapterId = button.dataset.guidedReview
+      if (step === 'Review' && chapterId) onComplete?.(chapterId)
       ;(window as unknown as SessionWindow).startQuiz?.(chapterId, 'de-en')
     })
   })
@@ -321,6 +322,7 @@ export function renderGuidedSession(
   chapter: Chapter,
   step: Step = 'Learn',
   learnerName: string = 'Anna',
+  onComplete?: GuidedComplete,
 ): void {
   target.innerHTML = `
     <section class="guided-session" aria-labelledby="guided-title">
@@ -335,5 +337,5 @@ export function renderGuidedSession(
       ${renderStep(step, chapter, learnerName)}
     </section>
   `
-  wireSession(target, chapter, step, learnerName)
+  wireSession(target, chapter, step, learnerName, onComplete)
 }
