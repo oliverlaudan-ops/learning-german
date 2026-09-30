@@ -2,7 +2,7 @@ import './lesson.css'
 import type { Chapter, ListeningResult, VocabWord } from '../types'
 import { vocabulary } from '../data/vocabulary'
 import { getLessonContent } from '../data/lesson-content'
-import { recordListeningResult } from '../state/state'
+import { recordGuidedLessonCompletion, recordListeningResult } from '../state/state'
 import { renderGuidedSession } from './lesson-session'
 import { __appState, __getProfile } from './ui'
 import { disposeListeningLesson, listeningEntry, renderListeningLesson } from './listening-lesson'
@@ -11,6 +11,7 @@ import { consultationListeningEntry, disposeDoctorListeningLesson, doctorListeni
 type AppWindow = {
   showTab?: (tabName: string) => void
   speakWord?: (text: string) => void
+  startQuiz?: (chapterId?: string, mode?: 'de-en' | 'en-de' | 'audio-dictation' | 'sentence-completion' | 'type-sentence', isReview?: boolean) => void
 }
 
 function escapeHtml(value: string): string {
@@ -156,6 +157,10 @@ function renderLesson(chapter: Chapter): string {
   `
 }
 
+function recordGuidedLesson(chapterId: string): void {
+  recordGuidedLessonCompletion(__appState, { chapterId, completedAt: Date.now() })
+}
+
 function wireLesson(target: HTMLElement, chapter: Chapter, learnerName: string): void {
   target.querySelectorAll<HTMLElement>('[data-speak]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -175,16 +180,17 @@ function wireLesson(target: HTMLElement, chapter: Chapter, learnerName: string):
   target.querySelectorAll<HTMLElement>('[data-action="guided"]').forEach((button) => {
     button.addEventListener('click', () => {
       target.dataset.session = 'guided'
-      renderGuidedSession(target, chapter, 'Learn', learnerName)
+      renderGuidedSession(target, chapter, 'Learn', learnerName, recordGuidedLesson)
+    })
+  })
+
+  target.querySelectorAll<HTMLElement>('[data-action="practice"]').forEach((button) => {
+    button.addEventListener('click', () => {
+      ;(window as unknown as AppWindow).startQuiz?.(chapter.id, 'de-en')
     })
   })
 }
 
-/**
- * Pull the learner's display name from the active profile so the Build and
- * Real German steps personalise the answer. Falls back to "Anna" when no
- * profile name is set so the lesson still has a coherent greeting.
- */
 function currentLearnerName(): string {
   try {
     const name = __getProfile().displayName
@@ -221,7 +227,7 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
         <div class="lesson-index-hero">
           <span class="lesson-kicker">YOUR COURSE</span>
           <h2>Learn German step by step</h2>
-          <p>Each lesson now combines vocabulary, simple English explanations, grammar, useful phrases and a guided learning session.</p>
+          <p>Each lesson combines vocabulary, simple English explanations, grammar, useful phrases and active guided practice.</p>
         </div>
         ${listeningProgressSummary()}
         ${doctorListeningEntry()}
@@ -262,7 +268,7 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
   }
 
   if (target.dataset.session === 'guided') {
-    renderGuidedSession(target, chapter, 'Learn', learnerName)
+    renderGuidedSession(target, chapter, 'Learn', learnerName, recordGuidedLesson)
     return
   }
 
