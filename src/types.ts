@@ -62,7 +62,8 @@ export interface ListeningTaskScore {
 export interface ListeningResult {
   lessonId: string
   chapterId: string
-  level: CEFRLevel
+  /** Pedagogical label such as A2+ or B1. */
+  level: string
   correct: number
   total: number
   accuracy: number
