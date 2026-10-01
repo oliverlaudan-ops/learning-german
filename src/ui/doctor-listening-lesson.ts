@@ -1,3 +1,4 @@
+import complaintLesson from '../data/complaint-delivery-listening.json'
 import workshopLesson from '../data/workshop-planning-listening.json'
 import appointmentLesson from '../data/doctor-appointment-listening.json'
 import consultationLesson from '../data/doctor-consultation-listening.json'
@@ -333,4 +334,11 @@ export function workshopListeningEntry(): string {
 }
 export function renderWorkshopListeningLesson(target: HTMLElement, onExit: () => void, onComplete?: ListeningComplete): void {
   renderMedicalListeningLesson(target, onExit, workshopLesson, onComplete)
+}
+
+export function complaintListeningEntry(): string {
+  return `<section class="listening-entry lesson-card" lang="de"><div><span class="lesson-kicker">B1 · AUFGABEN AUF DEUTSCH · 20–25 MIN</span><h2>Eine beschädigte Lieferung reklamieren</h2><p>Vergleiche Lösungen, verstehe Bedingungen und bestätige eine Vereinbarung. Alle Aufgaben und Rückmeldungen sind auf Deutsch.</p></div><button type="button" class="btn primary" data-complaint-listening-start>Lektion starten →</button></section>`
+}
+export function renderComplaintListeningLesson(target: HTMLElement, onExit: () => void, onComplete?: ListeningComplete): void {
+  renderMedicalListeningLesson(target, onExit, complaintLesson, onComplete)
 }
