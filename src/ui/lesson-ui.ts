@@ -6,7 +6,7 @@ import { recordGuidedLessonCompletion, recordListeningResult } from '../state/st
 import { renderGuidedSession } from './lesson-session'
 import { __appState, __getProfile } from './ui'
 import { disposeListeningLesson, listeningEntry, renderListeningLesson } from './listening-lesson'
-import { workshopListeningEntry, renderWorkshopListeningLesson, consultationListeningEntry, disposeDoctorListeningLesson, doctorListeningEntry, housingListeningEntry, renderConsultationListeningLesson, renderDoctorListeningLesson, renderHousingListeningLesson, renderTravelListeningLesson, travelListeningEntry } from './doctor-listening-lesson'
+import { complaintListeningEntry, renderComplaintListeningLesson, workshopListeningEntry, renderWorkshopListeningLesson, consultationListeningEntry, disposeDoctorListeningLesson, doctorListeningEntry, housingListeningEntry, renderConsultationListeningLesson, renderDoctorListeningLesson, renderHousingListeningLesson, renderTravelListeningLesson, travelListeningEntry } from './doctor-listening-lesson'
 
 type AppWindow = {
   showTab?: (tabName: string) => void
@@ -66,6 +66,7 @@ function renderLesson(chapter: Chapter): string {
           <button class="btn primary" type="button" data-action="practice">Start vocabulary practice</button>
         </div>
         ${chapter.id === 'b1-ch2' ? workshopListeningEntry() : ''}
+        ${chapter.id === 'b1-ch8' ? complaintListeningEntry() : ''}
         ${chapter.id === 'b1-ch1' ? housingListeningEntry() : ''}
       </section>
     `
@@ -232,6 +233,7 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
         </div>
         ${listeningProgressSummary()}
         ${workshopListeningEntry()}
+        ${complaintListeningEntry()}
         ${doctorListeningEntry()}
         ${consultationListeningEntry()}
         ${travelListeningEntry()}
@@ -254,6 +256,7 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
     wireTravelListeningEntry(target, chapters)
     wireHousingListeningEntry(target, chapters)
     wireWorkshopListeningEntry(target, chapters)
+    wireComplaintListeningEntry(target, chapters)
     target.querySelectorAll<HTMLElement>('[data-open-lesson]').forEach((button) => {
       button.addEventListener('click', () => {
         target.dataset.lessonId = button.dataset.openLesson || ''
@@ -283,6 +286,7 @@ export function renderLearnExperience(target: HTMLElement, chapters: readonly Ch
   wireTravelListeningEntry(target, chapters)
   wireHousingListeningEntry(target, chapters)
     wireWorkshopListeningEntry(target, chapters)
+    wireComplaintListeningEntry(target, chapters)
 }
 
 function wireListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): void {
@@ -318,5 +322,11 @@ function wireHousingListeningEntry(target: HTMLElement, chapters: readonly Chapt
 function wireWorkshopListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): void {
   target.querySelector('[data-workshop-listening-start]')?.addEventListener('click', () => {
     renderWorkshopListeningLesson(target, () => renderLearnExperience(target, chapters), recordAdvancedListening)
+  })
+}
+
+function wireComplaintListeningEntry(target: HTMLElement, chapters: readonly Chapter[]): void {
+  target.querySelector('[data-complaint-listening-start]')?.addEventListener('click', () => {
+    renderComplaintListeningLesson(target, () => renderLearnExperience(target, chapters), recordAdvancedListening)
   })
 }
