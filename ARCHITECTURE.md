@@ -103,7 +103,9 @@ Despite the historical filename, this is now the shared **advanced listening ren
 - doctor's appointment;
 - doctor consultation;
 - travel disruption;
-- housing search.
+- housing search;
+- workplace training;
+- damaged-delivery complaints.
 
 The renderer is data-driven and supports:
 
@@ -115,11 +117,16 @@ The renderer is data-driven and supports:
 - gap-fill questions;
 - event ordering;
 - replayable transcript review;
-- speaking prompts;
+- speaking and self-directed writing prompts;
+- optional German interface via lesson `language: 'de'`;
 - completion scoring;
 - per-task score breakdown;
 - retry and targeted next-step feedback;
 - an optional `onComplete(ListeningResult)` callback.
+
+For German lessons, the renderer selects German stage labels and translates rendered text nodes, accessible labels and dynamic status/validation messages through its shared translation map. Markup, CSS classes and task identifiers are preserved. Lesson statements, explanations, event text and practice prompts are authored in German in the JSON data; the `english` dialogue field remains optional learner help inside disclosure controls.
+
+Entry/render pairs are `workshopListeningEntry` / `renderWorkshopListeningLesson` and `complaintListeningEntry` / `renderComplaintListeningLesson`. `lesson-ui.ts` wires them from Learn and their existing chapters (`b1-ch2`, `b1-ch8`) and passes the shared result-persistence callback.
 
 Do not fork this renderer for every new realistic listening lesson. Add compatible content data unless the interaction genuinely requires a different learning model.
 
@@ -242,6 +249,8 @@ doctor-appointment-listening.json
 doctor-consultation-listening.json
 travel-disruption-listening.json
 housing-search-listening.json
+workshop-planning-listening.json
+complaint-delivery-listening.json
 ```
 
 ## Advanced listening scoring model
@@ -314,17 +323,18 @@ Currently **not** persisted as assessment:
 - repeat-after-me pronunciation;
 - whether a transcript/details element was opened;
 - raw audio playback counts;
-- unsubmitted comprehension answers.
+- unsubmitted comprehension answers;
+- free spoken summaries and email-writing responses (prompts only, no automated assessment or response storage).
 
 ## Testing
 
 Vitest uses `happy-dom`.
 
-Current main baseline after PR #10:
+Latest local validation for the PR #14 lesson changes (2026-10-01):
 
-- **175 tests across 15 test files**;
-- CI runs `npm test` and `npm run build`;
-- PR #10 passed both before merge.
+- **184 tests across 18 test files passed**;
+- production TypeScript/Vite build passed;
+- CI runs `npm test` and `npm run build`; its latest status is checked separately.
 
 Coverage includes:
 
@@ -341,6 +351,8 @@ Coverage includes:
 - doctor consultation listening;
 - travel disruption listening and voice selection;
 - housing listening;
+- German workshop instructions, validation and feedback;
+- German complaint gaps, event ordering, completion, retry and skipped-task scoring;
 - advanced listening result emission, persistence and skipped-task handling.
 
 ## CI and deployment
