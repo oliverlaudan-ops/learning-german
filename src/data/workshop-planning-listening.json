@@ -1,0 +1,225 @@
+{
+  "id": "workshop-planning-v1",
+  "chapterId": "b1-ch2",
+  "level": "B1",
+  "title": "Eine Weiterbildung planen",
+  "scenario": "Mara bespricht mit ihrem Teamleiter eine Weiterbildung. Achte darauf, welche Vorschläge verworfen werden und unter welchen Bedingungen die Teilnahme möglich ist.",
+  "speechRate": 1.12,
+  "useTwoVoices": true,
+  "topicLabel": "BERUF & WEITERBILDUNG",
+  "completionTitle": "Du hast eine Weiterbildung geplant.",
+  "completionText": "Du hast Gründe, Bedingungen und endgültige Absprachen verstanden.",
+  "language": "de",
+  "lines": [
+    {
+      "id": "line-1",
+      "speaker": "Mara",
+      "german": "Ich würde gern an der Weiterbildung zur Kundenkommunikation teilnehmen. Zuerst dachte ich an den Kurs am Dienstag, weil er online stattfindet.",
+      "english": "I'd like to attend customer communication training. I first considered Tuesday's online course."
+    },
+    {
+      "id": "line-2",
+      "speaker": "Herr Berger",
+      "german": "Am Dienstag brauchen wir dich allerdings im Team. Lea ist im Urlaub, und vormittags erwarten wir besonders viele Anfragen.",
+      "english": "We need you on Tuesday. Lea is on holiday and we expect many enquiries in the morning."
+    },
+    {
+      "id": "line-3",
+      "speaker": "Mara",
+      "german": "Es gibt auch einen Kurs am Donnerstag. Der dauert von neun bis sechzehn Uhr und findet im Schulungszentrum statt.",
+      "english": "There is also a Thursday course from nine to four at the training centre."
+    },
+    {
+      "id": "line-4",
+      "speaker": "Herr Berger",
+      "german": "Donnerstag wäre möglich, sofern du die Übergabe an Jonas bis Mittwoch abschließt. Er übernimmt dann deine dringenden Aufgaben.",
+      "english": "Thursday is possible provided you complete the handover to Jonas by Wednesday."
+    },
+    {
+      "id": "line-5",
+      "speaker": "Mara",
+      "german": "Das schaffe ich. Der Kurs kostet zweihundertvierzig Euro. In der ersten Anzeige standen noch hundertachtzig Euro.",
+      "english": "I can do that. The course costs 240 euros; the first advert said 180."
+    },
+    {
+      "id": "line-6",
+      "speaker": "Herr Berger",
+      "german": "Die Firma übernimmt die Kursgebühr. Die Fahrtkosten erstatten wir aber nur, wenn du die Fahrkarten aufbewahrst.",
+      "english": "The company covers the course fee. Travel expenses are reimbursed only if you keep your tickets."
+    },
+    {
+      "id": "line-7",
+      "speaker": "Mara",
+      "german": "Muss ich mich selbst anmelden? Die Anmeldefrist endet am Freitag.",
+      "english": "Do I register myself? The deadline is Friday."
+    },
+    {
+      "id": "line-8",
+      "speaker": "Herr Berger",
+      "german": "Ja, aber warte bitte auf meine schriftliche Bestätigung. Ich schicke sie dir heute Nachmittag. Danach kannst du dich anmelden.",
+      "english": "Yes, but wait for my written confirmation this afternoon. You can register afterwards."
+    },
+    {
+      "id": "line-9",
+      "speaker": "Mara",
+      "german": "Nach dem Kurs möchte ich die wichtigsten Ideen im Team vorstellen. Würde der folgende Montag passen?",
+      "english": "I'd like to present the main ideas to the team. Would the following Monday work?"
+    },
+    {
+      "id": "line-10",
+      "speaker": "Herr Berger",
+      "german": "Am Montag ist unsere Besprechung schon voll. Plane lieber zehn Minuten am Mittwoch ein. Eine ausführliche Präsentation brauchst du nicht.",
+      "english": "Monday's meeting is full. Plan ten minutes on Wednesday; no detailed presentation is needed."
+    },
+    {
+      "id": "line-11",
+      "speaker": "Mara",
+      "german": "Gut, dann mache ich eine kurze Zusammenfassung mit zwei Beispielen aus unserem Arbeitsalltag.",
+      "english": "I'll prepare a short summary with two examples from our daily work."
+    },
+    {
+      "id": "line-12",
+      "speaker": "Herr Berger",
+      "german": "Einverstanden. Falls der Kurs ausgebucht ist, melde dich bitte bei mir, bevor du einen anderen Termin buchst.",
+      "english": "Agreed. If it is fully booked, contact me before booking another date."
+    }
+  ],
+  "trueFalse": [
+    {
+      "statement": "Warum verwirft Mara den Dienstagskurs? Weil sie an diesem Tag im Team gebraucht wird.",
+      "answer": true,
+      "explanation": "Lea ist im Urlaub; deshalb soll Mara am Dienstag arbeiten."
+    },
+    {
+      "statement": "Mara darf am Donnerstag teilnehmen, auch wenn die Übergabe noch nicht abgeschlossen ist.",
+      "answer": false,
+      "explanation": "Die Übergabe muss bis Mittwoch abgeschlossen sein. „Sofern“ nennt eine Bedingung."
+    },
+    {
+      "statement": "Die Firma übernimmt sowohl die Kursgebühr als auch nachgewiesene Fahrtkosten.",
+      "answer": true,
+      "explanation": "Für die Erstattung der Fahrtkosten muss Mara ihre Fahrkarten aufbewahren."
+    },
+    {
+      "statement": "Mara soll sich vor der schriftlichen Bestätigung anmelden.",
+      "answer": false,
+      "explanation": "Sie soll zuerst auf die Bestätigung warten und sich danach anmelden."
+    },
+    {
+      "statement": "Die kurze Vorstellung im Team findet am folgenden Montag statt.",
+      "answer": false,
+      "explanation": "Montag ist bereits verplant. Vereinbart wird Mittwoch."
+    },
+    {
+      "statement": "Wenn der Kurs voll ist, soll Mara selbstständig einen anderen Termin buchen.",
+      "answer": false,
+      "explanation": "Sie soll zuerst Herrn Berger kontaktieren."
+    }
+  ],
+  "gaps": [
+    {
+      "before": "Die Übergabe muss bis",
+      "answer": "Mittwoch",
+      "after": "abgeschlossen sein.",
+      "options": [
+        "Mittwoch",
+        "Dienstag",
+        "Freitag"
+      ]
+    },
+    {
+      "before": "Der endgültige Kurspreis beträgt",
+      "answer": "zweihundertvierzig Euro",
+      "after": ".",
+      "options": [
+        "zweihundertvierzig Euro",
+        "hundertachtzig Euro",
+        "sechzehn Euro"
+      ]
+    },
+    {
+      "before": "Die Fahrtkosten werden nur erstattet, wenn Mara",
+      "answer": "die Fahrkarten aufbewahrt",
+      "after": ".",
+      "options": [
+        "die Fahrkarten aufbewahrt",
+        "online teilnimmt",
+        "eine lange Präsentation hält"
+      ]
+    },
+    {
+      "before": "Mara meldet sich an, nachdem sie",
+      "answer": "die schriftliche Bestätigung erhalten hat",
+      "after": ".",
+      "options": [
+        "die schriftliche Bestätigung erhalten hat",
+        "den Kurs besucht hat",
+        "Jonas angerufen hat"
+      ]
+    },
+    {
+      "before": "Für die Vorstellung im Team sind",
+      "answer": "zehn Minuten",
+      "after": "vorgesehen.",
+      "options": [
+        "zehn Minuten",
+        "sechzehn Minuten",
+        "neun Stunden"
+      ]
+    }
+  ],
+  "sequence": [
+    {
+      "id": "tuesday",
+      "text": "Mara schlägt zunächst den Onlinekurs am Dienstag vor."
+    },
+    {
+      "id": "reason",
+      "text": "Herr Berger erklärt, warum Mara am Dienstag gebraucht wird."
+    },
+    {
+      "id": "alternative",
+      "text": "Mara nennt den Präsenzkurs am Donnerstag."
+    },
+    {
+      "id": "condition",
+      "text": "Herr Berger nennt die Bedingung für die Teilnahme."
+    },
+    {
+      "id": "cost",
+      "text": "Beide klären Kursgebühr und Fahrtkosten."
+    },
+    {
+      "id": "registration",
+      "text": "Herr Berger erklärt die Reihenfolge bei der Anmeldung."
+    },
+    {
+      "id": "summary",
+      "text": "Beide vereinbaren eine kurze Vorstellung am Mittwoch."
+    },
+    {
+      "id": "full",
+      "text": "Herr Berger erklärt, was bei einem ausgebuchten Kurs zu tun ist."
+    }
+  ],
+  "practice": [
+    {
+      "lineId": "line-4",
+      "focus": "Eine Bedingung ausdrücken",
+      "tip": "„Sofern“ bedeutet hier „wenn“. Formuliere eine eigene Bedingung mit „sofern“.",
+      "rhythm": "DONnerstag wäre MÖGlich / sofern du die ÜBERgabe / bis MITTwoch abschließt."
+    },
+    {
+      "lineId": "line-6",
+      "focus": "Eine Einschränkung verstehen",
+      "tip": "Erkläre in eigenen Worten: Wann werden Fahrtkosten erstattet? Vergleiche anschließend mit dem Dialog.",
+      "rhythm": "Die FAHRTkosten erSTATten wir / aber NUR / wenn du die FAHRkarten aufbewahrst."
+    },
+    {
+      "lineId": "line-11",
+      "focus": "Eine eigene Zusammenfassung formulieren",
+      "tip": "Erkläre in drei Sätzen, was Mara vor, während und nach dem Kurs tun soll. Nutze „zuerst“, „danach“ und „anschließend“. Dies ist eine freie Sprechübung ohne automatische Bewertung.",
+      "rhythm": "Eine KURze Zusammenfassung / mit ZWEI Beispielen / aus unserem ARBEITSalltag."
+    }
+  ]
+}
