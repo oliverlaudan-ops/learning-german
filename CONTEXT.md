@@ -4,7 +4,8 @@
 >
 > **Repository:** `oliverlaudan-ops/learning-german`  
 > **Working branch:** `main`  
-> **Last shipped:** [#10 — Track advanced listening progress](https://github.com/oliverlaudan-ops/learning-german/pull/10), merged 2026-09-30.  
+> **Latest feature on `main`:** [#14 — Eine beschädigte Lieferung reklamieren](https://github.com/oliverlaudan-ops/learning-german/pull/14), following [#13 — Eine Weiterbildung planen](https://github.com/oliverlaudan-ops/learning-german/pull/13).
+> **Documentation updated:** 2026-10-01. Repository status does not by itself verify the live deployment.  
 > **Branch rule:** Branch off `main` for feature or documentation work. Keep changes scoped. GitHub Pages deploys from `main` after merge.
 
 ## 1. Product mission
@@ -192,7 +193,7 @@ This unit uses a dedicated MP3 renderer and is not currently part of scored list
 
 ### #10 — Listening progress
 
-The four advanced A2+/B1 listening lessons now produce optional scored results when comprehension tasks are actually checked.
+The shared advanced A2+/B1 listening lessons produce optional scored results when comprehension tasks are actually checked.
 
 A saved listening result includes:
 
@@ -220,13 +221,22 @@ Important behaviour:
 - optional English transcript help and a free spoken summary;
 - linked from Learn and Berufsleben vertieft.
 
-### New lesson — Eine beschädigte Lieferung reklamieren
+### #14 — Eine beschädigte Lieferung reklamieren
 
 - B1 customer-service dialogue with rejected alternatives, photo requirements, return deadline and a delivery estimate that is not a guarantee;
 - same German task flow and optional English transcript help as #13;
 - true/false, gap fill, event ordering and free email-writing practice;
 - linked from Learn and Medien & Kommunikation;
 - free writing is not automatically assessed; checked comprehension uses existing per-profile listening history.
+
+### German B1 lesson details
+
+| Lesson | Chapter | Dialogue turns | True/false | Gaps | Ordered events | Free practice |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Eine Weiterbildung planen | `b1-ch2` | 12 | 6 | 5 | 8 | spoken summary |
+| Eine beschädigte Lieferung reklamieren | `b1-ch8` | 14 | 7 | 6 | 8 | short email |
+
+Both lessons are also linked from Learn. Each ordered sequence contributes one scored item, so a fully checked workshop run has 12 scored items and a complaint run has 14. Free speaking/writing is not automatically graded or persisted as a response. English translations remain inside transcript disclosures.
 
 ## 6. CI and deployment
 
@@ -245,11 +255,13 @@ GitHub Pages deploys from `main` after merge using the production `dist/` build.
 
 ### Current verified baseline
 
-After PR #10:
+Local verification for the PR #14 lesson changes on 2026-10-01:
 
-- **175 tests across 15 test files** (172 before PR #10 + 3 new listening-progress tests);
-- production TypeScript/Vite build passes in CI;
-- PR #10 CI passed before merge.
+- **184 tests across 18 test files passed**;
+- production TypeScript/Vite build passed;
+- workshop tests cover German instructions, unanswered-task validation, feedback and skipped-task scoring;
+- complaint tests cover gaps, incorrect/correct ordering, result emission and retry;
+- this records local validation, not a claim about the latest CI or live deployment.
 
 ## 7. Recommended next steps
 
@@ -307,6 +319,15 @@ Before implementing new work:
 6. Open a PR rather than committing feature work directly to `main`.
 7. Let the Pages workflow deploy only after merge.
 
-## 10. Short handoff prompt
+## 10. End-of-session handoff — 2026-10-01
+
+- Judith requested advanced lessons with questions and instructions in German.
+- Workshop and complaint lessons are now present on `main`; keep this German-first direction for future B1 additions.
+- No new persistence schema or audio asset generation was required.
+- The free summary/email prompts are self-directed and do not provide automatic assessment.
+- No further feature work is planned for this session. On the next session, check current `main` and the latest workflow/deployment status before making changes.
+- Next lesson content should broaden practical situations and require understanding reasons, conditions and final agreements rather than merely increasing dialogue length.
+
+## 11. Short handoff prompt
 
 > Read `CONTEXT.md` and `ARCHITECTURE.md`, inspect current `main`, preserve existing learner data and interaction flows, choose the next feature based on actual A2→B1 learning value, implement it on a scoped branch with tests, and open a PR. Do not deploy a feature branch directly.
