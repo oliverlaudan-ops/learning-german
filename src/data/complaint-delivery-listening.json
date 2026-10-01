@@ -1,0 +1,252 @@
+{
+  "id": "complaint-delivery-v1",
+  "chapterId": "b1-ch8",
+  "level": "B1",
+  "language": "de",
+  "title": "Eine beschädigte Lieferung reklamieren",
+  "scenario": "Nora ruft beim Kundenservice an, weil ihre Kaffeemaschine beschädigt angekommen ist. Achte auf verworfene Lösungen, Bedingungen und die endgültige Vereinbarung.",
+  "speechRate": 1.12,
+  "useTwoVoices": true,
+  "topicLabel": "ALLTAG & KUNDENSERVICE",
+  "completionTitle": "Du hast eine Reklamation geklärt.",
+  "completionText": "Du hast das Problem, die angebotenen Lösungen und die nächsten Schritte verstanden.",
+  "lines": [
+    {
+      "id": "line-1",
+      "speaker": "Nora",
+      "german": "Guten Tag. Meine Kaffeemaschine ist gestern angekommen, aber der Wasserbehälter hat einen Riss. Ich habe sie deshalb noch nicht eingeschaltet.",
+      "english": "My coffee machine arrived yesterday, but its water tank is cracked, so I haven't switched it on."
+    },
+    {
+      "id": "line-2",
+      "speaker": "Kundenservice",
+      "german": "Das tut mir leid. Haben Sie Ihre Bestellnummer zur Hand?",
+      "english": "I'm sorry. Do you have your order number?"
+    },
+    {
+      "id": "line-3",
+      "speaker": "Nora",
+      "german": "Ja, die Nummer lautet sieben vier zwei neun. In der Versandmail stand Freitag als Liefertermin, tatsächlich kam das Paket erst am Montag.",
+      "english": "Yes, it's 7429. The email said Friday, but the parcel only arrived on Monday."
+    },
+    {
+      "id": "line-4",
+      "speaker": "Kundenservice",
+      "german": "Danke, ich habe die Bestellung gefunden. Wir könnten Ihnen einen neuen Wasserbehälter schicken. Der wäre allerdings erst in zwei Wochen verfügbar.",
+      "english": "We could send a replacement tank, but it would only be available in two weeks."
+    },
+    {
+      "id": "line-5",
+      "speaker": "Nora",
+      "german": "So lange möchte ich nicht warten. Die Maschine war als Geschenk gedacht. Wäre ein Austausch des ganzen Geräts möglich?",
+      "english": "I don't want to wait that long. It was a gift. Could you replace the whole machine?"
+    },
+    {
+      "id": "line-6",
+      "speaker": "Kundenservice",
+      "german": "Ja. Dasselbe Modell in Weiß haben wir auf Lager. Das schwarze Modell ist momentan ausverkauft. Alternativ können wir nach der Rücksendung den Kaufpreis erstatten.",
+      "english": "The white version is in stock, but the black one is sold out. Alternatively, we can refund the price after the return."
+    },
+    {
+      "id": "line-7",
+      "speaker": "Nora",
+      "german": "Dann nehme ich das weiße Modell. Muss ich das beschädigte Gerät vorher zurückschicken?",
+      "english": "I'll take the white one. Must I send the damaged machine back first?"
+    },
+    {
+      "id": "line-8",
+      "speaker": "Kundenservice",
+      "german": "Wir senden den Ersatz, sobald Sie uns zwei Fotos geschickt haben: eines vom Schaden und eines vom Etikett auf dem Karton. Die Rücksendung können Sie danach erledigen.",
+      "english": "We send the replacement once you send two photos: the damage and the box label. You can return the machine afterwards."
+    },
+    {
+      "id": "line-9",
+      "speaker": "Nora",
+      "german": "Den äußeren Karton habe ich noch. Schicken Sie mir ein Rücksendeetikett, oder muss ich das Porto selbst bezahlen?",
+      "english": "I still have the outer box. Will you send a return label, or do I pay postage?"
+    },
+    {
+      "id": "line-10",
+      "speaker": "Kundenservice",
+      "german": "Das Etikett erhalten Sie kostenlos per E-Mail. Verpacken Sie bitte auch das Zubehör und geben Sie das Paket innerhalb von sieben Tagen nach Erhalt des Etiketts ab.",
+      "english": "The label comes free by email. Include the accessories and hand in the parcel within seven days of receiving the label."
+    },
+    {
+      "id": "line-11",
+      "speaker": "Nora",
+      "german": "Gut. Kann der Ersatz noch vor Samstag ankommen? Die Feier ist am Samstagabend.",
+      "english": "Can the replacement arrive before Saturday? The party is on Saturday evening."
+    },
+    {
+      "id": "line-12",
+      "speaker": "Kundenservice",
+      "german": "Wenn die Fotos heute bis fünfzehn Uhr da sind, versenden wir morgen. Die Zustellung dauert normalerweise zwei Werktage. Einen festen Ankunftstag kann ich Ihnen jedoch nicht garantieren.",
+      "english": "If we get the photos by three today, we ship tomorrow. Delivery normally takes two working days, but I cannot guarantee a date."
+    },
+    {
+      "id": "line-13",
+      "speaker": "Nora",
+      "german": "Dann sende ich die Fotos gleich. Bitte schicken Sie das neue Gerät an meine Büroadresse statt an meine Wohnung. Dort kann jemand das Paket annehmen.",
+      "english": "I'll send the photos now. Please deliver to my office instead of my home, where someone can accept it."
+    },
+    {
+      "id": "line-14",
+      "speaker": "Kundenservice",
+      "german": "Gern. Antworten Sie bitte auf meine E-Mail mit den Fotos und der vollständigen Büroadresse. Sie erhalten dann die Austauschbestätigung und später eine Sendungsnummer.",
+      "english": "Reply to my email with the photos and complete office address. You'll receive an exchange confirmation and later a tracking number."
+    }
+  ],
+  "trueFalse": [
+    {
+      "statement": "Nora hat die Maschine nicht eingeschaltet, weil sie einen sichtbaren Schaden entdeckt hat.",
+      "answer": true,
+      "explanation": "Der Wasserbehälter hat einen Riss. Nora hat das Gerät deshalb noch nicht eingeschaltet."
+    },
+    {
+      "statement": "Nora entscheidet sich für einen neuen Wasserbehälter.",
+      "answer": false,
+      "explanation": "Sie möchte keine zwei Wochen warten und wählt den Austausch des ganzen Geräts."
+    },
+    {
+      "statement": "Der Ersatz hat eine andere Farbe als das ursprünglich bestellte Gerät.",
+      "answer": true,
+      "explanation": "Das schwarze Modell ist ausverkauft. Nora akzeptiert das weiße Modell."
+    },
+    {
+      "statement": "Der Ersatz wird erst versendet, nachdem die Rücksendung angekommen ist.",
+      "answer": false,
+      "explanation": "Für den Versand muss Nora zuerst die zwei Fotos schicken. Die Rücksendung kann danach erfolgen."
+    },
+    {
+      "statement": "Der Kundenservice garantiert eine Lieferung vor Samstag.",
+      "answer": false,
+      "explanation": "Zwei Werktage sind die normale Lieferdauer. Ein bestimmter Ankunftstag wird ausdrücklich nicht garantiert."
+    },
+    {
+      "statement": "Nora muss das Porto für die Rücksendung selbst bezahlen.",
+      "answer": false,
+      "explanation": "Sie bekommt ein kostenloses Rücksendeetikett per E-Mail."
+    },
+    {
+      "statement": "Der Ersatz soll an Noras Büro geliefert werden, damit jemand das Paket annehmen kann.",
+      "answer": true,
+      "explanation": "Nora nennt diesen Grund für die Änderung der Lieferadresse."
+    }
+  ],
+  "gaps": [
+    {
+      "before": "Der einzelne Ersatzbehälter wäre erst",
+      "answer": "in zwei Wochen",
+      "after": "verfügbar.",
+      "options": [
+        "in zwei Wochen",
+        "morgen",
+        "am Freitag"
+      ]
+    },
+    {
+      "before": "Nora entscheidet sich für",
+      "answer": "das weiße Modell",
+      "after": ".",
+      "options": [
+        "das weiße Modell",
+        "das schwarze Modell",
+        "eine Erstattung"
+      ]
+    },
+    {
+      "before": "Vor dem Versand braucht der Kundenservice",
+      "answer": "zwei Fotos",
+      "after": ".",
+      "options": [
+        "zwei Fotos",
+        "das zurückgesendete Gerät",
+        "eine neue Zahlung"
+      ]
+    },
+    {
+      "before": "Die Rücksendefrist beginnt mit",
+      "answer": "dem Erhalt des Etiketts",
+      "after": ".",
+      "options": [
+        "dem Erhalt des Etiketts",
+        "der Bestellung",
+        "dem Geburtstag"
+      ]
+    },
+    {
+      "before": "Für den Versand am nächsten Tag müssen die Fotos heute bis",
+      "answer": "fünfzehn Uhr",
+      "after": "eingehen.",
+      "options": [
+        "fünfzehn Uhr",
+        "siebzehn Uhr",
+        "neun Uhr"
+      ]
+    },
+    {
+      "before": "Mit den Fotos soll Nora auch",
+      "answer": "die vollständige Büroadresse",
+      "after": "senden.",
+      "options": [
+        "die vollständige Büroadresse",
+        "ihre Bankdaten",
+        "eine neue Bestellnummer"
+      ]
+    }
+  ],
+  "sequence": [
+    {
+      "id": "damage",
+      "text": "Nora beschreibt den beschädigten Wasserbehälter."
+    },
+    {
+      "id": "order",
+      "text": "Der Kundenservice fragt nach der Bestellnummer."
+    },
+    {
+      "id": "part",
+      "text": "Ein neuer Wasserbehälter wird angeboten, aber Nora lehnt die Wartezeit ab."
+    },
+    {
+      "id": "exchange",
+      "text": "Nora entscheidet sich für den Austausch gegen das weiße Modell."
+    },
+    {
+      "id": "photos",
+      "text": "Der Kundenservice erklärt, welche Fotos vor dem Versand nötig sind."
+    },
+    {
+      "id": "return",
+      "text": "Beide klären Rücksendeetikett, Zubehör und Rücksendefrist."
+    },
+    {
+      "id": "arrival",
+      "text": "Der Kundenservice erklärt die Lieferdauer ohne einen festen Tag zu garantieren."
+    },
+    {
+      "id": "address",
+      "text": "Nora bittet um Lieferung ans Büro und erfährt, wie sie die Adresse mitteilen soll."
+    }
+  ],
+  "practice": [
+    {
+      "lineId": "line-5",
+      "focus": "Eine Alternative höflich erfragen",
+      "tip": "„Wäre … möglich?“ ist eine höfliche Frage. Formuliere eine eigene Frage nach einer anderen Lösung.",
+      "rhythm": "So LANGE / möchte ich NICHT warten. / Wäre ein AUStausch / des GANzen Geräts MÖGlich?"
+    },
+    {
+      "lineId": "line-12",
+      "focus": "Bedingung und Zusage unterscheiden",
+      "tip": "Erkläre in zwei Sätzen: Unter welcher Bedingung wird morgen versendet? Was wird nicht garantiert?",
+      "rhythm": "WENN die Fotos / bis FÜNFzehn Uhr da sind / versenden wir MORgen. / Einen FESTen Tag / kann ich NICHT garantieren."
+    },
+    {
+      "lineId": "line-14",
+      "focus": "Eine Antwort per E-Mail formulieren",
+      "tip": "Schreibe vier bis fünf Sätze an den Kundenservice: Nenne die Bestellnummer, bestätige das weiße Modell, erwähne die zwei Fotos und gib eine erfundene Büroadresse an. Vergleiche deine Nachricht mit den Absprachen. Dies ist eine freie Schreibübung ohne automatische Bewertung.",
+      "rhythm": "Antworten Sie / mit den FOtos / und der VOLLständigen Büroadresse."
+    }
+  ]
+}
