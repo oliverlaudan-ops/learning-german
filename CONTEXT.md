@@ -25,7 +25,7 @@ The guiding question for every feature is:
 
 ### Product principles
 
-- **English explains; German is practised.** Keep explanations simple and natural, with useful German examples.
+- **German-first advanced practice.** New B1 listening lessons use German questions, instructions and feedback. English transcript translations remain optional disclosure help; earlier foundation lessons can retain English explanations.
 - **Teach in context.** Prefer dialogues, situations, sentence patterns, articles/plurals, and complete phrases over isolated word pairs.
 - **A2→B1 is the immediate priority.** A1 exists mainly as foundation/refresh; B2 is secondary until the current path is strong.
 - **Clear next action.** The learner should not need to plan the learning session herself.
@@ -211,6 +211,22 @@ Important behaviour:
 - the learner can retry immediately;
 - Learn shows a Listening Progress summary with latest result, number of scored sessions and number of different advanced lessons practised;
 - only the newest 50 listening attempts are retained per profile.
+
+### #13 — Eine Weiterbildung planen
+
+- merged 2026-10-01;
+- B1 workplace dialogue with reasons, conditions, corrected prices and registration order;
+- German questions, instructions, controls, feedback and results;
+- optional English transcript help and a free spoken summary;
+- linked from Learn and Berufsleben vertieft.
+
+### New lesson — Eine beschädigte Lieferung reklamieren
+
+- B1 customer-service dialogue with rejected alternatives, photo requirements, return deadline and a delivery estimate that is not a guarantee;
+- same German task flow and optional English transcript help as #13;
+- true/false, gap fill, event ordering and free email-writing practice;
+- linked from Learn and Medien & Kommunikation;
+- free writing is not automatically assessed; checked comprehension uses existing per-profile listening history.
 
 ## 6. CI and deployment
 
