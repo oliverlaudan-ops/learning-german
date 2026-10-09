@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { extraParts } from '../data/goethe-b1-parts'
-import { clips } from './goethe-b1'
+import { clips } from '../data/goethe-b1-part1'
 import { fullExamQuestionCount, gradeB1 } from './goethe-b1-full-exam'
 
 describe('Goethe B1 four-part practice set', () => {
