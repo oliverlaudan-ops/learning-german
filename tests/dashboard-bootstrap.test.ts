@@ -53,6 +53,7 @@ function bootstrapDom(): void {
   document.body.innerHTML = `
     <div id="dashboard-tab"></div>
     <div id="learn-tab"></div>
+    <div id="exam-tab"></div>
     <select class="profile-select"><option value="oliver">Oliver</option></select>
   `
 }
@@ -83,6 +84,27 @@ describe('enhanceDashboard — idempotency', () => {
     const learn = document.getElementById('learn-tab')!
     expect(dashboard.innerHTML).toContain('dashboard')
     expect(learn.innerHTML).toContain('lesson-index')
+  })
+
+  it('renders Goethe B1 training on the dedicated exam tab rather than at the bottom of the dashboard', async () => {
+    const { enhanceDashboard } = await freshBootstrap()
+    enhanceDashboard()
+    const exam = document.getElementById('exam-tab')!
+    const dashboard = document.getElementById('dashboard-tab')!
+    expect(exam.innerHTML).toContain('GOETHE-ZERTIFIKAT B1')
+    expect(exam.innerHTML).toContain('data-goethe-full')
+    expect(exam.innerHTML).toContain('Your B1 Hören study plan')
+    expect(dashboard.innerHTML).not.toContain('data-goethe-full')
+  })
+
+  it('refreshes Goethe B1 content when returning to the exam tab', async () => {
+    const { enhanceDashboard, __triggerShowTabHooks } = await freshBootstrap()
+    enhanceDashboard()
+    const exam = document.getElementById('exam-tab')!
+    exam.innerHTML = '<p>old exam content</p>'
+    __triggerShowTabHooks('exam')
+    expect(exam.innerHTML).toContain('data-goethe-open')
+    expect(exam.innerHTML).not.toContain('old exam content')
   })
 
   it('does not stack showTab hooks across repeated calls', async () => {
