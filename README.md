@@ -155,3 +155,10 @@ The separate [Generate Goethe B1 multi-speaker audio](.github/workflows/goethe-b
 Voice model sources: [Piper German voice catalog](https://github.com/rhasspy/piper/blob/master/VOICES.md) and [Piper voice files/model cards](https://huggingface.co/rhasspy/piper-voices/tree/main/de/de_DE). Voice-model usage and attribution requirements should be reviewed against each model card before further redistribution.
 
 Audio generation checks verify the number and duration of MP3s; Vitest verifies file presence and manifest consistency. Manual listening/quality assurance is still recommended, especially for proper nouns and the voices in Teil 4.
+
+
+## Goethe B1 preparation navigation
+
+The full Goethe B1 Hören preparation is accessible from a dedicated **🎧 B1 Exam** tab immediately after Dashboard in the primary navigation. The tab holds both listening practice options and the weekly study plan. The exam card is no longer appended to the end of the Dashboard.
+
+The page is refreshed on tab navigation and learner profile changes; scores and completed daily practice continue using their existing profile-scoped localStorage keys. The existing learning, vocabulary, practice, review, and statistics tabs are unchanged.
