@@ -119,3 +119,18 @@ The dashboard now offers two separate learning experiences:
 **Limitations:** This is *original practice*, **not** an official Goethe examination or equivalent scoring instrument. Audio currently comes from the browser's German text-to-speech engine. Browser TTS does **not** reproduce real multi-speaker recordings, fixed pauses, the automatic playback sequence, reliable acoustic quality, or the formal five-minute paper answer-transfer procedure. The timed section is a training convenience rather than a faithful full exam recording. Learners should also use the [official Goethe B1 model test](https://bfu.goethe.de/b1_mod/hoeren.php). Planned next step: recorded multi-speaker audio with a deterministic sequence, additional original sets, and a personalised study plan.
 
 **Exam date:** The Kampala appointment needs confirmation against Judith's booking; the study target currently assumes 21–23 November 2026.
+
+## B1 Hören study-plan and pre-recorded audio support
+
+The Goethe B1 card now contains Judith's dated seven-stage learning schedule (9 October–23 November 2026), a daily practice recommendation and a per-profile completed-today checkbox. The schedule uses **21 November 2026 as a conservative target** while her reported 23 November examination date is still to be reconciled with the centre's booking confirmation. Full-practice results are taken from the existing profile-scoped local history, and the weakest part is selected using the *percentage* of each part rather than the raw number correct.
+
+The full four-part practice tries to load bundled `public/audio/goethe-b1/segment-0.mp3` through `segment-7.mp3`; if a file is not supplied, it visibly falls back to the browser's German speech synthesizer. **No new MP3 recordings have been included in this PR.** A repeatable recording workflow is provided:
+
+```bash
+node scripts/export-goethe-b1-audio.mjs
+python scripts/generate-goethe-b1-audio.py /path/to/german-voice-one.onnx /path/to/german-voice-two.onnx
+```
+
+The generator requires Piper TTS (`piper-tts==1.8.0`) and FFmpeg, exports eight fixed MP3 recordings at 64 kbps, and uses the second voice for Jonas and Herr Brandt if provided. You must review audio quality and pronunciation and then commit the actual generated assets in a later PR. The synthetic recordings are not original human voice acting or official Goethe audio. Existing listening lessons remain unchanged.
+
+Known limitations: the browser-speech fallback and player still need a more faithful automatic exam sequence, calibrated pauses, audio-completion guard and truly distinct female/male voices for all panel members. Do not claim formal Goethe exam equivalence.
