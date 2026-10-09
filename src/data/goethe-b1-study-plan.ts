@@ -20,7 +20,8 @@ export function planIndex(date: Date): number {
 }
 export interface FullAttempt { mode?: string; percent?: number; correct?: number; byPart?: number[]; completedAt?: number }
 export function weakestPart(attempts: FullAttempt[]): number | undefined {
- const latest=attempts.filter(a=>Array.isArray(a.byPart)&&a.byPart.length===4).at(-1)
+ const valid=attempts.filter(a=>Array.isArray(a.byPart)&&a.byPart.length===4)
+ const latest=valid[valid.length-1]
  if(!latest?.byPart)return undefined
  const rates=latest.byPart.map((score,i)=>score/[10,5,7,8][i])
  return rates.indexOf(Math.min(...rates))+1
