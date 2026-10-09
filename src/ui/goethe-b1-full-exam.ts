@@ -2,7 +2,7 @@
  * Four-part, 30-question Goethe-oriented listening PRACTICE.
  * Browser TTS does not provide a reproducible official exam recording.
  */
-import { clips } from './goethe-b1'
+import { clips } from '../data/goethe-b1-part1'
 import { extraParts, type B1Question, type B1Segment } from '../data/goethe-b1-parts'
 import './goethe-b1.css'
 
