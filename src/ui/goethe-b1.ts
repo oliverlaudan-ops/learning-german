@@ -4,10 +4,11 @@
  * NOT representative of the voices or playback quality of the Goethe exam.
  */
 import './goethe-b1.css'
+import { launchB1FullExam } from './goethe-b1-full-exam'
 
 type Question = { prompt: string; options: string[]; answer: number; explanation: string }
 type Clip = { title: string; text: string; questions: [Question, Question] }
-const clips: Clip[] = [
+export const clips: Clip[] = [
   { title: 'Nachricht zur Verabredung', text: 'Hallo Nina, hier ist Lara. Wir wollten uns morgen um halb drei vor dem Kino treffen. Leider muss ich länger arbeiten. Können wir uns stattdessen um Viertel nach vier am Haupteingang treffen? Ruf mich bitte nur an, wenn das nicht klappt. Bis morgen!', questions: [
     { prompt: 'Lara möchte das Treffen absagen.', options: ['Richtig', 'Falsch'], answer: 1, explanation: 'Lara will das Treffen verschieben, nicht absagen.' },
     { prompt: 'Wann möchte Lara sich treffen?', options: ['Um 14:30 Uhr', 'Um 16:15 Uhr', 'Um 16:45 Uhr'], answer: 1, explanation: '„Viertel nach vier“ bedeutet 16:15 Uhr.' }
@@ -42,8 +43,10 @@ export function attachGoetheB1Entry(dashboard: HTMLElement, profileId: string): 
     <p>Teil 1: Fünf kurze Hörtexte mit zehn Fragen auf Deutsch. Choose a guided practice or a timed, exam-style attempt.</p>
     <p class="muted">Exam target: 21–23 November 2026 (confirm the date with the centre).</p>
     <p class="goethe-tts-note">Prototype: computer-generated browser speech. This is not official Goethe exam audio.</p>
+    <button type="button" class="btn primary" data-goethe-full>All four parts · 30 questions →</button>
     <button type="button" class="btn primary" data-goethe-open>Start B1 Hören →</button>`
   dashboard.appendChild(section)
+  section.querySelector<HTMLButtonElement>('[data-goethe-full]')?.addEventListener('click', () => launchB1FullExam(profileId))
   section.querySelector<HTMLButtonElement>('[data-goethe-open]')?.addEventListener('click', () => {
     const overlay = document.createElement('div')
     overlay.className = 'goethe-overlay'
