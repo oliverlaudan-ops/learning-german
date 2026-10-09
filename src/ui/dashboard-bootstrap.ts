@@ -10,6 +10,7 @@ import { renderPlacementTest } from './placement-test'
 import { __getProfile, registerShowTabHook } from './ui'
 import { disposeListeningLesson } from './listening-lesson'
 import { getLessonContent } from '../data/lesson-content'
+import { attachGoetheB1Entry } from './goethe-b1'
 
 const levels = getLevels()
 const listeningOnlyChapterIds = new Set(['b1-ch1'])
@@ -25,6 +26,7 @@ function refreshDashboard(): void {
   const profile = __getProfile()
   const dueCount = getDueSrsWords(vocabulary, profile.srsState).length
   target.innerHTML = renderDashboard({ profile, levels, vocabulary, dueCount })
+  attachGoetheB1Entry(target, profile.id)
 
   target.querySelectorAll<HTMLElement>('[data-dashboard-action="review"]').forEach((button) => {
     button.addEventListener('click', () => showTab('review'))
