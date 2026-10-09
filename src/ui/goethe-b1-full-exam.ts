@@ -41,8 +41,10 @@ export function launchB1FullExam(profileId: string): void {
   let deadline = 0
   let timer: number | undefined
   let activeUtterance: SpeechSynthesisUtterance | undefined
+  let recording: HTMLAudioElement | undefined
+  const recordingURL = (i: number) => `${import.meta.env.BASE_URL}audio/goethe-b1/segment-${i}.mp3`
 
-  const stop = () => { activeUtterance = undefined; if ('speechSynthesis' in window) window.speechSynthesis.cancel() }
+  const stop = () => { activeUtterance = undefined; if (recording) { recording.pause(); recording.removeAttribute('src'); recording.load(); recording=undefined } if ('speechSynthesis' in window) window.speechSynthesis.cancel() }
   const cleanupTimer = () => { if (timer !== undefined) { clearInterval(timer); timer = undefined } }
   const close = () => { stop(); cleanupTimer(); overlay.remove(); oldFocus?.focus() }
   const remaining = () => Math.max(0, Math.ceil((deadline-Date.now())/1000))
@@ -92,7 +94,7 @@ export function launchB1FullExam(profileId: string): void {
       <button type="button" class="btn secondary" data-full-close>← Back to dashboard</button>
       <p class="card-kicker">GOETHE B1 HÖREN · SELF-CREATED PRACTICE</p>
       <h1 id="goethe-full-title">Alle vier Hörteile</h1>
-      <p class="goethe-tts-note">Nicht offizieller Goethe-Modellsatz. Die Stimmen werden vorläufig im Browser erzeugt und sind nicht prüfungsidentisch.</p>
+      <p class="goethe-tts-note">Nicht offizieller Goethe-Modellsatz. Die Aufnahme wird verwendet, wenn eine geprüfte MP3-Datei vorhanden ist. Ansonsten erfolgt ein gekennzeichneter Browser-TTS-Ersatz. Kein offizieller Goethe-Modellsatz.</p>
       ${!started ? `<p>30 Aufgaben · 4 Teile · 8 Hörtexte. Im Lernmodus gibt es Erklärungen und Transkripte. Der prüfungsähnliche Modus begrenzt Wiedergaben und läuft maximal 40 Minuten; bitte nutze zusätzlich den offiziellen Goethe-Modellsatz.</p>
         <label for="b1-full-mode">Wähle den Modus</label>
         <select id="b1-full-mode"><option value="learn" ${mode==='learn'?'selected':''}>Lernmodus</option><option value="exam" ${mode==='exam'?'selected':''}>Prüfungsähnlicher Modus</option></select>
@@ -136,29 +138,45 @@ export function launchB1FullExam(profileId: string): void {
       if(mode==='learn' && !transfer)render()
     }))
     overlay.querySelector('[data-full-play]')?.addEventListener('click',()=>{
-      if (!('speechSynthesis' in window)) {
-        const el=overlay.querySelector('[data-full-status]'); if(el)el.textContent='Dein Browser unterstützt keine deutsche Sprachausgabe.'
-        return
-      }
       if(mode==='exam'&&plays[index]>=s.maxPlays)return
       stop()
-      if(mode==='exam')plays[index]++
-      const utterance=new SpeechSynthesisUtterance(s.script)
-      activeUtterance=utterance
-      utterance.lang='de-DE'
-      utterance.rate=mode==='learn'?0.9:1
-      const voice=window.speechSynthesis.getVoices().find(v=>v.lang.toLowerCase().startsWith('de'))
-      if(voice)utterance.voice=voice
-      utterance.onerror=()=>{
-        if(activeUtterance!==utterance)return
-        const el=overlay.querySelector('[data-full-status]')
-        if(el)el.textContent='Die Wiedergabe ist fehlgeschlagen. Bitte die Sprachausgabe-Einstellungen prüfen.'
+      const playingIndex=index
+      let startedPlayback=false
+      const status=()=>overlay.querySelector<HTMLElement>('[data-full-status]')
+      const countPlay=()=>{
+        if(startedPlayback)return
+        startedPlayback=true
+        if(mode==='exam'){
+          plays[playingIndex]++
+          const button=overlay.querySelector<HTMLButtonElement>('[data-full-play]')
+          if(button){
+            button.disabled=plays[playingIndex]>=s.maxPlays
+            button.textContent='▶ Hörtext abspielen ('+plays[playingIndex]+'/'+s.maxPlays+')'
+          }
+        }
       }
-      window.speechSynthesis.speak(utterance)
-      const button=overlay.querySelector<HTMLButtonElement>('[data-full-play]')
-      if(button)button.disabled=mode==='exam'&&plays[index]>=s.maxPlays
-      const status=overlay.querySelector('[data-full-status]')
-      if(status)status.textContent='Wiedergabe gestartet.'
+      const fallback=()=>{
+        if(recording){recording.pause();recording=undefined}
+        if(!('speechSynthesis' in window)){
+          if(status())status()!.textContent='Audio fehlt und Browser-Sprachausgabe ist nicht verfügbar.'
+          return
+        }
+        const utterance=new SpeechSynthesisUtterance(s.script)
+        utterance.lang='de-DE'
+        utterance.rate=mode==='learn'?0.9:1
+        const voice=window.speechSynthesis.getVoices().find(v=>v.lang.toLowerCase().startsWith('de'))
+        if(voice)utterance.voice=voice
+        activeUtterance=utterance
+        utterance.onstart=()=>{if(activeUtterance===utterance){countPlay();if(status())status()!.textContent='Browser-Sprachausgabe (Ersatz, keine Aufnahme).'}}
+        utterance.onerror=()=>{if(activeUtterance===utterance&&status())status()!.textContent='Sprachausgabe fehlgeschlagen. Bitte die Einstellungen prüfen.'}
+        window.speechSynthesis.speak(utterance)
+      }
+      const asset=new Audio(recordingURL(playingIndex))
+      recording=asset
+      asset.preload='auto'
+      asset.onplaying=()=>{if(recording===asset){countPlay();if(status())status()!.textContent='Feste Audioaufnahme wird wiedergegeben.'}}
+      asset.onerror=()=>{if(recording===asset)fallback()}
+      void asset.play().catch(()=>{if(recording===asset)fallback()})
     })
     if(started&&!finished&&mode==='exam') tick()
   }
