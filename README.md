@@ -105,3 +105,17 @@ See `CONTEXT.md` for the current roadmap and `ARCHITECTURE.md` for implementatio
 ## License
 
 See `LICENSE` and the `license` field in `package.json` for repository licensing information.
+
+## Goethe B1 Hören – exam-oriented practice (October 2026)
+
+The dashboard now offers two separate learning experiences:
+
+- **Teil 1 practice:** Five short original scripts and ten comprehension questions, with guided and timed modes (the initial prototype).
+- **Full four-part practice:** Eight original scripts in total (five short announcements, one guided tour, one extended conversation, and one radio discussion), with **30 questions** divided into **10 / 5 / 7 / 8** across parts 1–4. All prompts, answer choices, and explanations are in German.
+- **Guided mode:** Replays without limit, transcript on demand, and instant explanations.
+- **Exam-style mode:** A 40-minute countdown, a maximum of two plays per Teil 1 text and Teil 4 discussion, one play for Teil 2 and Teil 3, answer checking before final submission, no transcript until results, and scores per part.
+- **Progress:** The last 30 attempts are saved locally per learner profile in the browser under `goethe-b1-hoeren-full-v1-<profileId>`. They do not alter existing learner-profile storage or lesson progress.
+
+**Limitations:** This is *original practice*, **not** an official Goethe examination or equivalent scoring instrument. Audio currently comes from the browser's German text-to-speech engine. Browser TTS does **not** reproduce real multi-speaker recordings, fixed pauses, the automatic playback sequence, reliable acoustic quality, or the formal five-minute paper answer-transfer procedure. The timed section is a training convenience rather than a faithful full exam recording. Learners should also use the [official Goethe B1 model test](https://bfu.goethe.de/b1_mod/hoeren.php). Planned next step: recorded multi-speaker audio with a deterministic sequence, additional original sets, and a personalised study plan.
+
+**Exam date:** The Kampala appointment needs confirmation against Judith's booking; the study target currently assumes 21–23 November 2026.
