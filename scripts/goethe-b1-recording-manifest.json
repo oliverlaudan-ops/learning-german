@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "title": "Nachricht zur Verabredung",
+    "part": 1,
+    "script": "Hallo Nina, hier ist Lara. Wir wollten uns morgen um halb drei vor dem Kino treffen. Leider muss ich länger arbeiten. Können wir uns stattdessen um Viertel nach vier am Haupteingang treffen? Ruf mich bitte nur an, wenn das nicht klappt. Bis morgen!"
+  },
+  {
+    "id": 1,
+    "title": "Durchsage am Bahnhof",
+    "part": 1,
+    "script": "Achtung, eine Information für Reisende nach Köln: Der Regionalexpress um 10 Uhr 20 fährt heute nicht von Gleis 4, sondern von Gleis 7. Wegen Bauarbeiten verzögert sich die Abfahrt um ungefähr zehn Minuten. Wir bitten um Verständnis."
+  },
+  {
+    "id": 2,
+    "title": "Nachricht aus der Arztpraxis",
+    "part": 1,
+    "script": "Guten Tag, Frau Berger. Hier spricht die Praxis Dr. Weber. Ihr Termin am Donnerstag um neun Uhr kann leider nicht stattfinden. Wir bieten Ihnen stattdessen Freitag um elf Uhr an. Bitte bestätigen Sie den neuen Termin bis Mittwoch telefonisch."
+  },
+  {
+    "id": 3,
+    "title": "Hinweis in der Bibliothek",
+    "part": 1,
+    "script": "Liebe Besucherinnen und Besucher, die Stadtbibliothek schließt heute ausnahmsweise schon um 16 Uhr. Bücher können Sie auch nach der Schließung in den Rückgabekasten am Seiteneingang werfen. Morgen sind wir wieder wie gewohnt bis 19 Uhr für Sie da."
+  },
+  {
+    "id": 4,
+    "title": "Nachricht von einem Kollegen",
+    "part": 1,
+    "script": "Hallo Tim, ich bin es, Daniel. Die Besprechung mit unserem Kunden beginnt morgen schon um acht statt um neun. Bitte bring die neuen Unterlagen mit. Die Präsentation übernehme ich, darum musst du dich nicht kümmern. Danke und bis morgen!"
+  },
+  {
+    "id": 5,
+    "title": "Eine Führung durch das Umweltzentrum",
+    "part": 2,
+    "script": "Guten Morgen und herzlich willkommen im Umweltzentrum am Stadtpark. Mein Name ist Frau Peters und ich begleite Sie heute durch unsere Ausstellung. Eigentlich wollten wir im Garten beginnen, aber wegen des Regens bleiben wir zunächst im Hauptgebäude. Im Erdgeschoss erfahren Sie, wie die Stadt ihren Energieverbrauch in den letzten zehn Jahren gesenkt hat. Besonders interessant sind die Fotos alter Heizungsanlagen. Im ersten Stock können Sie später selbst ausprobieren, wie viel Strom verschiedene Haushaltsgeräte benötigen. Die Geräte sind allerdings erst ab elf Uhr zugänglich, weil eine Schulklasse dort noch arbeitet. Nach unserem Rundgang treffen wir uns um Viertel nach zwölf im Café, nicht am Eingang. Dort können Sie Fragen stellen. Wenn Sie etwas trinken möchten, bezahlen Sie das selbst. Der Eintritt zur Ausstellung ist bereits in Ihrer Teilnehmerkarte enthalten. Fotografieren dürfen Sie im ganzen Haus, aber bitte ohne Blitz. Nach der Mittagspause bietet meine Kollegin eine freiwillige Führung durch den Garten an, falls das Wetter besser wird. Diese Führung dauert ungefähr eine halbe Stunde und kostet nichts extra. Jetzt gehen wir zuerst nach links in die Energieausstellung."
+  },
+  {
+    "id": 6,
+    "title": "Zwei Bekannte sprechen über eine neue Wohnung",
+    "part": 3,
+    "script": "Miriam: Hallo Jonas, du siehst müde aus. War dein Wochenende so anstrengend? Jonas: Ja, ich bin endlich umgezogen. Eigentlich sollten meine Freunde am Samstagmorgen helfen, aber zwei waren krank. Miriam: Oh nein! Hast du trotzdem alles geschafft? Jonas: Fast. Mein Bruder konnte zum Glück einen Transporter ausleihen. Den großen Schrank haben wir aber in der alten Wohnung gelassen, weil er nicht durch die Tür passte. Miriam: Und gefällt dir die neue Wohnung? Jonas: Sehr. Sie ist zwar kleiner als meine alte, dafür brauche ich nur zehn Minuten mit dem Fahrrad zur Arbeit. Vorher war ich fast eine Stunde unterwegs. Miriam: Das klingt gut. Ist die Miete günstiger? Jonas: Die Kaltmiete ist etwas höher, aber ich zahle weniger Heizkosten. Außerdem muss ich nicht mehr jeden Tag eine Fahrkarte kaufen. Miriam: Hast du schon alle Kartons ausgepackt? Jonas: Nein, die Bücher stehen noch im Flur. Zuerst muss ich morgen den Internetanschluss organisieren. Der Techniker wollte heute kommen, hat den Termin aber auf Dienstag verschoben. Miriam: Dann kannst du am Wochenende ja eine kleine Einweihungsfeier machen. Jonas: Lieber erst nächste Woche! Diesen Samstag arbeite ich. Aber am Sonntag können wir zusammen einen Kaffee trinken. Miriam: Sehr gerne. Soll ich Kuchen mitbringen? Jonas: Das wäre toll!"
+  },
+  {
+    "id": 7,
+    "title": "Sollten Geschäfte sonntags geöffnet sein?",
+    "part": 4,
+    "script": "Moderatorin: Heute sprechen wir darüber, ob Geschäfte auch sonntags regelmäßig öffnen sollten. Bei uns sind drei Gäste: Frau König, Herr Brandt und Frau Yilmaz. Frau König, was meinen Sie? Frau König: Ich bin dagegen. Wer im Verkauf arbeitet, braucht einen festen freien Tag. Natürlich kann man auch unter der Woche frei haben, aber gemeinsame Zeit mit der Familie lässt sich nicht so leicht ersetzen. Moderatorin: Herr Brandt? Herr Brandt: Ich sehe das anders. Viele Menschen arbeiten lange und schaffen es nicht, samstags einzukaufen. Ein zusätzlicher Einkaufstag wäre praktisch. Wichtig ist allerdings, dass niemand gezwungen wird, am Sonntag zu arbeiten. Frau Yilmaz: Mir ist vor allem der kleine Einzelhandel wichtig. Große Ketten könnten leicht zusätzliche Mitarbeiter einsetzen. Für ein kleines Familiengeschäft wäre ein weiterer Öffnungstag jedoch teuer. Vielleicht sollten die Geschäfte selbst entscheiden dürfen. Frau König: Aber freiwillig klingt nur auf dem Papier gut. Wenn alle anderen öffnen, fühlen sich kleine Geschäfte unter Druck. Herr Brandt: Das verstehe ich, trotzdem wünschen sich viele Kunden mehr Flexibilität. Man könnte zunächst an wenigen Sonntagen im Jahr testen, ob die Nachfrage wirklich groß ist. Frau Yilmaz: Einen begrenzten Versuch finde ich sinnvoll. Danach sollte man genau prüfen, ob die zusätzlichen Einnahmen die Kosten decken. Moderatorin: Frau König, wäre ein solcher Test für Sie denkbar? Frau König: Nur dann, wenn die Beschäftigten wirklich freiwillig teilnehmen und dafür einen fairen Ausgleich bekommen. Die Interessen der Mitarbeiter müssen an erster Stelle stehen. Moderatorin: Vielen Dank für die Diskussion!"
+  }
+]

@@ -134,3 +134,24 @@ python scripts/generate-goethe-b1-audio.py /path/to/german-voice-one.onnx /path/
 The generator requires Piper TTS (`piper-tts==1.8.0`) and FFmpeg, exports eight fixed MP3 recordings at 64 kbps, and uses the second voice for Jonas and Herr Brandt if provided. You must review audio quality and pronunciation and then commit the actual generated assets in a later PR. The synthetic recordings are not original human voice acting or official Goethe audio. Existing listening lessons remain unchanged.
 
 Known limitations: the browser-speech fallback and player still need a more faithful automatic exam sequence, calibrated pauses, audio-completion guard and truly distinct female/male voices for all panel members. Do not claim formal Goethe exam equivalence.
+
+## B1 Hören: bundled four-voice recordings
+
+Eight **pre-generated MP3 files** are now included under `public/audio/goethe-b1/segment-0.mp3` through `segment-7.mp3`. They are synthesized from the original eight German scripts (not official Goethe exam audio); the browser-TTS fallback remains for browsers that cannot load a file.
+
+The recordings use four distinct Piper German models, with consistent assignments:
+
+| Script role | German voice |
+| --- | --- |
+| Miriam, Frau König | `de_DE-kerstin-low` |
+| Jonas, Herr Brandt | `de_DE-thorsten-medium` |
+| Moderatorin | `de_DE-eva_k-x_low` |
+| Frau Yilmaz | `de_DE-ramona-low` |
+
+Short messages use different voices across clips as well. There are 14 distinct dialogue turns in Teil 3 and 11 in Teil 4, separated by 0.4-second silences. This trains speaker identification, but pronunciation and accent diversity remain limited by TTS models. The files are meant for self-study, not as a faithful recording of a real examination.
+
+The separate [Generate Goethe B1 multi-speaker audio](.github/workflows/goethe-b1-audio.yml) GitHub Action can regenerate all eight files after a change to the scripts or voice mapping. It installs Piper, FFmpeg and the four voice models, then commits updated recordings to the feature branch. Production does **not** need the voice models, only the bundled MP3s.
+
+Voice model sources: [Piper German voice catalog](https://github.com/rhasspy/piper/blob/master/VOICES.md) and [Piper voice files/model cards](https://huggingface.co/rhasspy/piper-voices/tree/main/de/de_DE). Voice-model usage and attribution requirements should be reviewed against each model card before further redistribution.
+
+Audio generation checks verify the number and duration of MP3s; Vitest verifies file presence and manifest consistency. Manual listening/quality assurance is still recommended, especially for proper nouns and the voices in Teil 4.

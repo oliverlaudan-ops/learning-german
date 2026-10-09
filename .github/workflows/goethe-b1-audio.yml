@@ -1,0 +1,55 @@
+name: Generate Goethe B1 multi-speaker audio
+
+on:
+  push:
+    branches:
+      - feature/goethe-b1-distinct-voices
+    paths:
+      - "scripts/generate-goethe-b1-audio.py"
+      - "scripts/export-goethe-b1-audio.mjs"
+      - ".github/workflows/goethe-b1-audio.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  synthesize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y ffmpeg
+      - run: npm ci
+      - run: pip install piper-tts==1.3.0
+      - name: Download the four licensed German voice models
+        run: |
+          mkdir -p voices
+          python -m piper.download_voices --data-dir voices de_DE-thorsten-medium de_DE-kerstin-low de_DE-ramona-low de_DE-eva_k-x_low
+      - name: Export scripts and render eight recordings
+        run: |
+          node scripts/export-goethe-b1-audio.mjs
+          python scripts/generate-goethe-b1-audio.py \
+            --thorsten voices/de_DE-thorsten-medium.onnx \
+            --kerstin voices/de_DE-kerstin-low.onnx \
+            --ramona voices/de_DE-ramona-low.onnx \
+            --eva voices/de_DE-eva_k-x_low.onnx
+          for i in {0..7}; do
+            test -s "public/audio/goethe-b1/segment-$i.mp3"
+            ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 "public/audio/goethe-b1/segment-$i.mp3"
+          done
+      - name: Commit generated assets to feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/goethe-b1-recording-manifest.json public/audio/goethe-b1/
+          git diff --cached --quiet || (git commit -m "Add four-voice pre-recorded Goethe B1 practice MP3s" && git push)
