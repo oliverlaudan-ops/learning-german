@@ -26,7 +26,6 @@ function refreshDashboard(): void {
   const profile = __getProfile()
   const dueCount = getDueSrsWords(vocabulary, profile.srsState).length
   target.innerHTML = renderDashboard({ profile, levels, vocabulary, dueCount })
-  attachGoetheB1Entry(target, profile.id)
 
   target.querySelectorAll<HTMLElement>('[data-dashboard-action="review"]').forEach((button) => {
     button.addEventListener('click', () => showTab('review'))
@@ -67,6 +66,14 @@ function refreshDashboard(): void {
   })
 }
 
+/** The Goethe B1 preparation has a dedicated primary navigation tab. */
+function refreshExam(): void {
+  const target = document.getElementById('exam-tab')
+  if (!target) return
+  target.replaceChildren()
+  attachGoetheB1Entry(target, __getProfile().id)
+}
+
 function refreshLearn(chapterId?: string): void {
   const target = document.getElementById('learn-tab')
   if (!target) return
@@ -87,6 +94,7 @@ function refreshPlacement(): void {
 export function enhanceDashboard(): void {
   refreshDashboard()
   refreshLearn()
+  refreshExam()
 
   // Unregister any previous hook so calling enhanceDashboard() twice (HMR,
   // future refactor, double-invoked main entry) does not stack listeners.
@@ -94,6 +102,7 @@ export function enhanceDashboard(): void {
   unregisterShowTabHook = registerShowTabHook((tabName) => {
     disposeListeningLesson()
     if (tabName === 'dashboard') refreshDashboard()
+    else if (tabName === 'exam') refreshExam()
     else if (tabName === 'learn') {
       const learnTarget = document.getElementById('learn-tab')
       if (learnTarget?.dataset.placement === 'true') renderPlacementTest(learnTarget)
@@ -110,6 +119,7 @@ export function enhanceDashboard(): void {
       window.setTimeout(() => {
         refreshDashboard()
         refreshLearn()
+        refreshExam()
       }, 0)
     }
     profileSelect.addEventListener('change', profileSelectListener)
