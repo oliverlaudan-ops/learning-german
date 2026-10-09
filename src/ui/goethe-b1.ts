@@ -5,6 +5,7 @@
  */
 import './goethe-b1.css'
 import { launchB1FullExam } from './goethe-b1-full-exam'
+import { attachB1StudyPlan } from './goethe-b1-study-plan'
 
 import { clips } from '../data/goethe-b1-part1'
 
@@ -23,6 +24,7 @@ export function attachGoetheB1Entry(dashboard: HTMLElement, profileId: string): 
     <button type="button" class="btn primary" data-goethe-full>All four parts · 30 questions →</button>
     <button type="button" class="btn primary" data-goethe-open>Start B1 Hören →</button>`
   dashboard.appendChild(section)
+  attachB1StudyPlan(section, profileId)
   section.querySelector<HTMLButtonElement>('[data-goethe-full]')?.addEventListener('click', () => launchB1FullExam(profileId))
   section.querySelector<HTMLButtonElement>('[data-goethe-open]')?.addEventListener('click', () => {
     const overlay = document.createElement('div')
