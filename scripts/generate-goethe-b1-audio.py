@@ -38,7 +38,7 @@ VOICE_BY_SEGMENT = {
     0: "ramona", 1: "thorsten", 2: "kerstin", 3: "eva",
     4: "ramona", 5: "kerstin",
 }
-TURN_PATTERN = re.compile(r"(Moderatorin|Frau König|Herr Brandt|Frau Yilmaz|Miriam|Jonas):\\s*")
+TURN_PATTERN = re.compile(r"(Moderatorin|Frau König|Herr Brandt|Frau Yilmaz|Miriam|Jonas):\s*")
 
 def split_turns(script: str, part: int):
     """Split only at explicit character labels, preserving their entire turns."""
@@ -80,7 +80,7 @@ def generate(manifest: list[dict], voices: dict[str, PiperVoice]):
                         )
                     output.write(pcm_from_wav(wav_path))
                     # 400 ms between turns helps listeners follow discussion flow.
-                    output.write(b"\\x00" * int(22050 * 0.4) * 2)
+                    output.write(b"\x00" * int(22050 * 0.4) * 2)
             mp3_path = OUTPUT / f"segment-{index}.mp3"
             subprocess.run([
                 "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
