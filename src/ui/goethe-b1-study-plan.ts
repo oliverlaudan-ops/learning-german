@@ -18,7 +18,7 @@ export function attachB1StudyPlan(section:HTMLElement,profileId:string):void {
  const checked=readJSON(checksKey(profileId))
  const days:Record<string,boolean>=checked&&typeof checked==='object'&&!Array.isArray(checked)?checked as Record<string,boolean>:{}
  const current=studyWeeks[planIndex(new Date())]
- const recent=attempts.at(-1)
+ const recent=attempts[attempts.length-1]
  const complete=Boolean(days[todayKey()])
  const planTitle='Your B1 Hören study plan'
  area.innerHTML=`<div class="goethe-plan-head">
