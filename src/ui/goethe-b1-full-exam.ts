@@ -103,7 +103,7 @@ export function launchB1FullExam(profileId: string): void {
           ${segments.map(segment=>`<section class="goethe-result"><h3>Teil ${segment.part}: ${escapeHtml(segment.title)}</h3>
             ${segment.questions.map((q,j)=>renderQuestion(q,segment.firstQuestion-1+j,true)).join('')}
             <details><summary>Transkript lesen</summary><p lang="de">${escapeHtml(segment.script)}</p></details></section>`).join('')}
-          <button type="button" class="btn primary" data-full-again>Neuen Versuch starten</button>`
+          <button type="button" class="btn primary" data-full-again>Zurück zum Dashboard</button>`
         : transfer ? `<h2>Antworten kontrollieren</h2>
           <p>Du hast ${selectedCount} von 30 Fragen beantwortet. In der echten Prüfung gibt es fünf Minuten Übertragungszeit; hier kannst du deine Auswahl vor dem Abgeben kontrollieren.</p>
           ${mode==='exam'?`<p><strong>Restzeit: <span data-full-clock>${timeLabel()}</span></strong></p>`:''}
@@ -137,7 +137,7 @@ export function launchB1FullExam(profileId: string): void {
     }))
     overlay.querySelector('[data-full-play]')?.addEventListener('click',()=>{
       if (!('speechSynthesis' in window)) {
-        const el=overlay.querySelector('[data-full-status'); if(el)el.textContent='Dein Browser unterstützt keine deutsche Sprachausgabe.'
+        const el=overlay.querySelector('[data-full-status]'); if(el)el.textContent='Dein Browser unterstützt keine deutsche Sprachausgabe.'
         return
       }
       if(mode==='exam'&&plays[index]>=s.maxPlays)return
