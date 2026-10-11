@@ -1,6 +1,6 @@
 /** Three original alternative Goethe B1 Hören practice sets, 30 questions each.
  * These are educational practice materials, not official Goethe examination papers.
- * New sets have NO recorded MP3 files yet; the player must disclose browser TTS.
+ * Sets 2–4 have pre-rendered synthetic MP3 voice recordings under public/audio/goethe-b1/set-N. Browser TTS is a fallback only.
  */
 import type { B1Question } from './goethe-b1-parts'
 export interface AlternativeSegment { title:string; script:string; maxPlays:number; part:number; questions:B1Question[] }
