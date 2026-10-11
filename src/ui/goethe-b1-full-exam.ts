@@ -52,7 +52,6 @@ export function launchB1FullExam(profileId:string):void {
  let ticker:number|undefined
  let pauseTimer:number|undefined
  let audio:HTMLAudioElement|undefined
- let utterance:SpeechSynthesisUtterance|undefined
  let generation=0
  let closing=false
  const currentSet=()=>examSets.find(s=>s.id===setId)??examSets[0]
@@ -68,7 +67,6 @@ export function launchB1FullExam(profileId:string):void {
  const stopAudio=()=>{
    generation++
    if(audio){audio.pause();audio.removeAttribute('src');audio.load();audio=undefined}
-   utterance=undefined
    if('speechSynthesis'in window)window.speechSynthesis.cancel()
  }
  const close=()=>{closing=true;clearTimers();stopAudio();overlay.remove();previousFocus?.focus()}
@@ -94,7 +92,7 @@ export function launchB1FullExam(profileId:string):void {
    clearTimers()
    stage='transfer'
    deadline=Date.now()+5*60*1000
-   ticker=window.setInterval(()=>{
+   ticker=setInterval(()=>{
      const span=overlay.querySelector<HTMLElement>('[data-full-clock]')
      if(span)span.textContent=clockText()
      if(clock()<=0)finish()
@@ -109,12 +107,12 @@ export function launchB1FullExam(profileId:string):void {
    if(stage!=='listening'||closing)return
    stopAudio()
    if(currentPlay<sections()[index].maxPlays){
-     pauseTimer=window.setTimeout(()=>playAudio(true),3500)
+     pauseTimer=setTimeout(()=>playAudio(true),3500)
    }else if(index+1<sections().length){
      index++
      currentPlay=0
      render()
-     pauseTimer=window.setTimeout(()=>playAudio(true),5000)
+     pauseTimer=setTimeout(()=>playAudio(true),5000)
    }else beginTransfer()
  }
  const playAudio=(automatic=false)=>{
@@ -143,18 +141,17 @@ export function launchB1FullExam(profileId:string):void {
      if(audio){audio.pause();audio=undefined}
      if(!('speechSynthesis'in window)){
        setStatus('Keine MP3 vorhanden und dieser Browser unterstützt keine Sprachausgabe.')
-       if(mode==='exam')pauseTimer=window.setTimeout(autoNext,2500)
+       if(mode==='exam')pauseTimer=setTimeout(autoNext,2500)
        return
      }
      const u=new SpeechSynthesisUtterance(segment.script)
-     utterance=u
      u.lang='de-DE'
      u.rate=mode==='learn'?0.88:1
      const german=window.speechSynthesis.getVoices().find(v=>v.lang.toLowerCase().startsWith('de'))
      if(german)u.voice=german
      u.onstart=()=>markStart('Browser-Sprachausgabe (keine Aufnahme)')
      u.onend=finishPlayback
-     u.onerror=()=>{if(generation===token){setStatus('Sprachausgabe fehlgeschlagen.');if(mode==='exam')pauseTimer=window.setTimeout(autoNext,2500)}}
+     u.onerror=()=>{if(generation===token){setStatus('Sprachausgabe fehlgeschlagen.');if(mode==='exam')pauseTimer=setTimeout(autoNext,2500)}}
      window.speechSynthesis.speak(u)
    }
    // MP3s are currently available for set 1 only. New sets use disclosed TTS.
@@ -225,7 +222,7 @@ export function launchB1FullExam(profileId:string):void {
      mode=overlay.querySelector<HTMLSelectElement>('#full-mode')?.value as Mode||mode
      stage='listening';index=0;currentPlay=0;tries=sections().map(()=>0);answers={}
      render()
-     if(mode==='exam')pauseTimer=window.setTimeout(()=>playAudio(true),5000)
+     if(mode==='exam')pauseTimer=setTimeout(()=>playAudio(true),5000)
    })
    overlay.querySelector('[data-full-finish]')?.addEventListener('click',finish)
    overlay.querySelector('[data-full-again]')?.addEventListener('click',close)
