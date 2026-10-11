@@ -1,7 +1,7 @@
 /** A conservative, date-based Goethe B1 Hören study plan for 2026. */
 export interface StudyWeek { start: string; end: string; title: string; focus: string; tasks: string[] }
 export const EXAM_PREP_TARGET = '2026-11-21'
-export const EXAM_USER_REPORTED = '2026-11-23'
+export const EXAM_USER_REPORTED = '2026-11-21'
 export const studyWeeks: readonly StudyWeek[] = [
  {start:'2026-10-09',end:'2026-10-15',title:'Standortbestimmung · Teil 1',focus:'Kurze Durchsagen, Uhrzeiten und Planänderungen',tasks:['Kurze Hörtexte mit Richtig/Falsch üben','Auf Änderungen und Verneinungen achten','Einen offiziellen Modellsatz als Standortbestimmung nutzen']},
  {start:'2026-10-16',end:'2026-10-22',title:'Teil 2 · Einmal hören',focus:'Vorträge und Führungen verstehen',tasks:['Fragen vor dem Hören überfliegen','Orte, Zeiten und Gründe heraushören','Einmal ohne Transkript üben']},
@@ -9,7 +9,7 @@ export const studyWeeks: readonly StudyWeek[] = [
  {start:'2026-10-30',end:'2026-11-05',title:'Teil 4 · Meinungen zuordnen',focus:'Zustimmung, Widerspruch und Begründungen',tasks:['Wer sagt was? gezielt zuordnen','Kontrastwörter erkennen: aber, trotzdem, allerdings','Erste vollständige Probeübung absolvieren']},
  {start:'2026-11-06',end:'2026-11-12',title:'Schwachstellen aufarbeiten',focus:'Auswertung der bisher schwächsten Hörteile',tasks:['Schwächsten Teil wiederholen','Zweite vollständige Probeübung bearbeiten','Fehlerliste mit kurzen Erklärungen führen']},
  {start:'2026-11-13',end:'2026-11-19',title:'Sicher in die Prüfung',focus:'Prüfungsroutine und konzentriertes Hören',tasks:['Dritte vollständige Probeübung machen','Im Prüfungsmodus ohne Transkript trainieren','Nur die häufigsten Fehler gezielt wiederholen']},
- {start:'2026-11-20',end:'2026-11-23',title:'Prüfungsphase',focus:'Leicht wiederholen und erholen',tasks:['Keine neuen schweren Inhalte mehr','Kopfhörer und Prüfungsmaterial prüfen','Bestätigten Prüfungstermin und Anfahrt kontrollieren']}
+ {start:'2026-11-20',end:'2026-11-21',title:'Prüfungsphase',focus:'Leicht wiederholen und erholen',tasks:['Keine neuen schweren Inhalte mehr','Kopfhörer und Prüfungsmaterial prüfen','Prüfung am 21. November: Unterlagen und Anfahrt kontrollieren']}
 ]
 const parseDay = (s:string): number => Date.parse(s+'T00:00:00Z')
 export function planIndex(date: Date): number {
