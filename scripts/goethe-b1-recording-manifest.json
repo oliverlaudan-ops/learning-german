@@ -1,50 +1,226 @@
 [
   {
+    "setId": "set-1",
     "id": 0,
-    "title": "Nachricht zur Verabredung",
     "part": 1,
+    "title": "Nachricht zur Verabredung",
     "script": "Hallo Nina, hier ist Lara. Wir wollten uns morgen um halb drei vor dem Kino treffen. Leider muss ich länger arbeiten. Können wir uns stattdessen um Viertel nach vier am Haupteingang treffen? Ruf mich bitte nur an, wenn das nicht klappt. Bis morgen!"
   },
   {
+    "setId": "set-1",
     "id": 1,
-    "title": "Durchsage am Bahnhof",
     "part": 1,
+    "title": "Durchsage am Bahnhof",
     "script": "Achtung, eine Information für Reisende nach Köln: Der Regionalexpress um 10 Uhr 20 fährt heute nicht von Gleis 4, sondern von Gleis 7. Wegen Bauarbeiten verzögert sich die Abfahrt um ungefähr zehn Minuten. Wir bitten um Verständnis."
   },
   {
+    "setId": "set-1",
     "id": 2,
-    "title": "Nachricht aus der Arztpraxis",
     "part": 1,
+    "title": "Nachricht aus der Arztpraxis",
     "script": "Guten Tag, Frau Berger. Hier spricht die Praxis Dr. Weber. Ihr Termin am Donnerstag um neun Uhr kann leider nicht stattfinden. Wir bieten Ihnen stattdessen Freitag um elf Uhr an. Bitte bestätigen Sie den neuen Termin bis Mittwoch telefonisch."
   },
   {
+    "setId": "set-1",
     "id": 3,
-    "title": "Hinweis in der Bibliothek",
     "part": 1,
+    "title": "Hinweis in der Bibliothek",
     "script": "Liebe Besucherinnen und Besucher, die Stadtbibliothek schließt heute ausnahmsweise schon um 16 Uhr. Bücher können Sie auch nach der Schließung in den Rückgabekasten am Seiteneingang werfen. Morgen sind wir wieder wie gewohnt bis 19 Uhr für Sie da."
   },
   {
+    "setId": "set-1",
     "id": 4,
-    "title": "Nachricht von einem Kollegen",
     "part": 1,
+    "title": "Nachricht von einem Kollegen",
     "script": "Hallo Tim, ich bin es, Daniel. Die Besprechung mit unserem Kunden beginnt morgen schon um acht statt um neun. Bitte bring die neuen Unterlagen mit. Die Präsentation übernehme ich, darum musst du dich nicht kümmern. Danke und bis morgen!"
   },
   {
+    "setId": "set-1",
     "id": 5,
-    "title": "Eine Führung durch das Umweltzentrum",
     "part": 2,
+    "title": "Eine Führung durch das Umweltzentrum",
     "script": "Guten Morgen und herzlich willkommen im Umweltzentrum am Stadtpark. Mein Name ist Frau Peters und ich begleite Sie heute durch unsere Ausstellung. Eigentlich wollten wir im Garten beginnen, aber wegen des Regens bleiben wir zunächst im Hauptgebäude. Im Erdgeschoss erfahren Sie, wie die Stadt ihren Energieverbrauch in den letzten zehn Jahren gesenkt hat. Besonders interessant sind die Fotos alter Heizungsanlagen. Im ersten Stock können Sie später selbst ausprobieren, wie viel Strom verschiedene Haushaltsgeräte benötigen. Die Geräte sind allerdings erst ab elf Uhr zugänglich, weil eine Schulklasse dort noch arbeitet. Nach unserem Rundgang treffen wir uns um Viertel nach zwölf im Café, nicht am Eingang. Dort können Sie Fragen stellen. Wenn Sie etwas trinken möchten, bezahlen Sie das selbst. Der Eintritt zur Ausstellung ist bereits in Ihrer Teilnehmerkarte enthalten. Fotografieren dürfen Sie im ganzen Haus, aber bitte ohne Blitz. Nach der Mittagspause bietet meine Kollegin eine freiwillige Führung durch den Garten an, falls das Wetter besser wird. Diese Führung dauert ungefähr eine halbe Stunde und kostet nichts extra. Jetzt gehen wir zuerst nach links in die Energieausstellung."
   },
   {
+    "setId": "set-1",
     "id": 6,
-    "title": "Zwei Bekannte sprechen über eine neue Wohnung",
     "part": 3,
+    "title": "Zwei Bekannte sprechen über eine neue Wohnung",
     "script": "Miriam: Hallo Jonas, du siehst müde aus. War dein Wochenende so anstrengend? Jonas: Ja, ich bin endlich umgezogen. Eigentlich sollten meine Freunde am Samstagmorgen helfen, aber zwei waren krank. Miriam: Oh nein! Hast du trotzdem alles geschafft? Jonas: Fast. Mein Bruder konnte zum Glück einen Transporter ausleihen. Den großen Schrank haben wir aber in der alten Wohnung gelassen, weil er nicht durch die Tür passte. Miriam: Und gefällt dir die neue Wohnung? Jonas: Sehr. Sie ist zwar kleiner als meine alte, dafür brauche ich nur zehn Minuten mit dem Fahrrad zur Arbeit. Vorher war ich fast eine Stunde unterwegs. Miriam: Das klingt gut. Ist die Miete günstiger? Jonas: Die Kaltmiete ist etwas höher, aber ich zahle weniger Heizkosten. Außerdem muss ich nicht mehr jeden Tag eine Fahrkarte kaufen. Miriam: Hast du schon alle Kartons ausgepackt? Jonas: Nein, die Bücher stehen noch im Flur. Zuerst muss ich morgen den Internetanschluss organisieren. Der Techniker wollte heute kommen, hat den Termin aber auf Dienstag verschoben. Miriam: Dann kannst du am Wochenende ja eine kleine Einweihungsfeier machen. Jonas: Lieber erst nächste Woche! Diesen Samstag arbeite ich. Aber am Sonntag können wir zusammen einen Kaffee trinken. Miriam: Sehr gerne. Soll ich Kuchen mitbringen? Jonas: Das wäre toll!"
   },
   {
+    "setId": "set-1",
     "id": 7,
-    "title": "Sollten Geschäfte sonntags geöffnet sein?",
     "part": 4,
+    "title": "Sollten Geschäfte sonntags geöffnet sein?",
     "script": "Moderatorin: Heute sprechen wir darüber, ob Geschäfte auch sonntags regelmäßig öffnen sollten. Bei uns sind drei Gäste: Frau König, Herr Brandt und Frau Yilmaz. Frau König, was meinen Sie? Frau König: Ich bin dagegen. Wer im Verkauf arbeitet, braucht einen festen freien Tag. Natürlich kann man auch unter der Woche frei haben, aber gemeinsame Zeit mit der Familie lässt sich nicht so leicht ersetzen. Moderatorin: Herr Brandt? Herr Brandt: Ich sehe das anders. Viele Menschen arbeiten lange und schaffen es nicht, samstags einzukaufen. Ein zusätzlicher Einkaufstag wäre praktisch. Wichtig ist allerdings, dass niemand gezwungen wird, am Sonntag zu arbeiten. Frau Yilmaz: Mir ist vor allem der kleine Einzelhandel wichtig. Große Ketten könnten leicht zusätzliche Mitarbeiter einsetzen. Für ein kleines Familiengeschäft wäre ein weiterer Öffnungstag jedoch teuer. Vielleicht sollten die Geschäfte selbst entscheiden dürfen. Frau König: Aber freiwillig klingt nur auf dem Papier gut. Wenn alle anderen öffnen, fühlen sich kleine Geschäfte unter Druck. Herr Brandt: Das verstehe ich, trotzdem wünschen sich viele Kunden mehr Flexibilität. Man könnte zunächst an wenigen Sonntagen im Jahr testen, ob die Nachfrage wirklich groß ist. Frau Yilmaz: Einen begrenzten Versuch finde ich sinnvoll. Danach sollte man genau prüfen, ob die zusätzlichen Einnahmen die Kosten decken. Moderatorin: Frau König, wäre ein solcher Test für Sie denkbar? Frau König: Nur dann, wenn die Beschäftigten wirklich freiwillig teilnehmen und dafür einen fairen Ausgleich bekommen. Die Interessen der Mitarbeiter müssen an erster Stelle stehen. Moderatorin: Vielen Dank für die Diskussion!"
+  },
+  {
+    "setId": "set-2",
+    "id": 0,
+    "part": 1,
+    "title": "Verspätetes Paket",
+    "script": "Guten Tag, hier ist der Paketdienst. Ihre Lieferung kommt nicht am Dienstag, sondern am Donnerstag. Bitte stellen Sie das Paket nicht selbst zur Abholung bereit. Wir bringen es direkt zu Ihrer Wohnung."
+  },
+  {
+    "setId": "set-2",
+    "id": 1,
+    "part": 1,
+    "title": "Sportkurs",
+    "script": "Hallo Frau Neumann, Ihr Schwimmkurs beginnt ab nächster Woche eine Viertelstunde früher, also um 18 Uhr 15. Der Kursraum bleibt gleich. Bitte bringen Sie diesmal auch ein Handtuch mit."
+  },
+  {
+    "setId": "set-2",
+    "id": 2,
+    "part": 1,
+    "title": "Busumleitung",
+    "script": "Liebe Fahrgäste, wegen eines Straßenfestes hält der Bus 24 heute nicht am Rathaus. Nutzen Sie bitte die Ersatzhaltestelle an der Schule. Ab morgen gilt wieder der normale Fahrplan."
+  },
+  {
+    "setId": "set-2",
+    "id": 3,
+    "part": 1,
+    "title": "Besuch bei Freunden",
+    "script": "Hallo Lea, wir freuen uns auf deinen Besuch am Sonntag. Komm gern schon um zwölf. Wir essen aber erst um eins, weil Paula vorher noch arbeiten muss. Getränke haben wir genug."
+  },
+  {
+    "setId": "set-2",
+    "id": 4,
+    "part": 1,
+    "title": "Anruf aus dem Büro",
+    "script": "Guten Morgen, Herr Wolf. Die Schulung am Freitag ist abgesagt. Stattdessen schicken wir Ihnen die Unterlagen per E-Mail. Wenn Sie Fragen haben, können wir Montag telefonieren."
+  },
+  {
+    "setId": "set-2",
+    "id": 5,
+    "part": 2,
+    "title": "Eine Führung in der Stadtbibliothek",
+    "script": "Herzlich willkommen zur Führung in unserer neuen Stadtbibliothek. Mein Name ist Frau Albers. Wir starten im Erdgeschoss bei den Informationsschaltern. Die Kinderbücher finden Sie links hinter dem Café. Die Arbeitsplätze für Erwachsene befinden sich im zweiten Stock, aber heute ist dieser Bereich bis 15 Uhr wegen einer Veranstaltung geschlossen. Wer Bücher ausleihen möchte, benötigt eine kostenlose Bibliothekskarte. Für die Ausstellung über die Stadtgeschichte zahlen Sie dagegen zwei Euro Eintritt. Unsere Führung dauert etwa vierzig Minuten. Danach können Sie im Seminarraum Fragen stellen. Bitte fotografieren Sie die historischen Dokumente nicht, denn das Licht könnte sie beschädigen. Das Café schließt bereits um 17 Uhr; die Bibliothek selbst bleibt bis 19 Uhr geöffnet."
+  },
+  {
+    "setId": "set-2",
+    "id": 6,
+    "part": 3,
+    "title": "Gespräch über eine Weiterbildung",
+    "script": "Mara: Hallo Ben, hast du dich für den Computerkurs angemeldet? Ben: Ja, aber nicht für den Abendkurs. Ich arbeite dienstags länger und habe deshalb den Kurs am Samstag gewählt. Mara: Kostet er viel? Ben: Ursprünglich 120 Euro. Da ich mich früh angemeldet habe, zahle ich nur 90. Mara: Und wie lange dauert er? Ben: Vier Samstage. Den ersten Termin habe ich allerdings verpasst, weil ich krank war. Die Kursleiterin hat mir die Aufgaben per E-Mail geschickt. Mara: War das schwierig? Ben: Die Aufgaben waren einfach, aber die Software musste ich erst installieren. Mara: Musst du einen eigenen Laptop mitbringen? Ben: Nein, Computer sind vorhanden. Ich nehme trotzdem meinen Laptop mit, um zu Hause weiterüben zu können. Mara: Bekommst du am Ende eine Bescheinigung? Ben: Ja, aber nur, wenn ich an mindestens drei Terminen teilnehme. Mara: Das ist doch gut. Ben: Ich hoffe nur, dass der letzte Termin nicht verschoben wird. Da habe ich nämlich eine Reise geplant."
+  },
+  {
+    "setId": "set-2",
+    "id": 7,
+    "part": 4,
+    "title": "Im Radio: Homeoffice",
+    "script": "Moderatorin: Heute diskutieren wir, ob man häufiger von zu Hause arbeiten sollte. Frau Seidel, Herr Kurz und Frau Özdemir sind zu Gast. Frau Seidel: Für mich spart Homeoffice viel Zeit. Früher saß ich täglich über eine Stunde im Zug. Jetzt sehe ich meine Familie öfter. Herr Kurz: Ich finde die Zusammenarbeit im Büro einfacher. Bei komplizierten Problemen kann ich sofort jemanden fragen. Frau Özdemir: Es kommt auf die Aufgabe an. Für konzentriertes Schreiben ist die eigene Wohnung ideal, für gemeinsame Planung finde ich das Büro besser. Moderatorin: Und wie sieht es mit den Kosten aus? Frau Seidel: Ich bezahle zwar mehr Strom, brauche aber keine Monatskarte mehr. Herr Kurz: Kleine Unternehmen können weniger Bürofläche mieten. Das ist ein Vorteil. Allerdings fehlt manchmal der persönliche Austausch. Frau Özdemir: Eine feste Regel für alle halte ich für falsch. Teams sollten selbst entscheiden, an welchen Tagen sie sich treffen. Frau Seidel: Das sehe ich ähnlich. Zwei Bürotage in der Woche reichen mir. Herr Kurz: Wenn die Technik gut funktioniert, kann ich mir das vorstellen. Aber neue Mitarbeiter sollten am Anfang häufiger im Büro sein. Moderatorin: Vielen Dank für Ihre Einschätzungen."
+  },
+  {
+    "setId": "set-3",
+    "id": 0,
+    "part": 1,
+    "title": "Nachricht vom Zahnarzt",
+    "script": "Guten Tag, Frau Schmitt. Morgen um neun ist ein früherer Termin frei geworden. Ihr bisheriger Termin um elf bleibt bestehen, wenn Sie sich heute nicht bei uns melden."
+  },
+  {
+    "setId": "set-3",
+    "id": 1,
+    "part": 1,
+    "title": "Hotelinformation",
+    "script": "Liebe Gäste, das Frühstücksbuffet gibt es morgen ausnahmsweise ab sieben Uhr im großen Konferenzraum. Unser Restaurant bleibt wegen einer privaten Feier bis zum Mittag geschlossen."
+  },
+  {
+    "setId": "set-3",
+    "id": 2,
+    "part": 1,
+    "title": "Freizeitangebot",
+    "script": "Hallo zusammen! Der Wanderausflug am Samstag beginnt um acht Uhr am Parkplatz Nord. Wenn es regnet, treffen wir uns trotzdem dort und entscheiden gemeinsam, ob wir die Strecke verkürzen."
+  },
+  {
+    "setId": "set-3",
+    "id": 3,
+    "part": 1,
+    "title": "Nachricht aus der Schule",
+    "script": "Guten Abend, morgen endet der Unterricht der Klasse 8B bereits um zwölf. Die Busse fahren aber erst um halb eins. Wer nicht warten möchte, braucht die Erlaubnis der Eltern."
+  },
+  {
+    "setId": "set-3",
+    "id": 4,
+    "part": 1,
+    "title": "Anruf einer Freundin",
+    "script": "Hi Alex, ich stehe schon vor dem Theater. Die Vorstellung beginnt erst um halb acht, nicht um sieben. Ich gehe deshalb noch ins Café gegenüber. Treffen wir uns dort?"
+  },
+  {
+    "setId": "set-3",
+    "id": 5,
+    "part": 2,
+    "title": "Informationen im Gesundheitszentrum",
+    "script": "Guten Morgen! Ich möchte Ihnen heute unser neues Gesundheitszentrum vorstellen. Am Montag bieten wir eine kostenlose Beratung zur Ernährung an. Dafür müssen Sie sich bis Freitag telefonisch anmelden. Unser Bewegungskurs findet mittwochs um halb sechs statt und kostet zehn Euro pro Termin. Die erste Stunde dürfen alle ohne Bezahlung ausprobieren. Der Vortrag über guten Schlaf wurde wegen Krankheit des Referenten vom Donnerstag auf den nächsten Dienstag verschoben. Er beginnt um 18 Uhr im Raum drei. Bitte beachten Sie: Für Untersuchungen benötigen wir Ihre Versichertenkarte. Bei den offenen Vorträgen ist sie nicht erforderlich. Unsere Rezeption öffnet täglich um acht Uhr, samstags erst um neun. Weitere Informationen stehen auf unserer Website. Fragen können Sie auch nach dem Vortrag an meine Kollegin richten, die heute hinten im Raum sitzt."
+  },
+  {
+    "setId": "set-3",
+    "id": 6,
+    "part": 3,
+    "title": "Ein Gespräch nach einer Reise",
+    "script": "Nina: Hallo Paul, wie war dein Urlaub am Meer? Paul: Schön, aber die Anreise war schwierig. Der erste Zug hatte eine Stunde Verspätung. Nina: Hast du den Anschluss verpasst? Paul: Ja. Zum Glück konnte ich einen späteren Zug ohne Aufpreis nehmen. Nina: Und das Hotel? Paul: Es war weiter vom Strand entfernt als auf der Website stand. Dafür war das Zimmer sehr ruhig. Nina: Hast du dich beschwert? Paul: Nein, ich habe nur nach einem Fahrrad gefragt. Das konnte ich für fünf Euro am Tag mieten. Nina: War das Wetter gut? Paul: Die ersten zwei Tage hat es geregnet. Danach schien fast immer die Sonne. Nina: Hast du viel unternommen? Paul: Am Mittwoch habe ich eine Bootsfahrt gemacht. Ich wollte eigentlich tauchen, aber dafür brauchte man dort einen Kurs. Nina: Hast du denn wenigstens gut gegessen? Paul: Ja, besonders in einem kleinen Restaurant neben dem Hafen. Dort war das Essen günstiger als im Hotel. Nina: Möchtest du noch einmal hinfahren? Paul: Vielleicht, aber beim nächsten Mal würde ich länger bleiben."
+  },
+  {
+    "setId": "set-3",
+    "id": 7,
+    "part": 4,
+    "title": "Im Radio: Fahrrad und Bus",
+    "script": "Moderator: Unser Thema heute: Wie sollte die Stadt den Verkehr verbessern? Bei uns sind Frau Beck, Herr Simon und Frau Arslan. Frau Beck: Ich fahre fast jeden Tag mit dem Fahrrad. Mir fehlen sichere Radwege, besonders an großen Kreuzungen. Herr Simon: Für ältere Menschen ist der Bus wichtig. Die Busse müssten häufiger fahren, gerade am Abend. Frau Arslan: Beides ist sinnvoll. Trotzdem brauchen wir gute Verbindungen zwischen den Stadtteilen und dem Bahnhof. Moderator: Was wäre die erste Maßnahme? Frau Beck: Ich würde gefährliche Kreuzungen umbauen. Ein zusätzlicher Fahrradparkplatz hilft wenig, wenn der Weg dorthin unsicher ist. Herr Simon: Ich wünsche mir vor allem verständliche Fahrpläne. Viele Informationen findet man nur im Internet. Frau Arslan: Wir sollten Fahrgäste fragen, welche Verbindungen ihnen fehlen. Ohne diese Informationen plant man vielleicht am Bedarf vorbei. Moderator: Und wer soll das bezahlen? Frau Beck: Investitionen in sichere Wege sparen langfristig Kosten. Herr Simon: Die Fahrkarten dürfen deshalb aber nicht teurer werden. Frau Arslan: Vielleicht können wir bestehende Angebote besser aufeinander abstimmen, statt überall neue Linien einzurichten. Moderator: Danke für Ihre Ideen."
+  },
+  {
+    "setId": "set-4",
+    "id": 0,
+    "part": 1,
+    "title": "Hausverwaltung",
+    "script": "Liebe Bewohner, am Dienstag zwischen acht und elf wird im Haus das Wasser abgestellt. Bitte füllen Sie vorher genügend Trinkwasser ab. Die Heizung funktioniert weiterhin."
+  },
+  {
+    "setId": "set-4",
+    "id": 1,
+    "part": 1,
+    "title": "Nachricht einer Kollegin",
+    "script": "Hallo Eva, die Unterlagen für das Gespräch liegen schon auf deinem Tisch. Ich komme zehn Minuten später, weil mein Bus ausgefallen ist. Bitte beginne trotzdem pünktlich mit der Begrüßung."
+  },
+  {
+    "setId": "set-4",
+    "id": 2,
+    "part": 1,
+    "title": "Stadtfest",
+    "script": "Achtung, liebe Besucher! Das Konzert auf dem Marktplatz beginnt heute wegen des starken Windes eine Stunde später. Die Stände bleiben bis 21 Uhr geöffnet. Der Eintritt ist weiterhin frei."
+  },
+  {
+    "setId": "set-4",
+    "id": 3,
+    "part": 1,
+    "title": "Abholtermin",
+    "script": "Guten Tag, hier ist die Fahrradwerkstatt. Ihr Fahrrad ist repariert. Sie können es morgen ab drei abholen. Heute schaffen wir es leider nicht mehr. Bitte bringen Sie den Abholschein mit."
+  },
+  {
+    "setId": "set-4",
+    "id": 4,
+    "part": 1,
+    "title": "Einladung zum Geburtstag",
+    "script": "Hallo David, wir feiern meinen Geburtstag am Freitag diesmal nicht zu Hause, sondern im Gemeinschaftsraum unseres Hauses. Bitte komm um 19 Uhr. Du brauchst nichts zu essen mitzubringen."
+  },
+  {
+    "setId": "set-4",
+    "id": 5,
+    "part": 2,
+    "title": "Informationsabend zum Energiesparen",
+    "script": "Guten Abend, schön, dass Sie zu unserem Informationsabend gekommen sind. Heute geht es um Möglichkeiten, zu Hause Energie zu sparen. Ich beginne mit der Heizung: Schon ein Grad weniger Raumtemperatur kann den Verbrauch senken. Wichtig ist aber, regelmäßig kurz und kräftig zu lüften statt Fenster den ganzen Tag gekippt zu lassen. Ab nächster Woche können Sie im Bürgerbüro kostenlos ein Messgerät ausleihen, mit dem sich der Stromverbrauch von Haushaltsgeräten feststellen lässt. Das Gerät dürfen Sie maximal sieben Tage behalten. Für Fragen zu neuen Fenstern und zur Dämmung gibt es im November zusätzliche Beratungstermine. Diese müssen Sie vorher online buchen. Unser Informationsmaterial liegt hinten neben der Tür aus. Der Vortrag dauert etwa eine halbe Stunde. Danach können Sie an drei Stationen praktische Beispiele ansehen. Die Veranstaltung ist kostenlos, Getränke im Café bezahlen Sie bitte selbst."
+  },
+  {
+    "setId": "set-4",
+    "id": 6,
+    "part": 3,
+    "title": "Ein Gespräch über eine neue Arbeit",
+    "script": "Tobias: Hallo Sarah, wie läuft es in deinem neuen Job? Sarah: Gut, aber die erste Woche war anstrengend. Ich musste viele neue Programme kennenlernen. Tobias: Arbeitest du jetzt immer im Büro? Sarah: Nein, montags und freitags kann ich von zu Hause arbeiten. Die anderen Tage treffe ich mein Team im Büro. Tobias: Ist der Arbeitsweg länger als früher? Sarah: Mit dem Zug dauert er nur zwanzig Minuten. Mit dem Auto wäre es länger, weil es so viele Baustellen gibt. Tobias: Hast du nette Kollegen? Sarah: Ja. Eine Kollegin hat mir sogar ihre Notizen gegeben, damit ich mich schneller einarbeiten kann. Tobias: Und wie sind die Arbeitszeiten? Sarah: Wir können zwischen sieben und neun anfangen. Dafür müssen wir unsere Termine gut abstimmen. Tobias: Gibt es auch Fortbildungen? Sarah: Ja, im nächsten Monat besuche ich einen Kurs zum Projektmanagement. Mein Arbeitgeber übernimmt die Kosten. Tobias: Klingt nach einem guten Start. Sarah: Das finde ich auch. Nur an die neue Software muss ich mich noch gewöhnen."
+  },
+  {
+    "setId": "set-4",
+    "id": 7,
+    "part": 4,
+    "title": "Im Radio: Gemeinschaftsgärten",
+    "script": "Moderatorin: Wir sprechen heute über Gemeinschaftsgärten in der Stadt. Zu Gast sind Frau Lange, Herr Weber und Frau Demir. Frau Lange: In unserem Garten lernen die Nachbarn einander kennen. Besonders schön finde ich, dass Kinder dort Gemüse anbauen können. Herr Weber: Mir gefällt die Idee, aber ich frage mich, wer die Pflege übernimmt. Ohne feste Regeln bleibt am Ende alles an wenigen Menschen hängen. Frau Demir: Solche Gärten sind außerdem gut für die Umwelt. Sie bieten Insekten Lebensraum und machen manche Plätze im Sommer angenehmer. Moderatorin: Was brauchen neue Projekte? Frau Lange: Vor allem Menschen, die gemeinsam beginnen möchten. Man muss nicht alles perfekt planen. Herr Weber: Ich sehe das anders. Schon am Anfang sollte klar sein, wer gießt und wer die Geräte verwaltet. Frau Demir: Die Stadt könnte Wasseranschlüsse bereitstellen. Viele Gruppen können solche Kosten allein nicht tragen. Moderatorin: Und wenn Nachbarn wenig Zeit haben? Frau Lange: Auch kleine Beiträge helfen. Man kann vielleicht einmal im Monat teilnehmen. Herr Weber: Solange verbindlich vereinbart ist, wer welche Arbeit macht. Frau Demir: Ich wünsche mir, dass noch mehr ungenutzte Flächen dafür geöffnet werden. Moderatorin: Vielen Dank für das Gespräch."
   }
 ]
