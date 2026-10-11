@@ -57,4 +57,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add scripts/goethe-b1-recording-manifest.json public/audio/goethe-b1/
-          git diff --cached --quiet || (git commit -m "Add 24 four-voice B1 practice MP3 recordings" && git push)
+          if ! git diff --cached --quiet; then
+            git commit -m "Add 24 four-voice B1 practice MP3 recordings"
+            # The branch may have moved while voice synthesis was running.
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
