@@ -4,6 +4,7 @@ describe('Goethe B1 study plan',()=>{
  it('has a continuous seven-stage schedule before the conservative exam target',()=>{
   expect(studyWeeks).toHaveLength(7)
   expect(EXAM_PREP_TARGET).toBe('2026-11-21')
+  expect(studyWeeks[6].end).toBe('2026-11-21')
   expect(planIndex(new Date(2026,9,9))).toBe(0)
   expect(planIndex(new Date(2026,9,20))).toBe(1)
   expect(planIndex(new Date(2026,10,10))).toBe(4)

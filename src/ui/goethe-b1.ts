@@ -19,9 +19,9 @@ export function attachGoetheB1Entry(dashboard: HTMLElement, profileId: string): 
   section.innerHTML = `<p class="card-kicker">GOETHE-ZERTIFIKAT B1 · HÖREN</p>
     <h2>Train for your listening exam</h2>
     <p>Teil 1: Fünf kurze Hörtexte mit zehn Fragen auf Deutsch. Choose a guided practice or a timed, exam-style attempt.</p>
-    <p class="muted">Exam target: 21–23 November 2026 (confirm the date with the centre).</p>
-    <p class="goethe-tts-note">Prototype: computer-generated browser speech. This is not official Goethe exam audio.</p>
-    <button type="button" class="btn primary" data-goethe-full>All four parts · 30 questions →</button>
+    <p class="muted">Confirmed exam date: 21 November 2026 (Hören).</p>
+    <p class="goethe-tts-note">Eigene Übungsaufnahmen mit verschiedenen Stimmen; für neue Sätze zunächst Browser-Sprachausgabe.</p>
+    <button type="button" class="btn primary" data-goethe-full>Four practice sets · 30 questions each →</button>
     <button type="button" class="btn primary" data-goethe-open>Start B1 Hören →</button>`
   dashboard.appendChild(section)
   attachB1StudyPlan(section, profileId)
