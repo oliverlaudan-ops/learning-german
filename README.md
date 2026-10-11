@@ -172,3 +172,13 @@ The exam-like mode plays each of the eight texts automatically with brief readin
 Each completed result includes a `setId` in the existing profile-scoped `goethe-b1-hoeren-full-v1-<id>` storage history. Older results without `setId` count as Set 1. The learner's exam dashboard summarizes mean accuracy for the four parts and the number of distinct practice sets attempted.
 
 **Confirmed Hören exam date: 21 November 2026.** Lesen, Schreiben and Sprechen are deliberately out of scope until their separately scheduled exam dates are known. Follow-up improvements: human quality assurance of all text/audio scripts, real pre-recorded voices for sets 2–4, longer real-world audio and a truly time-faithful official-style playback flow.
+
+## Four complete recorded B1 listening practice sets
+
+The existing [Goethe B1 multi-speaker audio](.github/workflows/goethe-b1-audio.yml) GitHub workflow was extended from eight to 32 recordings. All four complete sets use the same four German synthetic Piper voices with stable roles within each dialogue. Sets 2–4 contain **24 additional MP3 files**, at `public/audio/goethe-b1/set-2/segment-0.mp3` through `set-4/segment-7.mp3`. The eight existing set-1 MP3s remain in their original paths.
+
+The manifest now exports all 32 original scripts with explicit `setId` and segment IDs. The generator validates two distinct speaker roles in each conversation and four speaker roles in each panel discussion, inserts short pauses between turns, and encodes mono MP3 at 64 kbps. Tests verify all 32 file paths and manifest/script parity.
+
+The full practice player now loads the corresponding set-specific MP3 by default. If a recording is unavailable, the German browser voice remains a clearly labelled fallback. **All material remains independently created synthetic practice material, not official Goethe audio.** Human quality-checking of pronunciation, names, intelligibility, speaker differentiation and speaking rhythm is recommended; differences between four artificial voices do not perfectly reproduce a real examination recording.
+
+Audio generation on GitHub: push a change to the audio generator/exporter/workflow or run the workflow manually for the designated feature branch. Review the voice model licenses and attribution requirements before public distribution. This change does not affect the separately scheduled B1 Lesen, Schreiben or Sprechen modules.
