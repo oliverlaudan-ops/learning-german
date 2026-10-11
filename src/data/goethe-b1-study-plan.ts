@@ -18,7 +18,7 @@ export function planIndex(date: Date): number {
  if(index>=0)return index
  return day<parseDay(studyWeeks[0].start)?0:studyWeeks.length-1
 }
-export interface FullAttempt { mode?: string; percent?: number; correct?: number; byPart?: number[]; completedAt?: number }
+export interface FullAttempt { setId?: string; mode?: string; percent?: number; correct?: number; byPart?: number[]; completedAt?: number }
 export function weakestPart(attempts: FullAttempt[]): number | undefined {
  const valid=attempts.filter(a=>Array.isArray(a.byPart)&&a.byPart.length===4)
  const latest=valid[valid.length-1]
@@ -30,4 +30,14 @@ export function studyAdvice(now:Date,attempts:FullAttempt[]): string {
  const weak=weakestPart(attempts)
  const week=studyWeeks[planIndex(now)]
  return weak&&planIndex(now)>=4 ? `Teil ${weak} gezielt wiederholen und anschließend deine Fehler prüfen.` : week.tasks[(now.getDay()+6)%week.tasks.length]
+}
+
+/** Average performance by listening part, normalized for unequal question counts. */
+export function listeningProgress(attempts:FullAttempt[]): {attemptCount:number;setCount:number;byPartPercent:number[];weakestPart:number|undefined} {
+ const valid=attempts.filter(a=>Array.isArray(a.byPart)&&a.byPart.length===4&&a.byPart.every((n)=>typeof n==='number'&&Number.isFinite(n)&&n>=0))
+ const sums=[0,0,0,0]
+ for(const attempt of valid)for(let i=0;i<4;i++)sums[i]+=Math.min(attempt.byPart![i],[10,5,7,8][i])
+ const normalized=sums.map((sum,i)=>valid.length?Math.round(sum*100/(valid.length*[10,5,7,8][i])):0)
+ const setIds=new Set(valid.map(a=>a.setId??'set-1'))
+ return {attemptCount:valid.length,setCount:setIds.size,byPartPercent:normalized,weakestPart:valid.length?normalized.indexOf(Math.min(...normalized))+1:undefined}
 }
