@@ -1,4 +1,4 @@
-import { EXAM_PREP_TARGET, EXAM_USER_REPORTED, studyAdvice, studyWeeks, planIndex, type FullAttempt } from '../data/goethe-b1-study-plan'
+import { EXAM_PREP_TARGET, EXAM_USER_REPORTED, studyAdvice, studyWeeks, planIndex, listeningProgress, type FullAttempt } from '../data/goethe-b1-study-plan'
 import './goethe-b1.css'
 
 const historyKey = (id:string) => 'goethe-b1-hoeren-full-v1-' + id
@@ -19,6 +19,7 @@ export function attachB1StudyPlan(section:HTMLElement,profileId:string):void {
  const days:Record<string,boolean>=checked&&typeof checked==='object'&&!Array.isArray(checked)?checked as Record<string,boolean>:{}
  const current=studyWeeks[planIndex(new Date())]
  const recent=attempts[attempts.length-1]
+ const summary=listeningProgress(attempts)
  const complete=Boolean(days[todayKey()])
  const planTitle='Your B1 Hören study plan'
  area.innerHTML=`<div class="goethe-plan-head">
@@ -30,6 +31,7 @@ export function attachB1StudyPlan(section:HTMLElement,profileId:string):void {
     <p><strong>Today's practice:</strong> ${esc(studyAdvice(new Date(),attempts))}</p>
     <label class="goethe-plan-check"><input type="checkbox" data-b1-done ${complete?'checked':''}> Ich habe heute meine Hörübung gemacht.</label>
     ${recent&&typeof recent.percent==='number'?`<p>Latest full practice: <strong>${recent.percent}%</strong> · Goal: 80%.</p>`:'<p>Try a full practice to start tracking your scores.</p>'}
+    ${summary.attemptCount? `<section class="goethe-result"><h4>Hörfortschritt</h4><p>${summary.attemptCount} Durchgänge · ${summary.setCount} unterschiedliche Übungssätze</p><p>Teil 1: ${summary.byPartPercent[0]} % · Teil 2: ${summary.byPartPercent[1]} % · Teil 3: ${summary.byPartPercent[2]} % · Teil 4: ${summary.byPartPercent[3]} %</p><p><strong>Weiter üben: Teil ${summary.weakestPart}</strong> (Durchschnitt über bisherige Durchgänge).</p></section>`:''}
   </div>
   <details><summary>Show the full weekly study plan</summary>
     <ol class="goethe-plan-weeks">${studyWeeks.map(week=>`<li><strong>${esc(week.title)}</strong> <small>(${esc(week.start)} – ${esc(week.end)})</small><p>${esc(week.focus)}</p></li>`).join('')}</ol>
