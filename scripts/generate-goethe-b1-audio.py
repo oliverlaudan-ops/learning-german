@@ -29,7 +29,7 @@ VOICE_BY_SPEAKER={
 }
 VOICE_BY_SHORT=("ramona","thorsten","kerstin","eva","ramona","eva")
 # Colon-qualified dialogue turns, not incidental mentions of characters.
-TURN_PATTERN=re.compile(r"("+ "|".join(re.escape(x) for x in sorted(VOICE_BY_SPEAKER,key=len,reverse=True))+r"):\\s*")
+TURN_PATTERN=re.compile(r"("+ "|".join(re.escape(x) for x in sorted(VOICE_BY_SPEAKER,key=len,reverse=True))+r"):\s*")
 
 def split_turns(script,part):
     if part not in (3,4):return [(None,script.strip())]
@@ -66,7 +66,7 @@ def produce(manifest,voices,sets):
                         voices[name].synthesize_wav(utterance,file,syn_config=SynthesisConfig(length_scale=1.06))
                     out.write(pcm_from_wav(wav))
                     # Short natural transition between turns.
-                    out.write(b"\\x00"*int(22050*0.4)*2)
+                    out.write(b"\x00"*int(22050*0.4)*2)
             target=destination/f"segment-{clip_id}.mp3"
             subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y","-f","s16le",
                             "-ar","22050","-ac","1","-i",str(pcm),"-codec:a","libmp3lame",
