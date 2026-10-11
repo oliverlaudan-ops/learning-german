@@ -154,9 +154,9 @@ export function launchB1FullExam(profileId:string):void {
      u.onerror=()=>{if(generation===token){setStatus('Sprachausgabe fehlgeschlagen.');if(mode==='exam')pauseTimer=setTimeout(autoNext,2500)}}
      window.speechSynthesis.speak(u)
    }
-   // MP3s are currently available for set 1 only. New sets use disclosed TTS.
-   if(setId!=='set-1'){fallback();return}
-   const a=new Audio(import.meta.env.BASE_URL+'audio/goethe-b1/segment-'+index+'.mp3')
+   // Preserve the original eight recordings; additional sets have dedicated subfolders.
+   const relativePath=setId==='set-1'?'segment-'+index+'.mp3':setId+'/segment-'+index+'.mp3'
+   const a=new Audio(import.meta.env.BASE_URL+'audio/goethe-b1/'+relativePath)
    audio=a
    a.onplaying=()=>markStart('Aufgenommene MP3')
    a.onended=finishPlayback
@@ -182,7 +182,7 @@ export function launchB1FullExam(profileId:string):void {
      '<button class="btn secondary" data-full-close>← Zur B1-Übersicht</button>'+
      '<p class="card-kicker">B1 HÖREN · EIGENE ÜBUNGSMATERIALIEN</p>'+
      '<h1 id="goethe-full-title">'+esc(currentSet().title)+'</h1>'+
-     '<p class="goethe-tts-note">Keine offizielle Goethe-Prüfung. Für die neuen Übungssätze wird vorläufig deutsche Browser-Sprachausgabe verwendet.</p>'+
+     '<p class="goethe-tts-note">Keine offizielle Goethe-Prüfung. Alle vier Übungssätze besitzen vorproduzierte synthetische MP3-Aufnahmen mit unterschiedlichen Stimmen. Wenn eine Datei nicht geladen werden kann, wird als Ersatz die deutsche Browser-Sprachausgabe verwendet.</p>'+
      (stage==='setup'?
        '<p>Vier Hörteile · 30 Fragen. Wähle einen Übungssatz und den Lernmodus oder die automatische prüfungsähnliche Simulation.</p>'+
        '<label for="full-set">Übungssatz wählen</label><select id="full-set">'+examSets.map(s=>'<option value="'+s.id+'" '+(s.id===setId?'selected':'')+'>'+esc(s.title)+'</option>').join('')+'</select>'+

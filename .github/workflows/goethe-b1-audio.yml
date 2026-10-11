@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - feature/goethe-b1-distinct-voices
+      - feature/b1-new-set-mp3-recordings
     paths:
       - "scripts/generate-goethe-b1-audio.py"
       - "scripts/export-goethe-b1-audio.mjs"
+      - "src/data/goethe-b1-alternative-sets.ts"
       - ".github/workflows/goethe-b1-audio.yml"
   workflow_dispatch:
 
@@ -35,7 +37,7 @@ jobs:
         run: |
           mkdir -p voices
           python -m piper.download_voices --data-dir voices de_DE-thorsten-medium de_DE-kerstin-low de_DE-ramona-low de_DE-eva_k-x_low
-      - name: Export scripts and render eight recordings
+      - name: Export scripts and render 24 new multi-voice recordings
         run: |
           node scripts/export-goethe-b1-audio.mjs
           python scripts/generate-goethe-b1-audio.py \
@@ -43,13 +45,21 @@ jobs:
             --kerstin voices/de_DE-kerstin-low.onnx \
             --ramona voices/de_DE-ramona-low.onnx \
             --eva voices/de_DE-eva_k-x_low.onnx
-          for i in {0..7}; do
-            test -s "public/audio/goethe-b1/segment-$i.mp3"
-            ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 "public/audio/goethe-b1/segment-$i.mp3"
+          for set in set-2 set-3 set-4; do
+            for i in {0..7}; do
+              file="public/audio/goethe-b1/$set/segment-$i.mp3"
+              test -s "$file"
+              ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 "$file"
+            done
           done
       - name: Commit generated assets to feature branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add scripts/goethe-b1-recording-manifest.json public/audio/goethe-b1/
-          git diff --cached --quiet || (git commit -m "Add four-voice pre-recorded Goethe B1 practice MP3s" && git push)
+          if ! git diff --cached --quiet; then
+            git commit -m "Add 24 four-voice B1 practice MP3 recordings"
+            # The branch may have moved while voice synthesis was running.
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
