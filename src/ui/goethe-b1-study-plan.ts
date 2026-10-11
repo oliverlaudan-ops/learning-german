@@ -23,8 +23,8 @@ export function attachB1StudyPlan(section:HTMLElement,profileId:string):void {
  const planTitle='Your B1 Hören study plan'
  area.innerHTML=`<div class="goethe-plan-head">
     <h3>${esc(planTitle)}</h3>
-    <p><strong>${daysLeft(EXAM_PREP_TARGET)} days</strong> until the conservative target, 21 November 2026.</p>
-    <p class="muted">Your reported exam date: ${EXAM_USER_REPORTED}. Please verify the date in the booking confirmation.</p>
+    <p><strong>${daysLeft(EXAM_PREP_TARGET)} days</strong> until your confirmed B1 Hören exam on 21 November 2026.</p>
+    <p class="muted">Confirmed exam date: ${EXAM_USER_REPORTED}.</p>
     <p class="goethe-plan-week">This week: ${esc(current.title)}</p>
     <p>${esc(current.focus)}</p>
     <p><strong>Today's practice:</strong> ${esc(studyAdvice(new Date(),attempts))}</p>
