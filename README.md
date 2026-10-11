@@ -118,11 +118,11 @@ The dashboard now offers two separate learning experiences:
 
 **Limitations:** This is *original practice*, **not** an official Goethe examination or equivalent scoring instrument. Audio currently comes from the browser's German text-to-speech engine. Browser TTS does **not** reproduce real multi-speaker recordings, fixed pauses, the automatic playback sequence, reliable acoustic quality, or the formal five-minute paper answer-transfer procedure. The timed section is a training convenience rather than a faithful full exam recording. Learners should also use the [official Goethe B1 model test](https://bfu.goethe.de/b1_mod/hoeren.php). Planned next step: recorded multi-speaker audio with a deterministic sequence, additional original sets, and a personalised study plan.
 
-**Exam date:** The Kampala appointment needs confirmation against Judith's booking; the study target currently assumes 21–23 November 2026.
+**Exam date:** The Kampala appointment needs confirmation against Judith's booking; the study target currently assumes 21 November 2026.
 
 ## B1 Hören study-plan and pre-recorded audio support
 
-The Goethe B1 card now contains Judith's dated seven-stage learning schedule (9 October–23 November 2026), a daily practice recommendation and a per-profile completed-today checkbox. The schedule uses **21 November 2026 as a conservative target** while her reported 23 November examination date is still to be reconciled with the centre's booking confirmation. Full-practice results are taken from the existing profile-scoped local history, and the weakest part is selected using the *percentage* of each part rather than the raw number correct.
+The Goethe B1 card now contains Judith's dated seven-stage learning schedule (9 October–21 November 2026), a daily practice recommendation and a per-profile completed-today checkbox. The schedule uses **21 November 2026 as a conservative target** while her reported 23 November examination date is still to be reconciled with the centre's booking confirmation. Full-practice results are taken from the existing profile-scoped local history, and the weakest part is selected using the *percentage* of each part rather than the raw number correct.
 
 The full four-part practice tries to load bundled `public/audio/goethe-b1/segment-0.mp3` through `segment-7.mp3`; if a file is not supplied, it visibly falls back to the browser's German speech synthesizer. **No new MP3 recordings have been included in this PR.** A repeatable recording workflow is provided:
 
@@ -162,3 +162,13 @@ Audio generation checks verify the number and duration of MP3s; Vitest verifies 
 The full Goethe B1 Hören preparation is accessible from a dedicated **🎧 B1 Exam** tab immediately after Dashboard in the primary navigation. The tab holds both listening practice options and the weekly study plan. The exam card is no longer appended to the end of the Dashboard.
 
 The page is refreshed on tab navigation and learner profile changes; scores and completed daily practice continue using their existing profile-scoped localStorage keys. The existing learning, vocabulary, practice, review, and statistics tabs are unchanged.
+
+## Four distinct listening practice sets (October 2026)
+
+The B1 Exam area now offers **four separately selectable sets, each containing 30 original German-language questions across four listening parts** (120 questions total). Set 1 keeps the eight recorded MP3 clips. Sets 2–4 contain 24 additional original texts and 90 additional questions; **these new sets have no MP3 recordings yet and use explicitly labelled browser-generated German speech**. The original script IDs and Set 1 results remain intact.
+
+The exam-like mode plays each of the eight texts automatically with brief reading pauses and the indicated repetition counts, then opens a separate five-minute answer-transfer screen. **The short simulated audio and pauses do not reproduce the actual 40-minute Goethe recording** and this is not an official exam simulation. The learn mode preserves repeat playback, transcripts and immediate correction.
+
+Each completed result includes a `setId` in the existing profile-scoped `goethe-b1-hoeren-full-v1-<id>` storage history. Older results without `setId` count as Set 1. The learner's exam dashboard summarizes mean accuracy for the four parts and the number of distinct practice sets attempted.
+
+**Confirmed Hören exam date: 21 November 2026.** Lesen, Schreiben and Sprechen are deliberately out of scope until their separately scheduled exam dates are known. Follow-up improvements: human quality assurance of all text/audio scripts, real pre-recorded voices for sets 2–4, longer real-world audio and a truly time-faithful official-style playback flow.
