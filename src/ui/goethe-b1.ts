@@ -1,7 +1,9 @@
 /**
- * Goethe B1 Hören · Teil 1 practice prototype.
- * Original scripts and questions. Browser TTS is a temporary practice aid,
- * NOT representative of the voices or playback quality of the Goethe exam.
+ * Entry point for the Goethe B1 Hören area.
+ *
+ * Renders the focused Teil 1 practice, launches the four-set full practice,
+ * and attaches the profile-scoped study plan. All material is original
+ * practice content, not official Goethe examination material.
  */
 import './goethe-b1.css'
 import { launchB1FullExam } from './goethe-b1-full-exam'
