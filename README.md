@@ -45,8 +45,8 @@ Skipped comprehension task types are not counted as wrong answers. Pronunciation
 - Vite 8 + TypeScript 6
 - Vitest 4 with happy-dom
 - browser `localStorage` persistence
-- browser Speech Synthesis for most advanced listening lessons
-- bundled static MP3 audio for the weekend lesson
+- browser Speech Synthesis for advanced listening lessons and as an audio fallback
+- bundled static MP3 audio for the weekend lesson and all four Goethe B1 practice sets
 - GitHub Actions CI and GitHub Pages deployment
 - mobile-first CSS
 
@@ -64,7 +64,7 @@ npm test
 npm run build
 ```
 
-Latest local verification for the lesson changes on 2026-10-01: **184 tests across 18 test files passed**, and the production TypeScript/Vite build passed.
+Historical baseline: the PR #14 changes passed 184 tests across 18 test files on 2026-10-01. The repository now contains 22 test files; use the latest GitHub Actions run as the current verification record rather than treating the historical count as the present baseline.
 
 GitHub Actions runs both commands for pull requests targeting `main` and for pushes to `main`. Pages deploys from `main` after merge.
 
@@ -88,13 +88,22 @@ learning-german/
 ├── tests/                   # Vitest suites
 ├── ARCHITECTURE.md          # technical architecture and invariants
 ├── CONTEXT.md               # product direction, shipped work, handoff context
+├── DOCUMENTATION_MAINTENANCE.md # documentation audit + AI maintenance policy
 ├── package.json
 └── index.html
 ```
 
 ## State and privacy
 
-Learner data is stored locally in the browser. The current state key is `learning-german-v5-state`; older v2/v3/v4 data is migrated forward when found. Listening history is optional within v5, so the listening-progress feature did not require another storage-version bump.
+Learner data is stored locally in the browser. The current application-state key is `learning-german-v5-state`; older v2/v3/v4 data is migrated forward when found. Advanced-listening history is optional within v5.
+
+Goethe B1 practice uses separate profile-scoped keys:
+
+- `goethe-b1-hoeren-v1-<profileId>` — Teil 1 prototype history, newest 30 attempts;
+- `goethe-b1-hoeren-full-v1-<profileId>` — four-part practice history, newest 50 attempts;
+- `goethe-b1-daily-checks-v1-<profileId>` — completed-today study-plan checkboxes.
+
+All of these remain local to the browser. No learner data is sent to a server by the application.
 
 ## Product direction
 
@@ -104,81 +113,65 @@ See `CONTEXT.md` for the current roadmap and `ARCHITECTURE.md` for implementatio
 
 ## License
 
-See `LICENSE` and the `license` field in `package.json` for repository licensing information.
+The project is licensed under the MIT License. See `LICENSE`; `package.json` uses the same license identifier.
 
-## Goethe B1 Hören – exam-oriented practice (October 2026)
+## Goethe B1 Hören preparation
 
-The dashboard now offers two separate learning experiences:
+The dedicated **🎧 B1 Exam** primary-navigation tab contains:
 
-- **Teil 1 practice:** Five short original scripts and ten comprehension questions, with guided and timed modes (the initial prototype).
-- **Full four-part practice:** Eight original scripts in total (five short announcements, one guided tour, one extended conversation, and one radio discussion), with **30 questions** divided into **10 / 5 / 7 / 8** across parts 1–4. All prompts, answer choices, and explanations are in German.
-- **Guided mode:** Replays without limit, transcript on demand, and instant explanations.
-- **Exam-style mode:** A 40-minute countdown, a maximum of two plays per Teil 1 text and Teil 4 discussion, one play for Teil 2 and Teil 3, answer checking before final submission, no transcript until results, and scores per part.
-- **Progress:** The last 30 attempts are saved locally per learner profile in the browser under `goethe-b1-hoeren-full-v1-<profileId>`. They do not alter existing learner-profile storage or lesson progress.
+- a focused Teil 1 practice with five short texts and ten questions;
+- four complete practice sets, each with 30 German-language questions across Parts 1–4;
+- guided and exam-like modes;
+- a dated study plan, daily recommendation and completion checkbox;
+- per-part score summaries and practice-set coverage.
 
-**Limitations:** This is *original practice*, **not** an official Goethe examination or equivalent scoring instrument. Audio currently comes from the browser's German text-to-speech engine. Browser TTS does **not** reproduce real multi-speaker recordings, fixed pauses, the automatic playback sequence, reliable acoustic quality, or the formal five-minute paper answer-transfer procedure. The timed section is a training convenience rather than a faithful full exam recording. Learners should also use the [official Goethe B1 model test](https://bfu.goethe.de/b1_mod/hoeren.php). Planned next step: recorded multi-speaker audio with a deterministic sequence, additional original sets, and a personalised study plan.
+The four-part practice contains eight texts per set: five short announcements, one presentation or guided tour, one extended conversation and one panel/radio discussion. Question totals are **10 / 5 / 7 / 8** for Parts 1–4.
 
-**Exam date:** The Kampala appointment needs confirmation against Judith's booking; the study target currently assumes 21 November 2026.
+### Modes and scoring
 
-## B1 Hören study-plan and pre-recorded audio support
+In guided mode, recordings can be replayed, transcripts are available and selected answers receive immediate feedback. In exam-like mode, the eight recordings advance automatically with shortened preparation pauses and their configured replay limits. It finishes with a five-minute answer-transfer screen.
 
-The Goethe B1 card now contains Judith's dated seven-stage learning schedule (9 October–21 November 2026), a daily practice recommendation and a per-profile completed-today checkbox. The schedule uses **21 November 2026 as a conservative target** while her reported 23 November examination date is still to be reconciled with the centre's booking confirmation. Full-practice results are taken from the existing profile-scoped local history, and the weakest part is selected using the *percentage* of each part rather than the raw number correct.
+This is deliberately an **exam-like training flow**, not a time-faithful 40-minute simulation. Scores and the 80% training target are not official Goethe grading.
 
-The full four-part practice tries to load bundled `public/audio/goethe-b1/segment-0.mp3` through `segment-7.mp3`; if a file is not supplied, it visibly falls back to the browser's German speech synthesizer. **No new MP3 recordings have been included in this PR.** A repeatable recording workflow is provided:
+Completed four-part attempts are stored per profile under `goethe-b1-hoeren-full-v1-<profileId>`. The newest 50 attempts are retained. Each result contains the practice-set ID, mode, overall score, percentage, per-part scores and completion time. Results created before practice-set IDs were introduced are treated as Set 1.
+
+### Audio assets and fallback
+
+All four practice sets have pre-generated synthetic MP3 recordings:
+
+- Set 1: `public/audio/goethe-b1/segment-0.mp3` through `segment-7.mp3`;
+- Sets 2–4: `public/audio/goethe-b1/set-N/segment-0.mp3` through `segment-7.mp3`.
+
+The 32 recordings use four German Piper voices. Dialogues and discussions synthesize each labelled speaker turn separately and insert short pauses between turns. If an MP3 cannot be loaded, the player falls back to German browser Speech Synthesis and labels that fallback visibly.
+
+All scripts, questions and recordings are independently created practice material. They are not official Goethe content, human voice acting or a formal assessment. Manual listening review remains necessary for pronunciation, names, rhythm, intelligibility and speaker differentiation.
+
+### Rebuilding the recordings
+
+The canonical script manifest is generated from the TypeScript data:
 
 ```bash
 node scripts/export-goethe-b1-audio.mjs
-python scripts/generate-goethe-b1-audio.py /path/to/german-voice-one.onnx /path/to/german-voice-two.onnx
 ```
 
-The generator requires Piper TTS (`piper-tts==1.8.0`) and FFmpeg, exports eight fixed MP3 recordings at 64 kbps, and uses the second voice for Jonas and Herr Brandt if provided. You must review audio quality and pronunciation and then commit the actual generated assets in a later PR. The synthetic recordings are not original human voice acting or official Goethe audio. Existing listening lessons remain unchanged.
+The Python generator requires FFmpeg, `piper-tts==1.3.0` and four downloaded ONNX voice models:
 
-Known limitations: the browser-speech fallback and player still need a more faithful automatic exam sequence, calibrated pauses, audio-completion guard and truly distinct female/male voices for all panel members. Do not claim formal Goethe exam equivalence.
+```bash
+python scripts/generate-goethe-b1-audio.py \
+  --thorsten /path/to/de_DE-thorsten-medium.onnx \
+  --kerstin /path/to/de_DE-kerstin-low.onnx \
+  --ramona /path/to/de_DE-ramona-low.onnx \
+  --eva /path/to/de_DE-eva_k-x_low.onnx
+```
 
-## B1 Hören: bundled four-voice recordings
+By default the generator rebuilds Sets 2–4. Use `--sets` to select one or more of `set-2`, `set-3` and `set-4`. Set 1 remains in its legacy root path.
 
-Eight **pre-generated MP3 files** are now included under `public/audio/goethe-b1/segment-0.mp3` through `segment-7.mp3`. They are synthesized from the original eight German scripts (not official Goethe exam audio); the browser-TTS fallback remains for browsers that cannot load a file.
+The [audio workflow](.github/workflows/goethe-b1-audio.yml) exports the manifest, generates and validates the 24 Set 2–4 recordings and commits changed assets to the triggering feature branch. The ordinary production build needs only the committed MP3 files, not Piper or the voice models.
 
-The recordings use four distinct Piper German models, with consistent assignments:
+The confirmed study-plan target in the current data is **21 November 2026**. Reading, writing and speaking examination modules are outside the present feature scope.
 
-| Script role | German voice |
-| --- | --- |
-| Miriam, Frau König | `de_DE-kerstin-low` |
-| Jonas, Herr Brandt | `de_DE-thorsten-medium` |
-| Moderatorin | `de_DE-eva_k-x_low` |
-| Frau Yilmaz | `de_DE-ramona-low` |
+## AI maintenance model
 
-Short messages use different voices across clips as well. There are 14 distinct dialogue turns in Teil 3 and 11 in Teil 4, separated by 0.4-second silences. This trains speaker identification, but pronunciation and accent diversity remain limited by TTS models. The files are meant for self-study, not as a faithful recording of a real examination.
+The project is written and maintained with AI assistance. AI-generated changes are still expected to satisfy the same evidence standards as human changes: inspect current `main`, preserve learner data, update tests and documentation together, run verification, and avoid claims that are not supported by code or current CI results.
 
-The separate [Generate Goethe B1 multi-speaker audio](.github/workflows/goethe-b1-audio.yml) GitHub Action can regenerate all eight files after a change to the scripts or voice mapping. It installs Piper, FFmpeg and the four voice models, then commits updated recordings to the feature branch. Production does **not** need the voice models, only the bundled MP3s.
-
-Voice model sources: [Piper German voice catalog](https://github.com/rhasspy/piper/blob/master/VOICES.md) and [Piper voice files/model cards](https://huggingface.co/rhasspy/piper-voices/tree/main/de/de_DE). Voice-model usage and attribution requirements should be reviewed against each model card before further redistribution.
-
-Audio generation checks verify the number and duration of MP3s; Vitest verifies file presence and manifest consistency. Manual listening/quality assurance is still recommended, especially for proper nouns and the voices in Teil 4.
-
-
-## Goethe B1 preparation navigation
-
-The full Goethe B1 Hören preparation is accessible from a dedicated **🎧 B1 Exam** tab immediately after Dashboard in the primary navigation. The tab holds both listening practice options and the weekly study plan. The exam card is no longer appended to the end of the Dashboard.
-
-The page is refreshed on tab navigation and learner profile changes; scores and completed daily practice continue using their existing profile-scoped localStorage keys. The existing learning, vocabulary, practice, review, and statistics tabs are unchanged.
-
-## Four distinct listening practice sets (October 2026)
-
-The B1 Exam area now offers **four separately selectable sets, each containing 30 original German-language questions across four listening parts** (120 questions total). Set 1 keeps the eight recorded MP3 clips. Sets 2–4 contain 24 additional original texts and 90 additional questions; **these new sets have no MP3 recordings yet and use explicitly labelled browser-generated German speech**. The original script IDs and Set 1 results remain intact.
-
-The exam-like mode plays each of the eight texts automatically with brief reading pauses and the indicated repetition counts, then opens a separate five-minute answer-transfer screen. **The short simulated audio and pauses do not reproduce the actual 40-minute Goethe recording** and this is not an official exam simulation. The learn mode preserves repeat playback, transcripts and immediate correction.
-
-Each completed result includes a `setId` in the existing profile-scoped `goethe-b1-hoeren-full-v1-<id>` storage history. Older results without `setId` count as Set 1. The learner's exam dashboard summarizes mean accuracy for the four parts and the number of distinct practice sets attempted.
-
-**Confirmed Hören exam date: 21 November 2026.** Lesen, Schreiben and Sprechen are deliberately out of scope until their separately scheduled exam dates are known. Follow-up improvements: human quality assurance of all text/audio scripts, real pre-recorded voices for sets 2–4, longer real-world audio and a truly time-faithful official-style playback flow.
-
-## Four complete recorded B1 listening practice sets
-
-The existing [Goethe B1 multi-speaker audio](.github/workflows/goethe-b1-audio.yml) GitHub workflow was extended from eight to 32 recordings. All four complete sets use the same four German synthetic Piper voices with stable roles within each dialogue. Sets 2–4 contain **24 additional MP3 files**, at `public/audio/goethe-b1/set-2/segment-0.mp3` through `set-4/segment-7.mp3`. The eight existing set-1 MP3s remain in their original paths.
-
-The manifest now exports all 32 original scripts with explicit `setId` and segment IDs. The generator validates two distinct speaker roles in each conversation and four speaker roles in each panel discussion, inserts short pauses between turns, and encodes mono MP3 at 64 kbps. Tests verify all 32 file paths and manifest/script parity.
-
-The full practice player now loads the corresponding set-specific MP3 by default. If a recording is unavailable, the German browser voice remains a clearly labelled fallback. **All material remains independently created synthetic practice material, not official Goethe audio.** Human quality-checking of pronunciation, names, intelligibility, speaker differentiation and speaking rhythm is recommended; differences between four artificial voices do not perfectly reproduce a real examination recording.
-
-Audio generation on GitHub: push a change to the audio generator/exporter/workflow or run the workflow manually for the designated feature branch. Review the voice model licenses and attribution requirements before public distribution. This change does not affect the separately scheduled B1 Lesen, Schreiben or Sprechen modules.
+See [`DOCUMENTATION_MAINTENANCE.md`](DOCUMENTATION_MAINTENANCE.md) for the documentation ownership map, audit record and maintenance checklist.
