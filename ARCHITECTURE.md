@@ -14,6 +14,7 @@ src/ui/ui.ts -----------------------------+
    +--> vocab + grammar session wiring     |
    +--> achievements                      |
    +--> listening renderers               |
+   +--> Goethe B1 exam preparation        |
    |                                      |
    +----> src/state/state.ts <-------------+
    +----> src/srs/srs.ts
@@ -60,6 +61,31 @@ Responsibilities include:
 - quick refresher links;
 - Smart Review hints;
 - safe re-rendering through `registerShowTabHook` rather than runtime-patching tab navigation.
+
+### `src/ui/goethe-b1.ts`, `goethe-b1-full-exam.ts` and `goethe-b1-study-plan.ts`
+
+These modules own the dedicated **B1 Exam** tab that `dashboard-bootstrap.ts` refreshes on navigation and learner-profile changes.
+
+- `attachGoetheB1Entry(container, profileId)` renders the tab entry, launches the focused Teil 1 flow and attaches the study plan.
+- `launchB1FullExam(profileId)` owns the four-set guided/exam-like overlay, audio lifecycle, automatic progression, answer transfer and result persistence.
+- `gradeB1(answers, setId)` is the DOM-independent scorer. It returns total correct answers, total questions, percentage and raw scores for Parts 1–4.
+- `examSets` normalizes the original and alternative data into one eight-segment shape per set.
+- `attachB1StudyPlan(container, profileId)` combines dated plan data with full-exam history and profile-scoped daily checks.
+
+The exam-like mode is intentionally not a wall-clock reproduction of an official 40-minute recording. It uses shortened preparation pauses, configured replay limits and a five-minute transfer phase. The material and scores must not be described as official Goethe content or formal assessment.
+
+### Goethe B1 data modules
+
+- `goethe-b1-part1.ts` exports the five short Set 1 clips and their ten questions.
+- `goethe-b1-parts.ts` exports Set 1 Parts 2–4 plus the shared `B1Question` and `B1Segment` shapes.
+- `goethe-b1-alternative-sets.ts` exports Sets 2–4 and the `AlternativeExamSet` / `AlternativeSegment` shapes.
+- `goethe-b1-study-plan.ts` owns the dated weeks, target date and pure planning/summary helpers:
+  - `planIndex(date)` selects the current plan stage;
+  - `weakestPart(attempts)` uses the latest valid attempt and normalizes unequal part sizes;
+  - `studyAdvice(now, attempts)` selects the scheduled or weakness-driven next action;
+  - `listeningProgress(attempts)` aggregates normalized per-part averages and distinct-set coverage.
+
+Keep scoring and study-plan calculations in these data/domain modules. UI modules may format and persist their results but should not duplicate the calculations.
 
 ### `src/ui/lesson-ui.ts`
 
@@ -146,7 +172,7 @@ Vanilla-DOM achievement toast rendering. The core achievement definitions remain
 
 Owns persisted application state, migration, and state write-back helpers.
 
-Current keys:
+Application-state keys managed by `src/state/state.ts`:
 
 ```text
 learning-german-v5-state   current
@@ -154,6 +180,16 @@ learning-german-v4-state   migration source
 learning-german-v3-state   migration source
 learning-german-v2-state   migration source
 ```
+
+The Goethe B1 feature deliberately uses separate profile-scoped browser keys and does not mutate the `AppState` schema:
+
+```text
+goethe-b1-hoeren-v1-<profileId>       focused Teil 1 history; newest 30
+goethe-b1-hoeren-full-v1-<profileId>  four-part history; newest 50
+goethe-b1-daily-checks-v1-<profileId> dated study-plan completion flags
+```
+
+The full-exam history records `setId`, mode, total score, percentage, scores for Parts 1–4 and `completedAt`. Older records without `setId` are interpreted as Set 1.
 
 Important functions:
 
@@ -239,7 +275,8 @@ Learning content and metadata, including:
 - placement questions/scoring data;
 - grammar exercise sources;
 - achievements and glossary/reference content;
-- listening lesson JSON files.
+- listening lesson JSON files;
+- Goethe B1 exam scripts, questions, alternative sets and the dated study plan.
 
 Current dedicated listening content includes:
 
@@ -252,6 +289,8 @@ housing-search-listening.json
 workshop-planning-listening.json
 complaint-delivery-listening.json
 ```
+
+Goethe B1 exam content is TypeScript rather than JSON because its question and segment shapes are shared by scoring, UI tests and the audio-manifest exporter.
 
 ## Advanced listening scoring model
 
@@ -288,23 +327,41 @@ This matters pedagogically: an incomplete run must not silently become a low-con
 
 ## Audio model
 
-There are two audio approaches.
+There are three related audio paths.
 
-### Bundled MP3
+### Weekend lesson MP3
 
-The weekend lesson uses pre-generated Piper audio from `public/audio/`. This gives a consistent voice and supports replayable chunks but increases static assets and requires generated files to be maintained.
+The weekend lesson uses bundled Piper audio from `public/audio/weekend-v1/`, including dialogue, lines and speaking-practice chunks.
 
-### Browser Speech Synthesis
+### Advanced-lesson Speech Synthesis
 
-Advanced lessons use the browser/device Speech Synthesis implementation:
+The shared advanced-listening renderer normally uses browser/device Speech Synthesis with `de-DE`, lesson-configurable speed and installed German voices. Voice inventory and quality vary by browser and device.
 
-- `de-DE` language;
-- lesson-configurable playback rate;
-- multiple installed German voices used by speaker when available;
-- fallback to one voice when necessary;
-- visible text fallback when speech synthesis is unavailable.
+### Goethe B1 MP3 with Speech Synthesis fallback
 
-Do not assume the same voice inventory or sound quality on every device/browser.
+The four Goethe B1 practice sets use 32 bundled synthetic MP3 files under `public/audio/goethe-b1/`. Set 1 keeps the legacy root filenames; Sets 2–4 use matching subdirectories. `goethe-b1-full-exam.ts` resolves the file for the selected set and segment, then falls back visibly to German browser Speech Synthesis if loading or playback fails.
+
+The source-to-asset pipeline is:
+
+```text
+src/data/goethe-b1-*.ts
+        |
+        v
+scripts/export-goethe-b1-audio.mjs
+        |
+        v
+scripts/goethe-b1-recording-manifest.json
+        |
+        v
+scripts/generate-goethe-b1-audio.py
+        |
+        v
+public/audio/goethe-b1/**/*.mp3
+```
+
+The exporter validates four sets with eight texts each. The generator uses four Piper voices, validates the speaker count for dialogue/discussion segments, inserts short silences and produces mono 64-kbps MP3 files. `.github/workflows/goethe-b1-audio.yml` automates generation for designated feature branches and manual dispatch. `tests/goethe-audio-assets.test.ts` verifies all 32 assets and manifest/script parity.
+
+Generated speech is study material, not official Goethe audio. Voice-model licensing and manual audio quality must be reviewed before redistribution.
 
 ## Persistence boundaries
 
@@ -316,7 +373,9 @@ Currently persisted:
 - quiz/SRS progress;
 - category stats;
 - placement result;
-- scored advanced-listening attempts.
+- scored advanced-listening attempts;
+- Goethe Teil 1 and four-part histories in their separate profile-scoped keys;
+- Goethe daily study-plan completion flags.
 
 Currently **not** persisted as assessment:
 
@@ -330,11 +389,7 @@ Currently **not** persisted as assessment:
 
 Vitest uses `happy-dom`.
 
-Latest local validation for the PR #14 lesson changes (2026-10-01):
-
-- **184 tests across 18 test files passed**;
-- production TypeScript/Vite build passed;
-- CI runs `npm test` and `npm run build`; its latest status is checked separately.
+Historical validation for PR #14 on 2026-10-01 was 184 passing tests across 18 files plus a successful production build. The repository now contains 22 test files, including Goethe scoring, alternative-set, study-plan and audio-asset coverage. Do not present the old count as the current baseline; the latest GitHub Actions run is the authoritative verification record for `main`.
 
 Coverage includes:
 
