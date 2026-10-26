@@ -1010,3 +1010,9 @@ section h2 {
   font-size: 0.85rem;
   color: var(--text-light);
 }
+
+/* Outside #app so navigation and rerenders retain legal access. */
+.legal-footer { max-width: 800px; margin: 0 auto; padding: 1rem 1rem 6rem; text-align: center; font-size: .85rem; color: var(--text-light); }
+.legal-footer nav { display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem; }
+.legal-footer a { color: var(--primary-dark); text-decoration: underline; }
+.legal-footer a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
