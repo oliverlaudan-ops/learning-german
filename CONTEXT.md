@@ -146,26 +146,18 @@ The 80% goal is a training target, not an official Goethe threshold.
 
 ## 6. Audio generation and validation
 
-The audio source chain is:
+The current bundled audio is generated with OpenAI Realtime (`gpt-realtime-2.1-mini`), replacing the 45 legacy Piper MP3 files. Two-person dialogue uses the approved preview voices `marin` and `cedar`; four-person discussions additionally use `coral` and `sage`, with a distinct moderator voice.
 
 ```text
-TypeScript exam data
-  → scripts/export-goethe-b1-audio.mjs
-  → scripts/goethe-b1-recording-manifest.json
-  → scripts/generate-goethe-b1-audio.py
-  → public/audio/goethe-b1/**/*.mp3
+TypeScript scripts → export-goethe-b1-audio.mjs → 32-row manifest
+weekend-listening.json → six lines and six practice chunks
+  → scripts/generate-openai-audio.py
+  → 32 B1 + 13 weekend MP3s at existing URLs
 ```
 
-The manifest contains 32 rows: four sets × eight texts. The generator requires FFmpeg, `piper-tts==1.3.0` and four German ONNX voice models supplied through `--thorsten`, `--kerstin`, `--ramona` and `--eva`.
+The review-branch Actions workflow uses the `OPENAI_API_KEY` repository secret, at most 200 unique requests and a USD 2 estimated-charge guard. There is no browser API call or embedded credential. Reusable chunk caches and `public/audio/openai-generation.json` preserve text, voice, returned transcripts, usage and hashes. Transcript differences block replacement writes; the application suite/build run before generated files are committed to the PR branch. The legacy Piper workflow and generators are retired.
 
-`.github/workflows/goethe-b1-audio.yml` regenerates Sets 2–4 on designated feature branches or by manual dispatch. It is separate from normal application CI and commits changed generated assets to the triggering branch.
-
-Before redistributing regenerated audio:
-
-- review the voice-model licenses and attribution requirements;
-- listen for pronunciation, proper names, intelligibility and rhythm;
-- confirm dialogue speaker separation;
-- run the audio asset tests.
+The API-returned transcript check is not independent listening review. Oliver approved the two initial sample voices for clarity and distinction; complete exercises and the extra voices require listening review. These are synthetic independent practice materials, not official Goethe audio. See `docs/content-provenance.md` and the shipped audio notices.
 
 ## 7. CI, deployment and verification
 

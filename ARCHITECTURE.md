@@ -331,7 +331,7 @@ There are three related audio paths.
 
 ### Weekend lesson MP3
 
-The weekend lesson uses bundled Piper audio from `public/audio/weekend-v1/`, including dialogue, lines and speaking-practice chunks.
+The weekend lesson uses bundled OpenAI-generated audio from `public/audio/weekend-v1/`, including dialogue, lines and speaking-practice chunks.
 
 ### Advanced-lesson Speech Synthesis
 
@@ -353,15 +353,15 @@ scripts/export-goethe-b1-audio.mjs
 scripts/goethe-b1-recording-manifest.json
         |
         v
-scripts/generate-goethe-b1-audio.py
+scripts/generate-openai-audio.py
         |
         v
 public/audio/goethe-b1/**/*.mp3
 ```
 
-The exporter validates four sets with eight texts each. The generator uses four Piper voices, validates the speaker count for dialogue/discussion segments, inserts short silences and produces mono 64-kbps MP3 files. `.github/workflows/goethe-b1-audio.yml` automates generation for designated feature branches and manual dispatch. `tests/goethe-audio-assets.test.ts` verifies all 32 assets and manifest/script parity.
+The exporter validates four sets with eight texts each. The generator uses OpenAI Realtime speech with four built-in voices, preserves the existing speaker turns and URLs, inserts short silences and produces mono 96-kbps MP3 files. `.github/workflows/openai-audio-generation.yml` operates on the audio review branch with a repository secret, bounded requests and a USD 2 estimated-charge guard. Hash-bound caches allow resuming from saved chunks; returned transcript differences block publication of replacements. `public/audio/openai-generation.json` records inputs, usage, voices and hashes. The preview workflow creates two review-only samples. `tests/goethe-audio-assets.test.ts` verifies all 32 exam assets and manifest/script parity.
 
-Generated speech is study material, not official Goethe audio. Voice-model licensing and manual audio quality must be reviewed before redistribution.
+Generated speech is study material, not official Goethe audio. Provider terms, synthetic-speech disclosure and manual audio quality review remain required. No OpenAI request or API key is part of runtime portal playback; advanced lessons still use browser speech as described above.
 
 ## Persistence boundaries
 

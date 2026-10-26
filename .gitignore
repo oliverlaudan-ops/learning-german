@@ -25,3 +25,5 @@ audio-preview/
 .env
 .env.local
 .env.*.local
+
+audio-generation-cache/

@@ -2,11 +2,11 @@ name: Generate OpenAI replacement audio
 
 on:
   workflow_dispatch:
-  push:
-    branches: [audio/openai-preview]
-    paths:
-      - scripts/generate-openai-audio.py
-      - .github/workflows/openai-audio-generation.yml
+    inputs:
+      resume_run_id:
+        description: Previous cache run ID, or 0 for fresh generation
+        required: false
+        default: '0'
 
 permissions:
   contents: write
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     env:
-      RESUME_RUN_ID: '40359867544'
+      RESUME_RUN_ID: ${{ inputs.resume_run_id || '0' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

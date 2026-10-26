@@ -88,3 +88,7 @@ Added shipped notices, pinned model-card references and a 45-file MP3 inventory;
 ## OpenAI audio preview workflow — 2026-10-26
 
 Added the fixed-size review-only Realtime sample generator, an Actions workflow using the repository secret, and offline stream/error-handling tests. README describes triggers, paid reruns, bounds, artifact retention and listening-review requirements. Existing application behavior, local learner data and production audio remain unchanged. Live API results are recorded by the workflow, rather than asserted by the local offline checks.
+
+## Bundled audio replacement — 2026-10-26
+
+Replace all 45 Piper-generated MP3 paths with OpenAI API output, preserving scripts, application URLs and learner state. Document current provider terms and synthetic voices, generation receipts, cache validation, transcript checks and per-run cost guard. Retire the legacy Piper scripts/workflow. README, CONTEXT, ARCHITECTURE, provenance and portal legal/audio notices follow the new generation path. The initial two OpenAI samples passed Oliver's listening check; complete audio and added discussion voices remain subject to listening review.
