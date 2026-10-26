@@ -84,3 +84,7 @@ A green test suite confirms implemented expectations; it does not by itself conf
 ## Voice-license source review — 2026-10-26
 
 Added shipped notices, pinned model-card references and a 45-file MP3 inventory; updated the portal legal page and README. M-AILABS source terms have been located and retained. Training-chain review identified Lessac research terms and Ryan CC BY-NC-SA behind Thorsten/Kerstin. Overall unrestricted-use clearance remains open pending suitable permission/assessment or replacement audio. No audio assets or learner data were changed. See docs/content-provenance.md for evidence and scope.
+
+## OpenAI audio preview workflow — 2026-10-26
+
+Added the fixed-size review-only Realtime sample generator, an Actions workflow using the repository secret, and offline stream/error-handling tests. README describes triggers, paid reruns, bounds, artifact retention and listening-review requirements. Existing application behavior, local learner data and production audio remain unchanged. Live API results are recorded by the workflow, rather than asserted by the local offline checks.

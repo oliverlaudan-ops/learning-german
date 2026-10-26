@@ -179,3 +179,16 @@ See [`DOCUMENTATION_MAINTENANCE.md`](DOCUMENTATION_MAINTENANCE.md) for the docum
 ## Legal information and provenance
 
 The app footer links to `/rechtliches/` for operator details, portal-specific privacy information and AI/content provenance. See [content provenance and open review points](docs/content-provenance.md), especially for synthetic voice recordings and the unresolved Thorsten/Lessac and Kerstin/Ryan base-model chains. [Shipped audio notices](public/audio/VOICE-NOTICES.txt) include the full M-AILABS terms. These notices do not by themselves close unrestricted-use clearance. Browser speech may use remote voices depending on the user's browser and system; local progress storage does not imply all audio processing is local.
+
+## OpenAI review-only audio samples
+
+The `OpenAI audio preview` Actions workflow reads the `OPENAI_API_KEY` repository secret and produces two downloadable samples, not a production deployment. It runs automatically only on changes to the preview script/workflow on `audio/openai-preview`; after merge it can be started manually with **Run workflow**. Each run makes at most seven paid requests (798 current input characters), one announcement and the first six dialogue turns. Failed requests are never retried automatically; rerunning the workflow is another paid run. The model is `gpt-realtime-2.1-mini`, with `cedar` and `marin`, using the supported Realtime WebSocket API. There is no microphone input or tool access.
+
+Before network use, the job runs five offline tests and a dry run. Each request caps output at 1,024 tokens; these small-preview limits are not a universal currency-denominated account limit. Only the generation step receives the secret. Artifacts are retained for seven days and include MP3/WAV files, input scripts, returned transcripts, usage and file hashes. Audio/transcript fidelity and naturalness require listening review. No existing MP3 files, learner data or Pages deployment are changed. Partial results may be available if a run stops. The script never prints raw server errors, credentials or headers. The key is not included in artifacts.
+
+Local offline verification (no API key/network required):
+
+```bash
+python -m unittest discover -s scripts -p test_openai_audio_preview.py
+python scripts/openai-audio-preview.py --dry-run
+```
