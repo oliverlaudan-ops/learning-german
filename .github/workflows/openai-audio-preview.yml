@@ -2,11 +2,6 @@ name: OpenAI audio preview
 
 on:
   workflow_dispatch:
-  push:
-    branches: [audio/openai-preview]
-    paths:
-      - scripts/openai-audio-preview.py
-      - .github/workflows/openai-audio-preview.yml
 
 permissions:
   contents: read

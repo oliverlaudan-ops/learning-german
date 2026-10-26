@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     env:
-      RESUME_RUN_ID: '0'
+      RESUME_RUN_ID: '40359867544'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

@@ -103,7 +103,7 @@ def synthesize(clip, key):
         while receive_event(socket, deadline).get('type') != 'session.created':
             pass
         socket.send(json.dumps({'type': 'session.update', 'session': {
-            'type': 'realtime', 'model': MODEL, 'instructions': INSTRUCTIONS,
+            'type': 'realtime', 'model': MODEL, 'instructions': clip.get('instructions', INSTRUCTIONS),
             'output_modalities': ['audio'], 'max_output_tokens': MAX_OUTPUT_TOKENS,
             'audio': {'input': {'turn_detection': None}, 'output': {
                 'format': {'type': 'audio/pcm', 'rate': RATE}, 'voice': clip['voice']}}

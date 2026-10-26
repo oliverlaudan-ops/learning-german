@@ -24,6 +24,12 @@ class GenerationTests(unittest.TestCase):
             if t['path'].endswith('segment-7.mp3'):
                 self.assertEqual(len({c['voice'] for c in t['clips']}),4)
 
+    def test_two_person_dialogue_uses_only_approved_preview_voices(self):
+        targets,_=g.plan()
+        for t in targets:
+            if t['path'].endswith('segment-6.mp3'):
+                self.assertEqual({c['voice'] for c in t['clips']},{'marin','cedar'})
+
     def test_chunks_keep_original_words_and_sentence_order(self):
         text='Ein Satz. '*100
         chunks=g.split_text(text)
@@ -33,6 +39,13 @@ class GenerationTests(unittest.TestCase):
     def test_punctuation_variations_do_not_hide_missing_words(self):
         self.assertEqual(g.normalize('Oh nein!'),g.normalize('Oh, nein.'))
         self.assertNotEqual(g.normalize('Nicht am Dienstag.'),g.normalize('Am Dienstag.'))
+
+    def test_missing_usage_cannot_disable_budget_guard(self):
+        with self.assertRaises(g.api.PreviewError):g.charge({})
+
+    def test_prompt_changes_cannot_reuse_old_audio(self):
+        a={'voice':'marin','text':'Hallo.'}
+        self.assertNotEqual(g.cache_key(a),g.cache_key({**a,'instructions':'Read exactly.'}))
 
     def test_cache_is_bound_to_voice_and_text(self):
         a={'voice':'marin','text':'Hallo.'}

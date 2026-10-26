@@ -29,6 +29,15 @@ SPEAKERS = {
     'Frau Beck':'kerstin', 'Herr Simon':'thorsten', 'Frau Arslan':'ramona',
     'Frau Lange':'kerstin', 'Herr Weber':'thorsten', 'Frau Demir':'ramona',
 }
+# Targeted narration hints for the three differences reviewed in run 40359867544.
+READING_CORRECTIONS = {
+    '2882b62a6e2ff28db3c4605062818a12f80c08209e0954fbc1fe33837d33b3b9':
+        " Behalte exakt die Verspaetung 'zehn Minuten'; fuege keine Zeitspanne hinzu.",
+    '0d6660b26c680323884d929039b2904013bb26d2f38364e00364a0a82f9922d3':
+        " Behalte am Schluss exakt das Wort 'oefter', ohne zusaetzliches s.",
+    '61fecb153015b6e64e9f6e5c64cf45fe36f93416e2f578607356fb9ee1e8e8b1':
+        " Behalte exakt die Formulierung 'dauert er'. Korrigiere keine Grammatik.",
+}
 PATTERN = re.compile(r'(' + '|'.join(re.escape(x) for x in sorted(SPEAKERS, key=len, reverse=True)) + r'):\s*')
 
 
@@ -69,7 +78,7 @@ def plan():
         for speaker, text in turns:
             slot = SPEAKERS[speaker] if speaker else ('ramona','thorsten','kerstin','eva','ramona','eva')[record['id']]
             for chunk in split_text(text):
-                clips.append({'speaker': speaker or 'Narrator', 'voice': VOICES[slot], 'text': chunk})
+                clips.append({'speaker': speaker or 'Narrator', 'voice': ('cedar' if slot=='thorsten' else 'marin') if record['part']==3 else VOICES[slot], 'text': chunk})
         base = 'public/audio/goethe-b1/'
         if record['setId'] != 'set-1':
             base += record['setId'] + '/'
@@ -88,6 +97,11 @@ def plan():
         'clips': [{'speaker': line['speaker'], 'voice': 'marin' if line['speaker'] == 'Alex' else 'cedar', 'text': line['german']} for line in lesson['lines']]})
     if len(targets) != 45 or len({t['path'] for t in targets}) != 45:
         raise api.PreviewError('Expected exactly 45 unique audio paths')
+    for target in targets:
+        for clip in target['clips']:
+            correction = READING_CORRECTIONS.get(cache_key(clip))
+            if correction:
+                clip['instructions'] = api.INSTRUCTIONS + correction
     unique = {cache_key(c): c for t in targets for c in t['clips']}
     if len(unique) > MAX_CALLS or sum(len(c['text']) for c in unique.values()) > 22000:
         raise api.PreviewError('Generation plan exceeds authorized fixed scope')
@@ -95,13 +109,17 @@ def plan():
 
 
 def cache_key(clip):
-    return hashlib.sha256(json.dumps({'model':api.MODEL, 'instructions':api.INSTRUCTIONS,
+    return hashlib.sha256(json.dumps({'model':api.MODEL, 'instructions':clip.get('instructions',api.INSTRUCTIONS),
         'voice':clip['voice'], 'text':clip['text']}, sort_keys=True).encode()).hexdigest()
 
 
 def charge(usage):
     source = usage.get('input_token_details', {})
     out = usage.get('output_token_details', {})
+    # Missing usage cannot silently disable the estimate guard.
+    required = [source.get('text_tokens'), out.get('text_tokens'), out.get('audio_tokens')]
+    if any(not isinstance(n, int) or n < 0 for n in required):
+        raise api.PreviewError('Incomplete API usage; no further paid calls')
     # Current published USD / million token rates; use these only as an estimate.
     cached = source.get('cached_tokens', 0)
     return ((source.get('text_tokens', 0)-cached)*.6 + cached*.06 +
@@ -133,7 +151,7 @@ def main():
         wav_path = cache / (ident + '.wav')
         if metadata_path.exists() and wav_path.exists():
             metadata = json.loads(metadata_path.read_text())
-            if metadata.get('input_hash') != ident or metadata.get('wav_sha256') != hashlib.sha256(wav_path.read_bytes()).hexdigest():
+            if metadata.get('input_hash') != ident or cache_key(metadata) != ident or metadata.get('model') != api.MODEL or metadata.get('wav_sha256') != hashlib.sha256(wav_path.read_bytes()).hexdigest():
                 raise api.PreviewError('Invalid resume cache; stopped')
             with wave.open(str(wav_path), 'rb') as f:
                 if f.getframerate()!=api.RATE or f.getnchannels()!=1 or f.getsampwidth()!=2:
