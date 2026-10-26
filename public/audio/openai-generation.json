@@ -1,0 +1,4995 @@
+{
+  "provider": "OpenAI",
+  "model": "gpt-realtime-2.1-mini",
+  "input_commit": "23e69bc03faa0036c25282bceeb7edd151ee3a6c",
+  "generated_at": "2026-10-26T16:54:12.939357+00:00",
+  "voices": {
+    "thorsten": "cedar",
+    "kerstin": "marin",
+    "ramona": "coral",
+    "eva": "sage"
+  },
+  "calls_this_run": 11,
+  "estimated_USD_this_run": 0.02062456,
+  "clips": [
+    {
+      "speaker": "Narrator",
+      "voice": "coral",
+      "text": "Hallo Nina, hier ist Lara. Wir wollten uns morgen um halb drei vor dem Kino treffen. Leider muss ich länger arbeiten. Können wir uns stattdessen um Viertel nach vier am Haupteingang treffen? Ruf mich bitte nur an, wenn das nicht klappt. Bis morgen!",
+      "input_hash": "0c8fee20866d62c60ce65ec5871a42d84b3c95a4ca510f790cb2244128565795",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hallo Nina, hier ist Lara. Wir wollten uns morgen um halb drei vor dem Kino treffen. Leider muss ich länger arbeiten. Können wir uns stattdessen um Viertel nach vier am Haupteingang treffen? Ruf mich bitte nur an, wenn das nicht klappt. Bis morgen!",
+      "usage": {
+        "total_tokens": 602,
+        "input_tokens": 153,
+        "output_tokens": 449,
+        "input_token_details": {
+          "text_tokens": 153,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 139,
+          "audio_tokens": 310,
+          "reasoning_tokens": 57
+        }
+      },
+      "duration_seconds": 15.5,
+      "wav_sha256": "c97a452b8e0ae6bd79bad69a1870bc70912859af707bd93b27ac0aa93c8f95e7"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "cedar",
+      "text": "Achtung, eine Information für Reisende nach Köln: Der Regionalexpress um 10 Uhr 20 fährt heute nicht von Gleis 4, sondern von Gleis 7. Wegen Bauarbeiten verzögert sich die Abfahrt um ungefähr zehn Minuten. Wir bitten um Verständnis.",
+      "instructions": "Du bist ein Sprecher fuer deutsche Hoeruebungen auf Niveau A2 bis B1. Lies ausschliesslich den vom Nutzer gelieferten Text wortgetreu auf Deutsch vor. Keine Einleitung, keine Antwort, keine Erklaerung, nichts hinzufuegen oder auslassen. Sprich klar, natuerlich und in gemaessigtem Lerntempo. Sprich Zahlen und Uhrzeiten passend auf Deutsch aus. Behalte exakt die Verspaetung 'zehn Minuten'; fuege keine Zeitspanne hinzu.",
+      "input_hash": "0832c6b6afd07d4879dddcf39961efd5161d9d4cd53fd2f3a306fdd7f48b984d",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Achtung, eine Information für Reisende nach Köln: Der Regionalexpress um 10 Uhr 20 fährt heute nicht von Gleis 4, sondern von Gleis 7. Wegen Bauarbeiten verzögert sich die Abfahrt um ungefähr zehn Minuten. Wir bitten um Verständnis.",
+      "usage": {
+        "total_tokens": 579,
+        "input_tokens": 173,
+        "output_tokens": 406,
+        "input_token_details": {
+          "text_tokens": 173,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 109,
+          "audio_tokens": 297,
+          "reasoning_tokens": 29
+        }
+      },
+      "duration_seconds": 14.85,
+      "wav_sha256": "9c9393e698cee517f6be12fe92c1a227c88d4cb9a591480059e1e252867e4a42"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "marin",
+      "text": "Guten Tag, Frau Berger. Hier spricht die Praxis Dr. Weber. Ihr Termin am Donnerstag um neun Uhr kann leider nicht stattfinden. Wir bieten Ihnen stattdessen Freitag um elf Uhr an. Bitte bestätigen Sie den neuen Termin bis Mittwoch telefonisch.",
+      "input_hash": "80c700b251e2ffda0ac08b28e1a2ab1e138bca6b55f2b8d20ee0517c26aa116f",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Guten Tag, Frau Berger. Hier spricht die Praxis Dr. Weber. Ihr Termin am Donnerstag um neun Uhr kann leider nicht stattfinden. Wir bieten Ihnen stattdessen Freitag um elf Uhr an. Bitte bestätigen Sie den neuen Termin bis Mittwoch telefonisch.",
+      "usage": {
+        "total_tokens": 593,
+        "input_tokens": 145,
+        "output_tokens": 448,
+        "input_token_details": {
+          "text_tokens": 145,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 141,
+          "audio_tokens": 307,
+          "reasoning_tokens": 66
+        }
+      },
+      "duration_seconds": 15.35,
+      "wav_sha256": "0724fabcc46ca7577917a4ce087cc06c4413d431b04c4c649d45d171df53db78"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Liebe Besucherinnen und Besucher, die Stadtbibliothek schließt heute ausnahmsweise schon um 16 Uhr. Bücher können Sie auch nach der Schließung in den Rückgabekasten am Seiteneingang werfen. Morgen sind wir wieder wie gewohnt bis 19 Uhr für Sie da.",
+      "input_hash": "a3f32ea0eb5a84b19e5418016c569e28200b668b6bbf38fa95f661917de821c1",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Liebe Besucherinnen und Besucher, die Stadtbibliothek schließt heute ausnahmsweise schon um 16 Uhr. Bücher können Sie auch nach der Schließung in den Rückgabekasten am Seiteneingang werfen. Morgen sind wir wieder wie gewohnt bis 19 Uhr für Sie da.",
+      "usage": {
+        "total_tokens": 668,
+        "input_tokens": 155,
+        "output_tokens": 513,
+        "input_token_details": {
+          "text_tokens": 155,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 113,
+          "audio_tokens": 400
+        }
+      },
+      "duration_seconds": 20.0,
+      "wav_sha256": "05d1f2d50f34834e64499796c323ae4fa915fff9bd43175e9d9d1d78d67c8909"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "coral",
+      "text": "Hallo Tim, ich bin es, Daniel. Die Besprechung mit unserem Kunden beginnt morgen schon um acht statt um neun. Bitte bring die neuen Unterlagen mit. Die Präsentation übernehme ich, darum musst du dich nicht kümmern. Danke und bis morgen!",
+      "input_hash": "db720e046ca665f8815102f66427848261e63428f60fea564c1ee5b6b477d53a",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hallo Tim, ich bin es, Daniel. Die Besprechung mit unserem Kunden beginnt morgen schon um acht statt um neun. Bitte bring die neuen Unterlagen mit. Die Präsentation übernehme ich, darum musst du dich nicht kümmern. Danke und bis morgen!",
+      "usage": {
+        "total_tokens": 573,
+        "input_tokens": 149,
+        "output_tokens": 424,
+        "input_token_details": {
+          "text_tokens": 149,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 113,
+          "audio_tokens": 311,
+          "reasoning_tokens": 34
+        }
+      },
+      "duration_seconds": 15.55,
+      "wav_sha256": "2e9cd83ed1f33a40de60ca6526e03bfa532901109996966326e35a9ae954b37d"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Guten Morgen und herzlich willkommen im Umweltzentrum am Stadtpark. Mein Name ist Frau Peters und ich begleite Sie heute durch unsere Ausstellung. Eigentlich wollten wir im Garten beginnen, aber wegen des Regens bleiben wir zunächst im Hauptgebäude. Im Erdgeschoss erfahren Sie, wie die Stadt ihren Energieverbrauch in den letzten zehn Jahren gesenkt hat. Besonders interessant sind die Fotos alter Heizungsanlagen.",
+      "input_hash": "1d7690f4588feeefc610cb7e4be05a837ab283b03e7b9c7c0affd11459b25af4",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Guten Morgen und herzlich willkommen im Umweltzentrum am Stadtpark. Mein Name ist Frau Peters und ich begleite Sie heute durch unsere Ausstellung. Eigentlich wollten wir im Garten beginnen, aber wegen des Regens bleiben wir zunächst im Hauptgebäude. Im Erdgeschoss erfahren Sie, wie die Stadt ihren Energieverbrauch in den letzten zehn Jahren gesenkt hat. Besonders interessant sind die Fotos alter Heizungsanlagen.",
+      "usage": {
+        "total_tokens": 889,
+        "input_tokens": 177,
+        "output_tokens": 712,
+        "input_token_details": {
+          "text_tokens": 177,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 168,
+          "audio_tokens": 544,
+          "reasoning_tokens": 51
+        }
+      },
+      "duration_seconds": 27.2,
+      "wav_sha256": "33b632dff12714aab36e242245fe942e81b1f28107c42e4377fcefbbaa8da87f"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Im ersten Stock können Sie später selbst ausprobieren, wie viel Strom verschiedene Haushaltsgeräte benötigen. Die Geräte sind allerdings erst ab elf Uhr zugänglich, weil eine Schulklasse dort noch arbeitet. Nach unserem Rundgang treffen wir uns um Viertel nach zwölf im Café, nicht am Eingang. Dort können Sie Fragen stellen. Wenn Sie etwas trinken möchten, bezahlen Sie das selbst. Der Eintritt zur Ausstellung ist bereits in Ihrer Teilnehmerkarte enthalten.",
+      "input_hash": "f923a85735352d3c506b61d99afe8bc01e5fc0d7508b715a62a7e3b142a2ffca",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Im ersten Stock können Sie später selbst ausprobieren, wie viel Strom verschiedene Haushaltsgeräte benötigen. Die Geräte sind allerdings erst ab elf Uhr zugänglich, weil eine Schulklasse dort noch arbeitet. Nach unserem Rundgang treffen wir uns um Viertel nach zwölf im Café, nicht am Eingang. Dort können Sie Fragen stellen. Wenn Sie etwas trinken möchten, bezahlen Sie das selbst. Der Eintritt zur Ausstellung ist bereits in Ihrer Teilnehmerkarte enthalten.",
+      "usage": {
+        "total_tokens": 901,
+        "input_tokens": 181,
+        "output_tokens": 720,
+        "input_token_details": {
+          "text_tokens": 181,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 137,
+          "audio_tokens": 583,
+          "reasoning_tokens": 16
+        }
+      },
+      "duration_seconds": 29.15,
+      "wav_sha256": "48f7433cd3fd5bf075dc9c3bc639c6ae792bfb2431f7d8dd1dec061c1fe0ea84"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Fotografieren dürfen Sie im ganzen Haus, aber bitte ohne Blitz. Nach der Mittagspause bietet meine Kollegin eine freiwillige Führung durch den Garten an, falls das Wetter besser wird. Diese Führung dauert ungefähr eine halbe Stunde und kostet nichts extra. Jetzt gehen wir zuerst nach links in die Energieausstellung.",
+      "input_hash": "ec98487c7e29f42553c3ebda2db373da7c7836a5ddd7eff3049da8c654dd8d87",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Fotografieren dürfen Sie im ganzen Haus, aber bitte ohne Blitz. Nach der Mittagspause bietet meine Kollegin eine freiwillige Führung durch den Garten an, falls das Wetter besser wird. Diese Führung dauert ungefähr eine halbe Stunde und kostet nichts extra. Jetzt gehen wir zuerst nach links in die Energieausstellung.",
+      "usage": {
+        "total_tokens": 703,
+        "input_tokens": 159,
+        "output_tokens": 544,
+        "input_token_details": {
+          "text_tokens": 159,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 117,
+          "audio_tokens": 427,
+          "reasoning_tokens": 23
+        }
+      },
+      "duration_seconds": 21.35,
+      "wav_sha256": "4def5723b4db3ab95dfe374e9b67e2ab0f089147cde4017a9fac96517a571718"
+    },
+    {
+      "speaker": "Miriam",
+      "voice": "marin",
+      "text": "Hallo Jonas, du siehst müde aus. War dein Wochenende so anstrengend?",
+      "input_hash": "d45012ebfc0fa2d725b712a7740e9577395e82a5d727abdfb4b999f36a31d879",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hallo Jonas, du siehst müde aus. War dein Wochenende so anstrengend?",
+      "usage": {
+        "total_tokens": 263,
+        "input_tokens": 114,
+        "output_tokens": 149,
+        "input_token_details": {
+          "text_tokens": 114,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 61,
+          "audio_tokens": 88,
+          "reasoning_tokens": 27
+        }
+      },
+      "duration_seconds": 4.4,
+      "wav_sha256": "0f532203887a9cfb93a6bf93f8180b5b5a92be2e251994cd12f668e5ed9a4296"
+    },
+    {
+      "speaker": "Jonas",
+      "voice": "cedar",
+      "text": "Ja, ich bin endlich umgezogen. Eigentlich sollten meine Freunde am Samstagmorgen helfen, aber zwei waren krank.",
+      "input_hash": "96e08e511ed94cb9fcffd202de6896916ba7a3927b8b86bfc89eed56169bc1bc",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ja, ich bin endlich umgezogen. Eigentlich sollten meine Freunde am Samstagmorgen helfen, aber zwei waren krank.",
+      "usage": {
+        "total_tokens": 350,
+        "input_tokens": 119,
+        "output_tokens": 231,
+        "input_token_details": {
+          "text_tokens": 119,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 83,
+          "audio_tokens": 148,
+          "reasoning_tokens": 42
+        }
+      },
+      "duration_seconds": 7.4,
+      "wav_sha256": "acb9eb5ae2e801d377764febc6449877718a8c73b2214a1f90513b2f12c61d55"
+    },
+    {
+      "speaker": "Miriam",
+      "voice": "marin",
+      "text": "Oh nein! Hast du trotzdem alles geschafft?",
+      "input_hash": "e898df24c5a881193aba28db6e7787c071fabe22984763ded9674e08b429b34d",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Oh nein! Hast du trotzdem alles geschafft?",
+      "usage": {
+        "total_tokens": 225,
+        "input_tokens": 105,
+        "output_tokens": 120,
+        "input_token_details": {
+          "text_tokens": 105,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 59,
+          "audio_tokens": 61,
+          "reasoning_tokens": 36
+        }
+      },
+      "duration_seconds": 3.05,
+      "wav_sha256": "8e90eef97c4afa1b5f6378835e977052afbf69de2752b79580e276719e723005"
+    },
+    {
+      "speaker": "Jonas",
+      "voice": "cedar",
+      "text": "Fast. Mein Bruder konnte zum Glück einen Transporter ausleihen. Den großen Schrank haben wir aber in der alten Wohnung gelassen, weil er nicht durch die Tür passte.",
+      "input_hash": "04d86e2edf348bea366a6586041ce0a60eb710dab36672a518ac6ec6461355a0",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Fast. Mein Bruder konnte zum Glück einen Transporter ausleihen. Den großen Schrank haben wir aber in der alten Wohnung gelassen, weil er nicht durch die Tür passte.",
+      "usage": {
+        "total_tokens": 467,
+        "input_tokens": 133,
+        "output_tokens": 334,
+        "input_token_details": {
+          "text_tokens": 133,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 137,
+          "audio_tokens": 197,
+          "reasoning_tokens": 80
+        }
+      },
+      "duration_seconds": 9.85,
+      "wav_sha256": "e607145bbf9acb226f3bbe8517fe1e45a101a80b17099bb7f17949afa251b0b0"
+    },
+    {
+      "speaker": "Miriam",
+      "voice": "marin",
+      "text": "Und gefällt dir die neue Wohnung?",
+      "input_hash": "3540418d070178efbb3f96747abf5a1108e0168a9f3cdd9a1977ee4c52f76ca7",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Und gefällt dir die neue Wohnung?",
+      "usage": {
+        "total_tokens": 170,
+        "input_tokens": 103,
+        "output_tokens": 67,
+        "input_token_details": {
+          "text_tokens": 103,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 31,
+          "audio_tokens": 36,
+          "reasoning_tokens": 12
+        }
+      },
+      "duration_seconds": 1.8,
+      "wav_sha256": "4e64d8fc9b221af4eab0aa79a88613f638fc11a29ff81b21a2971f0e2930ea83"
+    },
+    {
+      "speaker": "Jonas",
+      "voice": "cedar",
+      "text": "Sehr. Sie ist zwar kleiner als meine alte, dafür brauche ich nur zehn Minuten mit dem Fahrrad zur Arbeit. Vorher war ich fast eine Stunde unterwegs.",
+      "input_hash": "cbaf1ac1310c5e0131224cdc70952090e3ebc9421784cbe1388963cbd47caa3f",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Sehr. Sie ist zwar kleiner als meine alte, dafür brauche ich nur zehn Minuten mit dem Fahrrad zur Arbeit. Vorher war ich fast eine Stunde unterwegs.",
+      "usage": {
+        "total_tokens": 384,
+        "input_tokens": 127,
+        "output_tokens": 257,
+        "input_token_details": {
+          "text_tokens": 127,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 75,
+          "audio_tokens": 182,
+          "reasoning_tokens": 24
+        }
+      },
+      "duration_seconds": 9.1,
+      "wav_sha256": "97c99d8203e721792ee3dbc221b657c269f90633568b6f9f4289f47ca857d220"
+    },
+    {
+      "speaker": "Miriam",
+      "voice": "marin",
+      "text": "Das klingt gut. Ist die Miete günstiger?",
+      "input_hash": "7890d3af5ed8b8749d0ad239188a86c3d9d64d015e40dacf24fb815e8f2d1a5d",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Das klingt gut. Ist die Miete günstiger?",
+      "usage": {
+        "total_tokens": 189,
+        "input_tokens": 107,
+        "output_tokens": 82,
+        "input_token_details": {
+          "text_tokens": 107,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 25,
+          "audio_tokens": 57
+        }
+      },
+      "duration_seconds": 2.85,
+      "wav_sha256": "4f732bf6696775cd55b0daaa5bcfb4793506622f3c5fa7076a9782b9fd01b20e"
+    },
+    {
+      "speaker": "Jonas",
+      "voice": "cedar",
+      "text": "Die Kaltmiete ist etwas höher, aber ich zahle weniger Heizkosten. Außerdem muss ich nicht mehr jeden Tag eine Fahrkarte kaufen.",
+      "input_hash": "cf02a9fce0a5a69c8da1b5134f5bff81310bb2928fa795b2661f2a8eb6f16b4b",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Die Kaltmiete ist etwas höher, aber ich zahle weniger Heizkosten. Außerdem muss ich nicht mehr jeden Tag eine Fahrkarte kaufen.",
+      "usage": {
+        "total_tokens": 362,
+        "input_tokens": 125,
+        "output_tokens": 237,
+        "input_token_details": {
+          "text_tokens": 125,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 79,
+          "audio_tokens": 158,
+          "reasoning_tokens": 32
+        }
+      },
+      "duration_seconds": 7.9,
+      "wav_sha256": "98ead6c2eabe592951f49123e7abbb0e835060622b92584a1a8fd18b6c421b85"
+    },
+    {
+      "speaker": "Miriam",
+      "voice": "marin",
+      "text": "Hast du schon alle Kartons ausgepackt?",
+      "input_hash": "efbd1593dd0b65539e6f3bda347296f34097c4b95f24d1891d77113040316b37",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hast du schon alle Kartons ausgepackt?",
+      "usage": {
+        "total_tokens": 212,
+        "input_tokens": 107,
+        "output_tokens": 105,
+        "input_token_details": {
+          "text_tokens": 107,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 54,
+          "audio_tokens": 51,
+          "reasoning_tokens": 31
+        }
+      },
+      "duration_seconds": 2.55,
+      "wav_sha256": "6a5cfcc52c19b3a1be127cebe2eec55f32fe30200e6442c7e3d16dc8465eaf5c"
+    },
+    {
+      "speaker": "Jonas",
+      "voice": "cedar",
+      "text": "Nein, die Bücher stehen noch im Flur. Zuerst muss ich morgen den Internetanschluss organisieren. Der Techniker wollte heute kommen, hat den Termin aber auf Dienstag verschoben.",
+      "input_hash": "35db23b0ed421feb2b8ae19d8da650afbaee316d6fd17ae90e03c5a29588079e",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Nein, die Bücher stehen noch im Flur. Zuerst muss ich morgen den Internetanschluss organisieren. Der Techniker wollte heute kommen, hat den Termin aber auf Dienstag verschoben.",
+      "usage": {
+        "total_tokens": 458,
+        "input_tokens": 135,
+        "output_tokens": 323,
+        "input_token_details": {
+          "text_tokens": 135,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 118,
+          "audio_tokens": 205,
+          "reasoning_tokens": 59
+        }
+      },
+      "duration_seconds": 10.25,
+      "wav_sha256": "a24e2c9cf1ec15f8b5ba1420060c6f38064624d5374f20c71be3de0fcbdb4309"
+    },
+    {
+      "speaker": "Miriam",
+      "voice": "marin",
+      "text": "Dann kannst du am Wochenende ja eine kleine Einweihungsfeier machen.",
+      "input_hash": "e91b0b6520698822328163c0788cd65838f751ddf786e51be15c3b6dd5b8d834",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Dann kannst du am Wochenende ja eine kleine Einweihungsfeier machen.",
+      "usage": {
+        "total_tokens": 240,
+        "input_tokens": 112,
+        "output_tokens": 128,
+        "input_token_details": {
+          "text_tokens": 112,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 52,
+          "audio_tokens": 76,
+          "reasoning_tokens": 22
+        }
+      },
+      "duration_seconds": 3.8,
+      "wav_sha256": "6cfc8c5c94ba5655df19874ec2cca11bf38231b6d43df906cbd628cfc671987d"
+    },
+    {
+      "speaker": "Jonas",
+      "voice": "cedar",
+      "text": "Lieber erst nächste Woche! Diesen Samstag arbeite ich. Aber am Sonntag können wir zusammen einen Kaffee trinken.",
+      "input_hash": "11cf9416e4727e7425719584670649cbfa18221678b1ad18720fc7428ce44d19",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Lieber erst nächste Woche! Diesen Samstag arbeite ich. Aber am Sonntag können wir zusammen einen Kaffee trinken.",
+      "usage": {
+        "total_tokens": 321,
+        "input_tokens": 119,
+        "output_tokens": 202,
+        "input_token_details": {
+          "text_tokens": 119,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 67,
+          "audio_tokens": 135,
+          "reasoning_tokens": 26
+        }
+      },
+      "duration_seconds": 6.75,
+      "wav_sha256": "c23f41cc6d6e524ba20ebd863c130a40af0a27f167ac72f9f42da7871c7bf690"
+    },
+    {
+      "speaker": "Miriam",
+      "voice": "marin",
+      "text": "Sehr gerne. Soll ich Kuchen mitbringen?",
+      "input_hash": "8911bf9b6ccb95abf7dc061c881a50a04cec3a345f051567a7986d6e2039b31e",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Sehr gerne. Soll ich Kuchen mitbringen?",
+      "usage": {
+        "total_tokens": 215,
+        "input_tokens": 105,
+        "output_tokens": 110,
+        "input_token_details": {
+          "text_tokens": 105,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 55,
+          "audio_tokens": 55,
+          "reasoning_tokens": 32
+        }
+      },
+      "duration_seconds": 2.75,
+      "wav_sha256": "ec631ae5ff6a3987f5c992c189da4e638f86221ec1d80c0ac59e8072a53f0ba2"
+    },
+    {
+      "speaker": "Jonas",
+      "voice": "cedar",
+      "text": "Das wäre toll!",
+      "input_hash": "0ad6a0e2a7f58c43f245ece1ec958a3b975c25539f71f82166568744c73e19e1",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Das wäre toll!",
+      "usage": {
+        "total_tokens": 156,
+        "input_tokens": 100,
+        "output_tokens": 56,
+        "input_token_details": {
+          "text_tokens": 100,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 33,
+          "audio_tokens": 23,
+          "reasoning_tokens": 19
+        }
+      },
+      "duration_seconds": 1.15,
+      "wav_sha256": "6b5519907b1e8774dc257cd26184da7da0dbe651a507d21bba95c2b98a66d0e4"
+    },
+    {
+      "speaker": "Moderatorin",
+      "voice": "sage",
+      "text": "Heute sprechen wir darüber, ob Geschäfte auch sonntags regelmäßig öffnen sollten. Bei uns sind drei Gäste: Frau König, Herr Brandt und Frau Yilmaz. Frau König, was meinen Sie?",
+      "input_hash": "2d36bfb9231036c55233fc9f2995ae34da3f8392f376247c53933262b56f68ec",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Heute sprechen wir darüber, ob Geschäfte auch sonntags regelmäßig öffnen sollten. Bei uns sind drei Gäste: Frau König, Herr Brandt und Frau Yilmaz. Frau König, was meinen Sie?",
+      "usage": {
+        "total_tokens": 503,
+        "input_tokens": 137,
+        "output_tokens": 366,
+        "input_token_details": {
+          "text_tokens": 137,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 92,
+          "audio_tokens": 274,
+          "reasoning_tokens": 27
+        }
+      },
+      "duration_seconds": 13.7,
+      "wav_sha256": "4222653dae70e6c23b2f91b1e2cee5e80216d64b1b07704abe430e2f0e6d9c25"
+    },
+    {
+      "speaker": "Frau König",
+      "voice": "marin",
+      "text": "Ich bin dagegen. Wer im Verkauf arbeitet, braucht einen festen freien Tag. Natürlich kann man auch unter der Woche frei haben, aber gemeinsame Zeit mit der Familie lässt sich nicht so leicht ersetzen.",
+      "input_hash": "d3462b9c24313899239a3fdc5703ba74dd154fbfb22c6e8d04d819fa9100b293",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ich bin dagegen. Wer im Verkauf arbeitet, braucht einen festen freien Tag. Natürlich kann man auch unter der Woche frei haben, aber gemeinsame Zeit mit der Familie lässt sich nicht so leicht ersetzen.",
+      "usage": {
+        "total_tokens": 459,
+        "input_tokens": 134,
+        "output_tokens": 325,
+        "input_token_details": {
+          "text_tokens": 134,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 85,
+          "audio_tokens": 240,
+          "reasoning_tokens": 25
+        }
+      },
+      "duration_seconds": 12.0,
+      "wav_sha256": "5d8c8a418a77fa8c966294e6257d6adf2b4f17f232a32400085d5b8fbdd0d5c3"
+    },
+    {
+      "speaker": "Moderatorin",
+      "voice": "sage",
+      "text": "Herr Brandt?",
+      "input_hash": "250c3aefb7402323d252d38e77c57535141765c4f69f77d3f306593d716d00cd",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Herr Brandt?",
+      "usage": {
+        "total_tokens": 150,
+        "input_tokens": 100,
+        "output_tokens": 50,
+        "input_token_details": {
+          "text_tokens": 100,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 33,
+          "audio_tokens": 17,
+          "reasoning_tokens": 19
+        }
+      },
+      "duration_seconds": 0.85,
+      "wav_sha256": "5b834300b9a97e590e7723bcb7d06e5cd925b588a0ad4152da61a304ebc0369f"
+    },
+    {
+      "speaker": "Herr Brandt",
+      "voice": "cedar",
+      "text": "Ich sehe das anders. Viele Menschen arbeiten lange und schaffen es nicht, samstags einzukaufen. Ein zusätzlicher Einkaufstag wäre praktisch. Wichtig ist allerdings, dass niemand gezwungen wird, am Sonntag zu arbeiten.",
+      "input_hash": "3ee006571fe5159f0286a8a72f7565b8293c949ee7cbf1748dbd49dd907ed220",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ich sehe das anders. Viele Menschen arbeiten lange und schaffen es nicht, samstags einzukaufen. Ein zusätzlicher Einkaufstag wäre praktisch. Wichtig ist allerdings, dass niemand gezwungen wird, am Sonntag zu arbeiten.",
+      "usage": {
+        "total_tokens": 492,
+        "input_tokens": 140,
+        "output_tokens": 352,
+        "input_token_details": {
+          "text_tokens": 140,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 92,
+          "audio_tokens": 260,
+          "reasoning_tokens": 26
+        }
+      },
+      "duration_seconds": 13.0,
+      "wav_sha256": "4afd6f72ee7ff061c307d7524a70acbafb853c1107a481f54cb8d91a5d6e1d4d"
+    },
+    {
+      "speaker": "Frau Yilmaz",
+      "voice": "coral",
+      "text": "Mir ist vor allem der kleine Einzelhandel wichtig. Große Ketten könnten leicht zusätzliche Mitarbeiter einsetzen. Für ein kleines Familiengeschäft wäre ein weiterer Öffnungstag jedoch teuer. Vielleicht sollten die Geschäfte selbst entscheiden dürfen.",
+      "input_hash": "84b800e8568f7757111377be3dcb24dae8cd5d1c58f96d6ebf77e800d2376d29",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Mir ist vor allem der kleine Einzelhandel wichtig. Große Ketten könnten leicht zusätzliche Mitarbeiter einsetzen. Für ein kleines Familiengeschäft wäre ein weiterer Öffnungstag jedoch teuer. Vielleicht sollten die Geschäfte selbst entscheiden dürfen.",
+      "usage": {
+        "total_tokens": 549,
+        "input_tokens": 138,
+        "output_tokens": 411,
+        "input_token_details": {
+          "text_tokens": 138,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 94,
+          "audio_tokens": 317,
+          "reasoning_tokens": 26
+        }
+      },
+      "duration_seconds": 15.85,
+      "wav_sha256": "69424788f39005e50b4c650b36f76483d8af27f5b969bdd7353e90f6c83044a6"
+    },
+    {
+      "speaker": "Frau König",
+      "voice": "marin",
+      "text": "Aber freiwillig klingt nur auf dem Papier gut. Wenn alle anderen öffnen, fühlen sich kleine Geschäfte unter Druck.",
+      "input_hash": "b2f097c64f810f241d54b8486ffac08ec53fdb9d7f51efabbd01c716686499f4",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Aber freiwillig klingt nur auf dem Papier gut. Wenn alle anderen öffnen, fühlen sich kleine Geschäfte unter Druck.",
+      "usage": {
+        "total_tokens": 350,
+        "input_tokens": 119,
+        "output_tokens": 231,
+        "input_token_details": {
+          "text_tokens": 119,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 91,
+          "audio_tokens": 140,
+          "reasoning_tokens": 50
+        }
+      },
+      "duration_seconds": 7.0,
+      "wav_sha256": "e0f21280f0f753d2253f45b3126a2556ef111c5b634fe40e9f0d9805f649ad6b"
+    },
+    {
+      "speaker": "Herr Brandt",
+      "voice": "cedar",
+      "text": "Das verstehe ich, trotzdem wünschen sich viele Kunden mehr Flexibilität. Man könnte zunächst an wenigen Sonntagen im Jahr testen, ob die Nachfrage wirklich groß ist.",
+      "input_hash": "e2a4290d821b7788c7e0bcb7ba8629f9866af6b59846dc81f6e01fd67d59838f",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Das verstehe ich, trotzdem wünschen sich viele Kunden mehr Flexibilität. Man könnte zunächst an wenigen Sonntagen im Jahr testen, ob die Nachfrage wirklich groß ist.",
+      "usage": {
+        "total_tokens": 410,
+        "input_tokens": 129,
+        "output_tokens": 281,
+        "input_token_details": {
+          "text_tokens": 129,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 70,
+          "audio_tokens": 211,
+          "reasoning_tokens": 17
+        }
+      },
+      "duration_seconds": 10.55,
+      "wav_sha256": "bfcd76443122c8ce99495a6bc030b18a539c08e9232bc21116fb0bde5acbf8b6"
+    },
+    {
+      "speaker": "Frau Yilmaz",
+      "voice": "coral",
+      "text": "Einen begrenzten Versuch finde ich sinnvoll. Danach sollte man genau prüfen, ob die zusätzlichen Einnahmen die Kosten decken.",
+      "input_hash": "10fb94c213671d8f964db891b37bff98654ccb0bd6ecb1cd57fec3b1211faecc",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Einen begrenzten Versuch finde ich sinnvoll. Danach sollte man genau prüfen, ob die zusätzlichen Einnahmen die Kosten decken.",
+      "usage": {
+        "total_tokens": 358,
+        "input_tokens": 122,
+        "output_tokens": 236,
+        "input_token_details": {
+          "text_tokens": 122,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 67,
+          "audio_tokens": 169,
+          "reasoning_tokens": 23
+        }
+      },
+      "duration_seconds": 8.45,
+      "wav_sha256": "103b4daacaec215b9c068975b7ecb523a71dede482f50acdf12501383d223272"
+    },
+    {
+      "speaker": "Moderatorin",
+      "voice": "sage",
+      "text": "Frau König, wäre ein solcher Test für Sie denkbar?",
+      "input_hash": "e0459c773c4d48221b9953e2d544a209622f3b41ee57aecc5d8faf1096f074e7",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Frau König, wäre ein solcher Test für Sie denkbar?",
+      "usage": {
+        "total_tokens": 255,
+        "input_tokens": 109,
+        "output_tokens": 146,
+        "input_token_details": {
+          "text_tokens": 109,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 76,
+          "audio_tokens": 70,
+          "reasoning_tokens": 49
+        }
+      },
+      "duration_seconds": 3.5,
+      "wav_sha256": "dbb8ee1d600817ff5db79d340746e5c5995ac9c45cce55365162125dfc5004a1"
+    },
+    {
+      "speaker": "Frau König",
+      "voice": "marin",
+      "text": "Nur dann, wenn die Beschäftigten wirklich freiwillig teilnehmen und dafür einen fairen Ausgleich bekommen. Die Interessen der Mitarbeiter müssen an erster Stelle stehen.",
+      "input_hash": "125a2cba3638927c793db442995830f67b9c5f05164997ecab16aef6d7698a4a",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Nur dann, wenn die Beschäftigten wirklich freiwillig teilnehmen und dafür einen fairen Ausgleich bekommen. Die Interessen der Mitarbeiter müssen an erster Stelle stehen.",
+      "usage": {
+        "total_tokens": 409,
+        "input_tokens": 126,
+        "output_tokens": 283,
+        "input_token_details": {
+          "text_tokens": 126,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 76,
+          "audio_tokens": 207,
+          "reasoning_tokens": 25
+        }
+      },
+      "duration_seconds": 10.35,
+      "wav_sha256": "e63bca8b74f11e48b37bae9af3f5403cb8cd32d1baf1bd900bd367628ba1a910"
+    },
+    {
+      "speaker": "Moderatorin",
+      "voice": "sage",
+      "text": "Vielen Dank für die Diskussion!",
+      "input_hash": "a70c0975a30d68cc638f6836bc65e4d6b62831a71f61f76bddb903ee6f253210",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Vielen Dank für die Diskussion!",
+      "usage": {
+        "total_tokens": 186,
+        "input_tokens": 102,
+        "output_tokens": 84,
+        "input_token_details": {
+          "text_tokens": 102,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 42,
+          "audio_tokens": 42,
+          "reasoning_tokens": 24
+        }
+      },
+      "duration_seconds": 2.1,
+      "wav_sha256": "4b3073ee649cbacbf88eb9cee29363d32f52308138d7866c709c351005afc9e5"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "coral",
+      "text": "Guten Tag, hier ist der Paketdienst. Ihre Lieferung kommt nicht am Dienstag, sondern am Donnerstag. Bitte stellen Sie das Paket nicht selbst zur Abholung bereit. Wir bringen es direkt zu Ihrer Wohnung.",
+      "input_hash": "f621c9228f6c0757b09554acd69f76f66e46361e137cce7959014e2d36dba830",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Guten Tag, hier ist der Paketdienst. Ihre Lieferung kommt nicht am Dienstag, sondern am Donnerstag. Bitte stellen Sie das Paket nicht selbst zur Abholung bereit. Wir bringen es direkt zu Ihrer Wohnung.",
+      "usage": {
+        "total_tokens": 507,
+        "input_tokens": 137,
+        "output_tokens": 370,
+        "input_token_details": {
+          "text_tokens": 137,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 89,
+          "audio_tokens": 281,
+          "reasoning_tokens": 24
+        }
+      },
+      "duration_seconds": 14.05,
+      "wav_sha256": "16d0c017ac87bf14e1ef4f0e36a42b9d2c686b252cd0dd37b86eb7d20b44b587"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "cedar",
+      "text": "Hallo Frau Neumann, Ihr Schwimmkurs beginnt ab nächster Woche eine Viertelstunde früher, also um 18 Uhr 15. Der Kursraum bleibt gleich. Bitte bringen Sie diesmal auch ein Handtuch mit.",
+      "input_hash": "ead30ac75bb55dc1c6a0e2b16879f0a23c478d7c40137750a103e0c4e8a5ca0b",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hallo Frau Neumann, Ihr Schwimmkurs beginnt ab nächster Woche eine Viertelstunde früher, also um 18 Uhr 15. Der Kursraum bleibt gleich. Bitte bringen Sie diesmal auch ein Handtuch mit.",
+      "usage": {
+        "total_tokens": 508,
+        "input_tokens": 142,
+        "output_tokens": 366,
+        "input_token_details": {
+          "text_tokens": 142,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 146,
+          "audio_tokens": 220,
+          "reasoning_tokens": 78
+        }
+      },
+      "duration_seconds": 11.0,
+      "wav_sha256": "3a663c6a6f0f63faff35f220a90f7f79d419a67a3ef4074d18c33b5dab96e7ff"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "marin",
+      "text": "Liebe Fahrgäste, wegen eines Straßenfestes hält der Bus 24 heute nicht am Rathaus. Nutzen Sie bitte die Ersatzhaltestelle an der Schule. Ab morgen gilt wieder der normale Fahrplan.",
+      "input_hash": "6fd62047c126fc96232bd5f3a07a5bc8ef4383d2e4ede5e178f7f58c35f14fb6",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Liebe Fahrgäste, wegen eines Straßenfestes hält der Bus 24 heute nicht am Rathaus. Nutzen Sie bitte die Ersatzhaltestelle an der Schule. Ab morgen gilt wieder der normale Fahrplan.",
+      "usage": {
+        "total_tokens": 459,
+        "input_tokens": 137,
+        "output_tokens": 322,
+        "input_token_details": {
+          "text_tokens": 137,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 83,
+          "audio_tokens": 239,
+          "reasoning_tokens": 20
+        }
+      },
+      "duration_seconds": 11.95,
+      "wav_sha256": "26fd9bd2bcada2671159e6cf3e95b4f35633fc4fdc0717ac98e661dee36e12aa"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Hallo Lea, wir freuen uns auf deinen Besuch am Sonntag. Komm gern schon um zwölf. Wir essen aber erst um eins, weil Paula vorher noch arbeiten muss. Getränke haben wir genug.",
+      "input_hash": "63dfef3a0e7869794cb90687f8180ec026596c9881c9baa4e0d4a4e21de7901e",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hallo Lea, wir freuen uns auf deinen Besuch am Sonntag. Komm gern schon um zwölf. Wir essen aber erst um eins, weil Paula vorher noch arbeiten muss. Getränke haben wir genug.",
+      "usage": {
+        "total_tokens": 501,
+        "input_tokens": 133,
+        "output_tokens": 368,
+        "input_token_details": {
+          "text_tokens": 133,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 109,
+          "audio_tokens": 259,
+          "reasoning_tokens": 50
+        }
+      },
+      "duration_seconds": 12.95,
+      "wav_sha256": "a474174ebe53b5ae64f032ba66c4783777da0f4b85b4928ffec765340f8b7cdc"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "coral",
+      "text": "Guten Morgen, Herr Wolf. Die Schulung am Freitag ist abgesagt. Stattdessen schicken wir Ihnen die Unterlagen per E-Mail. Wenn Sie Fragen haben, können wir Montag telefonieren.",
+      "input_hash": "b2da6fef7f97c63dc0deb654a29d013c50ebe16bb329c5d3fe54acb792e281e3",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Guten Morgen, Herr Wolf. Die Schulung am Freitag ist abgesagt. Stattdessen schicken wir Ihnen die Unterlagen per E-Mail. Wenn Sie Fragen haben, können wir Montag telefonieren.",
+      "usage": {
+        "total_tokens": 433,
+        "input_tokens": 135,
+        "output_tokens": 298,
+        "input_token_details": {
+          "text_tokens": 135,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 81,
+          "audio_tokens": 217,
+          "reasoning_tokens": 22
+        }
+      },
+      "duration_seconds": 10.85,
+      "wav_sha256": "e9425235b1a6f9777a4645639c5f965aa5f396b0bff9e9f17a4a3da2fa9d81c8"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Herzlich willkommen zur Führung in unserer neuen Stadtbibliothek. Mein Name ist Frau Albers. Wir starten im Erdgeschoss bei den Informationsschaltern. Die Kinderbücher finden Sie links hinter dem Café. Die Arbeitsplätze für Erwachsene befinden sich im zweiten Stock, aber heute ist dieser Bereich bis 15 Uhr wegen einer Veranstaltung geschlossen. Wer Bücher ausleihen möchte, benötigt eine kostenlose Bibliothekskarte.",
+      "input_hash": "ee44a3497894e3b7dd263da9076c807c5c659a8de00905436419b046bd75bb48",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Herzlich willkommen zur Führung in unserer neuen Stadtbibliothek. Mein Name ist Frau Albers. Wir starten im Erdgeschoss bei den Informationsschaltern. Die Kinderbücher finden Sie links hinter dem Café. Die Arbeitsplätze für Erwachsene befinden sich im zweiten Stock, aber heute ist dieser Bereich bis 15 Uhr wegen einer Veranstaltung geschlossen. Wer Bücher ausleihen möchte, benötigt eine kostenlose Bibliothekskarte.",
+      "usage": {
+        "total_tokens": 866,
+        "input_tokens": 177,
+        "output_tokens": 689,
+        "input_token_details": {
+          "text_tokens": 177,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 146,
+          "audio_tokens": 543,
+          "reasoning_tokens": 28
+        }
+      },
+      "duration_seconds": 27.15,
+      "wav_sha256": "df120b0d564954e087aeed8c4ebee4a60c6ac0407bdb6de534c0f64e883de56a"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Für die Ausstellung über die Stadtgeschichte zahlen Sie dagegen zwei Euro Eintritt. Unsere Führung dauert etwa vierzig Minuten. Danach können Sie im Seminarraum Fragen stellen. Bitte fotografieren Sie die historischen Dokumente nicht, denn das Licht könnte sie beschädigen. Das Café schließt bereits um 17 Uhr; die Bibliothek selbst bleibt bis 19 Uhr geöffnet.",
+      "input_hash": "a5e6e64a9c7e2e2f15358ea1db36f89ad5caff757c7a7b375edd14de7daf4bbc",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Für die Ausstellung über die Stadtgeschichte zahlen Sie dagegen zwei Euro Eintritt. Unsere Führung dauert etwa vierzig Minuten. Danach können Sie im Seminarraum Fragen stellen. Bitte fotografieren Sie die historischen Dokumente nicht, denn das Licht könnte sie beschädigen. Das Café schließt bereits um 17 Uhr; die Bibliothek selbst bleibt bis 19 Uhr geöffnet.",
+      "usage": {
+        "total_tokens": 744,
+        "input_tokens": 166,
+        "output_tokens": 578,
+        "input_token_details": {
+          "text_tokens": 166,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 119,
+          "audio_tokens": 459,
+          "reasoning_tokens": 17
+        }
+      },
+      "duration_seconds": 22.95,
+      "wav_sha256": "e9a04541fed63e739c8f2558f4365a2bb12bf3f661bc70df8ea313e450c95e43"
+    },
+    {
+      "speaker": "Mara",
+      "voice": "marin",
+      "text": "Hallo Ben, hast du dich für den Computerkurs angemeldet?",
+      "input_hash": "57dd08d4b9aa1146a1a03e73157d966f62873defc287a3966564b90eb4389cfb",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hallo Ben, hast du dich für den Computerkurs angemeldet?",
+      "usage": {
+        "total_tokens": 227,
+        "input_tokens": 110,
+        "output_tokens": 117,
+        "input_token_details": {
+          "text_tokens": 110,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 49,
+          "audio_tokens": 68,
+          "reasoning_tokens": 21
+        }
+      },
+      "duration_seconds": 3.4,
+      "wav_sha256": "0ffb322e49fd18a8e87b26b7dc037355de2baa585498573b4ec213a4dd812ab2"
+    },
+    {
+      "speaker": "Ben",
+      "voice": "cedar",
+      "text": "Ja, aber nicht für den Abendkurs. Ich arbeite dienstags länger und habe deshalb den Kurs am Samstag gewählt.",
+      "input_hash": "ff8de56f6ebe976bf7c86fabe427bae4ea58a511a59bec7d7c52f23dc728a38d",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ja, aber nicht für den Abendkurs. Ich arbeite dienstags länger und habe deshalb den Kurs am Samstag gewählt.",
+      "usage": {
+        "total_tokens": 329,
+        "input_tokens": 120,
+        "output_tokens": 209,
+        "input_token_details": {
+          "text_tokens": 120,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 65,
+          "audio_tokens": 144,
+          "reasoning_tokens": 23
+        }
+      },
+      "duration_seconds": 7.2,
+      "wav_sha256": "0ac8318178e719fd939428d0dd73ed112f0bf75cedbbaeead619061b31d93b7d"
+    },
+    {
+      "speaker": "Mara",
+      "voice": "marin",
+      "text": "Kostet er viel?",
+      "input_hash": "9d7e13fc6dceefb9eb14dadafb31e500b4b28852a3a7f4051d40c7eccb264606",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Kostet er viel?",
+      "usage": {
+        "total_tokens": 191,
+        "input_tokens": 102,
+        "output_tokens": 89,
+        "input_token_details": {
+          "text_tokens": 102,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 43,
+          "audio_tokens": 46,
+          "reasoning_tokens": 25
+        }
+      },
+      "duration_seconds": 2.3,
+      "wav_sha256": "d89527f9f5c9ddc41e536fef310550f5b18ca2ed3a8ca5c063b4b493993d1ec8"
+    },
+    {
+      "speaker": "Ben",
+      "voice": "cedar",
+      "text": "Ursprünglich 120 Euro. Da ich mich früh angemeldet habe, zahle ich nur 90.",
+      "input_hash": "3bc48258e2db0344cb6749127f328eac23a71e096731482a995e79e7c43e0026",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ursprünglich 120 Euro. Da ich mich früh angemeldet habe, zahle ich nur 90.",
+      "usage": {
+        "total_tokens": 379,
+        "input_tokens": 119,
+        "output_tokens": 260,
+        "input_token_details": {
+          "text_tokens": 119,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 135,
+          "audio_tokens": 125,
+          "reasoning_tokens": 96
+        }
+      },
+      "duration_seconds": 6.25,
+      "wav_sha256": "efe1d87cd4a2e2bb7f132deff2540b9fd84667ec3b58785194e68c9f3101123c"
+    },
+    {
+      "speaker": "Mara",
+      "voice": "marin",
+      "text": "Und wie lange dauert er?",
+      "input_hash": "ea44e77a7406d0f331f938d9b45dfa5c03fb93f42a1fe12387e9cb7abc1b95f8",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Und wie lange dauert er?",
+      "usage": {
+        "total_tokens": 185,
+        "input_tokens": 102,
+        "output_tokens": 83,
+        "input_token_details": {
+          "text_tokens": 102,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 48,
+          "audio_tokens": 35,
+          "reasoning_tokens": 32
+        }
+      },
+      "duration_seconds": 1.75,
+      "wav_sha256": "663a0eaa369747f947eac5e49688a4f64d16037f9ae69a2319298a42e4be44c4"
+    },
+    {
+      "speaker": "Ben",
+      "voice": "cedar",
+      "text": "Vier Samstage. Den ersten Termin habe ich allerdings verpasst, weil ich krank war. Die Kursleiterin hat mir die Aufgaben per E-Mail geschickt.",
+      "input_hash": "6d9822ab1dd184810fd29fd9114826e3c8ad5e626f3b3a82558815d18acf2bb9",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Vier Samstage. Den ersten Termin habe ich allerdings verpasst, weil ich krank war. Die Kursleiterin hat mir die Aufgaben per E-Mail geschickt.",
+      "usage": {
+        "total_tokens": 360,
+        "input_tokens": 127,
+        "output_tokens": 233,
+        "input_token_details": {
+          "text_tokens": 127,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 65,
+          "audio_tokens": 168,
+          "reasoning_tokens": 15
+        }
+      },
+      "duration_seconds": 8.4,
+      "wav_sha256": "b8b6891a72eac638d3bda44894e06481c5cc6a52ad73f33c409c64682b9be4af"
+    },
+    {
+      "speaker": "Mara",
+      "voice": "marin",
+      "text": "War das schwierig?",
+      "input_hash": "9094b8667f0cc0eeca1af27054b4c0b9495444fd751e57a1aa1ba104f41cf2cf",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "War das schwierig?",
+      "usage": {
+        "total_tokens": 162,
+        "input_tokens": 100,
+        "output_tokens": 62,
+        "input_token_details": {
+          "text_tokens": 100,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 34,
+          "audio_tokens": 28,
+          "reasoning_tokens": 20
+        }
+      },
+      "duration_seconds": 1.4,
+      "wav_sha256": "f1ec904aba859850b9a1fb6f87a140c914c8d0ae6d417f081d19757b1604e15f"
+    },
+    {
+      "speaker": "Ben",
+      "voice": "cedar",
+      "text": "Die Aufgaben waren einfach, aber die Software musste ich erst installieren.",
+      "input_hash": "0f96ef15d3970ecc12ba0712ce15d11fba397e7be70d745fb6a6192ecf554a11",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Die Aufgaben waren einfach, aber die Software musste ich erst installieren.",
+      "usage": {
+        "total_tokens": 245,
+        "input_tokens": 109,
+        "output_tokens": 136,
+        "input_token_details": {
+          "text_tokens": 109,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 51,
+          "audio_tokens": 85,
+          "reasoning_tokens": 22
+        }
+      },
+      "duration_seconds": 4.25,
+      "wav_sha256": "82ac62cda5b9bc24a70812126ca3811fb6dfd04f897bd74452352e486b7c3b17"
+    },
+    {
+      "speaker": "Mara",
+      "voice": "marin",
+      "text": "Musst du einen eigenen Laptop mitbringen?",
+      "input_hash": "7cf1011fe1c3406e5e96dba4b4f8faf5b0a8caed9d75a289344bde271f0ccef2",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Musst du einen eigenen Laptop mitbringen?",
+      "usage": {
+        "total_tokens": 192,
+        "input_tokens": 105,
+        "output_tokens": 87,
+        "input_token_details": {
+          "text_tokens": 105,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 42,
+          "audio_tokens": 45,
+          "reasoning_tokens": 21
+        }
+      },
+      "duration_seconds": 2.25,
+      "wav_sha256": "a7dc444d17bee2b77a4ef63256c45e1af88c287c607342cf06b1972e41e8ceee"
+    },
+    {
+      "speaker": "Ben",
+      "voice": "cedar",
+      "text": "Nein, Computer sind vorhanden. Ich nehme trotzdem meinen Laptop mit, um zu Hause weiterüben zu können.",
+      "input_hash": "21c0bacd6ee5ad10e543649492b73dae8524763b5d8cac6599a6bf3b198d187f",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Nein, Computer sind vorhanden. Ich nehme trotzdem meinen Laptop mit, um zu Hause weiterüben zu können.",
+      "usage": {
+        "total_tokens": 307,
+        "input_tokens": 118,
+        "output_tokens": 189,
+        "input_token_details": {
+          "text_tokens": 118,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 60,
+          "audio_tokens": 129,
+          "reasoning_tokens": 20
+        }
+      },
+      "duration_seconds": 6.45,
+      "wav_sha256": "d9209cf14ff2fa7e8bb08524f98f01998652024ad4d0e048c5af3ad532dca0a9"
+    },
+    {
+      "speaker": "Mara",
+      "voice": "marin",
+      "text": "Bekommst du am Ende eine Bescheinigung?",
+      "input_hash": "3424400e7b34892ef01d75774508523a05f637b163dd92ce2fe122c7e028c84e",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Bekommst du am Ende eine Bescheinigung?",
+      "usage": {
+        "total_tokens": 213,
+        "input_tokens": 107,
+        "output_tokens": 106,
+        "input_token_details": {
+          "text_tokens": 107,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 60,
+          "audio_tokens": 46,
+          "reasoning_tokens": 37
+        }
+      },
+      "duration_seconds": 2.3,
+      "wav_sha256": "5597cde9707df620ef8485063e45ebccd4f7c205209ebd2fe13fd048f1ab06ce"
+    },
+    {
+      "speaker": "Ben",
+      "voice": "cedar",
+      "text": "Ja, aber nur, wenn ich an mindestens drei Terminen teilnehme.",
+      "input_hash": "026cd45c5d5285c026b9addf637def356a479439b7e740d208cbc5a9d82d75dc",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ja, aber nur, wenn ich an mindestens drei Terminen teilnehme.",
+      "usage": {
+        "total_tokens": 240,
+        "input_tokens": 112,
+        "output_tokens": 128,
+        "input_token_details": {
+          "text_tokens": 112,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 47,
+          "audio_tokens": 81,
+          "reasoning_tokens": 17
+        }
+      },
+      "duration_seconds": 4.05,
+      "wav_sha256": "6588dd80c098601742aa33e82e28bc46bd2da57e57ae3f0fd713713cb886af86"
+    },
+    {
+      "speaker": "Mara",
+      "voice": "marin",
+      "text": "Das ist doch gut.",
+      "input_hash": "89039c2462dd695fe66036929d44d4a1ce8604d4d13a05fdb9790ff5fe3e5d84",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Das ist doch gut.",
+      "usage": {
+        "total_tokens": 184,
+        "input_tokens": 101,
+        "output_tokens": 83,
+        "input_token_details": {
+          "text_tokens": 101,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 48,
+          "audio_tokens": 35,
+          "reasoning_tokens": 33
+        }
+      },
+      "duration_seconds": 1.75,
+      "wav_sha256": "d2bea9e6ad983fcdf1cdc5fd7e69f2cefd0ffc3315f6d58a095a6878f046d94f"
+    },
+    {
+      "speaker": "Ben",
+      "voice": "cedar",
+      "text": "Ich hoffe nur, dass der letzte Termin nicht verschoben wird. Da habe ich nämlich eine Reise geplant.",
+      "input_hash": "8e60e068f5aa5319b7089e5c1ec78970047ed40bc3493eff75b7b0148b5afb34",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ich hoffe nur, dass der letzte Termin nicht verschoben wird. Da habe ich nämlich eine Reise geplant.",
+      "usage": {
+        "total_tokens": 284,
+        "input_tokens": 117,
+        "output_tokens": 167,
+        "input_token_details": {
+          "text_tokens": 117,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 54,
+          "audio_tokens": 113,
+          "reasoning_tokens": 17
+        }
+      },
+      "duration_seconds": 5.65,
+      "wav_sha256": "9af8df649fdc1184d9c17f7cec6b1ff79a9d16f2e015de37d167a564619ea80a"
+    },
+    {
+      "speaker": "Moderatorin",
+      "voice": "sage",
+      "text": "Heute diskutieren wir, ob man häufiger von zu Hause arbeiten sollte. Frau Seidel, Herr Kurz und Frau Özdemir sind zu Gast.",
+      "input_hash": "14809342c200efb9335c8f2f7f3d4aa8746f6af55d0038900a431fd229df3e89",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Heute diskutieren wir, ob man häufiger von zu Hause arbeiten sollte. Frau Seidel, Herr Kurz und Frau Özdemir sind zu Gast.",
+      "usage": {
+        "total_tokens": 381,
+        "input_tokens": 125,
+        "output_tokens": 256,
+        "input_token_details": {
+          "text_tokens": 125,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 72,
+          "audio_tokens": 184,
+          "reasoning_tokens": 23
+        }
+      },
+      "duration_seconds": 9.2,
+      "wav_sha256": "8ccb54f0988c68194e7fbcc42949cfde61fcde6a22175675007842e7445828dd"
+    },
+    {
+      "speaker": "Frau Seidel",
+      "voice": "marin",
+      "text": "Für mich spart Homeoffice viel Zeit. Früher saß ich täglich über eine Stunde im Zug. Jetzt sehe ich meine Familie öfter.",
+      "instructions": "Du bist ein Sprecher fuer deutsche Hoeruebungen auf Niveau A2 bis B1. Lies ausschliesslich den vom Nutzer gelieferten Text wortgetreu auf Deutsch vor. Keine Einleitung, keine Antwort, keine Erklaerung, nichts hinzufuegen oder auslassen. Sprich klar, natuerlich und in gemaessigtem Lerntempo. Sprich Zahlen und Uhrzeiten passend auf Deutsch aus. Behalte am Schluss exakt das Wort 'oefter', ohne zusaetzliches s.",
+      "input_hash": "99e620c801e887a40dea3a90fa87db4c572a37f3e94bcefadbf79b6e85bb3230",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Für mich spart Homeoffice viel Zeit. Früher saß ich täglich über eine Stunde im Zug. Jetzt sehe ich meine Familie öfter",
+      "usage": {
+        "total_tokens": 497,
+        "input_tokens": 142,
+        "output_tokens": 355,
+        "input_token_details": {
+          "text_tokens": 142,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 189,
+          "audio_tokens": 166,
+          "reasoning_tokens": 145
+        }
+      },
+      "duration_seconds": 8.3,
+      "wav_sha256": "307444b38769e6957779f48c32dd92be5270d141802fae0cb7a01c39b1ee212c"
+    },
+    {
+      "speaker": "Herr Kurz",
+      "voice": "cedar",
+      "text": "Ich finde die Zusammenarbeit im Büro einfacher. Bei komplizierten Problemen kann ich sofort jemanden fragen.",
+      "input_hash": "71e9d11d031b078682898d8d1f9d05cd84c33fea9154155a5ec2cb9c3e2ec895",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ich finde die Zusammenarbeit im Büro einfacher. Bei komplizierten Problemen kann ich sofort jemanden fragen.",
+      "usage": {
+        "total_tokens": 293,
+        "input_tokens": 115,
+        "output_tokens": 178,
+        "input_token_details": {
+          "text_tokens": 115,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 54,
+          "audio_tokens": 124,
+          "reasoning_tokens": 19
+        }
+      },
+      "duration_seconds": 6.2,
+      "wav_sha256": "efd4c747ac00bfbc7946de9bd71fa61cc2d5a6a288e0aaa83cc06bdb8a4805a7"
+    },
+    {
+      "speaker": "Frau Özdemir",
+      "voice": "coral",
+      "text": "Es kommt auf die Aufgabe an. Für konzentriertes Schreiben ist die eigene Wohnung ideal, für gemeinsame Planung finde ich das Büro besser.",
+      "input_hash": "f6c84c2b7a4abf1895276acd99b8806d8d6982f2b4afc15204b4622504d00db0",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Es kommt auf die Aufgabe an. Für konzentriertes Schreiben ist die eigene Wohnung ideal, für gemeinsame Planung finde ich das Büro besser.",
+      "usage": {
+        "total_tokens": 392,
+        "input_tokens": 123,
+        "output_tokens": 269,
+        "input_token_details": {
+          "text_tokens": 123,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 68,
+          "audio_tokens": 201,
+          "reasoning_tokens": 21
+        }
+      },
+      "duration_seconds": 10.05,
+      "wav_sha256": "2c38625b7f86ff3c722e9bc9fc4b46428c2f67798899052da0704c78f9de59c3"
+    },
+    {
+      "speaker": "Moderatorin",
+      "voice": "sage",
+      "text": "Und wie sieht es mit den Kosten aus?",
+      "input_hash": "9dd13c6d3f82f4ee462bff65f401a48411599741f1d7c585438aa5360c4e7f43",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Und wie sieht es mit den Kosten aus?",
+      "usage": {
+        "total_tokens": 198,
+        "input_tokens": 105,
+        "output_tokens": 93,
+        "input_token_details": {
+          "text_tokens": 105,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 43,
+          "audio_tokens": 50,
+          "reasoning_tokens": 22
+        }
+      },
+      "duration_seconds": 2.5,
+      "wav_sha256": "28d86695e37044e5c59f8a9d2cb0455f530456610598791c776ac73094dc4e21"
+    },
+    {
+      "speaker": "Frau Seidel",
+      "voice": "marin",
+      "text": "Ich bezahle zwar mehr Strom, brauche aber keine Monatskarte mehr.",
+      "input_hash": "d64abf4ade6198e5f90e3e71e25799f7693b4a6099a446080181c1b3b30c2c9a",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ich bezahle zwar mehr Strom, brauche aber keine Monatskarte mehr.",
+      "usage": {
+        "total_tokens": 237,
+        "input_tokens": 110,
+        "output_tokens": 127,
+        "input_token_details": {
+          "text_tokens": 110,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 49,
+          "audio_tokens": 78,
+          "reasoning_tokens": 21
+        }
+      },
+      "duration_seconds": 3.9,
+      "wav_sha256": "1dc7c92ed3ac0cd2d90a77fedb06c04e6408b7c1db6da46af10a87ef7ea1861d"
+    },
+    {
+      "speaker": "Herr Kurz",
+      "voice": "cedar",
+      "text": "Kleine Unternehmen können weniger Bürofläche mieten. Das ist ein Vorteil. Allerdings fehlt manchmal der persönliche Austausch.",
+      "input_hash": "28c583e38bdf7a8e65d82a975a2be1c70d11671053b1230404d3eacbb337e723",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Kleine Unternehmen können weniger Bürofläche mieten. Das ist ein Vorteil. Allerdings fehlt manchmal der persönliche Austausch.",
+      "usage": {
+        "total_tokens": 345,
+        "input_tokens": 118,
+        "output_tokens": 227,
+        "input_token_details": {
+          "text_tokens": 118,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 70,
+          "audio_tokens": 157,
+          "reasoning_tokens": 30
+        }
+      },
+      "duration_seconds": 7.85,
+      "wav_sha256": "d089e676c8a797edf5953aa4984faf398a63fcabb0f997e55ba8e700e41495a1"
+    },
+    {
+      "speaker": "Frau Özdemir",
+      "voice": "coral",
+      "text": "Eine feste Regel für alle halte ich für falsch. Teams sollten selbst entscheiden, an welchen Tagen sie sich treffen.",
+      "input_hash": "a288302be5045a668ef7dd6a2f40d2a6bdb7a6569e940119c2ab343c492e6680",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Eine feste Regel für alle halte ich für falsch. Teams sollten selbst entscheiden, an welchen Tagen sie sich treffen.",
+      "usage": {
+        "total_tokens": 331,
+        "input_tokens": 118,
+        "output_tokens": 213,
+        "input_token_details": {
+          "text_tokens": 118,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 59,
+          "audio_tokens": 154,
+          "reasoning_tokens": 19
+        }
+      },
+      "duration_seconds": 7.7,
+      "wav_sha256": "a21f49aafae54c7c23cfb8fa3732a5de1e8f11e955be23813a6f092cde489599"
+    },
+    {
+      "speaker": "Frau Seidel",
+      "voice": "marin",
+      "text": "Das sehe ich ähnlich. Zwei Bürotage in der Woche reichen mir.",
+      "input_hash": "8383e4223e77a5fb1f81fbabcb8da0025b2d0b10d32f634744e12618834ea3fe",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Das sehe ich ähnlich. Zwei Bürotage in der Woche reichen mir.",
+      "usage": {
+        "total_tokens": 246,
+        "input_tokens": 111,
+        "output_tokens": 135,
+        "input_token_details": {
+          "text_tokens": 111,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 50,
+          "audio_tokens": 85,
+          "reasoning_tokens": 19
+        }
+      },
+      "duration_seconds": 4.25,
+      "wav_sha256": "d420f1c70c022c627c4d09ba22815fcd03515306dd96e18a36f26a9b0622eccb"
+    },
+    {
+      "speaker": "Herr Kurz",
+      "voice": "cedar",
+      "text": "Wenn die Technik gut funktioniert, kann ich mir das vorstellen. Aber neue Mitarbeiter sollten am Anfang häufiger im Büro sein.",
+      "input_hash": "735e713ad459480bea68d056a029f6ded1e04d0683e4b97fb98764b0ff62bf3d",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Wenn die Technik gut funktioniert, kann ich mir das vorstellen. Aber neue Mitarbeiter sollten am Anfang häufiger im Büro sein.",
+      "usage": {
+        "total_tokens": 335,
+        "input_tokens": 119,
+        "output_tokens": 216,
+        "input_token_details": {
+          "text_tokens": 119,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 65,
+          "audio_tokens": 151,
+          "reasoning_tokens": 24
+        }
+      },
+      "duration_seconds": 7.55,
+      "wav_sha256": "bc5e2b9de79b424cf80da08e6b5989654f6ca505d157a58fd56527377d3220c7"
+    },
+    {
+      "speaker": "Moderatorin",
+      "voice": "sage",
+      "text": "Vielen Dank für Ihre Einschätzungen.",
+      "input_hash": "b9628b991fbe965e9ef5f4951f5fb0069504f1b8b44ca85b809d30ca0c8e67ad",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Vielen Dank für Ihre Einschätzungen.",
+      "usage": {
+        "total_tokens": 191,
+        "input_tokens": 104,
+        "output_tokens": 87,
+        "input_token_details": {
+          "text_tokens": 104,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 42,
+          "audio_tokens": 45,
+          "reasoning_tokens": 22
+        }
+      },
+      "duration_seconds": 2.25,
+      "wav_sha256": "8dd8e1b066b6cc5570d6fce7b1d88a7827e8f184f16f5536a27cfeaa751b16da"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "coral",
+      "text": "Guten Tag, Frau Schmitt. Morgen um neun ist ein früherer Termin frei geworden. Ihr bisheriger Termin um elf bleibt bestehen, wenn Sie sich heute nicht bei uns melden.",
+      "input_hash": "0bcc1142364e8e5795f94ad3c595fff6f766f2447942315adf44c01b42ae521e",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Guten Tag, Frau Schmitt. Morgen um neun ist ein früherer Termin frei geworden. Ihr bisheriger Termin um elf bleibt bestehen, wenn Sie sich heute nicht bei uns melden.",
+      "usage": {
+        "total_tokens": 437,
+        "input_tokens": 133,
+        "output_tokens": 304,
+        "input_token_details": {
+          "text_tokens": 133,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 96,
+          "audio_tokens": 208,
+          "reasoning_tokens": 39
+        }
+      },
+      "duration_seconds": 10.4,
+      "wav_sha256": "a8f36e0d5a24a09b195dc9e73a334ca2833efbfd972ebc91e2db1e8c2ea7529f"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "cedar",
+      "text": "Liebe Gäste, das Frühstücksbuffet gibt es morgen ausnahmsweise ab sieben Uhr im großen Konferenzraum. Unser Restaurant bleibt wegen einer privaten Feier bis zum Mittag geschlossen.",
+      "input_hash": "b45fc4dd26aead9537d831b640d7c0be49c2c609e8bb49b813c1e45b5a98692c",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Liebe Gäste, das Frühstücksbuffet gibt es morgen ausnahmsweise ab sieben Uhr im großen Konferenzraum. Unser Restaurant bleibt wegen einer privaten Feier bis zum Mittag geschlossen.",
+      "usage": {
+        "total_tokens": 454,
+        "input_tokens": 132,
+        "output_tokens": 322,
+        "input_token_details": {
+          "text_tokens": 132,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 88,
+          "audio_tokens": 234,
+          "reasoning_tokens": 30
+        }
+      },
+      "duration_seconds": 11.7,
+      "wav_sha256": "27597e17f804a58edb61bffa65694bd5817307ff06d0382a5aceb27184d75703"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "marin",
+      "text": "Hallo zusammen! Der Wanderausflug am Samstag beginnt um acht Uhr am Parkplatz Nord. Wenn es regnet, treffen wir uns trotzdem dort und entscheiden gemeinsam, ob wir die Strecke verkürzen.",
+      "input_hash": "722fadd9cf43b6e283c03955cf2eba1054fe0867a9b823046f623acb6272870e",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hallo zusammen! Der Wanderausflug am Samstag beginnt um acht Uhr am Parkplatz Nord. Wenn es regnet, treffen wir uns trotzdem dort und entscheiden gemeinsam, ob wir die Strecke verkürzen.",
+      "usage": {
+        "total_tokens": 467,
+        "input_tokens": 136,
+        "output_tokens": 331,
+        "input_token_details": {
+          "text_tokens": 136,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 99,
+          "audio_tokens": 232,
+          "reasoning_tokens": 37
+        }
+      },
+      "duration_seconds": 11.6,
+      "wav_sha256": "088fea050be6af22e0760ba09a664a1eb6164ef5cfbeda342d46a25dec078117"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Guten Abend, morgen endet der Unterricht der Klasse 8B bereits um zwölf. Die Busse fahren aber erst um halb eins. Wer nicht warten möchte, braucht die Erlaubnis der Eltern.",
+      "input_hash": "9ca337d50c8dea6a2bced426f386c50b0b0baebd75d1db47fe77286b6d406d51",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Guten Abend, morgen endet der Unterricht der Klasse 8B bereits um zwölf. Die Busse fahren aber erst um halb eins. Wer nicht warten möchte, braucht die Erlaubnis der Eltern.",
+      "usage": {
+        "total_tokens": 523,
+        "input_tokens": 136,
+        "output_tokens": 387,
+        "input_token_details": {
+          "text_tokens": 136,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 148,
+          "audio_tokens": 239,
+          "reasoning_tokens": 86
+        }
+      },
+      "duration_seconds": 11.95,
+      "wav_sha256": "84b4c6595e31b98ec24bda6e4d2d7eca65c1734ddc9a10877fadbfd31e757985"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "coral",
+      "text": "Hi Alex, ich stehe schon vor dem Theater. Die Vorstellung beginnt erst um halb acht, nicht um sieben. Ich gehe deshalb noch ins Café gegenüber. Treffen wir uns dort?",
+      "input_hash": "2a198c94514882c9c5b200b8885d3e35c5a744089435caffce7593cc6da6797c",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hi Alex, ich stehe schon vor dem Theater. Die Vorstellung beginnt erst um halb acht, nicht um sieben. Ich gehe deshalb noch ins Café gegenüber. Treffen wir uns dort?",
+      "usage": {
+        "total_tokens": 421,
+        "input_tokens": 132,
+        "output_tokens": 289,
+        "input_token_details": {
+          "text_tokens": 132,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 82,
+          "audio_tokens": 207,
+          "reasoning_tokens": 26
+        }
+      },
+      "duration_seconds": 10.35,
+      "wav_sha256": "ac2d78b297d19932694ade6d12d0e36a779af0ad33d51d12d7e427272736e269"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Guten Morgen! Ich möchte Ihnen heute unser neues Gesundheitszentrum vorstellen. Am Montag bieten wir eine kostenlose Beratung zur Ernährung an. Dafür müssen Sie sich bis Freitag telefonisch anmelden. Unser Bewegungskurs findet mittwochs um halb sechs statt und kostet zehn Euro pro Termin. Die erste Stunde dürfen alle ohne Bezahlung ausprobieren. Der Vortrag über guten Schlaf wurde wegen Krankheit des Referenten vom Donnerstag auf den nächsten Dienstag verschoben.",
+      "input_hash": "b6cfa919c13b9f7ae478d35e9b5564bca84e4917e6228eff507727a16a628f1c",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Guten Morgen! Ich möchte Ihnen heute unser neues Gesundheitszentrum vorstellen. Am Montag bieten wir eine kostenlose Beratung zur Ernährung an. Dafür müssen Sie sich bis Freitag telefonisch anmelden. Unser Bewegungskurs findet mittwochs um halb sechs statt und kostet zehn Euro pro Termin. Die erste Stunde dürfen alle ohne Bezahlung ausprobieren. Der Vortrag über guten Schlaf wurde wegen Krankheit des Referenten vom Donnerstag auf den nächsten Dienstag verschoben.",
+      "usage": {
+        "total_tokens": 985,
+        "input_tokens": 179,
+        "output_tokens": 806,
+        "input_token_details": {
+          "text_tokens": 179,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 183,
+          "audio_tokens": 623,
+          "reasoning_tokens": 59
+        }
+      },
+      "duration_seconds": 31.15,
+      "wav_sha256": "d5e18d9cdef109192c8d0e4dc0e0ed98870046bae9a7868d2adccdc9d149a0b4"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Er beginnt um 18 Uhr im Raum drei. Bitte beachten Sie: Für Untersuchungen benötigen wir Ihre Versichertenkarte. Bei den offenen Vorträgen ist sie nicht erforderlich. Unsere Rezeption öffnet täglich um acht Uhr, samstags erst um neun. Weitere Informationen stehen auf unserer Website. Fragen können Sie auch nach dem Vortrag an meine Kollegin richten, die heute hinten im Raum sitzt.",
+      "input_hash": "703ec1475a0512048bad5ade91a626b4c0218a159312b3d05b1364dafa136a81",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Er beginnt um 18 Uhr im Raum drei. Bitte beachten Sie: Für Untersuchungen benötigen wir Ihre Versichertenkarte. Bei den offenen Vorträgen ist sie nicht erforderlich. Unsere Rezeption öffnet täglich um acht Uhr, samstags erst um neun. Weitere Informationen stehen auf unserer Website. Fragen können Sie auch nach dem Vortrag an meine Kollegin richten, die heute hinten im Raum sitzt.",
+      "usage": {
+        "total_tokens": 892,
+        "input_tokens": 175,
+        "output_tokens": 717,
+        "input_token_details": {
+          "text_tokens": 175,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 211,
+          "audio_tokens": 506,
+          "reasoning_tokens": 98
+        }
+      },
+      "duration_seconds": 25.3,
+      "wav_sha256": "37e6d98edb34819b7e965c035c6ab50a0d24a9fe6b4cdcfd71fd24c834cce637"
+    },
+    {
+      "speaker": "Nina",
+      "voice": "marin",
+      "text": "Hallo Paul, wie war dein Urlaub am Meer?",
+      "input_hash": "9b5815b2e8130c9ea7ac5c593a43a9dd51db4f2a09cb1b5ea0ad74be0fdc9e52",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hallo Paul, wie war dein Urlaub am Meer?",
+      "usage": {
+        "total_tokens": 215,
+        "input_tokens": 106,
+        "output_tokens": 109,
+        "input_token_details": {
+          "text_tokens": 106,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 59,
+          "audio_tokens": 50,
+          "reasoning_tokens": 37
+        }
+      },
+      "duration_seconds": 2.5,
+      "wav_sha256": "05e51a1076b4bc9a51cf5971370bd37249c9988d9b624e4a8505dfdfa855542f"
+    },
+    {
+      "speaker": "Paul",
+      "voice": "cedar",
+      "text": "Schön, aber die Anreise war schwierig. Der erste Zug hatte eine Stunde Verspätung.",
+      "input_hash": "8e1822387f03b9bb91704676563fcd5ba86a75678714762f15246a4c299af078",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Schön, aber die Anreise war schwierig. Der erste Zug hatte eine Stunde Verspätung.",
+      "usage": {
+        "total_tokens": 310,
+        "input_tokens": 117,
+        "output_tokens": 193,
+        "input_token_details": {
+          "text_tokens": 117,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 79,
+          "audio_tokens": 114,
+          "reasoning_tokens": 42
+        }
+      },
+      "duration_seconds": 5.7,
+      "wav_sha256": "91e9d78c9dac9be16c47118c2a5f05ce8bd4ce79e7b4d8c5acd6f5d902435c42"
+    },
+    {
+      "speaker": "Nina",
+      "voice": "marin",
+      "text": "Hast du den Anschluss verpasst?",
+      "input_hash": "5cdac27e10d57d855ece15de9ecbc1cf1a8a27f91afff2485c907637405d57e4",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hast du den Anschluss verpasst?",
+      "usage": {
+        "total_tokens": 181,
+        "input_tokens": 104,
+        "output_tokens": 77,
+        "input_token_details": {
+          "text_tokens": 104,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 41,
+          "audio_tokens": 36,
+          "reasoning_tokens": 20
+        }
+      },
+      "duration_seconds": 1.8,
+      "wav_sha256": "f663ed726dbedec87b153f97757f9503fce2c9e2e3cf2a5e924f157ce02ab2db"
+    },
+    {
+      "speaker": "Paul",
+      "voice": "cedar",
+      "text": "Ja. Zum Glück konnte ich einen späteren Zug ohne Aufpreis nehmen.",
+      "input_hash": "73004ad0e0e075c9af2eedddf27ff4a15d7a1dd72219d3c9812ffa85ab1db4e6",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ja. Zum Glück konnte ich einen späteren Zug ohne Aufpreis nehmen.",
+      "usage": {
+        "total_tokens": 249,
+        "input_tokens": 111,
+        "output_tokens": 138,
+        "input_token_details": {
+          "text_tokens": 111,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 49,
+          "audio_tokens": 89,
+          "reasoning_tokens": 18
+        }
+      },
+      "duration_seconds": 4.45,
+      "wav_sha256": "aafadd0f9a257c97908fc343316c444a9492bf075ea872e7145c3c6cf8143dd4"
+    },
+    {
+      "speaker": "Nina",
+      "voice": "marin",
+      "text": "Und das Hotel?",
+      "input_hash": "c50d27c1bd7c29c80ad41dce07fd89977d9bd61d598ef08b635bec2c54e3c1f0",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Und das Hotel?",
+      "usage": {
+        "total_tokens": 161,
+        "input_tokens": 100,
+        "output_tokens": 61,
+        "input_token_details": {
+          "text_tokens": 100,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 36,
+          "audio_tokens": 25,
+          "reasoning_tokens": 22
+        }
+      },
+      "duration_seconds": 1.25,
+      "wav_sha256": "15410617f428f4e24f34228b9e5c058dc884721229838804806febe410832431"
+    },
+    {
+      "speaker": "Paul",
+      "voice": "cedar",
+      "text": "Es war weiter vom Strand entfernt als auf der Website stand. Dafür war das Zimmer sehr ruhig.",
+      "input_hash": "1d7c06d137be2545fb3cb1daa6630b181f8180260580323faf8c1c3920f91fc4",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Es war weiter vom Strand entfernt als auf der Website stand. Dafür war das Zimmer sehr ruhig.",
+      "usage": {
+        "total_tokens": 304,
+        "input_tokens": 115,
+        "output_tokens": 189,
+        "input_token_details": {
+          "text_tokens": 115,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 58,
+          "audio_tokens": 131,
+          "reasoning_tokens": 21
+        }
+      },
+      "duration_seconds": 6.55,
+      "wav_sha256": "11540229594a8906ed5a7859c1053b667de203ace1311e2458579a96ac779c4c"
+    },
+    {
+      "speaker": "Nina",
+      "voice": "marin",
+      "text": "Hast du dich beschwert?",
+      "input_hash": "4735c99182504152f7cc3b8284c2d702f1767d59db8f8c3192dfb7986146fba8",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hast du dich beschwert?",
+      "usage": {
+        "total_tokens": 186,
+        "input_tokens": 103,
+        "output_tokens": 83,
+        "input_token_details": {
+          "text_tokens": 103,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 47,
+          "audio_tokens": 36,
+          "reasoning_tokens": 30
+        }
+      },
+      "duration_seconds": 1.8,
+      "wav_sha256": "c0462cdc6bef51bbd041f54824ec5d907d88d421d39fe73e10bca03ac9c61580"
+    },
+    {
+      "speaker": "Paul",
+      "voice": "cedar",
+      "text": "Nein, ich habe nur nach einem Fahrrad gefragt. Das konnte ich für fünf Euro am Tag mieten.",
+      "input_hash": "f13477478f58cd07d8d9e2d870f3136e7ee5238c3f0d565b4e0248fd98a0a682",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Nein, ich habe nur nach einem Fahrrad gefragt. Das konnte ich für fünf Euro am Tag mieten.",
+      "usage": {
+        "total_tokens": 303,
+        "input_tokens": 117,
+        "output_tokens": 186,
+        "input_token_details": {
+          "text_tokens": 117,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 80,
+          "audio_tokens": 106,
+          "reasoning_tokens": 43
+        }
+      },
+      "duration_seconds": 5.3,
+      "wav_sha256": "f0858649d7fa7a5e227f1cecec8906d70cdedf67dc9feee4d21f00c8a4e6bbb5"
+    },
+    {
+      "speaker": "Nina",
+      "voice": "marin",
+      "text": "War das Wetter gut?",
+      "input_hash": "3f368abaf0f1ac16b270658801b5c724f1a3ffc01c12600799f39e1fbc329abf",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "War das Wetter gut?",
+      "usage": {
+        "total_tokens": 173,
+        "input_tokens": 101,
+        "output_tokens": 72,
+        "input_token_details": {
+          "text_tokens": 101,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 41,
+          "audio_tokens": 31,
+          "reasoning_tokens": 26
+        }
+      },
+      "duration_seconds": 1.55,
+      "wav_sha256": "a3355036619512b82764b007f8d4618650dd3a5045d47f8116e665a3a3adbd5d"
+    },
+    {
+      "speaker": "Paul",
+      "voice": "cedar",
+      "text": "Die ersten zwei Tage hat es geregnet. Danach schien fast immer die Sonne.",
+      "input_hash": "96d6d192d447757789d72dd41a1b97951a0fd822d6b369a836a2749733842b9b",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Die ersten zwei Tage hat es geregnet. Danach schien fast immer die Sonne.",
+      "usage": {
+        "total_tokens": 277,
+        "input_tokens": 113,
+        "output_tokens": 164,
+        "input_token_details": {
+          "text_tokens": 113,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 80,
+          "audio_tokens": 84,
+          "reasoning_tokens": 47
+        }
+      },
+      "duration_seconds": 4.2,
+      "wav_sha256": "7f1dd7805c6f3bdde8cf6cb71063eed6f225c13ea1475565335fccfbbc23a06f"
+    },
+    {
+      "speaker": "Nina",
+      "voice": "marin",
+      "text": "Hast du viel unternommen?",
+      "input_hash": "f20c329a363c0b889db72d98926b5351d96b523c0f4be37e6a1ff004259292fe",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hast du viel unternommen?",
+      "usage": {
+        "total_tokens": 178,
+        "input_tokens": 104,
+        "output_tokens": 74,
+        "input_token_details": {
+          "text_tokens": 104,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 42,
+          "audio_tokens": 32,
+          "reasoning_tokens": 24
+        }
+      },
+      "duration_seconds": 1.6,
+      "wav_sha256": "db5ba3719c179df718f2a778b511c5d83ce6b32092a2fd9361bdf37186756f2d"
+    },
+    {
+      "speaker": "Paul",
+      "voice": "cedar",
+      "text": "Am Mittwoch habe ich eine Bootsfahrt gemacht. Ich wollte eigentlich tauchen, aber dafür brauchte man dort einen Kurs.",
+      "input_hash": "27e603cddcf96baf4e637a99444ad7759f902b516fbcad00992f69ec2c95e5a2",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Am Mittwoch habe ich eine Bootsfahrt gemacht. Ich wollte eigentlich tauchen, aber dafür brauchte man dort einen Kurs.",
+      "usage": {
+        "total_tokens": 310,
+        "input_tokens": 121,
+        "output_tokens": 189,
+        "input_token_details": {
+          "text_tokens": 121,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 62,
+          "audio_tokens": 127,
+          "reasoning_tokens": 19
+        }
+      },
+      "duration_seconds": 6.35,
+      "wav_sha256": "58c33c602d68f8d00c378dc3697f83cbed5a277f69aabf62a7f304e337b8db23"
+    },
+    {
+      "speaker": "Nina",
+      "voice": "marin",
+      "text": "Hast du denn wenigstens gut gegessen?",
+      "input_hash": "8e0b53c6838644c30a07ed2b11f44e8f6672e456c58555bdde0b1ca07e67a2b8",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hast du denn wenigstens gut gegessen?",
+      "usage": {
+        "total_tokens": 207,
+        "input_tokens": 105,
+        "output_tokens": 102,
+        "input_token_details": {
+          "text_tokens": 105,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 42,
+          "audio_tokens": 60,
+          "reasoning_tokens": 19
+        }
+      },
+      "duration_seconds": 3.0,
+      "wav_sha256": "3d97e0256b1a456bbf0ce2c69b412d9e1585481dd5bd77cb387b96227bc56487"
+    },
+    {
+      "speaker": "Paul",
+      "voice": "cedar",
+      "text": "Ja, besonders in einem kleinen Restaurant neben dem Hafen. Dort war das Essen günstiger als im Hotel.",
+      "input_hash": "3f6201657e9502c9e9cc0e4eaa253ef94ec69440e426e3a9be619bfd5cd929aa",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ja, besonders in einem kleinen Restaurant neben dem Hafen. Dort war das Essen günstiger als im Hotel.",
+      "usage": {
+        "total_tokens": 296,
+        "input_tokens": 117,
+        "output_tokens": 179,
+        "input_token_details": {
+          "text_tokens": 117,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 52,
+          "audio_tokens": 127,
+          "reasoning_tokens": 15
+        }
+      },
+      "duration_seconds": 6.35,
+      "wav_sha256": "a3f5d8b0b7550642063d9c40eb6a5b40afb3691b1572c1d9e0f41fa2c2473fc4"
+    },
+    {
+      "speaker": "Nina",
+      "voice": "marin",
+      "text": "Möchtest du noch einmal hinfahren?",
+      "input_hash": "87c770d77d015e7cfdb6690f09c25132458d3979e118e1b306a16d9bc24631a0",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Möchtest du noch einmal hinfahren?",
+      "usage": {
+        "total_tokens": 194,
+        "input_tokens": 105,
+        "output_tokens": 89,
+        "input_token_details": {
+          "text_tokens": 105,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 42,
+          "audio_tokens": 47,
+          "reasoning_tokens": 21
+        }
+      },
+      "duration_seconds": 2.35,
+      "wav_sha256": "57ff2cf4b5b4e12087547db13734a6bf713a72bc9d0887475cf10d464afe727e"
+    },
+    {
+      "speaker": "Paul",
+      "voice": "cedar",
+      "text": "Vielleicht, aber beim nächsten Mal würde ich länger bleiben.",
+      "input_hash": "1a9805ff234fee5570d29f70d33f5a4e7264b33dd835287f4c4990c758c952f8",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Vielleicht, aber beim nächsten Mal würde ich länger bleiben.",
+      "usage": {
+        "total_tokens": 206,
+        "input_tokens": 107,
+        "output_tokens": 99,
+        "input_token_details": {
+          "text_tokens": 107,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 35,
+          "audio_tokens": 64,
+          "reasoning_tokens": 10
+        }
+      },
+      "duration_seconds": 3.2,
+      "wav_sha256": "1d97a186aaf71718e70a932ed28ea42de504191a5aa2ae60d1d9d11bd90258a6"
+    },
+    {
+      "speaker": "Moderator",
+      "voice": "sage",
+      "text": "Unser Thema heute: Wie sollte die Stadt den Verkehr verbessern? Bei uns sind Frau Beck, Herr Simon und Frau Arslan.",
+      "input_hash": "7a541e28302266e76e061e8b14d0f63694ae10027079eed00e0ac49bb766ca85",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Unser Thema heute: Wie sollte die Stadt den Verkehr verbessern? Bei uns sind Frau Beck, Herr Simon und Frau Arslan.",
+      "usage": {
+        "total_tokens": 354,
+        "input_tokens": 121,
+        "output_tokens": 233,
+        "input_token_details": {
+          "text_tokens": 121,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 62,
+          "audio_tokens": 171,
+          "reasoning_tokens": 17
+        }
+      },
+      "duration_seconds": 8.55,
+      "wav_sha256": "4c03b199e2c9991c60f6d01f0295e393a980bc3ab2195e37239cc59f0c5398a3"
+    },
+    {
+      "speaker": "Frau Beck",
+      "voice": "marin",
+      "text": "Ich fahre fast jeden Tag mit dem Fahrrad. Mir fehlen sichere Radwege, besonders an großen Kreuzungen.",
+      "input_hash": "9c7feb15e1fb56cae569c796a7dcd1d3ee6ba3b776b4be0c87725c0027bd11c9",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ich fahre fast jeden Tag mit dem Fahrrad. Mir fehlen sichere Radwege, besonders an großen Kreuzungen.",
+      "usage": {
+        "total_tokens": 330,
+        "input_tokens": 118,
+        "output_tokens": 212,
+        "input_token_details": {
+          "text_tokens": 118,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 71,
+          "audio_tokens": 141,
+          "reasoning_tokens": 31
+        }
+      },
+      "duration_seconds": 7.05,
+      "wav_sha256": "61a6db79a198cd4b8c8b33bf11e33ae7923a0fca2cf2b9d752589d3f970429ea"
+    },
+    {
+      "speaker": "Herr Simon",
+      "voice": "cedar",
+      "text": "Für ältere Menschen ist der Bus wichtig. Die Busse müssten häufiger fahren, gerade am Abend.",
+      "input_hash": "c2b87a1342dbe614427a2600c8267c03e0ec2aa8b277cfb28b7970c3bd6adc8b",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Für ältere Menschen ist der Bus wichtig. Die Busse müssten häufiger fahren, gerade am Abend.",
+      "usage": {
+        "total_tokens": 321,
+        "input_tokens": 116,
+        "output_tokens": 205,
+        "input_token_details": {
+          "text_tokens": 116,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 92,
+          "audio_tokens": 113,
+          "reasoning_tokens": 56
+        }
+      },
+      "duration_seconds": 5.65,
+      "wav_sha256": "587eb5a46cb3ea681079c8df62e20dedb0db067cb1266dd58472bce19160ad03"
+    },
+    {
+      "speaker": "Frau Arslan",
+      "voice": "coral",
+      "text": "Beides ist sinnvoll. Trotzdem brauchen wir gute Verbindungen zwischen den Stadtteilen und dem Bahnhof.",
+      "input_hash": "02bed6ad765caa6447814ea6383e855d89d0c5f171c256b92d407684fd770587",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Beides ist sinnvoll. Trotzdem brauchen wir gute Verbindungen zwischen den Stadtteilen und dem Bahnhof.",
+      "usage": {
+        "total_tokens": 314,
+        "input_tokens": 115,
+        "output_tokens": 199,
+        "input_token_details": {
+          "text_tokens": 115,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 61,
+          "audio_tokens": 138,
+          "reasoning_tokens": 24
+        }
+      },
+      "duration_seconds": 6.9,
+      "wav_sha256": "3860a0e17778d3032405c6197c36741fad1d61bb31534ebe4a6a3b36e9d22a6c"
+    },
+    {
+      "speaker": "Moderator",
+      "voice": "sage",
+      "text": "Was wäre die erste Maßnahme?",
+      "input_hash": "b7e3a1de50915d78d4de814540b681c450418d4261d731050feec340fc74ae53",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Was wäre die erste Maßnahme?",
+      "usage": {
+        "total_tokens": 170,
+        "input_tokens": 103,
+        "output_tokens": 67,
+        "input_token_details": {
+          "text_tokens": 103,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 19,
+          "audio_tokens": 48
+        }
+      },
+      "duration_seconds": 2.4,
+      "wav_sha256": "1be740439e23f38975a6b8f8ac7691f16545276e2d4454a033a6b82669ea4e8a"
+    },
+    {
+      "speaker": "Frau Beck",
+      "voice": "marin",
+      "text": "Ich würde gefährliche Kreuzungen umbauen. Ein zusätzlicher Fahrradparkplatz hilft wenig, wenn der Weg dorthin unsicher ist.",
+      "input_hash": "2d8276ce23742fd09889a2a6a431208932cab02aa9898070ed93d019d3743f8e",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ich würde gefährliche Kreuzungen umbauen. Ein zusätzlicher Fahrradparkplatz hilft wenig, wenn der Weg dorthin unsicher ist.",
+      "usage": {
+        "total_tokens": 382,
+        "input_tokens": 124,
+        "output_tokens": 258,
+        "input_token_details": {
+          "text_tokens": 124,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 100,
+          "audio_tokens": 158,
+          "reasoning_tokens": 54
+        }
+      },
+      "duration_seconds": 7.9,
+      "wav_sha256": "4f29d17b389128e61f9e26fc46a636353c7371a4f1d39c9c63265f2db574ace3"
+    },
+    {
+      "speaker": "Herr Simon",
+      "voice": "cedar",
+      "text": "Ich wünsche mir vor allem verständliche Fahrpläne. Viele Informationen findet man nur im Internet.",
+      "input_hash": "79e25816ccfef2ba0234daf364ff2c428acef6da863e428e8a261db3084697e1",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ich wünsche mir vor allem verständliche Fahrpläne. Viele Informationen findet man nur im Internet.",
+      "usage": {
+        "total_tokens": 299,
+        "input_tokens": 115,
+        "output_tokens": 184,
+        "input_token_details": {
+          "text_tokens": 115,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 73,
+          "audio_tokens": 111,
+          "reasoning_tokens": 38
+        }
+      },
+      "duration_seconds": 5.55,
+      "wav_sha256": "a3093b03f0fb9e02ec3b48cbd8469a7ed2bdcd6b66e249936995961881de4756"
+    },
+    {
+      "speaker": "Frau Arslan",
+      "voice": "coral",
+      "text": "Wir sollten Fahrgäste fragen, welche Verbindungen ihnen fehlen. Ohne diese Informationen plant man vielleicht am Bedarf vorbei.",
+      "input_hash": "841b2d1c1db152cf09fb0fc6f3fa709828687658a1f70e42d755d2bf85886b05",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Wir sollten Fahrgäste fragen, welche Verbindungen ihnen fehlen. Ohne diese Informationen plant man vielleicht am Bedarf vorbei.",
+      "usage": {
+        "total_tokens": 336,
+        "input_tokens": 119,
+        "output_tokens": 217,
+        "input_token_details": {
+          "text_tokens": 119,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 56,
+          "audio_tokens": 161,
+          "reasoning_tokens": 15
+        }
+      },
+      "duration_seconds": 8.05,
+      "wav_sha256": "fc6435406aaa83b356b14b7c6ccf43ac68414ebde52bd86b7b54a12bdfa6e767"
+    },
+    {
+      "speaker": "Moderator",
+      "voice": "sage",
+      "text": "Und wer soll das bezahlen?",
+      "input_hash": "fb64ca1b2aab60fcbda65ee3f4cd27b98c2e0a5311777a0937fcd1d8c83594fe",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Und wer soll das bezahlen?",
+      "usage": {
+        "total_tokens": 163,
+        "input_tokens": 102,
+        "output_tokens": 61,
+        "input_token_details": {
+          "text_tokens": 102,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 18,
+          "audio_tokens": 43
+        }
+      },
+      "duration_seconds": 2.15,
+      "wav_sha256": "1039a9377f5f1d42d15a36397d5bf521092c5110ada0dc98b765c43eed27c1ad"
+    },
+    {
+      "speaker": "Frau Beck",
+      "voice": "marin",
+      "text": "Investitionen in sichere Wege sparen langfristig Kosten.",
+      "input_hash": "af9f668f1f8965feadd959daecca5927326cdc0db7e2c8560c36bf10f5353096",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Investitionen in sichere Wege sparen langfristig Kosten.",
+      "usage": {
+        "total_tokens": 226,
+        "input_tokens": 106,
+        "output_tokens": 120,
+        "input_token_details": {
+          "text_tokens": 106,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 40,
+          "audio_tokens": 80,
+          "reasoning_tokens": 16
+        }
+      },
+      "duration_seconds": 4.0,
+      "wav_sha256": "3a1657b6501a5236c2f11cf4b1a010ddc96b58f523521257a448b5ae1fed5406"
+    },
+    {
+      "speaker": "Herr Simon",
+      "voice": "cedar",
+      "text": "Die Fahrkarten dürfen deshalb aber nicht teurer werden.",
+      "input_hash": "184872f41c013b50d7a13aa1efa6780766db661707816cad1ff94ba2fb3b3489",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Die Fahrkarten dürfen deshalb aber nicht teurer werden.",
+      "usage": {
+        "total_tokens": 213,
+        "input_tokens": 107,
+        "output_tokens": 106,
+        "input_token_details": {
+          "text_tokens": 107,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 46,
+          "audio_tokens": 60,
+          "reasoning_tokens": 21
+        }
+      },
+      "duration_seconds": 3.0,
+      "wav_sha256": "136b40e8c9cdc6048b6dd31905e0a9d8507c509a14931cc478c945996b44389b"
+    },
+    {
+      "speaker": "Frau Arslan",
+      "voice": "coral",
+      "text": "Vielleicht können wir bestehende Angebote besser aufeinander abstimmen, statt überall neue Linien einzurichten.",
+      "input_hash": "78d2a2c1cc05a0b6148a244c539ef05ef2377a320d0571eeea79b4d8850683c8",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Vielleicht können wir bestehende Angebote besser aufeinander abstimmen, statt überall neue Linien einzurichten.",
+      "usage": {
+        "total_tokens": 339,
+        "input_tokens": 116,
+        "output_tokens": 223,
+        "input_token_details": {
+          "text_tokens": 116,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 84,
+          "audio_tokens": 139,
+          "reasoning_tokens": 46
+        }
+      },
+      "duration_seconds": 6.95,
+      "wav_sha256": "07bbfb77eb873772bffe81be12b7c236989dbfb5e392e05268c49ee3cd495aa2"
+    },
+    {
+      "speaker": "Moderator",
+      "voice": "sage",
+      "text": "Danke für Ihre Ideen.",
+      "input_hash": "733968f7f4877e8d1512fd4372af1266fda18b5f47ffb3e950c9d8bc615d90c1",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Danke für Ihre Ideen.",
+      "usage": {
+        "total_tokens": 181,
+        "input_tokens": 101,
+        "output_tokens": 80,
+        "input_token_details": {
+          "text_tokens": 101,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 44,
+          "audio_tokens": 36,
+          "reasoning_tokens": 27
+        }
+      },
+      "duration_seconds": 1.8,
+      "wav_sha256": "cbf590eeb16ab56c3b592f93bc47c141614957e9f740ba5450aa997013e7b0fc"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "coral",
+      "text": "Liebe Bewohner, am Dienstag zwischen acht und elf wird im Haus das Wasser abgestellt. Bitte füllen Sie vorher genügend Trinkwasser ab. Die Heizung funktioniert weiterhin.",
+      "input_hash": "e10fb315a3daf3a5c20c222238d307d7cf5b0ea67dca3afbc47cfb873a291108",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Liebe Bewohner, am Dienstag zwischen acht und elf wird im Haus das Wasser abgestellt. Bitte füllen Sie vorher genügend Trinkwasser ab. Die Heizung funktioniert weiterhin.",
+      "usage": {
+        "total_tokens": 439,
+        "input_tokens": 129,
+        "output_tokens": 310,
+        "input_token_details": {
+          "text_tokens": 129,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 73,
+          "audio_tokens": 237,
+          "reasoning_tokens": 18
+        }
+      },
+      "duration_seconds": 11.85,
+      "wav_sha256": "cdf0b38a0418c46fc09b70536c1412c4dc5034f2af711b00accb0f9822b5989c"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "cedar",
+      "text": "Hallo Eva, die Unterlagen für das Gespräch liegen schon auf deinem Tisch. Ich komme zehn Minuten später, weil mein Bus ausgefallen ist. Bitte beginne trotzdem pünktlich mit der Begrüßung.",
+      "input_hash": "4c03f2c3364c18792a4fcb238386c4cb7a3f79104b8656439bc7a1a5f99e4df1",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hallo Eva, die Unterlagen für das Gespräch liegen schon auf deinem Tisch. Ich komme zehn Minuten später, weil mein Bus ausgefallen ist. Bitte beginne trotzdem pünktlich mit der Begrüßung.",
+      "usage": {
+        "total_tokens": 450,
+        "input_tokens": 139,
+        "output_tokens": 311,
+        "input_token_details": {
+          "text_tokens": 139,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 92,
+          "audio_tokens": 219,
+          "reasoning_tokens": 27
+        }
+      },
+      "duration_seconds": 10.95,
+      "wav_sha256": "36f3a79ab709389d7cd7f8004e071b7d1c10c095e4df2fccaf14c64d6aba82e5"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "marin",
+      "text": "Achtung, liebe Besucher! Das Konzert auf dem Marktplatz beginnt heute wegen des starken Windes eine Stunde später. Die Stände bleiben bis 21 Uhr geöffnet. Der Eintritt ist weiterhin frei.",
+      "input_hash": "e8f3b518e6333c695b5e2cc4c56fa93ae8313ea87ae250cf3ba5975588e54435",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Achtung, liebe Besucher! Das Konzert auf dem Marktplatz beginnt heute wegen des starken Windes eine Stunde später. Die Stände bleiben bis 21 Uhr geöffnet. Der Eintritt ist weiterhin frei.",
+      "usage": {
+        "total_tokens": 475,
+        "input_tokens": 136,
+        "output_tokens": 339,
+        "input_token_details": {
+          "text_tokens": 136,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 89,
+          "audio_tokens": 250,
+          "reasoning_tokens": 26
+        }
+      },
+      "duration_seconds": 12.5,
+      "wav_sha256": "aa12edc514490b0e343d4f996b9452e56af8ad98a7888116b51a3eb52dd2278f"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Guten Tag, hier ist die Fahrradwerkstatt. Ihr Fahrrad ist repariert. Sie können es morgen ab drei abholen. Heute schaffen wir es leider nicht mehr. Bitte bringen Sie den Abholschein mit.",
+      "input_hash": "1d42366ee14d39c923a94d5096324c3ce95f1a07646819583de3360c42e09ee4",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Guten Tag, hier ist die Fahrradwerkstatt. Ihr Fahrrad ist repariert. Sie können es morgen ab drei abholen. Heute schaffen wir es leider nicht mehr. Bitte bringen Sie den Abholschein mit.",
+      "usage": {
+        "total_tokens": 542,
+        "input_tokens": 139,
+        "output_tokens": 403,
+        "input_token_details": {
+          "text_tokens": 139,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 158,
+          "audio_tokens": 245,
+          "reasoning_tokens": 93
+        }
+      },
+      "duration_seconds": 12.25,
+      "wav_sha256": "ed468c28d7ce37936dc5dbb2178291ffc1c9a26b2a12bf8823b8bffa5dd623f2"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "coral",
+      "text": "Hallo David, wir feiern meinen Geburtstag am Freitag diesmal nicht zu Hause, sondern im Gemeinschaftsraum unseres Hauses. Bitte komm um 19 Uhr. Du brauchst nichts zu essen mitzubringen.",
+      "input_hash": "cd615511fda24786f815f07905ba0f00ec8ebee1b45c47b7047f04fbec4a084d",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hallo David, wir feiern meinen Geburtstag am Freitag diesmal nicht zu Hause, sondern im Gemeinschaftsraum unseres Hauses. Bitte komm um 19 Uhr. Du brauchst nichts zu essen mitzubringen.",
+      "usage": {
+        "total_tokens": 453,
+        "input_tokens": 134,
+        "output_tokens": 319,
+        "input_token_details": {
+          "text_tokens": 134,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 60,
+          "audio_tokens": 259
+        }
+      },
+      "duration_seconds": 12.95,
+      "wav_sha256": "94c1f90696b7429f174bfd1f845d2c5e8beef8119fd1866aa99e7affff7cc015"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Guten Abend, schön, dass Sie zu unserem Informationsabend gekommen sind. Heute geht es um Möglichkeiten, zu Hause Energie zu sparen. Ich beginne mit der Heizung: Schon ein Grad weniger Raumtemperatur kann den Verbrauch senken. Wichtig ist aber, regelmäßig kurz und kräftig zu lüften statt Fenster den ganzen Tag gekippt zu lassen. Ab nächster Woche können Sie im Bürgerbüro kostenlos ein Messgerät ausleihen, mit dem sich der Stromverbrauch von Haushaltsgeräten feststellen lässt.",
+      "input_hash": "9c767efafd6408603ccbc07569e90e7df0d008ec24bff1ea3a964d21906a3419",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Guten Abend, schön, dass Sie zu unserem Informationsabend gekommen sind. Heute geht es um Möglichkeiten, zu Hause Energie zu sparen. Ich beginne mit der Heizung: Schon ein Grad weniger Raumtemperatur kann den Verbrauch senken. Wichtig ist aber, regelmäßig kurz und kräftig zu lüften statt Fenster den ganzen Tag gekippt zu lassen. Ab nächster Woche können Sie im Bürgerbüro kostenlos ein Messgerät ausleihen, mit dem sich der Stromverbrauch von Haushaltsgeräten feststellen lässt.",
+      "usage": {
+        "total_tokens": 992,
+        "input_tokens": 200,
+        "output_tokens": 792,
+        "input_token_details": {
+          "text_tokens": 200,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 178,
+          "audio_tokens": 614,
+          "reasoning_tokens": 36
+        }
+      },
+      "duration_seconds": 30.7,
+      "wav_sha256": "c9f768f62774c430cb19b2ac15661a9526409c86ca2b90a85bc4b7b62b7f8361"
+    },
+    {
+      "speaker": "Narrator",
+      "voice": "sage",
+      "text": "Das Gerät dürfen Sie maximal sieben Tage behalten. Für Fragen zu neuen Fenstern und zur Dämmung gibt es im November zusätzliche Beratungstermine. Diese müssen Sie vorher online buchen. Unser Informationsmaterial liegt hinten neben der Tür aus. Der Vortrag dauert etwa eine halbe Stunde. Danach können Sie an drei Stationen praktische Beispiele ansehen. Die Veranstaltung ist kostenlos, Getränke im Café bezahlen Sie bitte selbst.",
+      "input_hash": "dd82a74ca62661536dc58213c4c730659cbc95c01caccfe99c4dbca62207f7fe",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Das Gerät dürfen Sie maximal sieben Tage behalten. Für Fragen zu neuen Fenstern und zur Dämmung gibt es im November zusätzliche Beratungstermine. Diese müssen Sie vorher online buchen. Unser Informationsmaterial liegt hinten neben der Tür aus. Der Vortrag dauert etwa eine halbe Stunde. Danach können Sie an drei Stationen praktische Beispiele ansehen. Die Veranstaltung ist kostenlos, Getränke im Café bezahlen Sie bitte selbst.",
+      "usage": {
+        "total_tokens": 903,
+        "input_tokens": 175,
+        "output_tokens": 728,
+        "input_token_details": {
+          "text_tokens": 175,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 144,
+          "audio_tokens": 584,
+          "reasoning_tokens": 27
+        }
+      },
+      "duration_seconds": 29.2,
+      "wav_sha256": "fadfb81572f15f3bf88aaf6d0e7205704ad150acb766bb91ee37e9e769aadeec"
+    },
+    {
+      "speaker": "Tobias",
+      "voice": "cedar",
+      "text": "Hallo Sarah, wie läuft es in deinem neuen Job?",
+      "input_hash": "323cf6b1717e30d337b198fb2b87a3c3bdc41f7e54f5cf2a9687d036e9f40af6",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hallo Sarah, wie läuft es in deinem neuen Job?",
+      "usage": {
+        "total_tokens": 201,
+        "input_tokens": 107,
+        "output_tokens": 94,
+        "input_token_details": {
+          "text_tokens": 107,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 36,
+          "audio_tokens": 58,
+          "reasoning_tokens": 11
+        }
+      },
+      "duration_seconds": 2.9,
+      "wav_sha256": "bc5f4320e7385b5bb35317337acb0d90fa70a1d49e2937fb476c9af4dd2184ca"
+    },
+    {
+      "speaker": "Sarah",
+      "voice": "marin",
+      "text": "Gut, aber die erste Woche war anstrengend. Ich musste viele neue Programme kennenlernen.",
+      "input_hash": "697a1f79d19f0f307edc70a85927cf99c554de03e8d6c321ae54421231e62773",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Gut, aber die erste Woche war anstrengend. Ich musste viele neue Programme kennenlernen.",
+      "usage": {
+        "total_tokens": 284,
+        "input_tokens": 114,
+        "output_tokens": 170,
+        "input_token_details": {
+          "text_tokens": 114,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 54,
+          "audio_tokens": 116,
+          "reasoning_tokens": 20
+        }
+      },
+      "duration_seconds": 5.8,
+      "wav_sha256": "5f3a2ca8be8efd4d010a564656fb3a0052bcd1a545816fcb9b41f08c63c310bb"
+    },
+    {
+      "speaker": "Tobias",
+      "voice": "cedar",
+      "text": "Arbeitest du jetzt immer im Büro?",
+      "input_hash": "8b9480d850ed0260f6ce142b6c2b88abe1c50d839b95753051cae0f9ac25ba32",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Arbeitest du jetzt immer im Büro?",
+      "usage": {
+        "total_tokens": 209,
+        "input_tokens": 105,
+        "output_tokens": 104,
+        "input_token_details": {
+          "text_tokens": 105,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 53,
+          "audio_tokens": 51,
+          "reasoning_tokens": 32
+        }
+      },
+      "duration_seconds": 2.55,
+      "wav_sha256": "e2960cacd0b7a080f07fc2042602fc2792af3885347060969c0cbd1cd2769c1e"
+    },
+    {
+      "speaker": "Sarah",
+      "voice": "marin",
+      "text": "Nein, montags und freitags kann ich von zu Hause arbeiten. Die anderen Tage treffe ich mein Team im Büro.",
+      "input_hash": "ce84f8bc729d78fa811bd7db0b3d1733cc588a4d1597cd9d8355dff9027ec39b",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Nein, montags und freitags kann ich von zu Hause arbeiten. Die anderen Tage treffe ich mein Team im Büro.",
+      "usage": {
+        "total_tokens": 312,
+        "input_tokens": 122,
+        "output_tokens": 190,
+        "input_token_details": {
+          "text_tokens": 122,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 55,
+          "audio_tokens": 135,
+          "reasoning_tokens": 11
+        }
+      },
+      "duration_seconds": 6.75,
+      "wav_sha256": "750c7d504860ac65962cc569bfcfd5f9c1d4e192427eb2ed3339173274e28c56"
+    },
+    {
+      "speaker": "Tobias",
+      "voice": "cedar",
+      "text": "Ist der Arbeitsweg länger als früher?",
+      "input_hash": "bd582e7bf4967c300c7568bda52c56f97e528532993b9de6d0d6506fcf287168",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ist der Arbeitsweg länger als früher?",
+      "usage": {
+        "total_tokens": 193,
+        "input_tokens": 104,
+        "output_tokens": 89,
+        "input_token_details": {
+          "text_tokens": 104,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 39,
+          "audio_tokens": 50,
+          "reasoning_tokens": 19
+        }
+      },
+      "duration_seconds": 2.5,
+      "wav_sha256": "f002d2bfaee937b9f7f188a17ef55d98d03a6c458a32a6904c8689d38ba5d1a8"
+    },
+    {
+      "speaker": "Sarah",
+      "voice": "marin",
+      "text": "Mit dem Zug dauert er nur zwanzig Minuten. Mit dem Auto wäre es länger, weil es so viele Baustellen gibt.",
+      "instructions": "Du bist ein Sprecher fuer deutsche Hoeruebungen auf Niveau A2 bis B1. Lies ausschliesslich den vom Nutzer gelieferten Text wortgetreu auf Deutsch vor. Keine Einleitung, keine Antwort, keine Erklaerung, nichts hinzufuegen oder auslassen. Sprich klar, natuerlich und in gemaessigtem Lerntempo. Sprich Zahlen und Uhrzeiten passend auf Deutsch aus. Behalte exakt die Formulierung 'dauert er'. Korrigiere keine Grammatik.",
+      "input_hash": "50728a142518a753ff1c3f0a7710b50af04f90a0ffc73bbaee2e9ce07897c49d",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Mit dem Zug dauert er nur zwanzig Minuten. Mit dem Auto wäre es länger, weil es so viele Baustellen gibt.",
+      "usage": {
+        "total_tokens": 392,
+        "input_tokens": 143,
+        "output_tokens": 249,
+        "input_token_details": {
+          "text_tokens": 143,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 112,
+          "audio_tokens": 137,
+          "reasoning_tokens": 68
+        }
+      },
+      "duration_seconds": 6.85,
+      "wav_sha256": "4aa573ce45336807f4f99fbf6c91b136a9e92b0c26ec7c5cafb248935c314014"
+    },
+    {
+      "speaker": "Tobias",
+      "voice": "cedar",
+      "text": "Hast du nette Kollegen?",
+      "input_hash": "00781687098db50526e079b8a25f6086d8a3f08eba95ccdeade4850a31323466",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hast du nette Kollegen?",
+      "usage": {
+        "total_tokens": 170,
+        "input_tokens": 102,
+        "output_tokens": 68,
+        "input_token_details": {
+          "text_tokens": 102,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 41,
+          "audio_tokens": 27,
+          "reasoning_tokens": 25
+        }
+      },
+      "duration_seconds": 1.35,
+      "wav_sha256": "d961f82c900418235c789597e0ba58d5b23c6f3fd08270aff6ba755f93dad8c5"
+    },
+    {
+      "speaker": "Sarah",
+      "voice": "marin",
+      "text": "Ja. Eine Kollegin hat mir sogar ihre Notizen gegeben, damit ich mich schneller einarbeiten kann.",
+      "input_hash": "80740ae4a662daece7e0f418ca05430ba6e690c63513e571d574ade3c78a3291",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ja. Eine Kollegin hat mir sogar ihre Notizen gegeben, damit ich mich schneller einarbeiten kann.",
+      "usage": {
+        "total_tokens": 318,
+        "input_tokens": 117,
+        "output_tokens": 201,
+        "input_token_details": {
+          "text_tokens": 117,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 84,
+          "audio_tokens": 117,
+          "reasoning_tokens": 47
+        }
+      },
+      "duration_seconds": 5.85,
+      "wav_sha256": "853171ee759f00e829073ca18deffa73a14e8b98a42666b54252c6fc06f9dffa"
+    },
+    {
+      "speaker": "Tobias",
+      "voice": "cedar",
+      "text": "Und wie sind die Arbeitszeiten?",
+      "input_hash": "ab0d5a435901e5ab565c0c77a4442c51e925a7a1810aa2f1e565a8d55fc9a6f6",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Und wie sind die Arbeitszeiten?",
+      "usage": {
+        "total_tokens": 174,
+        "input_tokens": 103,
+        "output_tokens": 71,
+        "input_token_details": {
+          "text_tokens": 103,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 34,
+          "audio_tokens": 37,
+          "reasoning_tokens": 15
+        }
+      },
+      "duration_seconds": 1.85,
+      "wav_sha256": "4992475ecab9591d65e5848a96443247cc0bcb67868e23726552f139565ad3dd"
+    },
+    {
+      "speaker": "Sarah",
+      "voice": "marin",
+      "text": "Wir können zwischen sieben und neun anfangen. Dafür müssen wir unsere Termine gut abstimmen.",
+      "input_hash": "a821c69b0be566402ae75844e7a25c9beb8aef667a6c9d36650733b42eef78e9",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Wir können zwischen sieben und neun anfangen. Dafür müssen wir unsere Termine gut abstimmen.",
+      "usage": {
+        "total_tokens": 316,
+        "input_tokens": 113,
+        "output_tokens": 203,
+        "input_token_details": {
+          "text_tokens": 113,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 82,
+          "audio_tokens": 121,
+          "reasoning_tokens": 49
+        }
+      },
+      "duration_seconds": 6.05,
+      "wav_sha256": "dae3173bb34db14f81442166deb8262d06b267257795c01d1d6050588435cf76"
+    },
+    {
+      "speaker": "Tobias",
+      "voice": "cedar",
+      "text": "Gibt es auch Fortbildungen?",
+      "input_hash": "66f87df74638cb0acb6a7203c85bd9397a6b0d9771a3033d25b52dfc7b645f93",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Gibt es auch Fortbildungen?",
+      "usage": {
+        "total_tokens": 183,
+        "input_tokens": 104,
+        "output_tokens": 79,
+        "input_token_details": {
+          "text_tokens": 104,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 38,
+          "audio_tokens": 41,
+          "reasoning_tokens": 20
+        }
+      },
+      "duration_seconds": 2.05,
+      "wav_sha256": "0bff3f9a3b54e7967d7669d4e1eb10fba8dacc579d139470a2cb5f487152372a"
+    },
+    {
+      "speaker": "Sarah",
+      "voice": "marin",
+      "text": "Ja, im nächsten Monat besuche ich einen Kurs zum Projektmanagement. Mein Arbeitgeber übernimmt die Kosten.",
+      "input_hash": "5ae3542abf7317cf6e724cd8f4b87d93779218618b316d30dfff5e40535ff039",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ja, im nächsten Monat besuche ich einen Kurs zum Projektmanagement. Mein Arbeitgeber übernimmt die Kosten.",
+      "usage": {
+        "total_tokens": 329,
+        "input_tokens": 116,
+        "output_tokens": 213,
+        "input_token_details": {
+          "text_tokens": 116,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 73,
+          "audio_tokens": 140,
+          "reasoning_tokens": 35
+        }
+      },
+      "duration_seconds": 7.0,
+      "wav_sha256": "53b370081b3a9d0c6e06eecbce637ce89805c650fb8e0fdc9279ee7c6f64a8dc"
+    },
+    {
+      "speaker": "Tobias",
+      "voice": "cedar",
+      "text": "Klingt nach einem guten Start.",
+      "input_hash": "b2ecfb7c69196db3ca0ab33e68efde4209ef343474615e180f58d187db361055",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Klingt nach einem guten Start.",
+      "usage": {
+        "total_tokens": 176,
+        "input_tokens": 104,
+        "output_tokens": 72,
+        "input_token_details": {
+          "text_tokens": 104,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 38,
+          "audio_tokens": 34,
+          "reasoning_tokens": 20
+        }
+      },
+      "duration_seconds": 1.7,
+      "wav_sha256": "3ff881e1adb199e38b158f6472da397907cb2828123425bfff978be733416835"
+    },
+    {
+      "speaker": "Sarah",
+      "voice": "marin",
+      "text": "Das finde ich auch. Nur an die neue Software muss ich mich noch gewöhnen.",
+      "input_hash": "cac29c5102c4b1528e4fd1d976aaa6a36e08dd47edeb5dce451403617dd0e7b8",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Das finde ich auch. Nur an die neue Software muss ich mich noch gewöhnen.",
+      "usage": {
+        "total_tokens": 230,
+        "input_tokens": 113,
+        "output_tokens": 117,
+        "input_token_details": {
+          "text_tokens": 113,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 31,
+          "audio_tokens": 86
+        }
+      },
+      "duration_seconds": 4.3,
+      "wav_sha256": "ceb4ff8e00299ceaf2a2b281adadb0dd7ae19066d4b65991f070fdd67e81c448"
+    },
+    {
+      "speaker": "Moderatorin",
+      "voice": "sage",
+      "text": "Wir sprechen heute über Gemeinschaftsgärten in der Stadt. Zu Gast sind Frau Lange, Herr Weber und Frau Demir.",
+      "input_hash": "71c41543251abd98d56d8f07bc42defb144af0cc6fecdf32e4e675bd32003536",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Wir sprechen heute über Gemeinschaftsgärten in der Stadt. Zu Gast sind Frau Lange, Herr Weber und Frau Demir.",
+      "usage": {
+        "total_tokens": 356,
+        "input_tokens": 120,
+        "output_tokens": 236,
+        "input_token_details": {
+          "text_tokens": 120,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 81,
+          "audio_tokens": 155,
+          "reasoning_tokens": 39
+        }
+      },
+      "duration_seconds": 7.75,
+      "wav_sha256": "d5cf07791aa9344cb611d777d988843c5c407bd224d3336ab8274aef6e012b63"
+    },
+    {
+      "speaker": "Frau Lange",
+      "voice": "marin",
+      "text": "In unserem Garten lernen die Nachbarn einander kennen. Besonders schön finde ich, dass Kinder dort Gemüse anbauen können.",
+      "input_hash": "fea738b539dde923b16c4c1bbbcf4f150e3f00ef2213cc10373b666b6a5d7796",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "In unserem Garten lernen die Nachbarn einander kennen. Besonders schön finde ich, dass Kinder dort Gemüse anbauen können.",
+      "usage": {
+        "total_tokens": 381,
+        "input_tokens": 120,
+        "output_tokens": 261,
+        "input_token_details": {
+          "text_tokens": 120,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 105,
+          "audio_tokens": 156,
+          "reasoning_tokens": 62
+        }
+      },
+      "duration_seconds": 7.8,
+      "wav_sha256": "8f9ee383e9035b2c36f87b6ba1b32b82a5208fbc6875fbe1782636ab76ac45c0"
+    },
+    {
+      "speaker": "Herr Weber",
+      "voice": "cedar",
+      "text": "Mir gefällt die Idee, aber ich frage mich, wer die Pflege übernimmt. Ohne feste Regeln bleibt am Ende alles an wenigen Menschen hängen.",
+      "input_hash": "8cb59b65076aa3e7a02e65a359319c16436c914c34c223af1e195379efae5c9d",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Mir gefällt die Idee, aber ich frage mich, wer die Pflege übernimmt. Ohne feste Regeln bleibt am Ende alles an wenigen Menschen hängen.",
+      "usage": {
+        "total_tokens": 351,
+        "input_tokens": 123,
+        "output_tokens": 228,
+        "input_token_details": {
+          "text_tokens": 123,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 62,
+          "audio_tokens": 166,
+          "reasoning_tokens": 17
+        }
+      },
+      "duration_seconds": 8.3,
+      "wav_sha256": "2f4cdbfd738b325130776b2c225c952b27acef4bc0b68d10e7071ebbb2248ead"
+    },
+    {
+      "speaker": "Frau Demir",
+      "voice": "coral",
+      "text": "Solche Gärten sind außerdem gut für die Umwelt. Sie bieten Insekten Lebensraum und machen manche Plätze im Sommer angenehmer.",
+      "input_hash": "549508c6f0786a2f6570bdde75271d67276ab48f2fae39f7d3a5ec57783f07ed",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Solche Gärten sind außerdem gut für die Umwelt. Sie bieten Insekten Lebensraum und machen manche Plätze im Sommer angenehmer.",
+      "usage": {
+        "total_tokens": 349,
+        "input_tokens": 124,
+        "output_tokens": 225,
+        "input_token_details": {
+          "text_tokens": 124,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 61,
+          "audio_tokens": 164,
+          "reasoning_tokens": 15
+        }
+      },
+      "duration_seconds": 8.2,
+      "wav_sha256": "97c4f0eef5ec5163b8720d6367c63fb4606fd15e16f2741ac55b0d90d019138d"
+    },
+    {
+      "speaker": "Moderatorin",
+      "voice": "sage",
+      "text": "Was brauchen neue Projekte?",
+      "input_hash": "d8d6b01617ca378b61c9f9597e3bd7bb9c8776f778fe3140af3765e949039cc5",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Was brauchen neue Projekte?",
+      "usage": {
+        "total_tokens": 186,
+        "input_tokens": 101,
+        "output_tokens": 85,
+        "input_token_details": {
+          "text_tokens": 101,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 40,
+          "audio_tokens": 45,
+          "reasoning_tokens": 23
+        }
+      },
+      "duration_seconds": 2.25,
+      "wav_sha256": "8b372ca5683279a73cfbe87720703d2347bb6b00d42cb1d65818f47395d92c2b"
+    },
+    {
+      "speaker": "Frau Lange",
+      "voice": "marin",
+      "text": "Vor allem Menschen, die gemeinsam beginnen möchten. Man muss nicht alles perfekt planen.",
+      "input_hash": "3982e380035adc8ba6baa4e77b976479fdf26cf1368ac24c3e56cba9dd4c2aa4",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Vor allem Menschen, die gemeinsam beginnen möchten. Man muss nicht alles perfekt planen.",
+      "usage": {
+        "total_tokens": 287,
+        "input_tokens": 112,
+        "output_tokens": 175,
+        "input_token_details": {
+          "text_tokens": 112,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 0,
+          "cached_tokens_details": {
+            "text_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 72,
+          "audio_tokens": 103,
+          "reasoning_tokens": 40
+        }
+      },
+      "duration_seconds": 5.15,
+      "wav_sha256": "b5fbd08406fe1d42105392b6e9483dd5beb2b3afd4a18114ea00f6411e8c2bdc"
+    },
+    {
+      "speaker": "Herr Weber",
+      "voice": "cedar",
+      "text": "Ich sehe das anders. Schon am Anfang sollte klar sein, wer gießt und wer die Geräte verwaltet.",
+      "input_hash": "455ee912c8162fc861e8e53575bd9bb3796b74fce0f11b3cb710ec93ddcde6ca",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ich sehe das anders. Schon am Anfang sollte klar sein, wer gießt und wer die Geräte verwaltet.",
+      "usage": {
+        "total_tokens": 275,
+        "input_tokens": 118,
+        "output_tokens": 157,
+        "input_token_details": {
+          "text_tokens": 118,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 55,
+          "audio_tokens": 102,
+          "reasoning_tokens": 17
+        }
+      },
+      "duration_seconds": 5.1,
+      "wav_sha256": "24d6de522d6a86d487ef0169b3804ea7616f8b49ff013d374bfaf870cbdd457d"
+    },
+    {
+      "speaker": "Frau Demir",
+      "voice": "coral",
+      "text": "Die Stadt könnte Wasseranschlüsse bereitstellen. Viele Gruppen können solche Kosten allein nicht tragen.",
+      "input_hash": "40d8050a40a1c3084fbce23f665937516379f9857ffed3b057e7c09622dfb5c0",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Die Stadt könnte Wasseranschlüsse bereitstellen. Viele Gruppen können solche Kosten allein nicht tragen.",
+      "usage": {
+        "total_tokens": 307,
+        "input_tokens": 114,
+        "output_tokens": 193,
+        "input_token_details": {
+          "text_tokens": 114,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 60,
+          "audio_tokens": 133,
+          "reasoning_tokens": 24
+        }
+      },
+      "duration_seconds": 6.65,
+      "wav_sha256": "79cea0e2aa8a54395007037f93c774400c56d368e989045c1bf3a05e2fda4a30"
+    },
+    {
+      "speaker": "Moderatorin",
+      "voice": "sage",
+      "text": "Und wenn Nachbarn wenig Zeit haben?",
+      "input_hash": "0198746a4481b53333faf2484c0b23f69c96d53ccd3f674083915faa3e78ee9c",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Und wenn Nachbarn wenig Zeit haben?",
+      "usage": {
+        "total_tokens": 203,
+        "input_tokens": 104,
+        "output_tokens": 99,
+        "input_token_details": {
+          "text_tokens": 104,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 53,
+          "audio_tokens": 46,
+          "reasoning_tokens": 33
+        }
+      },
+      "duration_seconds": 2.3,
+      "wav_sha256": "dad6b61e7c7172ebe46543070540c55330f98c7362ca688a3018d3c4427252f9"
+    },
+    {
+      "speaker": "Frau Lange",
+      "voice": "marin",
+      "text": "Auch kleine Beiträge helfen. Man kann vielleicht einmal im Monat teilnehmen.",
+      "input_hash": "4dceebad3d61b66e8d2746f13ab58bbbbcd102bd679eba4dc20e77a0a963d570",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Auch kleine Beiträge helfen. Man kann vielleicht einmal im Monat teilnehmen.",
+      "usage": {
+        "total_tokens": 274,
+        "input_tokens": 109,
+        "output_tokens": 165,
+        "input_token_details": {
+          "text_tokens": 109,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 76,
+          "audio_tokens": 89,
+          "reasoning_tokens": 47
+        }
+      },
+      "duration_seconds": 4.45,
+      "wav_sha256": "dddcceef14cb7049f1d9f2c3d18ad94f4a0c22baccbb49ea01449eec84b91617"
+    },
+    {
+      "speaker": "Herr Weber",
+      "voice": "cedar",
+      "text": "Solange verbindlich vereinbart ist, wer welche Arbeit macht.",
+      "input_hash": "7a7735fb097262d74359d4682f5ae67f8354a9e91d213b4150b749562c4e6de5",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Solange verbindlich vereinbart ist, wer welche Arbeit macht.",
+      "usage": {
+        "total_tokens": 239,
+        "input_tokens": 109,
+        "output_tokens": 130,
+        "input_token_details": {
+          "text_tokens": 109,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 61,
+          "audio_tokens": 69,
+          "reasoning_tokens": 34
+        }
+      },
+      "duration_seconds": 3.45,
+      "wav_sha256": "e86d83512c03127de5528d297cedb3d48d8676c5d1be3c4812404838ef31852b"
+    },
+    {
+      "speaker": "Frau Demir",
+      "voice": "coral",
+      "text": "Ich wünsche mir, dass noch mehr ungenutzte Flächen dafür geöffnet werden.",
+      "input_hash": "4ebeb8671fea2d64453dfba9de25f63ebfdd774feff294a84c667ebd44ec532c",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ich wünsche mir, dass noch mehr ungenutzte Flächen dafür geöffnet werden.",
+      "usage": {
+        "total_tokens": 254,
+        "input_tokens": 113,
+        "output_tokens": 141,
+        "input_token_details": {
+          "text_tokens": 113,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 49,
+          "audio_tokens": 92,
+          "reasoning_tokens": 16
+        }
+      },
+      "duration_seconds": 4.6,
+      "wav_sha256": "0458f61bbc5f5fde360bc3eb245fa2e320bdb00f346217dbe0fb652a17bc7307"
+    },
+    {
+      "speaker": "Moderatorin",
+      "voice": "sage",
+      "text": "Vielen Dank für das Gespräch.",
+      "input_hash": "9c4a253c3dde5d27d0ccb25f128b4df3753eba7a5f6d13ca2b9c41a3df934a5c",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Vielen Dank für das Gespräch.",
+      "usage": {
+        "total_tokens": 184,
+        "input_tokens": 102,
+        "output_tokens": 82,
+        "input_token_details": {
+          "text_tokens": 102,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 40,
+          "audio_tokens": 42,
+          "reasoning_tokens": 22
+        }
+      },
+      "duration_seconds": 2.1,
+      "wav_sha256": "6dbbfb59f97e584de50481ce48f2f455dde359992e94e440cf47167a888f3680"
+    },
+    {
+      "speaker": "Alex",
+      "voice": "marin",
+      "text": "Hast du am Sonntag Zeit?",
+      "input_hash": "67fa7a3af8f8b4a6be6e1da536d2b9372560aa1e32c9fa2ff612f29bea990096",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hast du am Sonntag Zeit?",
+      "usage": {
+        "total_tokens": 200,
+        "input_tokens": 103,
+        "output_tokens": 97,
+        "input_token_details": {
+          "text_tokens": 103,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 56,
+          "audio_tokens": 41,
+          "reasoning_tokens": 37
+        }
+      },
+      "duration_seconds": 2.05,
+      "wav_sha256": "9a1376f7ceeb9d2eaca44baeba16144b56cbc9b8a82d7a9341d24d450f82fe29"
+    },
+    {
+      "speaker": "Sam",
+      "voice": "cedar",
+      "text": "Ja, am Nachmittag. Wollen wir im Park spazieren gehen?",
+      "input_hash": "a6bd8e4398f224964ac4be45bbd25d899433ad8daf0783c913fd0a9006509c57",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Ja, am Nachmittag. Wollen wir im Park spazieren gehen?",
+      "usage": {
+        "total_tokens": 229,
+        "input_tokens": 110,
+        "output_tokens": 119,
+        "input_token_details": {
+          "text_tokens": 110,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 43,
+          "audio_tokens": 76,
+          "reasoning_tokens": 15
+        }
+      },
+      "duration_seconds": 3.8,
+      "wav_sha256": "c6d513e3876ae7eb625fb09caa4af1b8d1781d95587dcd10d2ce47a425233e08"
+    },
+    {
+      "speaker": "Alex",
+      "voice": "marin",
+      "text": "Gern. Treffen wir uns um halb drei?",
+      "input_hash": "9a70048c3879f51e44d72fe32fb399a076369a8e3d412f9f9d8998cd716a5d83",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Gern. Treffen wir uns um halb drei?",
+      "usage": {
+        "total_tokens": 209,
+        "input_tokens": 106,
+        "output_tokens": 103,
+        "input_token_details": {
+          "text_tokens": 106,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 40,
+          "audio_tokens": 63,
+          "reasoning_tokens": 18
+        }
+      },
+      "duration_seconds": 3.15,
+      "wav_sha256": "5e82f8c52fdded8a6a207ea0c1995b2d0960ac2c15da024b7d944b596961e0c7"
+    },
+    {
+      "speaker": "Sam",
+      "voice": "cedar",
+      "text": "Lieber um drei. Ich esse vorher noch zu Mittag.",
+      "input_hash": "dae6c089344a26e76652c8972f0c66e6d7427187f343b5e7a8b9eb9259a28895",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Lieber um drei. Ich esse vorher noch zu Mittag.",
+      "usage": {
+        "total_tokens": 232,
+        "input_tokens": 108,
+        "output_tokens": 124,
+        "input_token_details": {
+          "text_tokens": 108,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 60,
+          "audio_tokens": 64,
+          "reasoning_tokens": 34
+        }
+      },
+      "duration_seconds": 3.2,
+      "wav_sha256": "0849823671343bd04f22cea4844e83145d4303222f20881c5b88c9fe8206d96f"
+    },
+    {
+      "speaker": "Alex",
+      "voice": "marin",
+      "text": "Gut, dann um drei am Eingang zum Park.",
+      "input_hash": "7233a979351e97f1656929a1cd4aa05ab3ef84fe98eb57e178809fa0d7ce5500",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Gut, dann um drei am Eingang zum Park.",
+      "usage": {
+        "total_tokens": 200,
+        "input_tokens": 106,
+        "output_tokens": 94,
+        "input_token_details": {
+          "text_tokens": 106,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 39,
+          "audio_tokens": 55,
+          "reasoning_tokens": 17
+        }
+      },
+      "duration_seconds": 2.75,
+      "wav_sha256": "827b1cef21e0717db77d528f07a5179e733ece11491ae5aa537e3b34b7ffade3"
+    },
+    {
+      "speaker": "Sam",
+      "voice": "cedar",
+      "text": "Abgemacht! Bis Sonntag.",
+      "input_hash": "c9d9a383e19cfb97ea87bc65cc39a56d145658cb51df1985be546ce43ca6ff48",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Abgemacht! Bis Sonntag.",
+      "usage": {
+        "total_tokens": 191,
+        "input_tokens": 103,
+        "output_tokens": 88,
+        "input_token_details": {
+          "text_tokens": 103,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 48,
+          "audio_tokens": 40,
+          "reasoning_tokens": 29
+        }
+      },
+      "duration_seconds": 2.0,
+      "wav_sha256": "ba21b6d6d8d5c3aa778233659a4fa72b1890686f08f9f48c4674bda4dc50acfa"
+    },
+    {
+      "speaker": "Alex",
+      "voice": "marin",
+      "text": "Hast du am Sonntag",
+      "input_hash": "de55a8fd9997748076967571efd49587de24c284334bf3e37ffe6216cc0b75f6",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Hast du am Sonntag",
+      "usage": {
+        "total_tokens": 181,
+        "input_tokens": 101,
+        "output_tokens": 80,
+        "input_token_details": {
+          "text_tokens": 101,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 49,
+          "audio_tokens": 31,
+          "reasoning_tokens": 34
+        }
+      },
+      "duration_seconds": 1.55,
+      "wav_sha256": "53c5290f31d7878222ef1f8b83923c403309cc943a6d7dde4987c0a521883a49"
+    },
+    {
+      "speaker": "Alex",
+      "voice": "marin",
+      "text": "Zeit?",
+      "input_hash": "15c673694d861dd15caae9215f9e73af9ed0d851f70cf3a62a9c84eeaba6e889",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Zeit?",
+      "usage": {
+        "total_tokens": 149,
+        "input_tokens": 98,
+        "output_tokens": 51,
+        "input_token_details": {
+          "text_tokens": 98,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 36,
+          "audio_tokens": 15,
+          "reasoning_tokens": 26
+        }
+      },
+      "duration_seconds": 0.75,
+      "wav_sha256": "e676a72630cf7be68c14581a050ace4a637a568afad7946a53fb521f92dd5d40"
+    },
+    {
+      "speaker": "Alex",
+      "voice": "marin",
+      "text": "Gern. Treffen wir uns",
+      "input_hash": "ec16ff3de4383836adca4ed3049a20634555ea9c99e906b8425211b19b1e1a0c",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Gern. Treffen wir uns",
+      "usage": {
+        "total_tokens": 202,
+        "input_tokens": 102,
+        "output_tokens": 100,
+        "input_token_details": {
+          "text_tokens": 102,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 64,
+          "audio_tokens": 36,
+          "reasoning_tokens": 46
+        }
+      },
+      "duration_seconds": 1.8,
+      "wav_sha256": "70f14acb36850e8b91bb654f462b7b07926e1e0e03a508bcc7127398bec960cb"
+    },
+    {
+      "speaker": "Alex",
+      "voice": "marin",
+      "text": "um halb drei?",
+      "input_hash": "46b9d3f1a88a739d639a56bc7535c8400c88d10d943c5eca206fdfda03266b82",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "um halb drei?",
+      "usage": {
+        "total_tokens": 177,
+        "input_tokens": 100,
+        "output_tokens": 77,
+        "input_token_details": {
+          "text_tokens": 100,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 49,
+          "audio_tokens": 28,
+          "reasoning_tokens": 35
+        }
+      },
+      "duration_seconds": 1.4,
+      "wav_sha256": "ea3ec346926fd67de8f7f1b2d47bb72ce12ea06e9eec05e41b7723d90a2d3055"
+    },
+    {
+      "speaker": "Alex",
+      "voice": "marin",
+      "text": "Gut, dann um drei",
+      "input_hash": "8b941fc4ab441684d7142cf83fbd8d37dfb092fc6d5b75227809a3d7f8aadd88",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "Gut, dann um drei.",
+      "usage": {
+        "total_tokens": 184,
+        "input_tokens": 101,
+        "output_tokens": 83,
+        "input_token_details": {
+          "text_tokens": 101,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 40,
+          "audio_tokens": 43,
+          "reasoning_tokens": 22
+        }
+      },
+      "duration_seconds": 2.15,
+      "wav_sha256": "ac6ee6a7eddbbca5a221eef43a1ec8c6d1307dbc90e253493f8d523656b3bbb3"
+    },
+    {
+      "speaker": "Alex",
+      "voice": "marin",
+      "text": "am Eingang zum Park.",
+      "input_hash": "9406b625af414ba1c0dc4feb94892ff0ac85d1022a1f61b85b48023ad1bc36aa",
+      "model": "gpt-realtime-2.1-mini",
+      "transcript": "am Eingang zum Park.",
+      "usage": {
+        "total_tokens": 176,
+        "input_tokens": 101,
+        "output_tokens": 75,
+        "input_token_details": {
+          "text_tokens": 101,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "cached_tokens": 64,
+          "cached_tokens_details": {
+            "text_tokens": 64,
+            "audio_tokens": 0,
+            "image_tokens": 0
+          }
+        },
+        "output_token_details": {
+          "text_tokens": 40,
+          "audio_tokens": 35,
+          "reasoning_tokens": 23
+        }
+      },
+      "duration_seconds": 1.75,
+      "wav_sha256": "48628e8090894f4fbf3040a46b9cee7f42dd74d3b986de018092b789d79371a0"
+    }
+  ],
+  "status": "completed",
+  "files": [
+    {
+      "path": "public/audio/goethe-b1/segment-0.mp3",
+      "bytes": 191892,
+      "sha256": "ac45f3aa4d1c63361e17e4d39446317c59d04be3e0e7da3942b208a7c2736692",
+      "gitBlobSha": "2903630a3dfbf2797adc5ca6855af46873955505",
+      "voices": [
+        "coral"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/segment-1.mp3",
+      "bytes": 184116,
+      "sha256": "285bc1b4a2c8c6d82bb2f1e7d0ffa8c27164306a22bbc9262059bc99aad4e6ee",
+      "gitBlobSha": "1b80e0729db4aa139351989f41e0f808c9a6d9e3",
+      "voices": [
+        "cedar"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/segment-2.mp3",
+      "bytes": 190164,
+      "sha256": "efbd1a0ec5f2e1e8fc616a6de14e50a28d46859e78d1fb109416099be67812a1",
+      "gitBlobSha": "c127d76c360c291c8033477fe15eff5ecaa45437",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/segment-3.mp3",
+      "bytes": 245748,
+      "sha256": "a71c45b4157b48b1de80adca7cf119b27abbf255131a9f04a0bc82cb43461a48",
+      "gitBlobSha": "74b4d1d116dcd0682d613ba4013ee53f78fba5d7",
+      "voices": [
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/segment-4.mp3",
+      "bytes": 192468,
+      "sha256": "5fff4899b8564488e23b6583b74b1a20d4b22e727a337864d175ab5fb1fa0679",
+      "gitBlobSha": "b07c7b8b25c9e84dd42cd6ccfa2cf81892c6b169",
+      "voices": [
+        "coral"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/segment-5.mp3",
+      "bytes": 947892,
+      "sha256": "f3086e37edfd1989ab6124160de856213bccd92c83acf17b56e08fa6788162f9",
+      "gitBlobSha": "fae6262d8454ab39681a51e8f9871d53c3d829a1",
+      "voices": [
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/segment-6.mp3",
+      "bytes": 951348,
+      "sha256": "8c16034770880b2b5cac90e5a0e8c01328dd6a85d932df23e1e692746c4627b6",
+      "gitBlobSha": "be25f30bcaa1de9b5faa963c71b2d75c3795dff1",
+      "voices": [
+        "cedar",
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/segment-7.mp3",
+      "bytes": 1222068,
+      "sha256": "b225e9c8e5ec2c37265858b78c23779fb8fe082a323385d28207c5c54e79c556",
+      "gitBlobSha": "271d92ad537733ebf3dcd82cd27522a411244297",
+      "voices": [
+        "cedar",
+        "coral",
+        "marin",
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-2/segment-0.mp3",
+      "bytes": 174612,
+      "sha256": "26459eb1a4ea19c703bea5972cfc22e8af89ea5197db8d4de01778ace42331fc",
+      "gitBlobSha": "3289aa988d75125832df2f5bcc6a537ba2a25780",
+      "voices": [
+        "coral"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-2/segment-1.mp3",
+      "bytes": 137748,
+      "sha256": "5168e8f0983b7a56ac9d959d377d6c2dd3e8cfdbfc6981c29f31bbe171d8ffc0",
+      "gitBlobSha": "88b3f5271763b7129b93197dfa80402fe18f5a62",
+      "voices": [
+        "cedar"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-2/segment-2.mp3",
+      "bytes": 149268,
+      "sha256": "e7393bf8c1f0943cae63520648cc3dfe1e868312de6b305895eeb4f542e5b281",
+      "gitBlobSha": "9508057400b10f4eca983f3e93107f4e065bef32",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-2/segment-3.mp3",
+      "bytes": 161364,
+      "sha256": "8216c1397a39036e8fbc541c1c8da8a5ba16ecd1444641c95e3d5b458f885d0b",
+      "gitBlobSha": "216852e3553f21a0cd2876c018879737d96688d1",
+      "voices": [
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-2/segment-4.mp3",
+      "bytes": 136020,
+      "sha256": "b295bedda1c2d8db54b3f7a2fe4c0be5eb348db61a8e07568bde7c1adea8809a",
+      "gitBlobSha": "66a6ab69f5a34b24ca4467c12900403fe3af9909",
+      "voices": [
+        "coral"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-2/segment-5.mp3",
+      "bytes": 611796,
+      "sha256": "3d8477c0dfd27a32bea9b50518713a6a21a65dd1d884ff673840b3a027964345",
+      "gitBlobSha": "319c461f5f56a63828a01d21d9da9fa3c41b6838",
+      "voices": [
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-2/segment-6.mp3",
+      "bytes": 756948,
+      "sha256": "7e02f334b5d811b4e3f09e625fed69182d6ae4641cf74c2286af464bea406993",
+      "gitBlobSha": "653ed3b86f0efebad6bfcb14d530d99e6fd10e44",
+      "voices": [
+        "cedar",
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-2/segment-7.mp3",
+      "bytes": 890868,
+      "sha256": "cda1379ffb0294fedf7f6262d508eb14c2843fd480370283d06b1fc62dbf697e",
+      "gitBlobSha": "458113ebfe3ec0bd6171437b5cb74be612d98c7e",
+      "voices": [
+        "cedar",
+        "coral",
+        "marin",
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-3/segment-0.mp3",
+      "bytes": 130548,
+      "sha256": "0b86753b9c041cea25284209692f1e8fb14c71780757b7658494a3747d40ee69",
+      "gitBlobSha": "4ac8e539c79ccf19fc0f31c684a3259e6e31d28f",
+      "voices": [
+        "coral"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-3/segment-1.mp3",
+      "bytes": 146388,
+      "sha256": "b1f737e356923faccb0aa61ae27c8909eeb009b81a6dcaa2d2574645e1ce2b6c",
+      "gitBlobSha": "968bf45fa24e01604bc581b70cfef9b34615617d",
+      "voices": [
+        "cedar"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-3/segment-2.mp3",
+      "bytes": 144948,
+      "sha256": "68539aac1dd4a2705ffc6a9dd260241f172ce7c3ecd2c1f142b5962f66d60284",
+      "gitBlobSha": "7d6d3eba86b20b731c3838da95a233c08b77f99b",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-3/segment-3.mp3",
+      "bytes": 149268,
+      "sha256": "851479bb587f18caaeda42315d0fb4021dc9d608c159fe6eb540e5037cdce69e",
+      "gitBlobSha": "14a301a91bc6b4babd855a2693d40b3c04b6daea",
+      "voices": [
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-3/segment-4.mp3",
+      "bytes": 129972,
+      "sha256": "3a7c9fb91d1fa06f7fbe1d7a12f97042a032ed1c021cad5f84d9878a99a7c209",
+      "gitBlobSha": "433eee74b93c9cb63041e0e1ffbe8a7d7170d0d3",
+      "voices": [
+        "coral"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-3/segment-5.mp3",
+      "bytes": 688116,
+      "sha256": "573b053608c9cd77890b24bfa6537207729fe5405367e85b90d6061946b1dfc9",
+      "gitBlobSha": "b24baed9b48207fe756e40ec02080ef7d04216e2",
+      "voices": [
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-3/segment-6.mp3",
+      "bytes": 773364,
+      "sha256": "3ce617cf23cba200d3921785c94d9675a3d8cc0de94f639f26889d63315dfeb8",
+      "gitBlobSha": "96e4f28eadbed7cc829214d38a29c09861a22221",
+      "voices": [
+        "cedar",
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-3/segment-7.mp3",
+      "bytes": 902964,
+      "sha256": "ed14997405668d0a89f2d814c91e00dbf11c0d45fec66b933c057ad098d987c6",
+      "gitBlobSha": "33316e505124d90038563210acf71fc579cf8f4e",
+      "voices": [
+        "cedar",
+        "coral",
+        "marin",
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-4/segment-0.mp3",
+      "bytes": 148116,
+      "sha256": "999e47347d652f2139d52dae175bd65d45adcb5ba410f2d6d24b6b7f2eef2c64",
+      "gitBlobSha": "86598c20af7a29184d25d6195e693d5da6e1f777",
+      "voices": [
+        "coral"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-4/segment-1.mp3",
+      "bytes": 137172,
+      "sha256": "6b9852096f486f9c82cf1f9c9f9f2d315d7b8d7cfedb172f705a1acf3ed96b84",
+      "gitBlobSha": "f2e5edf4939419a1e7ee3e5707d7a72c106b2c99",
+      "voices": [
+        "cedar"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-4/segment-2.mp3",
+      "bytes": 155892,
+      "sha256": "2c7794ede0370f592b8e119932e885c562bdc56991bb08890b400a3db273ac6b",
+      "gitBlobSha": "ada43383511056c1dabd90fdbedb39f12c8bce76",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-4/segment-3.mp3",
+      "bytes": 153012,
+      "sha256": "ba9dc92784bd9704c57915b2477b60c8d4052227d957bd8398492d38eaf853b7",
+      "gitBlobSha": "fe8ff43c0f163e7f66e069087b24327d098fade2",
+      "voices": [
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-4/segment-4.mp3",
+      "bytes": 161364,
+      "sha256": "4b26f7128bc573a45f0848c8619443066438175544ae98af7af7befa00915482",
+      "gitBlobSha": "e5cc93948580ddc1052ed2c6fe36e973e126b43c",
+      "voices": [
+        "coral"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-4/segment-5.mp3",
+      "bytes": 729588,
+      "sha256": "e23db6595e2859114985f4b126de431bfa04dba1b2e1fbafd06f48e20c49af62",
+      "gitBlobSha": "5947eb71f65950d78bc8760a217df4f3deebd14e",
+      "voices": [
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-4/segment-6.mp3",
+      "bytes": 758388,
+      "sha256": "26d8451e1c932b92aaf36f454a5d280d9aeabeb181751d30ea2cba1cea6ea63e",
+      "gitBlobSha": "e701dde24997e1c2faec5d6aa731e541940ce988",
+      "voices": [
+        "cedar",
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/goethe-b1/set-4/segment-7.mp3",
+      "bytes": 880788,
+      "sha256": "b1f0a6cc62538fb46eda0cef607c714d30cae5f99e3d1d754cc57c13285a28f5",
+      "gitBlobSha": "6f20102238a9124cde0a874d247dd0918fd2eb5c",
+      "voices": [
+        "cedar",
+        "coral",
+        "marin",
+        "sage"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/line-1.mp3",
+      "bytes": 25716,
+      "sha256": "cadb6b8d1837572777f64dbe049e9f19371a814485e5ae0c090e7d4a20390d6b",
+      "gitBlobSha": "18a2996ee24721f9604358521bfdc4ef05a29367",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/line-2.mp3",
+      "bytes": 46740,
+      "sha256": "ee1d1722a8fd69d15a6c7c1403628af6d575f3cdec6336f682f5ff1aa81f0a21",
+      "gitBlobSha": "d1f95d87275af624286553455c044442cfd70eff",
+      "voices": [
+        "cedar"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/line-3.mp3",
+      "bytes": 38964,
+      "sha256": "aa3b178bfa9e7a99fdbdf6b29498c5b02a7b6ab154c5bf4f6b9e1588b16d0abb",
+      "gitBlobSha": "9ccd3493b5a05e430dae345e7c66b03f1e1a98c6",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/line-4.mp3",
+      "bytes": 39540,
+      "sha256": "f6c75b2d1eb770e54c862e751cdb97e58d3f81a4c2f7b24c286c271d3f3e0c60",
+      "gitBlobSha": "6b5ef88d3c4ec8093964943d5dcfe5665f2a7514",
+      "voices": [
+        "cedar"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/line-5.mp3",
+      "bytes": 34068,
+      "sha256": "8515e2dbf64c715ed18750cf3a18b6b943c61bd2dc5769703b2a0d5ce5205ff6",
+      "gitBlobSha": "6da6f4a72ddec1795548cc22c3f8af7b5a7504e9",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/line-6.mp3",
+      "bytes": 25140,
+      "sha256": "2e293decef1476273f6ea834ae35304556cfa60dcc1e97959305c3f83e70b566",
+      "gitBlobSha": "f9bc98e74082fa2891dd5ab5b861cb2c7e95b282",
+      "voices": [
+        "cedar"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-1.mp3",
+      "bytes": 19668,
+      "sha256": "da84b360e2d0ea7b749168d6f4e39138b367bb674e6a34746e6d4cec8db629d2",
+      "gitBlobSha": "fb29e77d91f55b5d09a2fce6a680ca6259705e4f",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-2.mp3",
+      "bytes": 10164,
+      "sha256": "89a7a536aee9d44b049dc48d158fa07f89769688f0dbfa4e0ddd7122c781cd32",
+      "gitBlobSha": "de8e763d4dfc59ead9a49de20189852a4a433b2b",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-3.mp3",
+      "bytes": 22548,
+      "sha256": "945a70a8a92190ff808355272e54d277c1b3afee668492653d8da76900f53e58",
+      "gitBlobSha": "f599c74b5604479038312ad827a59d86202a0316",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-4.mp3",
+      "bytes": 17940,
+      "sha256": "98a1650137fcf8f4de12157afc451e37cd991d6024a043f61840037fab8166ff",
+      "gitBlobSha": "04c7ae6a4280c0eb2f890d4aa4fbfb18a67bd364",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-5.mp3",
+      "bytes": 26868,
+      "sha256": "4667ec105c2b4967c957193f8fb25bdf049ca7470d0e59aa15a834dcebdd4cdd",
+      "gitBlobSha": "860a2735c27e0278f90daa4396c38939939bd2a0",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-6.mp3",
+      "bytes": 21972,
+      "sha256": "36fa20a59d2595648f4b02aacdb006a1a71f3038d2f390b394a8c16701252585",
+      "gitBlobSha": "f5aef3a6491adbd1b36222e3e82c987a57e45a65",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/dialogue.mp3",
+      "bytes": 244020,
+      "sha256": "fb4c9af5f513a6a8d68a683ad4bd849b46ebfb86de204af0d0d0d83fdf154ef9",
+      "gitBlobSha": "e407487d650cdf7a5f883c8d330ef1982ca55386",
+      "voices": [
+        "cedar",
+        "marin"
+      ]
+    }
+  ]
+}
