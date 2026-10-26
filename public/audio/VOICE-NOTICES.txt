@@ -1,0 +1,94 @@
+DEUTSCH LERNEN — SYNTHETIC AUDIO: SOURCES AND LICENSE NOTICES
+Review date: 2026-10-26
+
+These are synthetic practice recordings, not official Goethe recordings or
+recordings performed for this portal by the named dataset speakers.
+Voice names identify technical sources; no endorsement is claimed.
+The code's MIT license does not override the following source conditions.
+
+1. DOCUMENTED VOICES
+
+de_DE-thorsten-medium
+  Dataset: Thorsten-Voice, Thorsten Mueller / Dominik Kreutz, CC0 1.0.
+  Source: https://github.com/thorstenMueller/Thorsten-Voice
+  Dataset/source revision: 29d0c153c55d8ffaa0ebf8ed1ecc879bff9fdf27
+  Training history: finetuned from en_US-lessac-medium.
+  The Lessac dataset has a research license, not an unrestricted commercial
+  grant. Application to finetuned weights and synthetic output is unresolved
+  by the reviewed sources. This notice does not grant that permission.
+
+de_DE-kerstin-low
+  Dataset: rhasspy/dataset-voice-kerstin, CC0 1.0.
+  Source: https://github.com/rhasspy/dataset-voice-kerstin
+  Dataset/source revision: f73127135cf80d6ef52aef6af58c49774f4fd625
+  Training history: finetuned from en_US-ryan-low.
+  The Ryan dataset is identified as CC BY-NC-SA 4.0.
+  Application to finetuned weights and synthetic output is unresolved
+  by the reviewed sources. This notice does not grant that permission.
+
+de_DE-ramona-low and de_DE-eva_k-x_low
+  Dataset: M-AILABS Speech Dataset (German), based on LibriVox and
+  Project Gutenberg. Model cards say trained from scratch.
+  The dataset permits use, including commercial use, subject to its
+  conditions below. We retain the complete notice conservatively;
+  this does not assert that every generated MP3 is legally source data.
+  Source: https://github.com/i-celeste-aurora/m-ailabs-dataset
+  Source revision: 53c4c9fe0f63cb0ae85ee7eb46a32b7316223e8e
+
+2. M-AILABS DATASET — COMPLETE UPSTREAM LICENSE NOTICE
+
+Copyright (c) 2017-2019 by the original creators @ M-AILABS
+
+Copyright (c) 2020 I. Celeste Aurora Solak (github.com/i-celeste-aurora)
+
+
+Redistribution and use in any form, including any commercial use, with or without modification are permitted provided that the following conditions are met:
+
+- Redistributions of source data must retain the above copyright notice, this list of conditions and the following disclaimer.
+- Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this downloaded data, source-code or binary-code without specific prior written permission.
+
+THIS DATA IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE and/or DATA, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+3. CC0 AND BASE-MODEL REFERENCES
+
+CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/
+CC0 legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+CC0 does not eliminate third-party personality, trademark or other rights.
+
+Lessac dataset terms:
+https://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/license.html
+
+Ryan source model card:
+https://huggingface.co/rhasspy/piper-voices/blob/5041a7a49ae5b3a0f30e6837769eb03fdbb231bd/en/en_US/ryan/low/MODEL_CARD
+
+CC BY-NC-SA 4.0: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+4. MODEL COLLECTION / GENERATION SOFTWARE
+
+The rhasspy/piper-voices collection README metadata says MIT, but the
+individual model cards separately identify dataset licenses and training
+history. The collection label is not treated here as clearance of those
+other rights. No ONNX models or original datasets are distributed by the
+portal. Model-card snapshots: licenses/model-cards.txt
+
+Piper generation software: https://github.com/OHF-Voice/piper1-gpl
+License: GPL-3.0, see https://github.com/OHF-Voice/piper1-gpl/blob/main/COPYING
+Piper is a build tool, not embedded in the deployed application.
+Using a GPL tool does not automatically place its output or the app under
+GPL; GPLv3 section 2 distinguishes output that itself constitutes a covered
+work. This is separate from dataset/model/output rights.
+
+5. REVIEW SCOPE
+
+The currently committed inventory is in audio-inventory.json. It identifies
+45 MP3 files by Git blob SHA and size; it is not a historic synthesis receipt.
+The current generator documents voices for Sets 2-4; the legacy Set 1
+recordings have no exact per-turn synthesis receipt. No waveforms or learner
+data were altered by this notice update.
+
+Unresolved: unrestricted publication/reuse clearance for the Thorsten/Lessac
+and Kerstin/Ryan model chains. A notice cannot substitute for permission.
+To close this point, obtain a suitable written grant/legal assessment or
+regenerate affected recordings with models whose full training provenance
+and intended-use permissions are documented. New models/versions need
+a new review. This is a source review, not a legal certification.

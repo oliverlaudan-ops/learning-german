@@ -80,3 +80,7 @@ A green test suite confirms implemented expectations; it does not by itself conf
 - [ ] Historical notes do not contradict current-state guidance.
 - [ ] License and attribution changes are reflected consistently.
 - [ ] AI-generated learning content received appropriate human review.
+
+## Voice-license source review — 2026-10-26
+
+Added shipped notices, pinned model-card references and a 45-file MP3 inventory; updated the portal legal page and README. M-AILABS source terms have been located and retained. Training-chain review identified Lessac research terms and Ryan CC BY-NC-SA behind Thorsten/Kerstin. Overall unrestricted-use clearance remains open pending suitable permission/assessment or replacement audio. No audio assets or learner data were changed. See docs/content-provenance.md for evidence and scope.

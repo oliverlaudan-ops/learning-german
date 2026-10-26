@@ -14,3 +14,7 @@ with 550 ms pauses. Six separate chunks support pronunciation practice.
 All files are served by the site; there is no runtime TTS service or API key.
 Audio is fetched on demand, not during the initial page load. Persistent
 offline downloads and offline page reopening are not implemented by this unit.
+
+## License review (2026-10-26)
+
+CC0 above describes the Thorsten dataset. The Piper model card also records fine-tuning from Lessac medium, whose dataset is subject to a research license. We have not established an unrestricted grant for that full chain or these outputs. See [audio notices](../VOICE-NOTICES.txt) and the [review](../../../docs/content-provenance.md); do not treat the code MIT license as blanket audio clearance.

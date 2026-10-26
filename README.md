@@ -178,4 +178,4 @@ See [`DOCUMENTATION_MAINTENANCE.md`](DOCUMENTATION_MAINTENANCE.md) for the docum
 
 ## Legal information and provenance
 
-The app footer links to `/rechtliches/` for operator details, portal-specific privacy information and AI/content provenance. See [content provenance and open review points](docs/content-provenance.md), especially for synthetic voice recordings. Browser speech may use remote voices depending on the user's browser and system; local progress storage does not imply all audio processing is local.
+The app footer links to `/rechtliches/` for operator details, portal-specific privacy information and AI/content provenance. See [content provenance and open review points](docs/content-provenance.md), especially for synthetic voice recordings and the unresolved Thorsten/Lessac and Kerstin/Ryan base-model chains. [Shipped audio notices](public/audio/VOICE-NOTICES.txt) include the full M-AILABS terms. These notices do not by themselves close unrestricted-use clearance. Browser speech may use remote voices depending on the user's browser and system; local progress storage does not imply all audio processing is local.
