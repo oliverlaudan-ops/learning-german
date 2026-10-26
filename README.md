@@ -175,3 +175,7 @@ The confirmed study-plan target in the current data is **21 November 2026**. Rea
 The project is written and maintained with AI assistance. AI-generated changes are still expected to satisfy the same evidence standards as human changes: inspect current `main`, preserve learner data, update tests and documentation together, run verification, and avoid claims that are not supported by code or current CI results.
 
 See [`DOCUMENTATION_MAINTENANCE.md`](DOCUMENTATION_MAINTENANCE.md) for the documentation ownership map, audit record and maintenance checklist.
+
+## Legal information and provenance
+
+The app footer links to `/rechtliches/` for operator details, portal-specific privacy information and AI/content provenance. See [content provenance and open review points](docs/content-provenance.md), especially for synthetic voice recordings. Browser speech may use remote voices depending on the user's browser and system; local progress storage does not imply all audio processing is local.
