@@ -1,0 +1,45 @@
+name: OpenAI audio preview
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: openai-audio-preview
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    if: github.repository == 'oliverlaudan-ops/learning-german'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install audio and WebSocket tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          python -m pip install websockets==15.0.1
+      - name: Verify offline safety checks
+        run: |
+          python -m unittest discover -s scripts -p test_openai_audio_preview.py
+          python scripts/openai-audio-preview.py --dry-run
+      - name: Generate only the two authorized hearing samples
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/openai-audio-preview.py
+      - name: Upload review audio and provenance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: openai-audio-preview
+          path: audio-preview/
+          retention-days: 7
+          if-no-files-found: warn

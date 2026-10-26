@@ -1,232 +1,429 @@
 {
   "reviewedAt": "2026-10-26",
-  "repositoryCommit": "d3cebbe38d64b6439eda610d1b69df42a7ab0d11",
-  "scope": "MP3 file inventory, not synthesis receipts or a legal clearance",
+  "provider": "OpenAI",
+  "scope": "45 bundled replacement MP3s; see openai-generation.json for inputs and transcripts",
   "files": [
     {
       "path": "public/audio/goethe-b1/segment-0.mp3",
-      "gitBlobSha": "1fca15b8b84798a298825207e9953e32a80e226e",
-      "bytes": 116654
+      "bytes": 191892,
+      "sha256": "ac45f3aa4d1c63361e17e4d39446317c59d04be3e0e7da3942b208a7c2736692",
+      "gitBlobSha": "2903630a3dfbf2797adc5ca6855af46873955505",
+      "voices": [
+        "coral"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/segment-1.mp3",
-      "gitBlobSha": "98e6be444ca9adc452c5207378922370c5b833c3",
-      "bytes": 115609
+      "bytes": 184116,
+      "sha256": "285bc1b4a2c8c6d82bb2f1e7d0ffa8c27164306a22bbc9262059bc99aad4e6ee",
+      "gitBlobSha": "1b80e0729db4aa139351989f41e0f808c9a6d9e3",
+      "voices": [
+        "cedar"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/segment-2.mp3",
-      "gitBlobSha": "78f354d7160fbaa5e674232f69ace6301d661daa",
-      "bytes": 123759
+      "bytes": 190164,
+      "sha256": "efbd1a0ec5f2e1e8fc616a6de14e50a28d46859e78d1fb109416099be67812a1",
+      "gitBlobSha": "c127d76c360c291c8033477fe15eff5ecaa45437",
+      "voices": [
+        "marin"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/segment-3.mp3",
-      "gitBlobSha": "50828596795f06ba8ee5b2cc91eb68208daa0d55",
-      "bytes": 131492
+      "bytes": 245748,
+      "sha256": "a71c45b4157b48b1de80adca7cf119b27abbf255131a9f04a0bc82cb43461a48",
+      "gitBlobSha": "74b4d1d116dcd0682d613ba4013ee53f78fba5d7",
+      "voices": [
+        "sage"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/segment-4.mp3",
-      "gitBlobSha": "85dcd7878e597d94b6481dd677858f65d02f245c",
-      "bytes": 124595
+      "bytes": 192468,
+      "sha256": "5fff4899b8564488e23b6583b74b1a20d4b22e727a337864d175ab5fb1fa0679",
+      "gitBlobSha": "b07c7b8b25c9e84dd42cd6ccfa2cf81892c6b169",
+      "voices": [
+        "coral"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/segment-5.mp3",
-      "gitBlobSha": "f164ab79c53fc4af3cbc1ea50bce9ac4c5c0f2f1",
-      "bytes": 572857
+      "bytes": 947892,
+      "sha256": "f3086e37edfd1989ab6124160de856213bccd92c83acf17b56e08fa6788162f9",
+      "gitBlobSha": "fae6262d8454ab39681a51e8f9871d53c3d829a1",
+      "voices": [
+        "sage"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/segment-6.mp3",
-      "gitBlobSha": "04b3e05aaf8d8a7cccc160070c6421d475911226",
-      "bytes": 575364
+      "bytes": 951348,
+      "sha256": "8c16034770880b2b5cac90e5a0e8c01328dd6a85d932df23e1e692746c4627b6",
+      "gitBlobSha": "be25f30bcaa1de9b5faa963c71b2d75c3795dff1",
+      "voices": [
+        "cedar",
+        "marin"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/segment-7.mp3",
-      "gitBlobSha": "32c53fbc20b1861aa0d6b7cf5323d11a4b88fff1",
-      "bytes": 731472
+      "bytes": 1222068,
+      "sha256": "b225e9c8e5ec2c37265858b78c23779fb8fe082a323385d28207c5c54e79c556",
+      "gitBlobSha": "271d92ad537733ebf3dcd82cd27522a411244297",
+      "voices": [
+        "cedar",
+        "coral",
+        "marin",
+        "sage"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-2/segment-0.mp3",
-      "gitBlobSha": "4b4d2d3bcb737bd88a41066e4672854d438e1e24",
-      "bytes": 88651
+      "bytes": 174612,
+      "sha256": "26459eb1a4ea19c703bea5972cfc22e8af89ea5197db8d4de01778ace42331fc",
+      "gitBlobSha": "3289aa988d75125832df2f5bcc6a537ba2a25780",
+      "voices": [
+        "coral"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-2/segment-1.mp3",
-      "gitBlobSha": "f493d9c369af824f3a458695c3ac5a833cc93641",
-      "bytes": 88442
+      "bytes": 137748,
+      "sha256": "5168e8f0983b7a56ac9d959d377d6c2dd3e8cfdbfc6981c29f31bbe171d8ffc0",
+      "gitBlobSha": "88b3f5271763b7129b93197dfa80402fe18f5a62",
+      "voices": [
+        "cedar"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-2/segment-2.mp3",
-      "gitBlobSha": "fd3da7a9fb50507dc229235f85cdb9d2ffe1b383",
-      "bytes": 98264
+      "bytes": 149268,
+      "sha256": "e7393bf8c1f0943cae63520648cc3dfe1e868312de6b305895eeb4f542e5b281",
+      "gitBlobSha": "9508057400b10f4eca983f3e93107f4e065bef32",
+      "voices": [
+        "marin"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-2/segment-3.mp3",
-      "gitBlobSha": "52e2ff1d4aaea168d328431fe0fb44d841df08cd",
-      "bytes": 97637
+      "bytes": 161364,
+      "sha256": "8216c1397a39036e8fbc541c1c8da8a5ba16ecd1444641c95e3d5b458f885d0b",
+      "gitBlobSha": "216852e3553f21a0cd2876c018879737d96688d1",
+      "voices": [
+        "sage"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-2/segment-4.mp3",
-      "gitBlobSha": "4a714e0e74ee5f7881d7169a0718e297f4009295",
-      "bytes": 74649
+      "bytes": 136020,
+      "sha256": "b295bedda1c2d8db54b3f7a2fe4c0be5eb348db61a8e07568bde7c1adea8809a",
+      "gitBlobSha": "66a6ab69f5a34b24ca4467c12900403fe3af9909",
+      "voices": [
+        "coral"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-2/segment-5.mp3",
-      "gitBlobSha": "470471b312418325edd9392a231cbc8bb8099681",
-      "bytes": 416540
+      "bytes": 611796,
+      "sha256": "3d8477c0dfd27a32bea9b50518713a6a21a65dd1d884ff673840b3a027964345",
+      "gitBlobSha": "319c461f5f56a63828a01d21d9da9fa3c41b6838",
+      "voices": [
+        "sage"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-2/segment-6.mp3",
-      "gitBlobSha": "a72498f50394c101c0c580095f2c5b13da9c1355",
-      "bytes": 453529
+      "bytes": 756948,
+      "sha256": "7e02f334b5d811b4e3f09e625fed69182d6ae4641cf74c2286af464bea406993",
+      "gitBlobSha": "653ed3b86f0efebad6bfcb14d530d99e6fd10e44",
+      "voices": [
+        "cedar",
+        "marin"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-2/segment-7.mp3",
-      "gitBlobSha": "d54a6b711b34f9915fa04c4dfc4e681b179864f6",
-      "bytes": 540883
+      "bytes": 890868,
+      "sha256": "cda1379ffb0294fedf7f6262d508eb14c2843fd480370283d06b1fc62dbf697e",
+      "gitBlobSha": "458113ebfe3ec0bd6171437b5cb74be612d98c7e",
+      "voices": [
+        "cedar",
+        "coral",
+        "marin",
+        "sage"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-3/segment-0.mp3",
-      "gitBlobSha": "4163708f03989ad46e9b504888e8554d9e685091",
-      "bytes": 78829
+      "bytes": 130548,
+      "sha256": "0b86753b9c041cea25284209692f1e8fb14c71780757b7658494a3747d40ee69",
+      "gitBlobSha": "4ac8e539c79ccf19fc0f31c684a3259e6e31d28f",
+      "voices": [
+        "coral"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-3/segment-1.mp3",
-      "gitBlobSha": "cd76b8c3292f4fcc7704a2618e1bc4d8a07effeb",
-      "bytes": 86561
+      "bytes": 146388,
+      "sha256": "b1f737e356923faccb0aa61ae27c8909eeb009b81a6dcaa2d2574645e1ce2b6c",
+      "gitBlobSha": "968bf45fa24e01604bc581b70cfef9b34615617d",
+      "voices": [
+        "cedar"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-3/segment-2.mp3",
-      "gitBlobSha": "f2b017eb0a9117ccd9dfdafa2b28e518ca81489a",
-      "bytes": 102444
+      "bytes": 144948,
+      "sha256": "68539aac1dd4a2705ffc6a9dd260241f172ce7c3ecd2c1f142b5962f66d60284",
+      "gitBlobSha": "7d6d3eba86b20b731c3838da95a233c08b77f99b",
+      "voices": [
+        "marin"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-3/segment-3.mp3",
-      "gitBlobSha": "7388cc07bcb37492aed281210431c9a2a6865322",
-      "bytes": 100563
+      "bytes": 149268,
+      "sha256": "851479bb587f18caaeda42315d0fb4021dc9d608c159fe6eb540e5037cdce69e",
+      "gitBlobSha": "14a301a91bc6b4babd855a2693d40b3c04b6daea",
+      "voices": [
+        "sage"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-3/segment-4.mp3",
-      "gitBlobSha": "c2d29061ffa0b36e69581b04ba93926d1a1a4a38",
-      "bytes": 76739
+      "bytes": 129972,
+      "sha256": "3a7c9fb91d1fa06f7fbe1d7a12f97042a032ed1c021cad5f84d9878a99a7c209",
+      "gitBlobSha": "433eee74b93c9cb63041e0e1ffbe8a7d7170d0d3",
+      "voices": [
+        "coral"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-3/segment-5.mp3",
-      "gitBlobSha": "bd078a039bcc20637a7337873aacb71d7fa09e1d",
-      "bytes": 445379
+      "bytes": 688116,
+      "sha256": "573b053608c9cd77890b24bfa6537207729fe5405367e85b90d6061946b1dfc9",
+      "gitBlobSha": "b24baed9b48207fe756e40ec02080ef7d04216e2",
+      "voices": [
+        "sage"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-3/segment-6.mp3",
-      "gitBlobSha": "e73790194dbdee7c01994ac3f6db16ec263fe2c4",
-      "bytes": 445797
+      "bytes": 773364,
+      "sha256": "3ce617cf23cba200d3921785c94d9675a3d8cc0de94f639f26889d63315dfeb8",
+      "gitBlobSha": "96e4f28eadbed7cc829214d38a29c09861a22221",
+      "voices": [
+        "cedar",
+        "marin"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-3/segment-7.mp3",
-      "gitBlobSha": "c4fdfcf06d4675544eb348919e9a7b908b462a56",
-      "bytes": 528553
+      "bytes": 902964,
+      "sha256": "ed14997405668d0a89f2d814c91e00dbf11c0d45fec66b933c057ad098d987c6",
+      "gitBlobSha": "33316e505124d90038563210acf71fc579cf8f4e",
+      "voices": [
+        "cedar",
+        "coral",
+        "marin",
+        "sage"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-4/segment-0.mp3",
-      "gitBlobSha": "bd1731c505b4407631cbf5d5cbe5be16fd4a5e6a",
-      "bytes": 77157
+      "bytes": 148116,
+      "sha256": "999e47347d652f2139d52dae175bd65d45adcb5ba410f2d6d24b6b7f2eef2c64",
+      "gitBlobSha": "86598c20af7a29184d25d6195e693d5da6e1f777",
+      "voices": [
+        "coral"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-4/segment-1.mp3",
-      "gitBlobSha": "14a4baa7b66bc3570e6e6c8e6489e7728113cb5f",
-      "bytes": 82590
+      "bytes": 137172,
+      "sha256": "6b9852096f486f9c82cf1f9c9f9f2d315d7b8d7cfedb172f705a1acf3ed96b84",
+      "gitBlobSha": "f2e5edf4939419a1e7ee3e5707d7a72c106b2c99",
+      "voices": [
+        "cedar"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-4/segment-2.mp3",
-      "gitBlobSha": "886e2bba79f2e7c6bae2f05f35967fd2a9d6ea64",
-      "bytes": 100981
+      "bytes": 155892,
+      "sha256": "2c7794ede0370f592b8e119932e885c562bdc56991bb08890b400a3db273ac6b",
+      "gitBlobSha": "ada43383511056c1dabd90fdbedb39f12c8bce76",
+      "voices": [
+        "marin"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-4/segment-3.mp3",
-      "gitBlobSha": "36d9b7e9cf08bbfb35074eb1cf137a868f8e78f9",
-      "bytes": 98264
+      "bytes": 153012,
+      "sha256": "ba9dc92784bd9704c57915b2477b60c8d4052227d957bd8398492d38eaf853b7",
+      "gitBlobSha": "fe8ff43c0f163e7f66e069087b24327d098fade2",
+      "voices": [
+        "sage"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-4/segment-4.mp3",
-      "gitBlobSha": "49c2759ebdb030489c930eeaae507ccddfb1f10e",
-      "bytes": 87606
+      "bytes": 161364,
+      "sha256": "4b26f7128bc573a45f0848c8619443066438175544ae98af7af7befa00915482",
+      "gitBlobSha": "e5cc93948580ddc1052ed2c6fe36e973e126b43c",
+      "voices": [
+        "coral"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-4/segment-5.mp3",
-      "gitBlobSha": "8620085faf786306d7bf3e80a2e1f7bcf64ca004",
-      "bytes": 460635
+      "bytes": 729588,
+      "sha256": "e23db6595e2859114985f4b126de431bfa04dba1b2e1fbafd06f48e20c49af62",
+      "gitBlobSha": "5947eb71f65950d78bc8760a217df4f3deebd14e",
+      "voices": [
+        "sage"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-4/segment-6.mp3",
-      "gitBlobSha": "f87778bc49279c20a20485ba548c7ed63975442e",
-      "bytes": 474009
+      "bytes": 758388,
+      "sha256": "26d8451e1c932b92aaf36f454a5d280d9aeabeb181751d30ea2cba1cea6ea63e",
+      "gitBlobSha": "e701dde24997e1c2faec5d6aa731e541940ce988",
+      "voices": [
+        "cedar",
+        "marin"
+      ]
     },
     {
       "path": "public/audio/goethe-b1/set-4/segment-7.mp3",
-      "gitBlobSha": "ccb72c96dfe2abdd2f156d45beaced300736e380",
-      "bytes": 560527
-    },
-    {
-      "path": "public/audio/weekend-v1/chunk-1.mp3",
-      "gitBlobSha": "fed6f50b0420406f10ba0c5a8af2f6cb349c787e",
-      "bytes": 9238
-    },
-    {
-      "path": "public/audio/weekend-v1/chunk-2.mp3",
-      "gitBlobSha": "8e3b07722451c8f6e90c6c58a14d56f3a42fcf44",
-      "bytes": 7148
-    },
-    {
-      "path": "public/audio/weekend-v1/chunk-3.mp3",
-      "gitBlobSha": "d20aa91d8337efb201026719c21668d62b6b8b43",
-      "bytes": 15507
-    },
-    {
-      "path": "public/audio/weekend-v1/chunk-4.mp3",
-      "gitBlobSha": "8a8c1b1947ad4689d53ef51dd8f6232c06c27bd2",
-      "bytes": 10492
-    },
-    {
-      "path": "public/audio/weekend-v1/chunk-5.mp3",
-      "gitBlobSha": "111c794e598db23618ec36de253e2f7b6167092a",
-      "bytes": 11745
-    },
-    {
-      "path": "public/audio/weekend-v1/chunk-6.mp3",
-      "gitBlobSha": "5e54de38ddd4691bdb49b5f128e2042a672d8e3f",
-      "bytes": 11954
-    },
-    {
-      "path": "public/audio/weekend-v1/dialogue.mp3",
-      "gitBlobSha": "397f73aac45230090950cf23a3e030c4630899bb",
-      "bytes": 137133
+      "bytes": 880788,
+      "sha256": "b1f0a6cc62538fb46eda0cef607c714d30cae5f99e3d1d754cc57c13285a28f5",
+      "gitBlobSha": "6f20102238a9124cde0a874d247dd0918fd2eb5c",
+      "voices": [
+        "cedar",
+        "coral",
+        "marin",
+        "sage"
+      ]
     },
     {
       "path": "public/audio/weekend-v1/line-1.mp3",
-      "gitBlobSha": "8ae4a23b69185af11d577171db9db8dbd063dbb8",
-      "bytes": 11745
+      "bytes": 25716,
+      "sha256": "cadb6b8d1837572777f64dbe049e9f19371a814485e5ae0c090e7d4a20390d6b",
+      "gitBlobSha": "18a2996ee24721f9604358521bfdc4ef05a29367",
+      "voices": [
+        "marin"
+      ]
     },
     {
       "path": "public/audio/weekend-v1/line-2.mp3",
-      "gitBlobSha": "aec46233aaaa279f838e2c36a1cac09de909e405",
-      "bytes": 27837
+      "bytes": 46740,
+      "sha256": "ee1d1722a8fd69d15a6c7c1403628af6d575f3cdec6336f682f5ff1aa81f0a21",
+      "gitBlobSha": "d1f95d87275af624286553455c044442cfd70eff",
+      "voices": [
+        "cedar"
+      ]
     },
     {
       "path": "public/audio/weekend-v1/line-3.mp3",
-      "gitBlobSha": "4ee073ab475c8467a3b1b6d1fc0e4398799ab404",
-      "bytes": 21567
+      "bytes": 38964,
+      "sha256": "aa3b178bfa9e7a99fdbdf6b29498c5b02a7b6ab154c5bf4f6b9e1588b16d0abb",
+      "gitBlobSha": "9ccd3493b5a05e430dae345e7c66b03f1e1a98c6",
+      "voices": [
+        "marin"
+      ]
     },
     {
       "path": "public/audio/weekend-v1/line-4.mp3",
-      "gitBlobSha": "d1a3ffd324bfb68c5f3b64cafbd25573d6036312",
-      "bytes": 21567
+      "bytes": 39540,
+      "sha256": "f6c75b2d1eb770e54c862e751cdb97e58d3f81a4c2f7b24c286c271d3f3e0c60",
+      "gitBlobSha": "6b5ef88d3c4ec8093964943d5dcfe5665f2a7514",
+      "voices": [
+        "cedar"
+      ]
     },
     {
       "path": "public/audio/weekend-v1/line-5.mp3",
-      "gitBlobSha": "cd1519bfd1956c1cf199770815e273ea252b71ee",
-      "bytes": 18224
+      "bytes": 34068,
+      "sha256": "8515e2dbf64c715ed18750cf3a18b6b943c61bd2dc5769703b2a0d5ce5205ff6",
+      "gitBlobSha": "6da6f4a72ddec1795548cc22c3f8af7b5a7504e9",
+      "voices": [
+        "marin"
+      ]
     },
     {
       "path": "public/audio/weekend-v1/line-6.mp3",
-      "gitBlobSha": "02ef4d8a9c832ae88fc59813c1a4f998cb4dddf5",
-      "bytes": 13626
+      "bytes": 25140,
+      "sha256": "2e293decef1476273f6ea834ae35304556cfa60dcc1e97959305c3f83e70b566",
+      "gitBlobSha": "f9bc98e74082fa2891dd5ab5b861cb2c7e95b282",
+      "voices": [
+        "cedar"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-1.mp3",
+      "bytes": 19668,
+      "sha256": "da84b360e2d0ea7b749168d6f4e39138b367bb674e6a34746e6d4cec8db629d2",
+      "gitBlobSha": "fb29e77d91f55b5d09a2fce6a680ca6259705e4f",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-2.mp3",
+      "bytes": 10164,
+      "sha256": "89a7a536aee9d44b049dc48d158fa07f89769688f0dbfa4e0ddd7122c781cd32",
+      "gitBlobSha": "de8e763d4dfc59ead9a49de20189852a4a433b2b",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-3.mp3",
+      "bytes": 22548,
+      "sha256": "945a70a8a92190ff808355272e54d277c1b3afee668492653d8da76900f53e58",
+      "gitBlobSha": "f599c74b5604479038312ad827a59d86202a0316",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-4.mp3",
+      "bytes": 17940,
+      "sha256": "98a1650137fcf8f4de12157afc451e37cd991d6024a043f61840037fab8166ff",
+      "gitBlobSha": "04c7ae6a4280c0eb2f890d4aa4fbfb18a67bd364",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-5.mp3",
+      "bytes": 26868,
+      "sha256": "4667ec105c2b4967c957193f8fb25bdf049ca7470d0e59aa15a834dcebdd4cdd",
+      "gitBlobSha": "860a2735c27e0278f90daa4396c38939939bd2a0",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/chunk-6.mp3",
+      "bytes": 21972,
+      "sha256": "36fa20a59d2595648f4b02aacdb006a1a71f3038d2f390b394a8c16701252585",
+      "gitBlobSha": "f5aef3a6491adbd1b36222e3e82c987a57e45a65",
+      "voices": [
+        "marin"
+      ]
+    },
+    {
+      "path": "public/audio/weekend-v1/dialogue.mp3",
+      "bytes": 244020,
+      "sha256": "fb4c9af5f513a6a8d68a683ad4bd849b46ebfb86de204af0d0d0d83fdf154ef9",
+      "gitBlobSha": "e407487d650cdf7a5f883c8d330ef1982ca55386",
+      "voices": [
+        "cedar",
+        "marin"
+      ]
     }
   ]
 }

@@ -113,7 +113,7 @@ See `CONTEXT.md` for the current roadmap and `ARCHITECTURE.md` for implementatio
 
 ## License
 
-The project is licensed under the MIT License. See `LICENSE`; `package.json` uses the same license identifier.
+The project code is licensed under MIT. See `LICENSE`; `package.json` uses the same identifier. Synthetic audio provenance and provider terms are documented separately in `public/audio/VOICE-NOTICES.txt`.
 
 ## Goethe B1 Hören preparation
 
@@ -142,7 +142,7 @@ All four practice sets have pre-generated synthetic MP3 recordings:
 - Set 1: `public/audio/goethe-b1/segment-0.mp3` through `segment-7.mp3`;
 - Sets 2–4: `public/audio/goethe-b1/set-N/segment-0.mp3` through `segment-7.mp3`.
 
-The 32 recordings use four German Piper voices. Dialogues and discussions synthesize each labelled speaker turn separately and insert short pauses between turns. If an MP3 cannot be loaded, the player falls back to German browser Speech Synthesis and labels that fallback visibly.
+The 32 recordings use OpenAI `gpt-realtime-2.1-mini` with the built-in voices `marin`, `cedar`, `coral` and `sage`. Dialogues and discussions synthesize each labelled speaker turn separately and insert short pauses between turns. If an MP3 cannot be loaded, the player falls back to German browser Speech Synthesis and labels that fallback visibly.
 
 All scripts, questions and recordings are independently created practice material. They are not official Goethe content, human voice acting or a formal assessment. Manual listening review remains necessary for pronunciation, names, rhythm, intelligibility and speaker differentiation.
 
@@ -154,19 +154,13 @@ The canonical script manifest is generated from the TypeScript data:
 node scripts/export-goethe-b1-audio.mjs
 ```
 
-The Python generator requires FFmpeg, `piper-tts==1.3.0` and four downloaded ONNX voice models:
+The replacement generator is `scripts/generate-openai-audio.py`. It uses FFmpeg (provided by `imageio-ffmpeg==0.6.0` in the workflow) and `websockets==15.0.1`, and obtains `OPENAI_API_KEY` only from a GitHub Actions secret. No key or OpenAI API client is included in the browser application.
 
-```bash
-python scripts/generate-goethe-b1-audio.py \
-  --thorsten /path/to/de_DE-thorsten-medium.onnx \
-  --kerstin /path/to/de_DE-kerstin-low.onnx \
-  --ramona /path/to/de_DE-ramona-low.onnx \
-  --eva /path/to/de_DE-eva_k-x_low.onnx
-```
+The manual-only `Generate OpenAI replacement audio` workflow operates on the `audio/openai-preview` review branch. Pushes do not automatically spend API credit. It generates all 32 B1 files plus the 13 weekend files at their existing URLs, keeps four distinct voices in four-person discussions, and reuses the sentence clips in the weekend dialogue. The old Piper generator/workflow is retired.
 
-By default the generator rebuilds Sets 2–4. Use `--sets` to select one or more of `set-2`, `set-3` and `set-4`. Set 1 remains in its legacy root path.
+A run has at most 200 unique requests, 2,048 output tokens per request, and a USD 2 estimated-charge guard with a per-request reserve. This is an application guard, not an instantaneous account-level billing limit. The current plan contains 147 unique requests and 16,485 characters. Successful chunks are cached with hashes, text, voice, transcripts and API usage. The optional `resume_run_id` workflow input restores those chunks without paying for them again while the artifact remains available. For later runs, create/select the `audio/openai-preview` review branch and start the workflow there. Failed network requests are not retried automatically. Transcript differences block replacement-file writes until reviewed.
 
-The [audio workflow](.github/workflows/goethe-b1-audio.yml) exports the manifest, generates and validates the 24 Set 2–4 recordings and commits changed assets to the triggering feature branch. The ordinary production build needs only the committed MP3 files, not Piper or the voice models.
+Generation receipts are shipped in `public/audio/openai-generation.json`; `audio-inventory.json` records all 45 replacement files. API-returned transcripts are a structural check, not independent proof of audible pronunciation or pedagogical quality. The two original OpenAI preview voices passed Oliver's listening check; complete recordings and the additional discussion voices still require listening review.
 
 The confirmed study-plan target in the current data is **21 November 2026**. Reading, writing and speaking examination modules are outside the present feature scope.
 
@@ -178,4 +172,17 @@ See [`DOCUMENTATION_MAINTENANCE.md`](DOCUMENTATION_MAINTENANCE.md) for the docum
 
 ## Legal information and provenance
 
-The app footer links to `/rechtliches/` for operator details, portal-specific privacy information and AI/content provenance. See [content provenance and open review points](docs/content-provenance.md), especially for synthetic voice recordings and the unresolved Thorsten/Lessac and Kerstin/Ryan base-model chains. [Shipped audio notices](public/audio/VOICE-NOTICES.txt) include the full M-AILABS terms. These notices do not by themselves close unrestricted-use clearance. Browser speech may use remote voices depending on the user's browser and system; local progress storage does not imply all audio processing is local.
+The app footer links to `/rechtliches/` for operator details, portal-specific privacy information and AI/content provenance. See [current audio provenance](docs/content-provenance.md) and [shipped audio notices](public/audio/VOICE-NOTICES.txt). The 45 bundled MP3s are generated through OpenAI; the former Piper model chains are no longer used for these files. Browser speech may use remote voices depending on the user's browser and system; local progress storage does not imply all audio processing is local.
+
+## OpenAI review-only audio samples
+
+The `OpenAI audio preview` Actions workflow reads the `OPENAI_API_KEY` repository secret and produces two downloadable samples, not a production deployment. It is manual-only and can be started with **Run workflow** after merge. Changing the generator does not automatically charge for another preview. Each run makes at most seven paid requests (798 current input characters), one announcement and the first six dialogue turns. Failed requests are never retried automatically; rerunning the workflow is another paid run. The model is `gpt-realtime-2.1-mini`, with `cedar` and `marin`, using the supported Realtime WebSocket API. There is no microphone input or tool access.
+
+Before network use, the job runs five offline tests and a dry run. Each request caps output at 1,024 tokens; these small-preview limits are not a universal currency-denominated account limit. Only the generation step receives the secret. Artifacts are retained for seven days and include MP3/WAV files, input scripts, returned transcripts, usage and file hashes. Audio/transcript fidelity and naturalness require listening review. No existing MP3 files, learner data or Pages deployment are changed. Partial results may be available if a run stops. The script never prints raw server errors, credentials or headers. The key is not included in artifacts.
+
+Local offline verification (no API key/network required):
+
+```bash
+python -m unittest discover -s scripts -p test_openai_audio_preview.py
+python scripts/openai-audio-preview.py --dry-run
+```

@@ -19,3 +19,11 @@ npm-debug.log*
 # Environment
 .env
 .env.local
+
+# Review-only generated audio; never include credentials or artifacts in source.
+audio-preview/
+.env
+.env.local
+.env.*.local
+
+audio-generation-cache/

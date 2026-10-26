@@ -1,0 +1,86 @@
+name: Generate OpenAI replacement audio
+
+on:
+  workflow_dispatch:
+    inputs:
+      resume_run_id:
+        description: Previous cache run ID, or 0 for fresh generation
+        required: false
+        default: '0'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: openai-replacement-audio
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    if: github.repository == 'oliverlaudan-ops/learning-german' && github.ref == 'refs/heads/audio/openai-preview'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      RESUME_RUN_ID: ${{ inputs.resume_run_id || '0' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Restore reviewed resume cache if configured
+        if: env.RESUME_RUN_ID != '0'
+        uses: actions/download-artifact@v4
+        with:
+          name: openai-generation-cache
+          run-id: ${{ env.RESUME_RUN_ID }}
+          github-token: ${{ github.token }}
+          path: audio-generation-cache/
+      - name: Install small generation dependencies
+        run: |
+          python -m pip install websockets==15.0.1 imageio-ffmpeg==0.6.0
+          python - <<'PYTHON'
+          import os
+          from pathlib import Path
+          from imageio_ffmpeg import get_ffmpeg_exe
+          tools = Path(os.environ['RUNNER_TEMP']) / 'audio-tools'
+          tools.mkdir(exist_ok=True)
+          (tools / 'ffmpeg').symlink_to(get_ffmpeg_exe())
+          with open(os.environ['GITHUB_PATH'], 'a') as target:
+              target.write(str(tools) + '\n')
+          PYTHON
+      - name: Validate offline plan and guards
+        run: |
+          python -m unittest discover -s scripts -p 'test_openai_*.py'
+          python scripts/generate-openai-audio.py --dry-run
+      - name: Generate only the 45 existing recordings
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/generate-openai-audio.py
+      - name: Verify application and asset compatibility
+        run: |
+          npm ci --no-audit --no-fund
+          node scripts/export-goethe-b1-audio.mjs
+          git diff --exit-code scripts/goethe-b1-recording-manifest.json
+          npm test
+          npm run build
+      - name: Commit reviewed-shape assets to this PR branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/audio/
+          if ! git diff --cached --quiet; then
+            git commit -m 'Replace 45 bundled recordings with OpenAI audio and generation receipts'
+            git push origin HEAD:audio/openai-preview
+          fi
+      - name: Preserve resumable generation records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: openai-generation-cache
+          path: audio-generation-cache/
+          retention-days: 7
+          if-no-files-found: warn
