@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: openai-replacement-audio
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   generate:
@@ -39,12 +39,19 @@ jobs:
           run-id: ${{ env.RESUME_RUN_ID }}
           github-token: ${{ github.token }}
           path: audio-generation-cache/
-      - name: Install generation tools
+      - name: Install small generation dependencies
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y ffmpeg
-          python -m pip install websockets==15.0.1
-          npm ci
+          python -m pip install websockets==15.0.1 imageio-ffmpeg==0.6.0
+          python - <<'PYTHON'
+          import os
+          from pathlib import Path
+          from imageio_ffmpeg import get_ffmpeg_exe
+          tools = Path(os.environ['RUNNER_TEMP']) / 'audio-tools'
+          tools.mkdir(exist_ok=True)
+          (tools / 'ffmpeg').symlink_to(get_ffmpeg_exe())
+          with open(os.environ['GITHUB_PATH'], 'a') as target:
+              target.write(str(tools) + '\n')
+          PYTHON
       - name: Validate offline plan and guards
         run: |
           python -m unittest discover -s scripts -p 'test_openai_*.py'
@@ -57,6 +64,7 @@ jobs:
         run: python scripts/generate-openai-audio.py
       - name: Verify application and asset compatibility
         run: |
+          npm ci --no-audit --no-fund
           npm test
           npm run build
       - name: Commit reviewed-shape assets to this PR branch
