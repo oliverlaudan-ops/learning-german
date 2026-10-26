@@ -1,31 +1,46 @@
-# Content provenance and review status
+# Audio provenance and license review
 
-Code and parts of the teaching material were created and maintained with AI assistance, including ChatGPT/Codex. Oliver Laudan makes project and publication decisions. This is not a claim that all content received human pedagogical or legal review.
+Reviewed on 2026-10-26 against repository commit `d3cebbe38d64b6439eda610d1b69df42a7ab0d11`.
 
-The repository declares MIT for the project code. This does not override third-party rights or settle whether individual AI-generated contributions qualify for copyright.
+Code and parts of the learning content were created with AI assistance, including ChatGPT/Codex. Oliver Laudan makes project/publication decisions. This is not a claim of complete human pedagogical or legal review. MIT applies to appropriately licensable project code and does not override third-party conditions.
 
-## Audio sources
+## Result
 
-The bundled MP3s are generated practice recordings, not recordings from Goethe-Institut. The scripts/questions are documented in README as independently created exercises. A complete comparison against external teaching materials has not been performed.
+The missing M-AILABS source and attribution check is resolved. Its upstream README permits commercial use and redistribution subject to retaining notices when redistributing source data, and no implied endorsement. The complete upstream notice is now shipped in [VOICE-NOTICES.txt](../public/audio/VOICE-NOTICES.txt), accessible from the portal legal page.
 
-- Weekend recordings: see [existing provenance](../public/audio/weekend-v1/README.md); Thorsten medium.
-- B1 recordings: see scripts/generate-goethe-b1-audio.py and .github/workflows/goethe-b1-audio.yml; Thorsten medium, Kerstin low, Ramona low and Eva K. x_low.
-- [Thorsten model card](https://huggingface.co/rhasspy/piper-voices/blob/main/de/de_DE/thorsten/medium/MODEL_CARD)
-- [Kerstin model card](https://huggingface.co/rhasspy/piper-voices/blob/main/de/de_DE/kerstin/low/MODEL_CARD)
-- [Ramona model card](https://huggingface.co/rhasspy/piper-voices/blob/main/de/de_DE/ramona/low/MODEL_CARD)
-- [Eva K. model card](https://huggingface.co/rhasspy/piper-voices/blob/main/de/de_DE/eva_k/x_low/MODEL_CARD)
+**The overall voice-rights check is not closed:** following the model training history revealed research/noncommercial terms in the base models behind Thorsten and Kerstin. CC0 on the final German dataset alone is insufficient evidence of an unrestricted grant for the complete chain. The sources do not settle whether those terms attach to these fine-tuned models or synthetic output; this review makes no infringement finding and no unrestricted clearance claim.
 
-Model cards for Ramona and Eva K. refer to the M-AILABS dataset website for its license. Verify the applicable dataset/model/output conditions and retain required attribution before treating recordings as freely redistributable. Neither the repository-wide MIT label nor the model collection's top-level label alone resolves all these conditions. No infringement has been established by this preliminary check.
+| Voice used by the documented generation process | German dataset | Upstream training history | Review conclusion |
+| --- | --- | --- | --- |
+| Thorsten medium | CC0, Thorsten-Voice | Fine-tuned from Lessac medium; Lessac data has a research license | Further permission/assessment or replacement needed to close unrestricted-use clearance |
+| Kerstin low | CC0, rhasspy/dataset-voice-kerstin | Fine-tuned from Ryan low; Ryan card identifies CC BY-NC-SA 4.0 | Further permission/assessment or replacement needed to close unrestricted-use clearance |
+| Ramona low | M-AILABS, permissive custom terms | Card says trained from scratch | Retain upstream notice; do not suggest speaker/author endorsement |
+| Eva K. x_low | M-AILABS, permissive custom terms | Card says trained from scratch | Retain upstream notice; do not suggest speaker/author endorsement |
 
-Piper and models are generation tools, not shipped runtime dependencies; generated output needs its own rights analysis. Do not label all audio MIT solely because the generator is open source.
+Dataset license, model license and generated-output rights are distinct. We retain M-AILABS notices conservatively without asserting all generated audio is source data. We do not assign a new blanket audio license in this PR.
 
-## Browser speech
+## Evidence and reproducibility
 
-Runtime speech uses the browser SpeechSynthesis API and can depend on local or remote system/browser voices. The code does not restrict selection to localService voices. Do not claim that all speech stays on-device. The portal does not record microphone audio or call an OpenAI API.
+- [Shipped model-card snapshots](../public/audio/licenses/model-cards.txt), collection revision `5041a7a49ae5b3a0f30e6837769eb03fdbb231bd`.
+- [45-file inventory](../public/audio/audio-inventory.json) records committed MP3 Git blob SHAs and sizes. No audio bytes were changed. It is not proof of historical model hashes.
+- Weekend: [existing generation record](../public/audio/weekend-v1/README.md), Thorsten medium.
+- Sets 2–4: `scripts/generate-goethe-b1-audio.py` and `.github/workflows/goethe-b1-audio.yml` document four models and per-character selection.
+- Set 1: existing legacy MP3 files; the repository does not preserve a complete per-turn synthesis receipt. Do not imply we reconstructed one.
+- [Thorsten dataset source at reviewed revision](https://github.com/thorstenMueller/Thorsten-Voice/blob/29d0c153c55d8ffaa0ebf8ed1ecc879bff9fdf27/README.md)
+- [Kerstin dataset source at reviewed revision](https://github.com/rhasspy/dataset-voice-kerstin/blob/f73127135cf80d6ef52aef6af58c49774f4fd625/README.md)
+- [M-AILABS license at reviewed revision](https://github.com/i-celeste-aurora/m-ailabs-dataset/blob/53c4c9fe0f63cb0ae85ee7eb46a32b7316223e8e/README.md#license)
+- [Lessac source-model card](https://huggingface.co/rhasspy/piper-voices/blob/5041a7a49ae5b3a0f30e6837769eb03fdbb231bd/en/en_US/lessac/medium/MODEL_CARD) and [dataset research license](https://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/license.html)
+- [Ryan source-model card](https://huggingface.co/rhasspy/piper-voices/blob/5041a7a49ae5b3a0f30e6837769eb03fdbb231bd/en/en_US/ryan/low/MODEL_CARD)
+- [Piper maintainer's licensing explanation](https://github.com/rhasspy/piper/discussions/271): use the model cards and training history; no additional model license is imposed by Piper. The discussion is not a legal ruling.
 
-## Publication checklist
+The collection metadata says MIT but its model cards identify independent dataset terms. Neither that metadata nor the portal MIT license is used to override them. Piper is GPL-3.0 generation software, not shipped runtime code. GPLv3 section 2 does not automatically apply GPL to all output; this does not settle model/dataset rights.
 
-- Legal/privacy/provenance page is served from public/rechtliches/index.html without scripts, external fonts or analytics.
-- Profile/progress keys and hosting must be revisited when adding accounts, syncing, analytics or new remote services.
-- Legal notices do not replace rights clearance, technical behavior changes or pedagogical review.
-- Check the footer and legal page on mobile and desktop; no visual browser verification was performed for this notice-only change.
+## What closes the remaining point
+
+For an unrestricted-use release, obtain written permissions or an appropriate legal assessment for both base-model chains, or regenerate affected recordings with fully reviewed replacement models. Preserve distinguishable dialogue speakers, exercise text, URLs and learner progress if replacing audio. Cover all legacy Set 1 files conservatively when exact speaker receipts are missing. Recheck model versions and record synthesis inputs/hashes for new audio.
+
+## Other boundaries
+
+The scripts/questions are documented as independently created, AI-assisted practice material, not official Goethe content. A comprehensive external-text similarity audit and human German/pedagogical/audio-quality review have not been performed.
+
+Runtime SpeechSynthesis can use local or remote browser/system voices; the portal does not record microphones, assess pronunciation or call an OpenAI API. Legal notices do not change runtime behavior or replace rights clearance.
