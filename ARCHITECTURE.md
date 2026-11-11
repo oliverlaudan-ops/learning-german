@@ -62,6 +62,10 @@ Responsibilities include:
 - Smart Review hints;
 - safe re-rendering through `registerShowTabHook` rather than runtime-patching tab navigation.
 
+### `src/ui/pronunciation.ts` + `pronunciation.css`
+
+Own the independent Pronunciation navigation area. `renderPronunciation(container)` renders five short lessons with English explanations, example playback through browser German Speech Synthesis and immediate self-check feedback. `dashboard-bootstrap.ts` mounts it at startup and refreshes it when the tab opens. It does not access learner state, persist activity, record a microphone stream or assess speech.
+
 ### `src/ui/goethe-b1.ts`, `goethe-b1-full-exam.ts` and `goethe-b1-study-plan.ts`
 
 These modules own the dedicated **B1 Exam** tab that `dashboard-bootstrap.ts` refreshes on navigation and learner-profile changes.

@@ -9,6 +9,7 @@ A personal German-learning portal for English speakers, built around practical A
 - **Placement check:** 21-question in-app diagnostic across A1, A2, and B1 with chapter-level recommendations and optional refreshers. It is a learning recommendation, not an official CEFR exam.
 - **Vocabulary practice:** German↔English, audio dictation, sentence completion, and B1+ sentence typing.
 - **Grammar practice:** cloze and sentence-construction exercises across articles, cases, modal verbs, perfect tense, prefixes, subordinate clauses, Konjunktiv II, relative clauses, and more.
+- **Pronunciation:** a separate workshop with English explanations, German audio examples and self-check exercises for vowel length, umlauts, `ch`, consonants, stress and sentence melody. It is independent of B1 exam preparation.
 - **Smart review:** five-box Leitner spaced repetition with local review state.
 - **Profiles and progress:** multiple learner profiles, quiz history, level/chapter progress, streaks, achievements, category statistics, and placement results are stored in the browser.
 
@@ -39,6 +40,8 @@ The two newest B1 lessons use German questions, instructions, controls and feedb
 The workshop lesson adds a free spoken summary; the complaint lesson adds a short email-writing prompt. These are self-directed exercises without automated assessment or saved written responses.
 
 Skipped comprehension task types are not counted as wrong answers. Pronunciation practice is not presented as automated speech assessment.
+
+The Pronunciation area uses browser German Speech Synthesis where available. It does not record or grade the learner's voice, and does not save activity history.
 
 ## Tech stack
 

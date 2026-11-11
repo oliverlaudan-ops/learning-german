@@ -599,6 +599,7 @@ function renderDashboard(): void {
         <button class="tab" data-tab="exam" aria-label="Goethe B1 exam preparation">🎧 B1 Exam</button>
         <button class="tab" data-tab="review">Review ${dueCount > 0 ? `<span class="tab-badge">${dueCount}</span>` : ''}</button>
         <button class="tab" data-tab="learn">Learn</button>
+        <button class="tab" data-tab="pronunciation">🗣️ Pronunciation</button>
         <button class="tab" data-tab="practice">Practice</button>
         <button class="tab" data-tab="stats">Stats</button>
       </nav>
@@ -662,6 +663,7 @@ function renderDashboard(): void {
       <main class="tab-content hidden" id="exam-tab"></main>
       <main class="tab-content hidden" id="review-tab"></main>
       <main class="tab-content hidden" id="learn-tab"></main>
+      <main class="tab-content hidden" id="pronunciation-tab"></main>
       <main class="tab-content hidden" id="practice-tab"></main>
       <main class="tab-content hidden" id="stats-tab"></main>
 
