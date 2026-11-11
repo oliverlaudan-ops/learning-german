@@ -92,3 +92,7 @@ Added the fixed-size review-only Realtime sample generator, an Actions workflow 
 ## Bundled audio replacement — 2026-10-26
 
 Replace all 45 Piper-generated MP3 paths with OpenAI API output, preserving scripts, application URLs and learner state. Document current provider terms and synthetic voices, generation receipts, cache validation, transcript checks and per-run cost guard. Retire the legacy Piper scripts/workflow. README, CONTEXT, ARCHITECTURE, provenance and portal legal/audio notices follow the new generation path. The initial two OpenAI samples passed Oliver's listening check; complete audio and added discussion voices remain subject to listening review.
+
+## Pronunciation workshop — 2026-11-11
+
+Added an independent Pronunciation navigation area with five English-guided sound lessons, browser speech examples and self-check questions. The workshop is separate from B1 Exam preparation, does not capture or grade speech, and stores no practice history. Updated README, CONTEXT and ARCHITECTURE; no application-state or storage changes.

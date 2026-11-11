@@ -69,6 +69,10 @@ The portal includes:
 
 The last six use the shared data-driven advanced-listening renderer. Checked comprehension tasks contribute to a score; skipped task types are excluded rather than counted wrong. Free speaking and writing prompts are not automatically assessed or stored.
 
+### Pronunciation workshop
+
+The independent **Pronunciation** navigation area teaches vowel length, umlauts, the two common `ch` sounds, German `w`/`z`/`v`, and word stress/sentence melody. Each short lesson combines an English explanation, browser-synthesized German examples and a self-check. It is separate from B1 Exam preparation; it does not record or automatically grade speech and does not persist practice history.
+
 ### Goethe B1 Hören preparation
 
 A dedicated **B1 Exam** navigation tab contains:
