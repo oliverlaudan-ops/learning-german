@@ -16,22 +16,6 @@ const items: Item[] = [
  { prompt: 'Das Café ist montags geschlossen. Heute ist Montag. Es ist ___ geöffnet.', options: ['nicht', 'noch', 'schon'], answer: 0, explanation: 'Nicht geöffnet = not open. „Noch nicht“ means not yet, which the information does not establish.' },
 ]
 const esc = (s: string) => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!))
-export function ensureAdverbNavigation(): void {
- const tabs = document.querySelector('.tabs')
- const reading = tabs?.querySelector<HTMLElement>('[data-tab="reading"]')
- if (!tabs || !reading) return
- if (!document.getElementById('adverbs-tab')) {
-  const main = document.createElement('main')
-  main.id = 'adverbs-tab'; main.className = 'tab-content hidden'
-  tabs.insertAdjacentElement('afterend', main)
- }
- if (!tabs.querySelector('[data-tab="adverbs"]')) {
-  const button = document.createElement('button')
-  button.type = 'button'; button.className = 'tab'; button.dataset.tab = 'adverbs'; button.textContent = '🔎 Adverbs'
-  reading.insertAdjacentElement('afterend', button)
-  button.addEventListener('click', () => window.showTab('adverbs'))
- }
-}
 export function renderAdverbWorkshop(): void {
  const host = document.getElementById('adverbs-tab')
  if (!host) return
