@@ -12,8 +12,8 @@ import { disposeListeningLesson } from './listening-lesson'
 import { getLessonContent } from '../data/lesson-content'
 import { attachGoetheB1Entry } from './goethe-b1'
 import { renderPronunciation } from './pronunciation'
-import { ensureAdverbNavigation, renderAdverbWorkshop } from './adverb-workshop'
-import { ensureReadingNavigation, renderGoetheB1Reading } from './goethe-b1-reading'
+import { renderAdverbWorkshop } from './adverb-workshop'
+import { renderGoetheB1Reading } from './goethe-b1-reading'
 
 const levels = getLevels()
 const listeningOnlyChapterIds = new Set(['b1-ch1'])
@@ -98,8 +98,6 @@ export function enhanceDashboard(): void {
   refreshDashboard()
   refreshLearn()
   refreshExam()
-  ensureReadingNavigation()
-  ensureAdverbNavigation()
   renderPronunciation(document.getElementById('pronunciation-tab'))
 
   // Unregister any previous hook so calling enhanceDashboard() twice (HMR,
