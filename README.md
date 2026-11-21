@@ -9,7 +9,7 @@ A personal German-learning portal for English speakers, built around practical A
 - **Placement check:** 21-question in-app diagnostic across A1, A2, and B1 with chapter-level recommendations and optional refreshers. It is a learning recommendation, not an official CEFR exam.
 - **Vocabulary practice:** German↔English, audio dictation, sentence completion, and B1+ sentence typing.
 - **Grammar practice:** cloze and sentence-construction exercises across articles, cases, modal verbs, perfect tense, prefixes, subordinate clauses, Konjunktiv II, relative clauses, and more.
-- **Pronunciation:** a separate workshop with English explanations, German audio examples and self-check exercises for vowel length, umlauts, `ch`, consonants, stress and sentence melody. It is independent of B1 exam preparation.
+- **Goethe B1 Lesen:** a dedicated reading-preparation area with three original texts, nine comprehension questions, guided and exam-style modes, answer explanations, and an English-supported adverb guide. Practice history is stored locally per learner profile; the material is not official Goethe content.\n- **Pronunciation:** a separate workshop with English explanations, German audio examples and self-check exercises for vowel length, umlauts, `ch`, consonants, stress and sentence melody. It is independent of B1 exam preparation.
 - **Smart review:** five-box Leitner spaced repetition with local review state.
 - **Profiles and progress:** multiple learner profiles, quiz history, level/chapter progress, streaks, achievements, category statistics, and placement results are stored in the browser.
 
@@ -43,7 +43,7 @@ Skipped comprehension task types are not counted as wrong answers. Pronunciation
 
 The Pronunciation area uses browser German Speech Synthesis where available. It does not record or grade the learner's voice, and does not save activity history.
 
-## Tech stack
+## Goethe B1 Lesen preparation\n\nThe dedicated **📖 B1 Lesen** navigation tab provides three original B1 reading tasks (course message, library notice, and appointment change) with nine questions. Guided mode gives immediate feedback; exam-style mode withholds answers until the end and then shows explanations. The English-language adverb guide covers time, frequency, place, manner and linking adverbs, plus reading cues such as *erst*, *schon*, *noch* and *spätestens*. Scores are kept locally per learner profile under `goethe-b1-lesen-adverbs-v1-<profileId>`. This is original practice material, not official Goethe content or an official score.\n\n## Tech stack
 
 - Vite 8 + TypeScript 6
 - Vitest 4 with happy-dom
@@ -165,7 +165,7 @@ A run has at most 200 unique requests, 2,048 output tokens per request, and a US
 
 Generation receipts are shipped in `public/audio/openai-generation.json`; `audio-inventory.json` records all 45 replacement files. API-returned transcripts are a structural check, not independent proof of audible pronunciation or pedagogical quality. The two original OpenAI preview voices passed Oliver's listening check; complete recordings and the additional discussion voices still require listening review.
 
-The confirmed study-plan target in the current data is **21 November 2026**. Reading, writing and speaking examination modules are outside the present feature scope.
+The confirmed study-plan target in the current data is **21 November 2026**. Writing and speaking examination modules are outside the present feature scope.
 
 ## AI maintenance model
 
