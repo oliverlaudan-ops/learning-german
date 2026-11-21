@@ -11,7 +11,7 @@ import { __getProfile, registerShowTabHook } from './ui'
 import { disposeListeningLesson } from './listening-lesson'
 import { getLessonContent } from '../data/lesson-content'
 import { attachGoetheB1Entry } from './goethe-b1'
-import { renderPronunciation } from './pronunciation'
+import { renderPronunciation } from './pronunciation'\nimport { ensureReadingNavigation, renderGoetheB1Reading } from './goethe-b1-reading'
 
 const levels = getLevels()
 const listeningOnlyChapterIds = new Set(['b1-ch1'])
@@ -104,7 +104,7 @@ export function enhanceDashboard(): void {
   unregisterShowTabHook = registerShowTabHook((tabName) => {
     disposeListeningLesson()
     if (tabName === 'dashboard') refreshDashboard()
-    else if (tabName === 'exam') refreshExam()
+    else if (tabName === 'exam') refreshExam()\n    else if (tabName === 'reading') renderGoetheB1Reading(__getProfile().id)
     else if (tabName === 'pronunciation') renderPronunciation(document.getElementById('pronunciation-tab'))
     else if (tabName === 'learn') {
       const learnTarget = document.getElementById('learn-tab')
