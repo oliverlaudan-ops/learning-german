@@ -62,29 +62,7 @@ const adverbs = [
 const escapeHtml = (s: string): string => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!))
 const historyKey = (profileId: string) => 'goethe-b1-lesen-adverbs-v1-' + profileId
 
-export function ensureReadingNavigation(): void {
-  const tabs = document.querySelector('.tabs')
-  const examTab = tabs?.querySelector<HTMLElement>('[data-tab="exam"]')
-  if (!tabs || !examTab) return
-  if (!document.getElementById('reading-tab')) {
-    const main = document.createElement('main')
-    main.className = 'tab-content hidden'
-    main.id = 'reading-tab'
-    examTab.parentElement?.insertAdjacentElement('afterend', main)
-  }
-  if (!tabs.querySelector('[data-tab="reading"]')) {
-    const button = document.createElement('button')
-    button.className = 'tab'
-    button.dataset.tab = 'reading'
-    button.type = 'button'
-    button.textContent = '📖 B1 Lesen'
-    examTab.insertAdjacentElement('afterend', button)
-    button.addEventListener('click', () => (window as unknown as { showTab: (tab: string) => void }).showTab('reading'))
-  }
-}
-
 export function renderGoetheB1Reading(profileId: string): void {
-  ensureReadingNavigation()
   const host = document.getElementById('reading-tab')
   if (!host) return
   let mode: Mode = 'guided'
