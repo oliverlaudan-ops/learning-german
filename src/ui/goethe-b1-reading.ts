@@ -47,7 +47,7 @@ const adverbs = [
   ['Ort · place', 'hier (here), draußen (outside), dort (there), überall (everywhere)'],
   ['Art und Weise · manner', 'leise (quietly), schnell (quickly), gemeinsam (together), besonders (especially)'],
   ['Verbindung · linking ideas', 'deshalb (therefore), trotzdem (nevertheless), danach (afterwards), zuerst (first)'],
-]
+] as const
 
 const escapeHtml = (s: string): string => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!))
 const historyKey = (profileId: string) => 'goethe-b1-lesen-adverbs-v1-' + profileId
@@ -99,7 +99,7 @@ export function renderGoetheB1Reading(profileId: string): void {
         <label>Practice mode <select data-reading-mode><option value="guided" ${mode === 'guided' ? 'selected' : ''}>Guided practice</option><option value="exam" ${mode === 'exam' ? 'selected' : ''}>Exam-style (answers at the end)</option></select></label>
         <span>Text ${taskIndex + 1} of ${tasks.length}</span>
       </div>
-      ${finished ? `<div class="reading-result" role="status"><h3>Ergebnis: ${score()} / 9 (${Math.round(score() / 9 * 100)}%)</h3><p>This is a practice score, not an official Goethe grade. Review the explanations, then try again.</p><button class="btn primary" data-reading-restart>Neue Runde starten</button></div>`
+      ${finished ? `<div class="reading-result" role="status"><h3>Ergebnis: ${score()} / 9 (${Math.round(score() / 9 * 100)}%)</h3><p>This is a practice score, not an official Goethe grade. Review each answer and explanation below.</p>${tasks.map((item, ti) => `<section class="reading-review"><h4>${escapeHtml(item.title)}</h4>${item.questions.map((q, qi) => { const id = ti * 3 + qi; const correct = selected[id] === q.answer; return `<p>${correct ? "✓" : "✗"} ${escapeHtml(q.prompt)} <strong>${escapeHtml(q.options[q.answer]!)}</strong><br>${escapeHtml(q.explanation)}</p>` }).join("")}</section>`).join("")}<button class="btn primary" data-reading-restart>Neue Runde starten</button></div>`
         : `<article class="reading-text"><h3>${escapeHtml(current.title)}</h3><p lang="de">${escapeHtml(current.text)}</p></article>
         <p class="reading-focus">Adverb focus: ${escapeHtml(current.focus)}</p>
         ${current.questions.map((q, qi) => { const id = taskIndex * 3 + qi; const value = selected[id]; const showFeedback = mode === 'guided' && value !== undefined; return `<fieldset class="reading-question"><legend>${qi + 1}. ${escapeHtml(q.prompt)}</legend>${q.options.map((opt, oi) => `<label><input type="radio" name="reading-q-${id}" value="${oi}" ${value === oi ? 'checked' : ''}> ${escapeHtml(opt)}</label>`).join('')}${showFeedback ? `<p class="reading-feedback">${value === q.answer ? '✓ Richtig.' : '✗ Richtig ist: ' + escapeHtml(q.options[q.answer]!)} ${escapeHtml(q.explanation)}</p>` : ''}</fieldset>` }).join('')}
