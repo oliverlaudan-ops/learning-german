@@ -39,6 +39,16 @@ const tasks: ReadingTask[] = [
       { prompt: 'Was ist der Unterschied zwischen Telefon und E-Mail?', options: ['E-Mails werden vielleicht später gelesen.', 'Telefonisch gibt es keine Termine.', 'E-Mails sind nur am Nachmittag möglich.'], answer: 0, explanation: '„Möglicherweise“ signals uncertainty: the email may not be read until the next working day.' },
     ],
   },
+  {
+    title: 'Eine Reise mit Hindernissen',
+    focus: 'erst, schon, noch and trotzdem',
+    text: 'Hallo Amina, eigentlich wollte ich heute um 8 Uhr mit dem Zug nach Köln fahren. Als ich am Bahnhof ankam, war der Zug aber schon abgefahren. Der nächste Zug fuhr erst um 9:15 Uhr. Zuerst wollte ich deshalb zu Hause bleiben. Ich musste jedoch ein wichtiges Dokument abholen und bin trotzdem gefahren. In Köln hatte das Büro noch geöffnet, aber nur bis 12 Uhr. Ich kam um 11:50 Uhr dort an und bekam das Dokument rechtzeitig. Danach habe ich mich im Café nebenan ausgeruht. Liebe Grüße, Judith',
+    questions: [
+      { prompt: 'Was war passiert, als Judith am Bahnhof ankam?', options: ['Ihr Zug war bereits abgefahren.', 'Der Zug fuhr erst um 9:15 Uhr ab.', 'Das Büro hatte schon geschlossen.'], answer: 0, explanation: '„Schon abgefahren“ means the train had already left when she arrived.' },
+      { prompt: 'Warum fuhr Judith trotzdem nach Köln?', options: ['Sie wollte im Café arbeiten.', 'Sie musste ein wichtiges Dokument abholen.', 'Sie wollte Amina am Bahnhof treffen.'], answer: 1, explanation: '„Trotzdem“ means nevertheless: despite the delay she still travelled because she needed the document.' },
+      { prompt: 'Was bedeutet „das Büro hatte noch geöffnet“ hier?', options: ['Das Büro war um 11:50 Uhr bereits geschlossen.', 'Das Büro öffnete erst um 12 Uhr.', 'Das Büro war um 11:50 Uhr weiterhin geöffnet.'], answer: 2, explanation: '„Noch geöffnet“ means still open. It closed at 12:00, so Judith arrived ten minutes before closing.' },
+    ],
+  },
 ]
 
 const adverbs = [
@@ -82,6 +92,7 @@ export function renderGoetheB1Reading(profileId: string): void {
   let selected: Record<number, number> = {}
   let finished = false
   const task = () => tasks[taskIndex]!
+  const total = tasks.reduce((sum, item) => sum + item.questions.length, 0)
   const score = () => tasks.reduce((sum, item, ti) => sum + item.questions.filter((q, qi) => selected[ti * 3 + qi] === q.answer).length, 0)
   const show = () => {
     const current = task()
@@ -99,17 +110,17 @@ export function renderGoetheB1Reading(profileId: string): void {
         <label>Practice mode <select data-reading-mode><option value="guided" ${mode === 'guided' ? 'selected' : ''}>Guided practice</option><option value="exam" ${mode === 'exam' ? 'selected' : ''}>Independent practice (answers at the end)</option></select></label>
         <span>Text ${taskIndex + 1} of ${tasks.length}</span>
       </div>
-      ${finished ? `<div class="reading-result" role="status"><h3>Ergebnis: ${score()} / 9 (${Math.round(score() / 9 * 100)}%)</h3><p>This is a practice score, not an official Goethe grade. Review each answer and explanation below.</p>${tasks.map((item, ti) => `<section class="reading-review"><h4>${escapeHtml(item.title)}</h4>${item.questions.map((q, qi) => { const id = ti * 3 + qi; const correct = selected[id] === q.answer; return `<p>${correct ? "✓" : "✗"} ${escapeHtml(q.prompt)} <strong>${escapeHtml(q.options[q.answer]!)}</strong><br>${escapeHtml(q.explanation)}</p>` }).join("")}</section>`).join("")}<button class="btn primary" data-reading-restart>Neue Runde starten</button></div>`
+      ${finished ? `<div class="reading-result" role="status"><h3>Ergebnis: ${score()} / ${total} (${Math.round(score() / total * 100)}%)</h3><p>This is a practice score, not an official Goethe grade. Review each answer and explanation below.</p>${tasks.map((item, ti) => `<section class="reading-review"><h4>${escapeHtml(item.title)}</h4>${item.questions.map((q, qi) => { const id = ti * 3 + qi; const correct = selected[id] === q.answer; return `<p>${correct ? "✓" : "✗"} ${escapeHtml(q.prompt)} <strong>${escapeHtml(q.options[q.answer]!)}</strong><br>${escapeHtml(q.explanation)}</p>` }).join("")}</section>`).join("")}<button class="btn primary" data-reading-restart>Neue Runde starten</button></div>`
         : `<article class="reading-text"><h3>${escapeHtml(current.title)}</h3><p lang="de">${escapeHtml(current.text)}</p></article>
         <p class="reading-focus">Adverb focus: ${escapeHtml(current.focus)}</p>
         ${current.questions.map((q, qi) => { const id = taskIndex * 3 + qi; const value = selected[id]; const showFeedback = mode === 'guided' && value !== undefined; return `<fieldset class="reading-question"><legend>${qi + 1}. ${escapeHtml(q.prompt)}</legend>${q.options.map((opt, oi) => `<label><input type="radio" name="reading-q-${id}" value="${oi}" ${value === oi ? 'checked' : ''}> ${escapeHtml(opt)}</label>`).join('')}${showFeedback ? `<p class="reading-feedback">${value === q.answer ? '✓ Richtig.' : '✗ Richtig ist: ' + escapeHtml(q.options[q.answer]!)} ${escapeHtml(q.explanation)}</p>` : ''}</fieldset>` }).join('')}
         <nav class="reading-nav"><button class="btn secondary" data-reading-prev ${taskIndex === 0 ? 'disabled' : ''}>← Zurück</button><button class="btn primary" data-reading-next>${taskIndex === tasks.length - 1 ? 'Auswerten' : 'Nächster Text →'}</button></nav>`}
-      <p class="reading-disclaimer">This focused 9-question warm-up is original practice material, not a full exam simulation or official Goethe content. Goethe B1 Lesen has five parts and 65 minutes. <a href="https://bfu.goethe.de/b1_mod/lesen.php" target="_blank" rel="noopener noreferrer">See the official Goethe model test</a>. Answers and progress stay in this browser.</p>
+      <p class="reading-disclaimer">This focused reading practice is original practice material, not a full exam simulation or official Goethe content. Goethe B1 Lesen has five parts and 65 minutes. <a href="https://bfu.goethe.de/b1_mod/lesen.php" target="_blank" rel="noopener noreferrer">See the official Goethe model test</a>. Answers and progress stay in this browser.</p>
     </section>`
     host.querySelector<HTMLSelectElement>('[data-reading-mode]')?.addEventListener('change', e => { mode = (e.target as HTMLSelectElement).value as Mode; show() })
     host.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach(input => input.addEventListener('change', () => { selected[Number(input.name.replace('reading-q-', ''))] = Number(input.value); if (mode === 'guided') show() }))
     host.querySelector('[data-reading-prev]')?.addEventListener('click', () => { taskIndex--; show() })
-    host.querySelector('[data-reading-next]')?.addEventListener('click', () => { if (taskIndex < tasks.length - 1) taskIndex++; else { finished = true; try { const old = JSON.parse(localStorage.getItem(historyKey(profileId)) || '[]'); const history = Array.isArray(old) ? old : []; history.push({ score: score(), total: 9, completedAt: Date.now() }); localStorage.setItem(historyKey(profileId), JSON.stringify(history.slice(-50))) } catch { /* Storage is optional. */ } } show() })
+    host.querySelector('[data-reading-next]')?.addEventListener('click', () => { if (taskIndex < tasks.length - 1) taskIndex++; else { finished = true; try { const old = JSON.parse(localStorage.getItem(historyKey(profileId)) || '[]'); const history = Array.isArray(old) ? old : []; history.push({ score: score(), total, completedAt: Date.now() }); localStorage.setItem(historyKey(profileId), JSON.stringify(history.slice(-50))) } catch { /* Storage is optional. */ } } show() })
     host.querySelector('[data-reading-restart]')?.addEventListener('click', () => { selected = {}; taskIndex = 0; finished = false; show() })
   }
   show()
