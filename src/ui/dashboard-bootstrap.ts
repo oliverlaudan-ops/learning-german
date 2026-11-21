@@ -12,6 +12,7 @@ import { disposeListeningLesson } from './listening-lesson'
 import { getLessonContent } from '../data/lesson-content'
 import { attachGoetheB1Entry } from './goethe-b1'
 import { renderPronunciation } from './pronunciation'
+import { ensureAdverbNavigation, renderAdverbWorkshop } from './adverb-workshop'
 import { ensureReadingNavigation, renderGoetheB1Reading } from './goethe-b1-reading'
 
 const levels = getLevels()
@@ -98,6 +99,7 @@ export function enhanceDashboard(): void {
   refreshLearn()
   refreshExam()
   ensureReadingNavigation()
+  ensureAdverbNavigation()
   renderPronunciation(document.getElementById('pronunciation-tab'))
 
   // Unregister any previous hook so calling enhanceDashboard() twice (HMR,
@@ -107,6 +109,7 @@ export function enhanceDashboard(): void {
     disposeListeningLesson()
     if (tabName === 'dashboard') refreshDashboard()
     else if (tabName === 'exam') refreshExam()
+    else if (tabName === 'adverbs') renderAdverbWorkshop()
     else if (tabName === 'reading') renderGoetheB1Reading(__getProfile().id)
     else if (tabName === 'pronunciation') renderPronunciation(document.getElementById('pronunciation-tab'))
     else if (tabName === 'learn') {

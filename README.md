@@ -13,6 +13,10 @@ A personal German-learning portal for English speakers, built around practical A
 - **Smart review:** five-box Leitner spaced repetition with local review state.
 - **Profiles and progress:** multiple learner profiles, quiz history, level/chapter progress, streaks, achievements, category statistics, and placement results are stored in the browser.
 
+## Adverb Workshop
+
+The **🔎 Adverbs** tab offers an English-supported guide and 12 interactive questions on frequently confused German words, their meanings in context, and the English false friend *actually / aktuell*. Answers receive immediate feedback; learners can repeat all questions or only their mistakes. The current round is held in memory and is reset when leaving the area.
+
 ## Listening and speaking
 
 The portal currently includes seven dedicated listening experiences:
